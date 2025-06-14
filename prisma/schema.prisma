@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Expert {
+  id               Int           @id @default(autoincrement())
+  fullName         String
+  birthYear        Int?
+  gender           String?
+  academicTitle    String?       // Học hàm
+  academicTitleYear Int?
+  degree           String?       // Học vị
+  degreeYear       Int?
+  position         String?       // Chức vụ hiện tại
+  currentWork      String?       // Công việc hiện nay
+  organization     String?       // Đơn vị
+  deleted      Boolean   @default(false)
+
+  // Quan hệ
+  educations       Education[]
+  workHistories    WorkHistory[]
+  publications     Publication[]
+  projects         Project[]
+  languages        Language[]
+}
+
+model Education {
+  id        Int     @id @default(autoincrement())
+  year      Int
+  school    String
+  major     String
+  expertId  Int
+  expert    Expert  @relation(fields: [expertId], references: [id])
+  deleted      Boolean   @default(false)
+}
+
+model WorkHistory {
+  id         Int     @id @default(autoincrement())
+  startYear  Int
+  endYear    Int
+  position   String
+  workplace  String
+  field      String
+  expertId   Int
+  expert     Expert  @relation(fields: [expertId], references: [id])
+  deleted      Boolean   @default(false)
+}
+
+model Publication {
+  id         Int     @id @default(autoincrement())
+  year       Int
+  place      String
+  title      String
+  type       String
+  author     String
+  expertId   Int
+  expert     Expert  @relation(fields: [expertId], references: [id])
+  deleted      Boolean   @default(false)
+}
+
+model Project {
+  id         Int     @id @default(autoincrement())
+  startYear  Int?
+  endYear    Int?
+  title      String
+  status     String?
+  role       String?
+  expertId   Int
+  expert     Expert  @relation(fields: [expertId], references: [id])
+  deleted      Boolean   @default(false)
+}
+
+model Language {
+  id         Int     @id @default(autoincrement())
+  language   String
+  listening  String
+  speaking   String
+  reading    String
+  writing    String
+  expertId   Int
+  expert     Expert  @relation(fields: [expertId], references: [id])
+  deleted      Boolean   @default(false)
+}
