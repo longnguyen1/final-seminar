@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Expert Dashboard
 
-## Getting Started
+## Tech Stack
+- Next.js 15 (App Router)
+- Prisma + MySQL
+- NextAuth (Credentials + Prisma Adapter)
+- Tailwind CSS 3.4.3
+- React Hooks, Fetch API
 
-First, run the development server:
+## Chạy local
+1. `npm install`  
+2. Tạo file `.env` với `DATABASE_URL=…`  
+3. `npx prisma migrate dev`  
+4. `npm run seed`  
+5. `npm run dev`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Cấu trúc chính
+/
+├── prisma/
+│   ├── schema.prisma        # Định nghĩa toàn bộ các model: Expert, Education, WorkHistory, Publication, Project, Language, User…
+│   └── seed.ts              # Script tạo dữ liệu mẫu (3 chuyên gia + admin user)
+│
+├── lib/
+│   └── prisma.ts            # Khởi tạo và export 1 singleton PrismaClient
+│
+├── app/
+│   ├── globals.css          # Tailwind base / components / utilities
+│   ├── layout.tsx           # RootLayout chung cho toàn app
+│   │
+│   ├── api/                  # Tất cả API routes (App Router)
+│   │   ├── experts/
+│   │   │   ├── route.ts            # GET all, POST new
+│   │   │   └── [id]/
+│   │   │       ├── route.ts        # GET by id, PUT, DELETE soft
+│   │   │       ├── undelete/route.ts
+│   │   │       └── educations/
+│   │   │           └── route.ts    # GET /api/experts/:id/educations
+│   │   │       …                    # workHistories/, publications/, projects/, languages/ tương tự
+│   │   ├── educations/…     # CRUD riêng lẻ: /api/educations, /api/educations/[id], undelete
+│   │   ├── workHistories/…
+│   │   ├── publications/…
+│   │   ├── projects/…
+│   │   ├── languages/…
+│   │   └── auth/[…nextauth]       # NextAuth route.ts
+│   │
+│   └── admin/               # Toàn bộ giao diện admin
+│       ├── page.tsx         # /admin → ExpertTable
+│       └── experts/
+│           ├── page.tsx     # /admin/experts → danh sách + modal thêm/sửa Expert
+│           ├── ExpertTable.tsx
+│           ├── ExpertFormModal.tsx
+│           └── [id]/
+│               ├── page.tsx         # /admin/experts/[id] → DetailPage với tabs
+│               └── components/
+│                   ├── ExpertInfoForm.tsx
+│                   ├── EducationSection.tsx
+│                   ├── EducationFormModal.tsx
+│                   ├── WorkHistorySection.tsx
+│                   ├── WorkHistoryFormModal.tsx
+│                   ├── PublicationSection.tsx
+│                   ├── PublicationFormModal.tsx
+│                   ├── ProjectSection.tsx
+│                   ├── ProjectFormModal.tsx
+│                   ├── LanguageSection.tsx
+│                   └── LanguageFormModal.tsx
+│
+├── postcss.config.js
+├── tailwind.config.js
+├── package.json
+└── tsconfig.json
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Luồng logic chính
+  1. Prisma Schema & Seed
+  . Định nghĩa model với soft-delete (deleted boolean).
+  . Kịch bản seed.ts dùng bcrypt để tạo admin user.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+  2. API (Next.js App Router)
+  .Major routes under /api/experts/* để CRUD Expert và các bảng liên quan.
+  .Sub‐resources /api/experts/[id]/educations, /workHistories, /publications, /projects, /languages trả về danh sách của 1 chuyên gia.
+  .Soft Delete: DELETE thực chất chỉ update deleted = true, có route undelete để khôi phục.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  3. Admin UI
+  . Danh sách chuyên gia (ExpertTable.tsx): fetch /api/experts, hiển thị bảng; modal thêm/sửa Expert; “xóa” (soft).
+  . Detail page ([id]/page.tsx):
+    .Tabs: “Thông tin chung” (form cập nhật expert), “Học vấn”, “Công tác”, “Công trình KH”, “Dự án”, “Ngoại ngữ”.
 
-## Learn More
+     .Mỗi section:
+      . fetch dữ liệu của expertId tương ứng,
+      . hiển thị table,
+      . modal thêm/sửa, xóa mềm.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+  4. Authentication (NextAuth)
+  . Sử dụng Prisma Adapter, strategy JWT, CredentialsProvider.
+  . authorize băm & so khớp password, trả về user nếu hợp lệ.
+  . Tạo trang /auth/signin và /auth/signout.
