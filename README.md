@@ -69,6 +69,11 @@
 ├── package.json
 └── tsconfig.json
 
+các file quan trọng:
+  prisma/schema.prisma
+  app/admin/experts/[id]/page.tsx
+  app/api/experts/route.ts
+
 2. Luồng logic chính
   1. Prisma Schema & Seed
   . Định nghĩa model với soft-delete (deleted boolean).
