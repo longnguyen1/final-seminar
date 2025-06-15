@@ -1,36 +1,19 @@
-import { PrismaClient } from '@prisma/client'
-import { NextResponse } from 'next/server'
+// app/api/workHistories/route.ts
+import { NextResponse } from "next/server";
+import {
+  getAllWorkHistories,
+  createWorkHistory,
+} from "@/lib/handlers/workHistoryHandlers";
+import { withAdmin } from "@/lib/middlewares/withAdmin";
 
-const prisma = new PrismaClient()
-
-// GET: lấy tất cả work histories (không bị xóa)
 export async function GET() {
-  const histories = await prisma.workHistory.findMany({
-    where: { deleted: false },
-    include: { expert: true },
-  })
-
-  return NextResponse.json(histories)
+  const workHistories = await getAllWorkHistories();
+  return NextResponse.json(workHistories);
 }
 
-// POST: tạo mới work history
 export async function POST(req: Request) {
-  const body = await req.json()
-
-  try {
-    const created = await prisma.workHistory.create({
-      data: {
-        startYear: body.startYear,
-        endYear: body.endYear,
-        position: body.position,
-        workplace: body.workplace,
-        field: body.field,
-        expertId: body.expertId,
-      },
-    })
-
-    return NextResponse.json(created)
-  } catch (error) {
-    return NextResponse.json({ error: 'Create failed' }, { status: 500 })
-  }
+  await withAdmin();
+  const data = await req.json();
+  const workHistory = await createWorkHistory(data);
+  return NextResponse.json(workHistory);
 }

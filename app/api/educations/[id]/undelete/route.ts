@@ -1,24 +1,11 @@
-// app/api/educations/[id]/undelete/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+// app/api/educations/undelete/route.ts
+import { NextResponse } from "next/server";
+import { undeleteEducation } from "@/lib/handlers/educationHandlers";
+import { withAdmin } from "@/lib/middlewares/withAdmin";
 
-export async function POST(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const { id } = await params;
-  const eduId = Number(id);
-  if (isNaN(eduId)) {
-    return NextResponse.json({ error: 'ID không hợp lệ' }, { status: 400 });
-  }
-
-  try {
-    const restored = await prisma.education.update({
-      where: { id: eduId },
-      data: { deleted: false },
-    });
-    return NextResponse.json({ message: 'Khôi phục thành công', data: restored });
-  } catch (e) {
-    return NextResponse.json({ error: 'Khôi phục thất bại' }, { status: 500 });
-  }
+export async function POST(req: Request) {
+  await withAdmin();
+  const { id } = await req.json();
+  const education = await undeleteEducation(id);
+  return NextResponse.json(education);
 }

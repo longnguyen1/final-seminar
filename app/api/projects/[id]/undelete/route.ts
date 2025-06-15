@@ -1,24 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+// app/api/projects/undelete/route.ts
+import { NextResponse } from "next/server";
+import { undeleteProject } from "@/lib/handlers/projectHandlers";
+import { withAdmin } from "@/lib/middlewares/withAdmin";
 
-export async function POST(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const { id } = await params;
-  const projectId = Number(id);
-  if (isNaN(projectId)) {
-    return NextResponse.json({ error: 'ID không hợp lệ' }, { status: 400 });
-  }
-
-  try {
-    const restored = await prisma.project.update({
-      where: { id: projectId },
-      data: { deleted: false },
-    });
-
-    return NextResponse.json({ message: 'Khôi phục thành công', data: restored });
-  } catch (error) {
-    return NextResponse.json({ error: 'Khôi phục thất bại' }, { status: 500 });
-  }
+export async function POST(req: Request) {
+  await withAdmin();
+  const { id } = await req.json();
+  const project = await undeleteProject(id);
+  return NextResponse.json(project);
 }

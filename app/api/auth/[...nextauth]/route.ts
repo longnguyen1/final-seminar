@@ -1,63 +1,57 @@
 // app/api/auth/[...nextauth]/route.ts
+
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma } from "@/lib/prisma";
-import { compare } from "bcrypt";
+import { prisma } from "@/lib/prisma"; // ✅ named import!
+import bcrypt from "bcryptjs";
 
-export const authOptions = {
-  adapter: PrismaAdapter(prisma),
+const handler = NextAuth({
   session: {
-    strategy: "jwt" as const,
-    maxAge: 30 * 24 * 60 * 60, // 30 ngày
-  },
-  pages: {
-    signIn: "/auth/signin",
-    signOut: "/auth/signout",
-    error: "/auth/error",
+    strategy: "jwt",
   },
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Mật khẩu", type: "password" },
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials) return null;
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
-        if (user && user.password) {
-          const isValid = await compare(credentials.password, user.password);
-          if (isValid) {
-            // chỉ trả về đối tượng minimal cần thiết
-            return { id: user.id, email: user.email, name: user.name };
-          }
-        }
-        return null;
+
+        if (!user) throw new Error("Email không tồn tại");
+
+        const isValid = await bcrypt.compare(credentials.password, user.password);
+        if (!isValid) throw new Error("Sai mật khẩu");
+
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name ?? null,
+        };
       },
     }),
-    // … thêm OAuth providers nếu cần
   ],
+  pages: {
+    signIn: "/auth/signin",
+  },
   callbacks: {
-    // Gọi khi tạo JWT
     async jwt({ token, user }) {
-      // Lần đầu sign in, user được trả về từ authorize()
       if (user) {
         token.id = user.id;
       }
       return token;
     },
-    // Gọi khi client fetch session
     async session({ session, token }) {
-      if (token.id) {
-        session.user.id = token.id as number;
+      if (session.user) {
+        session.user.id = token.id;
       }
       return session;
     },
   },
-};
+});
 
-const handler = NextAuth(authOptions);
+// ✅ BẮT BUỘC: chỉ export GET & POST
 export { handler as GET, handler as POST };

@@ -1,24 +1,11 @@
-// app/api/workHistories/[id]/undelete/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+// app/api/workHistories/undelete/route.ts
+import { NextResponse } from "next/server";
+import { undeleteWorkHistory } from "@/lib/handlers/workHistoryHandlers";
+import { withAdmin } from "@/lib/middlewares/withAdmin";
 
-export async function POST(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const { id } = await params;
-  const historyId = Number(id);
-  if (isNaN(historyId)) {
-    return NextResponse.json({ error: 'ID không hợp lệ' }, { status: 400 });
-  }
-
-  try {
-    const restored = await prisma.workHistory.update({
-      where: { id: historyId },
-      data: { deleted: false },
-    });
-    return NextResponse.json({ message: 'Khôi phục thành công', data: restored });
-  } catch (error) {
-    return NextResponse.json({ error: 'Khôi phục thất bại' }, { status: 500 });
-  }
+export async function POST(req: Request) {
+  await withAdmin();
+  const { id } = await req.json();
+  const workHistory = await undeleteWorkHistory(id);
+  return NextResponse.json(workHistory);
 }

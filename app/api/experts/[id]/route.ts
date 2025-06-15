@@ -1,57 +1,26 @@
 // app/api/experts/[id]/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { NextResponse } from "next/server";
+import {
+  getExpertById,
+  updateExpert,
+  softDeleteExpert,
+} from "@/lib/handlers/expertHandlers";
+import { withAdmin } from "@/lib/middlewares/withAdmin";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const { id } = await params;          // ← đây
-  const numId = Number(id);
-  if (isNaN(numId)) {
-    return NextResponse.json({ error: 'ID không hợp lệ' }, { status: 400 });
-  }
-  const expert = await prisma.expert.findUnique({ where: { id: numId } });
-  if (!expert) {
-    return NextResponse.json({ error: 'Không tìm thấy' }, { status: 404 });
-  }
+export async function GET(_: Request, { params }: { params: { id: string } }) {
+  const expert = await getExpertById(params.id);
   return NextResponse.json(expert);
 }
 
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const { id } = await params;
-  const numId = Number(id);
+export async function PUT(req: Request, { params }: { params: { id: string } }) {
+  await withAdmin();
   const data = await req.json();
-  const updated = await prisma.expert.update({
-    where: { id: numId },
-    data: {
-      fullName: data.fullName,
-      birthYear: data.birthYear,
-      gender: data.gender,
-      academicTitle: data.academicTitle,
-      academicTitleYear: data.academicTitleYear,
-      degree: data.degree,
-      degreeYear: data.degreeYear,
-      position: data.position,
-      currentWork: data.currentWork,
-      organization: data.organization,
-    },
-  });
-  return NextResponse.json(updated);
+  const expert = await updateExpert(params.id, data);
+  return NextResponse.json(expert);
 }
 
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const { id } = await params;
-  const numId = Number(id);
-  await prisma.expert.update({
-    where: { id: numId },
-    data: { deleted: true },
-  });
-  return NextResponse.json({ message: 'Đã xóa mềm' });
+export async function DELETE(_: Request, { params }: { params: { id: string } }) {
+  await withAdmin();
+  const expert = await softDeleteExpert(params.id);
+  return NextResponse.json(expert);
 }

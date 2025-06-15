@@ -1,31 +1,20 @@
-// prisma/seed.ts
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
+
 const prisma = new PrismaClient();
 
 async function main() {
-  // đổi mật khẩu thành "123456"
-  const hash = await bcrypt.hash("123456", 10);
+  const hashedPassword = await bcrypt.hash("123456", 10);
+await prisma.user.create({
+  data: {
+    email: "nguyenthanhlong601@gmail.com",
+    password: hashedPassword,
+    name: "Nguyen Thanh Long",
+  },
+});
 
-  await prisma.user.upsert({
-    where: { email: "admin@yourdomain.com" },
-    update: {
-      // nếu cần bạn cũng có thể cập nhật luôn mật khẩu ở đây
-      password: hash,
-    },
-    create: {
-      email: "nguyenthanhlong601@gmail.com",
-      name: "Admin",
-      password: hash,
-    },
-  });
 }
 
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+  .catch((e) => console.error(e))
+  .finally(() => prisma.$disconnect());

@@ -1,19 +1,8 @@
 // app/api/experts/[id]/educations/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { NextResponse } from "next/server";
+import { getEducationsOfExpert } from "@/lib/handlers/educationHandlers";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const { id } = await params;           // ← await ở đây
-  const expertId = Number(id);
-  if (isNaN(expertId)) {
-    return NextResponse.json({ error: 'ID không hợp lệ' }, { status: 400 });
-  }
-  const educations = await prisma.education.findMany({
-    where: { expertId, deleted: false },
-    orderBy: { year: 'desc' },
-  });
+export async function GET(_: Request, { params }: { params: { id: string } }) {
+  const educations = await getEducationsOfExpert(params.id);
   return NextResponse.json(educations);
 }

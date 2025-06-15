@@ -1,36 +1,19 @@
-import { PrismaClient } from '@prisma/client'
-import { NextResponse } from 'next/server'
+// app/api/languages/route.ts
+import { NextResponse } from "next/server";
+import {
+  getAllLanguages,
+  createLanguage,
+} from "@/lib/handlers/languageHandlers";
+import { withAdmin } from "@/lib/middlewares/withAdmin";
 
-const prisma = new PrismaClient()
-
-// GET: lấy tất cả ngôn ngữ (chưa bị xóa mềm)
 export async function GET() {
-  const languages = await prisma.language.findMany({
-    where: { deleted: false },
-    include: { expert: true },
-  })
-
-  return NextResponse.json(languages)
+  const languages = await getAllLanguages();
+  return NextResponse.json(languages);
 }
 
-// POST: tạo mới ngôn ngữ
 export async function POST(req: Request) {
-  const body = await req.json()
-
-  try {
-    const newLanguage = await prisma.language.create({
-      data: {
-        language: body.language,
-        listening: body.listening,
-        speaking: body.speaking,
-        reading: body.reading,
-        writing: body.writing,
-        expertId: body.expertId,
-      },
-    })
-
-    return NextResponse.json(newLanguage)
-  } catch (error) {
-    return NextResponse.json({ error: 'Create failed' }, { status: 500 })
-  }
+  await withAdmin();
+  const data = await req.json();
+  const language = await createLanguage(data);
+  return NextResponse.json(language);
 }
