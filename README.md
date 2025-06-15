@@ -93,3 +93,21 @@
   . Sử dụng Prisma Adapter, strategy JWT, CredentialsProvider.
   . authorize băm & so khớp password, trả về user nếu hợp lệ.
   . Tạo trang /auth/signin và /auth/signout.
+
+3. Những bước tiếp theo & gợi ý bổ sung
+  1. Triển khai role‐based access
+  . Thêm field role trong User (ví dụ: “admin” vs “editor”) để chỉ cho phép admin CRUD.
+
+  2. Validation & feedback
+  . Thêm Formik or React Hook Form + Zod/Yup để validate đầu vào.
+  . Hiển thị toast (e.g. react-hot-toast) cho thành công/thất bại.
+
+  3. Biểu đồ & thống kê
+  . Tích hợp chart (Chart.js) hiển thị số chuyên gia theo năm, chuyên ngành, v.v.
+
+  4. Tối ưu performance
+  . Dùng React‑query / SWR để cache & revalidate.
+  . Chia nhỏ bundle, lazy‐load modal & các section tab.
+
+  5. Triển khai
+  . Deploy lên Vercel, cài CI/CD để tự động build & migrate Prisma.
