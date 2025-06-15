@@ -1,26 +1,29 @@
-// app/api/experts/[id]/route.ts
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { withAdmin } from "@/lib/middlewares/withAdmin";
 import {
   getExpertById,
   updateExpert,
   softDeleteExpert,
 } from "@/lib/handlers/expertHandlers";
-import { withAdmin } from "@/lib/middlewares/withAdmin";
 
-export async function GET(_: Request, { params }: { params: { id: string } }) {
-  const expert = await getExpertById(params.id);
+// GET: /api/experts/:id
+export async function GET(_req: NextRequest, context: any) {
+  const expert = await getExpertById(context.params.id);
   return NextResponse.json(expert);
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+// PUT: /api/experts/:id
+export async function PUT(req: NextRequest, context: any) {
   await withAdmin();
   const data = await req.json();
-  const expert = await updateExpert(params.id, data);
+  const expert = await updateExpert(context.params.id, data);
   return NextResponse.json(expert);
 }
 
-export async function DELETE(_: Request, { params }: { params: { id: string } }) {
+// DELETE: /api/experts/:id
+export async function DELETE(_req: NextRequest, context: any) {
   await withAdmin();
-  const expert = await softDeleteExpert(params.id);
+  const expert = await softDeleteExpert(context.params.id);
   return NextResponse.json(expert);
 }

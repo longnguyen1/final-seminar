@@ -95,6 +95,7 @@ model User {
   emailVerified  DateTime?
   image          String?
   password       String?
+  role           String     @default("admin") // ✅ thêm trường role
   accounts       Account[]
   sessions       Session[]
 }

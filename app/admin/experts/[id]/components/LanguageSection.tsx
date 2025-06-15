@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import LanguageFormModal from './LanguageFormModal';
 
 interface Language {
-  id: number;
+  id?: number;
   language: string;
   listening: string;
   speaking: string;
@@ -12,6 +12,16 @@ interface Language {
   writing: string;
   expertId: number;
 }
+
+// ✅ Thêm hàm tạo Language mặc định
+const defaultLanguage = (expertId: number): Language => ({
+  language: '',
+  listening: '',
+  speaking: '',
+  reading: '',
+  writing: '',
+  expertId,
+});
 
 export default function LanguageSection({ expertId }: { expertId: number }) {
   const [items, setItems] = useState<Language[]>([]);
@@ -37,14 +47,14 @@ export default function LanguageSection({ expertId }: { expertId: number }) {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold">Trình độ ngoại ngữ</h2>
         <button
           onClick={() => {
             setEditing(undefined);
             setIsModalOpen(true);
           }}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="px-4 py-2 text-white bg-blue-600 rounded"
         >
           ➕ Thêm
         </button>
@@ -69,9 +79,9 @@ export default function LanguageSection({ expertId }: { expertId: number }) {
               <td className="p-2 border">{item.speaking}</td>
               <td className="p-2 border">{item.reading}</td>
               <td className="p-2 border">{item.writing}</td>
-              <td className="p-2 border text-center space-x-2">
+              <td className="p-2 space-x-2 text-center border">
                 <button onClick={() => { setEditing(item); setIsModalOpen(true); }} className="text-blue-600">✏️</button>
-                <button onClick={() => handleDelete(item.id)} className="text-red-600">🗑️</button>
+                <button onClick={() => handleDelete(item.id!)} className="text-red-600">🗑️</button>
               </td>
             </tr>
           ))}
@@ -82,7 +92,7 @@ export default function LanguageSection({ expertId }: { expertId: number }) {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={fetchData}
-        initialData={editing ? { ...editing } : { expertId }}
+        initialData={editing ? { ...editing } : defaultLanguage(expertId)}
       />
     </div>
   );

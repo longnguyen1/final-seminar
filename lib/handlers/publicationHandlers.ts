@@ -24,7 +24,7 @@ export async function createPublication(data: any) {
  */
 export async function getPublicationById(id: string) {
   return prisma.publication.findUnique({
-    where: { id },
+    where: { id: Number(id) },
   });
 }
 
@@ -33,7 +33,7 @@ export async function getPublicationById(id: string) {
  */
 export async function updatePublication(id: string, data: any) {
   return prisma.publication.update({
-    where: { id },
+    where: { id: Number(id) },
     data,
   });
 }
@@ -43,7 +43,7 @@ export async function updatePublication(id: string, data: any) {
  */
 export async function softDeletePublication(id: string) {
   return prisma.publication.update({
-    where: { id },
+    where: { id: Number(id) },
     data: { deleted: true },
   });
 }
@@ -53,7 +53,7 @@ export async function softDeletePublication(id: string) {
  */
 export async function undeletePublication(id: string) {
   return prisma.publication.update({
-    where: { id },
+    where: { id: Number(id) },
     data: { deleted: false },
   });
 }
@@ -64,7 +64,7 @@ export async function undeletePublication(id: string) {
 export async function getPublicationsOfExpert(expertId: string) {
   return prisma.publication.findMany({
     where: {
-      expertId,
+      expertId: Number(expertId),
       deleted: false,
     },
   });

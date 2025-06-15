@@ -22,7 +22,7 @@ export async function createExpert(data: any) {
 
 export async function getExpertById(id: string) {
   return prisma.expert.findUnique({
-    where: { id },
+    where: { id: Number(id) },
     include: {
       educations: true,
       workHistories: true,
@@ -35,21 +35,21 @@ export async function getExpertById(id: string) {
 
 export async function updateExpert(id: string, data: any) {
   return prisma.expert.update({
-    where: { id },
+    where: { id: Number(id) },
     data,
   });
 }
 
 export async function softDeleteExpert(id: string) {
   return prisma.expert.update({
-    where: { id },
+    where: { id: Number(id) },
     data: { deleted: true },
   });
 }
 
 export async function undeleteExpert(id: string) {
   return prisma.expert.update({
-    where: { id },
+    where: { id: Number(id) },
     data: { deleted: false },
   });
 }

@@ -1,10 +1,9 @@
-// lib/middlewares/withAdmin.ts
-import { withAuth } from "./withAuth";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions";
 
 export async function withAdmin() {
-  const session = await withAuth();
-  if (session.user.role !== "admin") {
-    throw new Error("Forbidden: Admins only");
+  const session = await getServerSession(authOptions);
+  if (!session || session.user.role !== "admin") {
+    throw new Error("Unauthorized: Admin only");
   }
-  return session;
 }

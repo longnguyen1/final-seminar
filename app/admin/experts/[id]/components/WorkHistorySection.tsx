@@ -1,11 +1,10 @@
-// app/admin/experts/[id]/components/WorkHistorySection.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
 import WorkHistoryFormModal from './WorkHistoryFormModal';
 
 interface WorkHistory {
-  id: number;
+  id?: number;
   startYear: number | null;
   endYear: number | null;
   position: string;
@@ -13,6 +12,16 @@ interface WorkHistory {
   field: string;
   expertId: number;
 }
+
+// ✅ Hàm tạo mặc định WorkHistory
+const defaultWorkHistory = (expertId: number): WorkHistory => ({
+  startYear: null,
+  endYear: null,
+  position: '',
+  workplace: '',
+  field: '',
+  expertId,
+});
 
 export default function WorkHistorySection({ expertId }: { expertId: number }) {
   const [items, setItems] = useState<WorkHistory[]>([]);
@@ -38,14 +47,14 @@ export default function WorkHistorySection({ expertId }: { expertId: number }) {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold">Lịch sử công tác</h2>
         <button
           onClick={() => {
             setEditing(undefined);
             setIsModalOpen(true);
           }}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="px-4 py-2 text-white bg-blue-600 rounded"
         >
           ➕ Thêm
         </button>
@@ -64,13 +73,13 @@ export default function WorkHistorySection({ expertId }: { expertId: number }) {
         <tbody>
           {items.map((item) => (
             <tr key={item.id} className="border-t">
-              <td className="p-2 border text-center">{item.startYear} - {item.endYear}</td>
+              <td className="p-2 text-center border">{item.startYear} - {item.endYear}</td>
               <td className="p-2 border">{item.position}</td>
               <td className="p-2 border">{item.workplace}</td>
               <td className="p-2 border">{item.field}</td>
-              <td className="p-2 border text-center space-x-2">
+              <td className="p-2 space-x-2 text-center border">
                 <button onClick={() => { setEditing(item); setIsModalOpen(true); }} className="text-blue-600">✏️</button>
-                <button onClick={() => handleDelete(item.id)} className="text-red-600">🗑️</button>
+                <button onClick={() => handleDelete(item.id!)} className="text-red-600">🗑️</button>
               </td>
             </tr>
           ))}
@@ -81,7 +90,7 @@ export default function WorkHistorySection({ expertId }: { expertId: number }) {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={fetchData}
-        initialData={editing ? { ...editing } : { expertId }}
+        initialData={editing ? { ...editing } : defaultWorkHistory(expertId)}
       />
     </div>
   );

@@ -1,19 +1,11 @@
-// app/api/experts/[id]/undelete/route.ts
-import { prisma } from '@/lib/prisma';
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { undeleteExpert } from "@/lib/handlers/expertHandlers";
+import { withAdmin } from "@/lib/middlewares/withAdmin";
 
-export async function POST(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
-  const id = Number(params.id);
-  try {
-    await prisma.expert.update({
-      where: { id },
-      data: { deleted: false },
-    });
-    return NextResponse.json({ message: 'Khôi phục thành công' });
-  } catch (error) {
-    return NextResponse.json({ error: 'Lỗi khôi phục' }, { status: 500 });
-  }
+// ✅ KHÔNG khai báo type cho params!
+export async function POST(_req: NextRequest, context: any) {
+  await withAdmin();
+  const expert = await undeleteExpert(context.params.id);
+  return NextResponse.json(expert);
 }

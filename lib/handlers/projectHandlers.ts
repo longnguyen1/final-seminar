@@ -15,27 +15,27 @@ export async function createProject(data: any) {
 
 export async function getProjectById(id: string) {
   return prisma.project.findUnique({
-    where: { id },
+    where: { id: Number(id) },
   });
 }
 
 export async function updateProject(id: string, data: any) {
   return prisma.project.update({
-    where: { id },
+    where: { id: Number(id) },
     data,
   });
 }
 
 export async function softDeleteProject(id: string) {
   return prisma.project.update({
-    where: { id },
+    where: { id: Number(id) },
     data: { deleted: true },
   });
 }
 
 export async function undeleteProject(id: string) {
   return prisma.project.update({
-    where: { id },
+    where: { id: Number(id) },
     data: { deleted: false },
   });
 }
@@ -43,7 +43,7 @@ export async function undeleteProject(id: string) {
 export async function getProjectsOfExpert(expertId: string) {
   return prisma.project.findMany({
     where: {
-      expertId,
+      expertId: Number(expertId),
       deleted: false,
     },
   });

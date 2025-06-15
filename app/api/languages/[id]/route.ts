@@ -1,5 +1,5 @@
-// app/api/languages/[id]/route.ts
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import {
   getLanguageById,
   updateLanguage,
@@ -7,20 +7,20 @@ import {
 } from "@/lib/handlers/languageHandlers";
 import { withAdmin } from "@/lib/middlewares/withAdmin";
 
-export async function GET(_: Request, { params }: { params: { id: string } }) {
-  const language = await getLanguageById(params.id);
+export async function GET(_req: NextRequest, context: any) {
+  const language = await getLanguageById(context.params.id);
   return NextResponse.json(language);
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, context: any) {
   await withAdmin();
   const data = await req.json();
-  const language = await updateLanguage(params.id, data);
+  const language = await updateLanguage(context.params.id, data);
   return NextResponse.json(language);
 }
 
-export async function DELETE(_: Request, { params }: { params: { id: string } }) {
+export async function DELETE(_req: NextRequest, context: any) {
   await withAdmin();
-  const language = await softDeleteLanguage(params.id);
+  const language = await softDeleteLanguage(context.params.id);
   return NextResponse.json(language);
 }

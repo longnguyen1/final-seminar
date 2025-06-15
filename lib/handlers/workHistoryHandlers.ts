@@ -22,7 +22,7 @@ export async function createWorkHistory(data: any) {
 /**
  * Lấy WorkHistory theo id
  */
-export async function getWorkHistoryById(id: string) {
+export async function getWorkHistoryById(id: number) {
   return prisma.workHistory.findUnique({
     where: { id },
   });
@@ -31,7 +31,7 @@ export async function getWorkHistoryById(id: string) {
 /**
  * Cập nhật WorkHistory theo id
  */
-export async function updateWorkHistory(id: string, data: any) {
+export async function updateWorkHistory(id: number, data: any) {
   return prisma.workHistory.update({
     where: { id },
     data,
@@ -41,7 +41,7 @@ export async function updateWorkHistory(id: string, data: any) {
 /**
  * Soft-delete WorkHistory
  */
-export async function softDeleteWorkHistory(id: string) {
+export async function softDeleteWorkHistory(id: number) {
   return prisma.workHistory.update({
     where: { id },
     data: { deleted: true },
@@ -51,7 +51,7 @@ export async function softDeleteWorkHistory(id: string) {
 /**
  * Khôi phục WorkHistory đã xoá mềm
  */
-export async function undeleteWorkHistory(id: string) {
+export async function undeleteWorkHistory(id: number) {
   return prisma.workHistory.update({
     where: { id },
     data: { deleted: false },
@@ -61,7 +61,7 @@ export async function undeleteWorkHistory(id: string) {
 /**
  * Lấy danh sách WorkHistories của 1 Expert cụ thể
  */
-export async function getWorkHistoriesOfExpert(expertId: string) {
+export async function getWorkHistoriesOfExpert(expertId: number) {
   return prisma.workHistory.findMany({
     where: {
       expertId,

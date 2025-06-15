@@ -21,7 +21,22 @@ interface ExpertFormModalProps {
   };
 }
 
-const emptyFormData = {
+// ✅ Bổ sung type ExpertForm
+interface ExpertForm {
+  fullName: string;
+  birthYear: number | null;
+  gender: string;
+  academicTitle: string;
+  academicTitleYear: number | null;
+  degree: string;
+  degreeYear: number | null;
+  position: string;
+  currentWork: string;
+  organization: string;
+}
+
+// ✅ Gán type cho emptyFormData
+const emptyFormData: ExpertForm = {
   fullName: '',
   birthYear: null,
   gender: '',
@@ -40,7 +55,8 @@ export default function ExpertFormModal({
   onSave,
   expert,
 }: ExpertFormModalProps) {
-  const [formData, setFormData] = useState({ ...emptyFormData });
+  // ✅ Gán type cho useState
+  const [formData, setFormData] = useState<ExpertForm>({ ...emptyFormData });
 
   useEffect(() => {
     if (expert) {
@@ -88,30 +104,30 @@ export default function ExpertFormModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-lg w-full max-w-2xl shadow-md">
-        <h2 className="text-xl font-bold mb-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
+      <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-md">
+        <h2 className="mb-4 text-xl font-bold">
           {expert?.id ? 'Chỉnh sửa chuyên gia' : 'Thêm chuyên gia'}
         </h2>
 
         <div className="grid grid-cols-2 gap-4">
-          <input className="border p-2" name="fullName" placeholder="Họ tên" value={formData.fullName} onChange={handleChange} />
-          <input className="border p-2" name="birthYear" type="number" placeholder="Năm sinh" value={formData.birthYear ?? ''} onChange={handleChange} />
-          <input className="border p-2" name="gender" placeholder="Giới tính" value={formData.gender} onChange={handleChange} />
-          <input className="border p-2" name="organization" placeholder="Đơn vị" value={formData.organization} onChange={handleChange} />
-          <input className="border p-2" name="academicTitle" placeholder="Học hàm" value={formData.academicTitle} onChange={handleChange} />
-          <input className="border p-2" name="academicTitleYear" type="number" placeholder="Năm phong HH" value={formData.academicTitleYear ?? ''} onChange={handleChange} />
-          <input className="border p-2" name="degree" placeholder="Học vị" value={formData.degree} onChange={handleChange} />
-          <input className="border p-2" name="degreeYear" type="number" placeholder="Năm đạt học vị" value={formData.degreeYear ?? ''} onChange={handleChange} />
-          <input className="border p-2" name="position" placeholder="Chức vụ" value={formData.position} onChange={handleChange} />
-          <input className="border p-2" name="currentWork" placeholder="Công việc hiện nay" value={formData.currentWork} onChange={handleChange} />
+          <input className="p-2 border" name="fullName" placeholder="Họ tên" value={formData.fullName} onChange={handleChange} />
+          <input className="p-2 border" name="birthYear" type="number" placeholder="Năm sinh" value={formData.birthYear ?? ''} onChange={handleChange} />
+          <input className="p-2 border" name="gender" placeholder="Giới tính" value={formData.gender} onChange={handleChange} />
+          <input className="p-2 border" name="organization" placeholder="Đơn vị" value={formData.organization} onChange={handleChange} />
+          <input className="p-2 border" name="academicTitle" placeholder="Học hàm" value={formData.academicTitle} onChange={handleChange} />
+          <input className="p-2 border" name="academicTitleYear" type="number" placeholder="Năm phong HH" value={formData.academicTitleYear ?? ''} onChange={handleChange} />
+          <input className="p-2 border" name="degree" placeholder="Học vị" value={formData.degree} onChange={handleChange} />
+          <input className="p-2 border" name="degreeYear" type="number" placeholder="Năm đạt học vị" value={formData.degreeYear ?? ''} onChange={handleChange} />
+          <input className="p-2 border" name="position" placeholder="Chức vụ" value={formData.position} onChange={handleChange} />
+          <input className="p-2 border" name="currentWork" placeholder="Công việc hiện nay" value={formData.currentWork} onChange={handleChange} />
         </div>
 
-        <div className="mt-6 flex justify-end gap-2">
-          <button onClick={onClose} className="px-4 py-2 bg-gray-400 text-white rounded">
+        <div className="flex justify-end gap-2 mt-6">
+          <button onClick={onClose} className="px-4 py-2 text-white bg-gray-400 rounded">
             Hủy
           </button>
-          <button onClick={handleSubmit} className="px-4 py-2 bg-blue-600 text-white rounded">
+          <button onClick={handleSubmit} className="px-4 py-2 text-white bg-blue-600 rounded">
             {expert?.id ? 'Lưu' : 'Thêm'}
           </button>
         </div>

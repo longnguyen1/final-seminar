@@ -1,8 +1,8 @@
-// app/api/experts/[id]/languages/route.ts
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import { getLanguagesOfExpert } from "@/lib/handlers/languageHandlers";
 
-export async function GET(_: Request, { params }: { params: { id: string } }) {
-  const languages = await getLanguagesOfExpert(params.id);
+export async function GET(_req: NextRequest, context: any) {
+  const languages = await getLanguagesOfExpert(context.params.id);
   return NextResponse.json(languages);
 }
