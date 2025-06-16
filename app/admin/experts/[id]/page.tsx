@@ -43,13 +43,13 @@ export default function ExpertDetailPage() {
   if (!expert) return <div className="p-8 text-red-600">Không tìm thấy chuyên gia</div>;
 
   return (
-    <div className="p-8 max-w-5xl mx-auto space-y-6">
+    <div className="max-w-5xl p-8 mx-auto space-y-6">
       {/* Tiêu đề và nút quay lại */}
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-800">{expert.fullName}</h1>
         <button
           onClick={() => router.back()}
-          className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+          className="px-4 py-2 text-white bg-gray-600 rounded hover:bg-gray-700"
         >
           ← Quay lại
         </button>

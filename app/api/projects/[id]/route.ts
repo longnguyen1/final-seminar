@@ -7,20 +7,26 @@ import {
 } from "@/lib/handlers/projectHandlers";
 import { withAdmin } from "@/lib/middlewares/withAdmin";
 
-export async function GET(_req: NextRequest, context: any) {
-  const project = await getProjectById(context.params.id);
+export async function GET(_req: NextRequest, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
+  const parseId = parseInt(id);
+  const project = await getProjectById(parseId);
   return NextResponse.json(project);
 }
 
-export async function PUT(req: NextRequest, context: any) {
+export async function PUT(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   await withAdmin();
+  const { id } = await context.params;
+  const parseId = parseInt(id);
   const data = await req.json();
-  const project = await updateProject(context.params.id, data);
+  const project = await updateProject(parseId, data);
   return NextResponse.json(project);
 }
 
-export async function DELETE(_req: NextRequest, context: any) {
+export async function DELETE(_req: NextRequest, context: { params: Promise<{ id: string }> })  {
   await withAdmin();
-  const project = await softDeleteProject(context.params.id);
+  const { id } = await context.params;
+  const parseId = parseInt(id);
+  const project = await softDeleteProject(parseId);
   return NextResponse.json(project);
 }

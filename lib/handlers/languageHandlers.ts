@@ -13,37 +13,37 @@ export async function createLanguage(data: any) {
   });
 }
 
-export async function getLanguageById(id: string) {
+export async function getLanguageById(id: number) {
   return prisma.language.findUnique({
-    where: { id: Number(id) },
+    where: { id },
   });
 }
 
-export async function updateLanguage(id: string, data: any) {
+export async function updateLanguage(id: number, data: any) {
   return prisma.language.update({
-    where: { id: Number(id) },
+    where: { id },
     data,
   });
 }
 
-export async function softDeleteLanguage(id: string) {
+export async function softDeleteLanguage(id: number) {
   return prisma.language.update({
-    where: { id: Number(id) },
+    where: { id },
     data: { deleted: true },
   });
 }
 
-export async function undeleteLanguage(id: string) {
+export async function undeleteLanguage(id: number) {
   return prisma.language.update({
-    where: { id: Number(id) },
+    where: { id },
     data: { deleted: false },
   });
 }
 
-export async function getLanguagesOfExpert(expertId: string) {
+export async function getLanguagesOfExpert(expertId: number) {
   return prisma.language.findMany({
     where: {
-      expertId: Number(expertId),
+      expertId,
       deleted: false,
     },
   });

@@ -13,37 +13,37 @@ export async function createEducation(data: any) {
   });
 }
 
-export async function getEducationById(id: string) {
+export async function getEducationById(id: number) {
   return prisma.education.findUnique({
-    where: { id: Number(id) },
+    where: { id },
   });
 }
 
-export async function updateEducation(id: string, data: any) {
+export async function updateEducation(id: number, data: any) {
   return prisma.education.update({
-    where: { id: Number(id) },
+    where: { id },
     data,
   });
 }
 
-export async function softDeleteEducation(id: string) {
+export async function softDeleteEducation(id: number) {
   return prisma.education.update({
-    where: { id: Number(id) },
+    where: { id },
     data: { deleted: true },
   });
 }
 
-export async function undeleteEducation(id: string) {
+export async function undeleteEducation(id: number) {
   return prisma.education.update({
-    where: { id: Number(id) },
+    where: { id },
     data: { deleted: false },
   });
 }
 
-export async function getEducationsOfExpert(expertId: string) {
+export async function getEducationsOfExpert(expertId: number) {
   return prisma.education.findMany({
     where: {
-      expertId: Number(expertId),
+      expertId,
       deleted: false,
     },
   });

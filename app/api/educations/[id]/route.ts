@@ -9,20 +9,26 @@ import {
 import { withAdmin } from "@/lib/middlewares/withAdmin";
 
 // ✅ Dùng NextRequest làm type
-export async function GET(_req: NextRequest, context: any) {
-  const education = await getEducationById(context.params.id);
+export async function GET(_req: NextRequest, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
+  const parseId = parseInt(id);
+  const education = await getEducationById(parseId);
   return NextResponse.json(education);
 }
 
-export async function PUT(req: NextRequest, context: any) {
+export async function PUT(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   await withAdmin();
+  const { id } = await context.params;
+  const parseId = parseInt(id);
   const data = await req.json();
-  const education = await updateEducation(context.params.id, data);
+  const education = await updateEducation(parseId, data);
   return NextResponse.json(education);
 }
 
-export async function DELETE(_req: NextRequest, context: any) {
+export async function DELETE(_req: NextRequest, context: { params: Promise<{ id: string }> })  {
   await withAdmin();
-  const education = await softDeleteEducation(context.params.id);
+  const { id } = await context.params;
+  const parseId = parseInt(id);
+  const education = await softDeleteEducation(parseId);
   return NextResponse.json(education);
 }

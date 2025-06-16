@@ -22,18 +22,18 @@ export async function createPublication(data: any) {
 /**
  * Lấy Publication theo id
  */
-export async function getPublicationById(id: string) {
+export async function getPublicationById(id: number) {
   return prisma.publication.findUnique({
-    where: { id: Number(id) },
+    where: { id },
   });
 }
 
 /**
  * Cập nhật Publication theo id
  */
-export async function updatePublication(id: string, data: any) {
+export async function updatePublication(id: number, data: any) {
   return prisma.publication.update({
-    where: { id: Number(id) },
+    where: { id },
     data,
   });
 }
@@ -41,9 +41,9 @@ export async function updatePublication(id: string, data: any) {
 /**
  * Soft-delete Publication
  */
-export async function softDeletePublication(id: string) {
+export async function softDeletePublication(id: number) {
   return prisma.publication.update({
-    where: { id: Number(id) },
+    where: { id },
     data: { deleted: true },
   });
 }
@@ -51,9 +51,9 @@ export async function softDeletePublication(id: string) {
 /**
  * Khôi phục Publication đã soft-delete
  */
-export async function undeletePublication(id: string) {
+export async function undeletePublication(id: number) {
   return prisma.publication.update({
-    where: { id: Number(id) },
+    where: { id },
     data: { deleted: false },
   });
 }
@@ -61,10 +61,10 @@ export async function undeletePublication(id: string) {
 /**
  * Lấy danh sách Publications của 1 Expert cụ thể
  */
-export async function getPublicationsOfExpert(expertId: string) {
+export async function getPublicationsOfExpert(expertId: number) {
   return prisma.publication.findMany({
     where: {
-      expertId: Number(expertId),
+      expertId,
       deleted: false,
     },
   });

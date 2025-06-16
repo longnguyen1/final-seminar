@@ -7,20 +7,26 @@ import {
 } from "@/lib/handlers/publicationHandlers";
 import { withAdmin } from "@/lib/middlewares/withAdmin";
 
-export async function GET(_req: NextRequest, context: any){
-  const publication = await getPublicationById(context.params.id);
+export async function GET(_req: NextRequest, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
+  const parseId = parseInt(id);
+  const publication = await getPublicationById(parseId);
   return NextResponse.json(publication);
 }
 
-export async function PUT(req: NextRequest, context: any) {
+export async function PUT(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   await withAdmin();
+  const { id } = await context.params;
+  const parseId = parseInt(id);
   const data = await req.json();
-  const publication = await updatePublication(context.params.id, data);
+  const publication = await updatePublication(parseId, data);
   return NextResponse.json(publication);
 }
 
-export async function DELETE(_req: NextRequest, context: any) {
+export async function DELETE(_req: NextRequest, context: { params: Promise<{ id: string }> }) {
   await withAdmin();
-  const publication = await softDeletePublication(context.params.id);
+  const { id } = await context.params;
+  const parseId = parseInt(id);
+  const publication = await softDeletePublication(parseId);
   return NextResponse.json(publication);
 }

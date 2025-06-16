@@ -19,6 +19,8 @@ model Expert {
   position         String?       // Chức vụ hiện tại
   currentWork      String?       // Công việc hiện nay
   organization     String?       // Đơn vị
+  email            String?
+  phone            String?
   deleted      Boolean   @default(false)
 
   // Quan hệ

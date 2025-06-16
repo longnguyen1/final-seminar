@@ -8,22 +8,28 @@ import {
 } from "@/lib/handlers/expertHandlers";
 
 // GET: /api/experts/:id
-export async function GET(_req: NextRequest, context: any) {
-  const expert = await getExpertById(context.params.id);
+export async function GET(_req: NextRequest, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
+  const parseId = parseInt(id);
+  const expert = await getExpertById(parseId);
   return NextResponse.json(expert);
 }
 
 // PUT: /api/experts/:id
-export async function PUT(req: NextRequest, context: any) {
+export async function PUT(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   await withAdmin();
+  const { id } = await context.params;
+  const parseId = parseInt(id);
   const data = await req.json();
-  const expert = await updateExpert(context.params.id, data);
+  const expert = await updateExpert(parseId, data);
   return NextResponse.json(expert);
 }
 
 // DELETE: /api/experts/:id
-export async function DELETE(_req: NextRequest, context: any) {
+export async function DELETE(_req: NextRequest, context: { params: Promise<{ id: string }> }) {
   await withAdmin();
-  const expert = await softDeleteExpert(context.params.id);
+  const { id } = await context.params;
+  const parseId = parseInt(id);
+  const expert = await softDeleteExpert(parseId);
   return NextResponse.json(expert);
 }

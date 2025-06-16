@@ -13,37 +13,37 @@ export async function createProject(data: any) {
   });
 }
 
-export async function getProjectById(id: string) {
+export async function getProjectById(id: number) {
   return prisma.project.findUnique({
-    where: { id: Number(id) },
+    where: { id },
   });
 }
 
-export async function updateProject(id: string, data: any) {
+export async function updateProject(id: number, data: any) {
   return prisma.project.update({
-    where: { id: Number(id) },
+    where: { id },
     data,
   });
 }
 
-export async function softDeleteProject(id: string) {
+export async function softDeleteProject(id: number) {
   return prisma.project.update({
-    where: { id: Number(id) },
+    where: { id },
     data: { deleted: true },
   });
 }
 
-export async function undeleteProject(id: string) {
+export async function undeleteProject(id: number) {
   return prisma.project.update({
-    where: { id: Number(id) },
+    where: { id},
     data: { deleted: false },
   });
 }
 
-export async function getProjectsOfExpert(expertId: string) {
+export async function getProjectsOfExpert(expertId: number) {
   return prisma.project.findMany({
     where: {
-      expertId: Number(expertId),
+      expertId,
       deleted: false,
     },
   });

@@ -3,9 +3,10 @@ import { NextResponse } from "next/server";
 import { undeletePublication } from "@/lib/handlers/publicationHandlers";
 import { withAdmin } from "@/lib/middlewares/withAdmin";
 
-export async function POST(req: Request) {
+export async function POST(req: Request,context: { params: Promise<{ id: string }> }) {
   await withAdmin();
-  const { id } = await req.json();
-  const publication = await undeletePublication(id);
+  const { id } = await context.params;
+  const parseId = parseInt(id);
+  const publication = await undeletePublication(parseId);
   return NextResponse.json(publication);
 }
