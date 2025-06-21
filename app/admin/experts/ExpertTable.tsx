@@ -3,12 +3,16 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import ExpertFormModal from './ExpertFormModal';
+import { getDegreePrefix } from "@/lib/utils/getDegreePrefix";
 
 interface Expert {
   id: number;
   fullName: string;
   birthYear: number | null;
   organization: string | null;
+  degree?: string | null;
+  email?: string | null;   // ✅ mới
+  phone?: string | null;   // ✅ mới
 }
 
 export default function ExpertTable() {
@@ -27,7 +31,7 @@ export default function ExpertTable() {
   }, []);
 
   const handleAdd = () => {
-    setEditingExpert(null); // thêm mới: không có expert
+    setEditingExpert(null);
     setIsModalOpen(true);
   };
 
@@ -38,7 +42,6 @@ export default function ExpertTable() {
 
   const handleDelete = async (id: number) => {
     if (!confirm('Bạn chắc chắn muốn xoá chuyên gia này?')) return;
-
     await fetch(`/api/experts/${id}`, { method: 'DELETE' });
     fetchExperts();
   };
@@ -64,6 +67,7 @@ export default function ExpertTable() {
               <th className="px-4 py-2">Họ tên</th>
               <th className="px-4 py-2">Năm sinh</th>
               <th className="px-4 py-2">Đơn vị</th>
+              <th className="px-4 py-2">Liên hệ</th>  
               <th className="px-4 py-2">Hành động</th>
             </tr>
           </thead>
@@ -73,11 +77,23 @@ export default function ExpertTable() {
                 <td className="px-4 py-2">{index + 1}</td>
                 <td className="px-4 py-2 text-blue-700 hover:underline">
                   <Link href={`/admin/experts/${expert.id}`}>
-                    {expert.fullName}
+                    {getDegreePrefix(expert.degree)}{expert.fullName}
                   </Link>
                 </td>
                 <td className="px-4 py-2">{expert.birthYear ?? '-'}</td>
                 <td className="px-4 py-2">{expert.organization ?? '-'}</td>
+                <td className="px-4 py-2">
+                  {expert.phone && (
+                    <div className="flex items-center gap-1">
+                      📞 <span>{expert.phone}</span>
+                    </div>
+                  )}
+                  {expert.email && (
+                    <div className="flex items-center gap-1">
+                      📧 <span>{expert.email}</span>
+                    </div>
+                  )}
+                </td>
                 <td className="px-4 py-2 space-x-2">
                   <button
                     onClick={() => handleEdit(expert)}
@@ -102,7 +118,17 @@ export default function ExpertTable() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={fetchExperts}
-        expert={editingExpert ? { ...editingExpert, organization: editingExpert.organization ?? undefined } : undefined} // 👈 khi sửa thì truyền data, thêm mới thì null
+        expert={
+          editingExpert
+            ? {
+                ...editingExpert,
+                organization: editingExpert.organization ?? undefined,
+                degree: editingExpert.degree ?? undefined,
+                email: editingExpert.email ?? undefined,  // ✅ thêm
+                phone: editingExpert.phone ?? undefined,  // ✅ thêm
+              }
+            : undefined
+        }
       />
     </div>
   );

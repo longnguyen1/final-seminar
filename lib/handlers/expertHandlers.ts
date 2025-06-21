@@ -1,5 +1,6 @@
 // lib/handlers/expertHandlers.ts
 import { prisma } from "../prisma";
+import { pick } from "lodash";
 
 export async function getAllExperts() {
   return prisma.expert.findMany({
@@ -33,12 +34,19 @@ export async function getExpertById(id: number) {
   });
 }
 
-export async function updateExpert(id: number, data: any) {
+export const updateExpert = async (id: number, data: any) => {
+  const allowedFields = [
+    "fullName", "birthYear", "gender", "academicTitle", "academicTitleYear",
+    "degree", "degreeYear", "position", "currentWork", "organization",
+    "email", "phone" // ✅ mới
+  ];
+  const updateData = pick(data, allowedFields);
   return prisma.expert.update({
     where: { id },
-    data,
+    data: updateData,
   });
-}
+};
+
 
 export async function softDeleteExpert(id: number) {
   return prisma.expert.update({

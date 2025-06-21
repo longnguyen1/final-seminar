@@ -18,10 +18,10 @@ export async function GET(_req: NextRequest, context: { params: Promise<{ id: st
 // PUT: /api/experts/:id
 export async function PUT(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   await withAdmin();
-  const { id } = await context.params;
-  const parseId = parseInt(id);
+  const params = await context.params;
+  const id = parseInt(params.id);
   const data = await req.json();
-  const expert = await updateExpert(parseId, data);
+  const expert = await updateExpert(id, data);
   return NextResponse.json(expert);
 }
 
