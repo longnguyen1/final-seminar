@@ -5,5 +5,6 @@ export function getDegreePrefix(degree: string | null | undefined): string {
   if (d.includes("giáo sư")) return "GS. ";
   if (d.includes("tiến sĩ")) return "TS. ";
   if (d.includes("thạc sĩ")) return "ThS. ";
+  if (d.includes("kỹ sư")) return "Kỹ sư. ";
   return "";
 }
