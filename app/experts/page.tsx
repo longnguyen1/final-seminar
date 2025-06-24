@@ -17,18 +17,45 @@ function PublicSearchPage() {
   const [degree, setDegree] = useState("");
   const [org, setOrg] = useState("");
   const [experts, setExperts] = useState([]);
+  const [degreeOptions, setDegreeOptions] = useState<string[]>([]);
+  const [orgOptions, setOrgOptions] = useState<string[]>([]);
+  const [page, setPage] = useState(1);
   const { theme, toggleTheme } = useTheme();
 
+  // ✅ Fetch gợi ý Degree & Org
+  const fetchOptions = async () => {
+    const res = await fetch(`/api/experts/options`);
+    const data = await res.json();
+    setDegreeOptions(data.degrees);
+    setOrgOptions(data.organizations);
+  };
+
   const fetchData = async () => {
-    const query = new URLSearchParams({ name, degree, org }).toString();
+    const query = new URLSearchParams({
+      name,
+      degree,
+      org,
+      page: page.toString()
+    }).toString();
     const res = await fetch(`/api/experts/search?${query}`);
     const data = await res.json();
     setExperts(data);
   };
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => {
+    fetchOptions();
+    fetchData();
+  }, []);
 
-  const handleSubmit = (e: any) => { e.preventDefault(); fetchData(); };
+  useEffect(() => {
+    fetchData();
+  }, [page]);
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setPage(1); // Reset về page 1
+    fetchData();
+  };
 
   return (
     <main className="min-h-screen p-8 bg-base-100 text-base-content">
@@ -41,14 +68,40 @@ function PublicSearchPage() {
 
       <div className="p-6 mb-6 rounded hero bg-base-200">
         <form onSubmit={handleSubmit} className="flex flex-col justify-center w-full gap-4 md:flex-row">
-          <input placeholder="Họ tên..." value={name} onChange={e => setName(e.target.value)} className="w-full input input-bordered md:w-auto" />
-          <input placeholder="Học vị..." value={degree} onChange={e => setDegree(e.target.value)} className="w-full input input-bordered md:w-auto" />
-          <input placeholder="Đơn vị..." value={org} onChange={e => setOrg(e.target.value)} className="w-full input input-bordered md:w-auto" />
-          <button type="submit" className="btn btn-primary">Tìm kiếm</button>
+          <input
+            placeholder="Họ tên..."
+            value={name}
+            onChange={e => setName(e.target.value)}
+            className="w-full input input-bordered md:w-auto"
+          />
+
+          <select
+            value={degree}
+            onChange={e => setDegree(e.target.value)}
+            className="w-full input input-bordered md:w-auto"
+          >
+            <option value="">🎓 Tất cả học vị</option>
+            {degreeOptions.map((deg) => (
+              <option key={deg} value={deg}>{deg}</option>
+            ))}
+          </select>
+
+          <select
+            value={org}
+            onChange={e => setOrg(e.target.value)}
+            className="w-full input input-bordered md:w-auto"
+          >
+            <option value="">🏢 Tất cả đơn vị</option>
+            {orgOptions.map((o) => (
+              <option key={o} value={o}>{o}</option>
+            ))}
+          </select>
+
+          <button type="submit" className="btn btn-primary">🔍 Tìm kiếm</button>
         </form>
       </div>
 
-      <ExpertPublicTable experts={experts} />
+      <ExpertPublicTable experts={experts} page={page} setPage={setPage} />
     </main>
   );
 }

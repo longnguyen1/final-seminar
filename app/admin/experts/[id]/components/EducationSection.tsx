@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import EducationFormModal from './EducationFormModal';
+import toast from "react-hot-toast";
 
 interface Education {
   id: number;
@@ -36,6 +37,7 @@ export default function EducationSection({ expertId }: { expertId: number }) {
     if (!confirm('Xóa bản ghi này?')) return;
     await fetch(`/api/educations/${id}`, { method: 'DELETE' });
     fetchData();
+    toast.success("🗑️ Xoá thành công!");
   };
 
   const openAdd = () => {
@@ -48,12 +50,12 @@ export default function EducationSection({ expertId }: { expertId: number }) {
   };
 
   return (
-    <div className="bg-white p-6 rounded shadow space-y-4">
-      <div className="flex justify-between items-center">
+    <div className="p-6 space-y-4 bg-white rounded shadow">
+      <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold">Quá trình đào tạo</h2>
         <button
           onClick={openAdd}
-          className="bg-green-600 text-white px-3 py-1 rounded"
+          className="px-3 py-1 text-white bg-green-600 rounded"
         >
           ➕
         </button>
@@ -64,7 +66,7 @@ export default function EducationSection({ expertId }: { expertId: number }) {
       ) : items.length === 0 ? (
         <p className="text-gray-500">Chưa có bản ghi</p>
       ) : (
-        <table className="w-full table-auto text-sm border">
+        <table className="w-full text-sm border table-auto">
           <thead className="bg-gray-100">
             <tr>
               <th className="p-2">#</th>

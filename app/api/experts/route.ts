@@ -1,10 +1,16 @@
 // app/api/experts/route.ts
-import { NextResponse } from "next/server";
-import { getAllExperts, createExpert } from "@/lib/handlers/expertHandlers";
+import { NextResponse, NextRequest } from "next/server";
+import { getExperts, createExpert } from "@/lib/handlers/expertHandlers";
 import { withAdmin } from "@/lib/middlewares/withAdmin";
 
-export async function GET() {
-  const experts = await getAllExperts();
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const pageParam = searchParams.get("page");
+  const page = pageParam ? parseInt(pageParam) : 1;
+  const take = 10;
+  const skip = (page - 1) * take;
+
+  const experts = await getExperts(skip, take);
   return NextResponse.json(experts);
 }
 

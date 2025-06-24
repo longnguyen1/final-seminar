@@ -1,63 +1,56 @@
 // lib/handlers/expertHandlers.ts
 import { prisma } from "../prisma";
+import { writeLog } from "./logHandlers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions";
 import { pick } from "lodash";
+import bcrypt from "bcryptjs";
 
-export async function getAllExperts() {
+// ✅ NEW: Hàm lấy danh sách Expert với skip/take
+export const getExperts = async (skip = 0, take = 10) => {
   return prisma.expert.findMany({
     where: { deleted: false },
-    include: {
-      educations: true,
-      workHistories: true,
-      publications: true,
-      projects: true,
-      languages: true,
-    },
-  });
-}
-
-export async function createExpert(data: any) {
-  return prisma.expert.create({
-    data,
-  });
-}
-
-export async function getExpertById(id: number) {
-  return prisma.expert.findUnique({
-    where: { id },
-    include: {
-      educations: true,
-      workHistories: true,
-      publications: true,
-      projects: true,
-      languages: true,
-    },
-  });
-}
-
-export const updateExpert = async (id: number, data: any) => {
-  const allowedFields = [
-    "fullName", "birthYear", "gender", "academicTitle", "academicTitleYear",
-    "degree", "degreeYear", "position", "currentWork", "organization",
-    "email", "phone" // ✅ mới
-  ];
-  const updateData = pick(data, allowedFields);
-  return prisma.expert.update({
-    where: { id },
-    data: updateData,
+    skip,
+    take,
+    orderBy: { id: "asc" },
   });
 };
 
+// ✅ Lấy chi tiết 1 Expert
+export const getExpertById = async (id: number) => {
+  return prisma.expert.findUnique({
+    where: { id },
+  });
+};
 
-export async function softDeleteExpert(id: number) {
+// ✅ Tạo mới Expert
+export const createExpert = async (data: any) => {
+  const expert = await prisma.expert.create({ data });
+
+  const session = await getServerSession(authOptions);
+  if (session) {
+    await writeLog(session.user.email ?? "unknown", "CREATE", "Expert", expert.id, `Created ${expert.fullName}`);
+  }
+
+  return expert;
+};
+
+// ✅ Update Expert
+export const updateExpert = async (id: number, data: any) => {
+  // Nếu có trường password, hash lại
+  if (data.password) {
+    data.password = await bcrypt.hash(data.password, 10);
+  }
+  return prisma.expert.update({
+    where: { id },
+    data,
+  });
+};
+
+// ✅ Xoá mềm Expert
+export const softDeleteExpert = async (id: number) => {
   return prisma.expert.update({
     where: { id },
     data: { deleted: true },
   });
-}
-
-export async function undeleteExpert(id: number) {
-  return prisma.expert.update({
-    where: { id },
-    data: { deleted: false },
-  });
-}
+};

@@ -1,0 +1,16 @@
+language: vi
+
+pipeline:
+- name: WhitespaceTokenizer
+- name: RegexFeaturizer
+- name: LexicalSyntacticFeaturizer
+- name: CountVectorsFeaturizer
+- name: DIETClassifier
+- name: EntitySynonymMapper
+- name: ResponseSelector
+- name: FallbackClassifier
+
+policies:
+- name: RulePolicy
+- name: MemoizationPolicy
+assistant_id: 20250624-151243-purple-map

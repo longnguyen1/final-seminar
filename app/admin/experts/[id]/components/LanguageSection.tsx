@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import LanguageFormModal from './LanguageFormModal';
+import toast from "react-hot-toast";
+
 
 interface Language {
   id?: number;
@@ -42,6 +44,7 @@ export default function LanguageSection({ expertId }: { expertId: number }) {
     if (confirm('Xác nhận xóa?')) {
       await fetch(`/api/languages/${id}`, { method: 'DELETE' });
       fetchData();
+      toast.success("🗑️ Xoá thành công!");
     }
   };
 

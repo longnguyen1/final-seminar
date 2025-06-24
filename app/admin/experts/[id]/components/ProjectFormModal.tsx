@@ -2,6 +2,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import toast from "react-hot-toast";
+
 
 interface Project {
   id?: number;
@@ -63,6 +65,7 @@ export default function ProjectFormModal({
       body: JSON.stringify(formData),
     });
 
+    toast.success("💾 Lưu thành công!");
     onSave();
     onClose();
   };
@@ -70,8 +73,8 @@ export default function ProjectFormModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-lg w-full max-w-xl space-y-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+      <div className="w-full max-w-xl p-6 space-y-4 bg-white rounded-lg">
         <h2 className="text-lg font-bold">
           {formData.id ? 'Sửa' : 'Thêm'} đề tài / dự án
         </h2>
@@ -82,14 +85,14 @@ export default function ProjectFormModal({
             placeholder="Tên đề tài"
             value={formData.title}
             onChange={handleChange}
-            className="border p-2"
+            className="p-2 border"
           />
           <input
             name="role"
             placeholder="Vai trò"
             value={formData.role}
             onChange={handleChange}
-            className="border p-2"
+            className="p-2 border"
           />
           <input
             name="startYear"
@@ -97,7 +100,7 @@ export default function ProjectFormModal({
             placeholder="Năm bắt đầu"
             value={formData.startYear ?? ''}
             onChange={handleChange}
-            className="border p-2"
+            className="p-2 border"
           />
           <input
             name="endYear"
@@ -105,27 +108,27 @@ export default function ProjectFormModal({
             placeholder="Năm kết thúc"
             value={formData.endYear ?? ''}
             onChange={handleChange}
-            className="border p-2"
+            className="p-2 border"
           />
           <input
             name="status"
             placeholder="Tình trạng"
             value={formData.status}
             onChange={handleChange}
-            className="border p-2 col-span-2"
+            className="col-span-2 p-2 border"
           />
         </div>
 
         <div className="flex justify-end space-x-2">
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-gray-400 text-white rounded"
+            className="px-4 py-2 text-white bg-gray-400 rounded"
           >
             Hủy
           </button>
           <button
             onClick={handleSubmit}
-            className="px-4 py-2 bg-blue-600 text-white rounded"
+            className="px-4 py-2 text-white bg-blue-600 rounded"
           >
             Lưu
           </button>

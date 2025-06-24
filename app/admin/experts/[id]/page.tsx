@@ -7,7 +7,10 @@ import EducationSection from './components/EducationSection';
 import WorkHistorySection from './components/WorkHistorySection';
 import PublicationSection from './components/PublicationSection';
 import ProjectSection from './components/ProjectSection';
-import LanguageSection from './components/LanguageSection'; // ✅ thêm dòng này
+import LanguageSection from './components/LanguageSection'; 
+
+import toast from "react-hot-toast";
+
 
 type Tab = 'info' | 'education' | 'work' | 'publication' | 'project' | 'language'; // ✅ thêm 'language'
 
@@ -19,6 +22,7 @@ export default function ExpertDetailPage() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<Tab>('info');
   const [error, setError] = useState<string | null>(null);
+  
 
   useEffect(() => {
     async function fetchExpert() {
@@ -28,7 +32,7 @@ export default function ExpertDetailPage() {
         const data = await res.json();
         setExpert(data);
       } catch (err: any) {
-        console.error('Lỗi:', err);
+        console.error('Lỗi khi tải chuyên gia:', err);
         setError(err.message || 'Lỗi tải dữ liệu');
       } finally {
         setLoading(false);

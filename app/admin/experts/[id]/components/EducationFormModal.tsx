@@ -1,6 +1,7 @@
 // app/admin/experts/[id]/components/EducationFormModal.tsx
 'use client';
 import { useState, useEffect } from 'react';
+import toast from "react-hot-toast";
 
 interface EducationData {
   id?: number;
@@ -54,6 +55,7 @@ export default function EducationFormModal({
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
     });
+    toast.success("💾 Lưu thành công!");
     onSaved();
     onClose();
   };
@@ -61,9 +63,9 @@ export default function EducationFormModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-lg w-full max-w-lg">
-        <h2 className="text-xl font-bold mb-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
+      <div className="w-full max-w-lg p-6 bg-white rounded-lg">
+        <h2 className="mb-4 text-xl font-bold">
           {form.id ? 'Chỉnh sửa học vấn' : 'Thêm học vấn'}
         </h2>
         <div className="space-y-4">
@@ -73,28 +75,28 @@ export default function EducationFormModal({
             value={form.year}
             onChange={handleChange}
             placeholder="Năm"
-            className="border p-2 w-full"
+            className="w-full p-2 border"
           />
           <input
             name="school"
             value={form.school}
             onChange={handleChange}
             placeholder="Trường"
-            className="border p-2 w-full"
+            className="w-full p-2 border"
           />
           <input
             name="major"
             value={form.major}
             onChange={handleChange}
             placeholder="Chuyên ngành"
-            className="border p-2 w-full"
+            className="w-full p-2 border"
           />
         </div>
-        <div className="mt-6 flex justify-end gap-2">
-          <button onClick={onClose} className="px-4 py-2 bg-gray-400 text-white rounded">
+        <div className="flex justify-end gap-2 mt-6">
+          <button onClick={onClose} className="px-4 py-2 text-white bg-gray-400 rounded">
             Hủy
           </button>
-          <button onClick={handleSubmit} className="px-4 py-2 bg-blue-600 text-white rounded">
+          <button onClick={handleSubmit} className="px-4 py-2 text-white bg-blue-600 rounded">
             {form.id ? 'Lưu' : 'Thêm'}
           </button>
         </div>

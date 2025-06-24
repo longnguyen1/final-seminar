@@ -1,9 +1,14 @@
-// app/admin/layout.tsx
+import React from "react";
+import AdminSidebar from "@/app/admin/experts/[id]/components/AdminSidebar";
+import { ToastProvider } from "@/lib/context/ToastContext";
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-      <div>{children}</div>
-    </div>
+    <ToastProvider>
+      <div className="flex min-h-screen">
+        <AdminSidebar />
+        <main className="flex-1 p-6 bg-gray-100">{children}</main>
+      </div>
+    </ToastProvider>
   );
 }

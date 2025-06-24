@@ -1,0 +1,24 @@
+version: "3.1"
+
+intents:
+  - ask_expert_info
+  - ask_count_degree
+
+entities:
+  - name
+
+slots:
+  name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: name
+
+responses:
+  utter_default:
+    - text: "Xin lỗi, tôi chưa hiểu yêu cầu của bạn."
+
+actions:
+  - action_search_expert
+  - action_count_degree

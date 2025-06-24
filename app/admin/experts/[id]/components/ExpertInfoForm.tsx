@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
+
 
 type Expert = {
   id: string;
@@ -44,6 +46,7 @@ export default function ExpertInfoForm({
     });
     const updated = await res.json();
     onSaved(updated); // ✅ callback update parent expert
+    toast.success("✅ Thành công!");
   };
 
   if (!form) return <p>Đang tải...</p>;

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import WorkHistoryFormModal from './WorkHistoryFormModal';
+import toast from 'react-hot-toast';
 
 interface WorkHistory {
   id?: number;
@@ -42,6 +43,7 @@ export default function WorkHistorySection({ expertId }: { expertId: number }) {
     if (confirm('Xác nhận xóa?')) {
       await fetch(`/api/workHistories/${id}`, { method: 'DELETE' });
       fetchData();
+      toast.success("🗑️ Xoá thành công!");
     }
   };
 

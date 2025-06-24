@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import toast from "react-hot-toast";
+
 
 interface Language {
   id?: number;
@@ -72,7 +74,7 @@ export default function LanguageFormModal({
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
     });
-
+    toast.success("💾 Lưu thành công!");
     onSave();
     onClose();
   };

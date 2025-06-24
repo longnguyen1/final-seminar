@@ -1,0 +1,12 @@
+version: "3.1"
+
+rules:
+- rule: Trả lời thông tin chuyên gia
+  steps:
+    - intent: ask_expert_info
+    - action: action_search_expert
+
+- rule: Thống kê số lượng học vị
+  steps:
+    - intent: ask_count_degree
+    - action: action_count_degree

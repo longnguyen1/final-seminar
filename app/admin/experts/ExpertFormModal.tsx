@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
+
 
 interface ExpertForm {
   fullName: string;
@@ -75,10 +77,11 @@ export default function ExpertFormModal({ isOpen, onClose, onSave, expert }: any
     });
 
     if (res.ok) {
+      toast.success("💾 Lưu thành công!");
       onSave();
       onClose();
     } else {
-      alert("Thao tác thất bại!");
+      toast.error("❌ Thao tác thất bại!");
     }
   };
 

@@ -3,6 +3,8 @@
 
 import { useEffect, useState } from 'react';
 import ProjectFormModal from './ProjectFormModal';
+import toast from "react-hot-toast";
+
 
 interface Project {
   id: number;
@@ -33,18 +35,19 @@ export default function ProjectSection({ expertId }: { expertId: number }) {
     if (!confirm('Xác nhận xóa?')) return;
     await fetch(`/api/projects/${id}`, { method: 'DELETE' });
     fetchData();
+    toast.success("🗑️ Xoá thành công!");
   };
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold">Đề tài / Dự án</h2>
         <button
           onClick={() => {
             setEditing(undefined);
             setIsModalOpen(true);
           }}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="px-4 py-2 text-white bg-blue-600 rounded"
         >
           ➕ Thêm
         </button>
@@ -65,15 +68,15 @@ export default function ProjectSection({ expertId }: { expertId: number }) {
           {items.map((item, index) => (
             <tr key={item.id} className="border-t hover:bg-gray-50">
               {/* STT */}
-              <td className="p-2 border text-center">{index + 1}</td>
-              <td className="p-2 border text-center">
+              <td className="p-2 text-center border">{index + 1}</td>
+              <td className="p-2 text-center border">
                 {item.startYear ?? '-'}
                 {item.endYear != null ? ` – ${item.endYear}` : ''}
               </td>
               <td className="p-2 border">{item.title}</td>
               <td className="p-2 border">{item.role}</td>
               <td className="p-2 border">{item.status}</td>
-              <td className="p-2 border text-center space-x-2">
+              <td className="p-2 space-x-2 text-center border">
                 <button
                   onClick={() => {
                     setEditing(item);
