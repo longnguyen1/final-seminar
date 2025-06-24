@@ -42,6 +42,16 @@ next-env.d.ts
 
 /app/generated/prisma
 
+# Node
+node_modules/
+.next/
+.env
+
 # Python venv
 rasa/venv/
+
+# VSCode & OS
+.vscode/
+.DS_Store
+
 
