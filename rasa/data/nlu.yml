@@ -1,0 +1,10 @@
+nlu:
+- intent: ask_expert_info
+  examples: |
+    - Thông tin về TS. Bùi Công Thành
+    - Cho tôi biết TS. Trương Thục Tuyền là ai?
+    - Chi tiết về PGS. Nguyễn Văn A
+- intent: ask_count_degree
+  examples: |
+    - Có bao nhiêu tiến sĩ?
+    - Thống kê số lượng thạc sĩ
