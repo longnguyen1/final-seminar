@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 version: "3.1"
 
 nlu:
@@ -25,3 +26,15 @@ nlu:
     examples: |
       - Ai là chuyên gia trẻ nhất?
       - Ai là chuyên gia lớn tuổi nhất?
+=======
+nlu:
+- intent: ask_expert_info
+  examples: |
+    - Thông tin về TS. Bùi Công Thành
+    - Cho tôi biết TS. Trương Thục Tuyền là ai?
+    - Chi tiết về PGS. Nguyễn Văn A
+- intent: ask_count_degree
+  examples: |
+    - Có bao nhiêu tiến sĩ?
+    - Thống kê số lượng thạc sĩ
+>>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442

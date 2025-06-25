@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 intents:
   - ask_count_degree
   - ask_expert_info
   - ask_most_publications
   - ask_top_organization
   - ask_youngest_oldest_expert
+=======
+version: "3.1"
+
+intents:
+  - ask_expert_info
+  - ask_count_degree
+>>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
 
 entities:
   - name
@@ -21,8 +29,13 @@ responses:
     - text: "Xin lỗi, tôi chưa hiểu yêu cầu của bạn."
 
 actions:
+<<<<<<< HEAD
   - action_count_degree
   - action_search_expert
   - action_most_publications
   - action_top_organization
   - action_youngest_oldest_expert
+=======
+  - action_search_expert
+  - action_count_degree
+>>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442

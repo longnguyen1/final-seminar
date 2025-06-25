@@ -48,8 +48,12 @@ node_modules/
 .env
 
 # Python venv
+<<<<<<< HEAD
 expert-dashboard/rasa/venv/
 expert-dashboard/rasa/models/
+=======
+rasa/venv/
+>>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
 
 # VSCode & OS
 .vscode/

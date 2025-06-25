@@ -23,7 +23,10 @@ function PublicExpertDetailPage() {
     const fetchExpert = async () => {
       const res = await fetch(`/api/experts/${id}`);
       const data = await res.json();
+<<<<<<< HEAD
       console.log("Expert data:", data);
+=======
+>>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
       setExpert(data);
     };
     fetchExpert();
@@ -55,6 +58,7 @@ function PublicExpertDetailPage() {
 
       {/* Các bảng con */}
       <Section title="Học vấn">
+<<<<<<< HEAD
         <Table
           columns={["Năm", "Trường", "Ngành"]}
           rows={(expert.educations ?? []).map((e: any) => [e.year, e.school, e.major])}
@@ -87,6 +91,25 @@ function PublicExpertDetailPage() {
           columns={["Ngôn ngữ", "Nghe", "Nói", "Đọc", "Viết"]}
           rows={(expert.languages ?? []).map((l: any) => [l.language, l.listening, l.speaking, l.reading, l.writing])}
         />
+=======
+        <Table columns={["Năm", "Trường", "Ngành"]} rows={expert.educations.map((e: any) => [e.year, e.school, e.major])} />
+      </Section>
+
+      <Section title="Công tác">
+        <Table columns={["Từ năm", "Đến năm", "Chức vụ", "Nơi công tác"]} rows={expert.workHistories.map((w: any) => [w.startYear, w.endYear, w.position, w.workplace])} />
+      </Section>
+
+      <Section title="Công trình KH">
+        <Table columns={["Năm", "Nơi công bố", "Tiêu đề", "Loại", "Tác giả"]} rows={expert.publications.map((p: any) => [p.year, p.place, p.title, p.type, p.author])} />
+      </Section>
+
+      <Section title="Dự án">
+        <Table columns={["Từ năm", "Đến năm", "Tiêu đề", "Trạng thái", "Vai trò"]} rows={expert.projects.map((p: any) => [p.startYear ?? "-", p.endYear ?? "-", p.title, p.status, p.role])} />
+      </Section>
+
+      <Section title="Ngoại ngữ">
+        <Table columns={["Ngôn ngữ", "Nghe", "Nói", "Đọc", "Viết"]} rows={expert.languages.map((l: any) => [l.language, l.listening, l.speaking, l.reading, l.writing])} />
+>>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
       </Section>
     </div>
   );
