@@ -126,43 +126,30 @@ export default function ExpertTable() {
           className="p-2 border"
         >
           <option value="">🎓 Tất cả học vị</option>
-          {degreeOptions.map((deg) => (
-<<<<<<< HEAD
-            <option key={deg ?? ''} value={deg ?? ''}>
-              {deg ?? ''}
-=======
-            <option key={deg} value={deg}>
-              {deg}
->>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
-            </option>
-          ))}
+{degreeOptions.map((deg) => (
+  <option key={deg ?? ''} value={deg ?? ''}>
+    {deg ?? ''}
+  </option>
+))}
         </select>
-        <select
-          value={filters.organization}
-          onChange={(e) => setFilters({ ...filters, organization: e.target.value })}
-          className="p-2 border"
-        >
-          <option value="">🏢 Tất cả đơn vị</option>
-          {orgOptions.map((org) => (
-<<<<<<< HEAD
-            <option key={org ?? ''} value={org ?? ''}>
-              {org ?? ''}
-=======
-            <option key={org} value={org}>
-              {org}
->>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="flex flex-wrap gap-4 mb-4">
-        <button
-          className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
-          onClick={handleAdd}
-        >
-          ➕ Thêm chuyên gia
-        </button>
+<select
+  value={filters.organization}
+  onChange={(e) => setFilters({ ...filters, organization: e.target.value })}
+  className="p-2 border"
+>
+  <option value="">🏢 Tất cả đơn vị</option>
+  {orgOptions.map((org) => (
+    <option key={org ?? ''} value={org ?? ''}>
+      {org ?? ''}
+    </option>
+  ))}
+</select>
+<button
+  className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
+  onClick={handleAdd}
+>
+  ➕ Thêm chuyên gia
+</button>
 
         <button
           className="px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700"

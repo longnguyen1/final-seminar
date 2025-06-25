@@ -12,24 +12,20 @@ export default function Wrapper() {
   );
 }
 
+// Define the missing PublicExpertDetailPage component
 function PublicExpertDetailPage() {
-  const params = useParams();
-  const id = parseInt(params.id as string);
-
-  const { theme, toggleTheme } = useTheme();
+  const { id } = useParams();
   const [expert, setExpert] = useState<any>(null);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    const fetchExpert = async () => {
+    // Replace this with your actual data fetching logic
+    async function fetchExpert() {
       const res = await fetch(`/api/experts/${id}`);
       const data = await res.json();
-<<<<<<< HEAD
-      console.log("Expert data:", data);
-=======
->>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
       setExpert(data);
-    };
-    fetchExpert();
+    }
+    if (id) fetchExpert();
   }, [id]);
 
   if (!expert) return <p className="p-8">Đang tải...</p>;
@@ -58,7 +54,6 @@ function PublicExpertDetailPage() {
 
       {/* Các bảng con */}
       <Section title="Học vấn">
-<<<<<<< HEAD
         <Table
           columns={["Năm", "Trường", "Ngành"]}
           rows={(expert.educations ?? []).map((e: any) => [e.year, e.school, e.major])}
@@ -91,30 +86,12 @@ function PublicExpertDetailPage() {
           columns={["Ngôn ngữ", "Nghe", "Nói", "Đọc", "Viết"]}
           rows={(expert.languages ?? []).map((l: any) => [l.language, l.listening, l.speaking, l.reading, l.writing])}
         />
-=======
-        <Table columns={["Năm", "Trường", "Ngành"]} rows={expert.educations.map((e: any) => [e.year, e.school, e.major])} />
-      </Section>
-
-      <Section title="Công tác">
-        <Table columns={["Từ năm", "Đến năm", "Chức vụ", "Nơi công tác"]} rows={expert.workHistories.map((w: any) => [w.startYear, w.endYear, w.position, w.workplace])} />
-      </Section>
-
-      <Section title="Công trình KH">
-        <Table columns={["Năm", "Nơi công bố", "Tiêu đề", "Loại", "Tác giả"]} rows={expert.publications.map((p: any) => [p.year, p.place, p.title, p.type, p.author])} />
-      </Section>
-
-      <Section title="Dự án">
-        <Table columns={["Từ năm", "Đến năm", "Tiêu đề", "Trạng thái", "Vai trò"]} rows={expert.projects.map((p: any) => [p.startYear ?? "-", p.endYear ?? "-", p.title, p.status, p.role])} />
-      </Section>
-
-      <Section title="Ngoại ngữ">
-        <Table columns={["Ngôn ngữ", "Nghe", "Nói", "Đọc", "Viết"]} rows={expert.languages.map((l: any) => [l.language, l.listening, l.speaking, l.reading, l.writing])} />
->>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
       </Section>
     </div>
   );
 }
 
+// Move Section and Table components outside of PublicExpertDetailPage
 function Section({ title, children }: { title: string, children: React.ReactNode }) {
   return (
     <div className="mb-10">
@@ -133,8 +110,10 @@ function Table({ columns, rows }: { columns: string[], rows: string[][] }) {
         </thead>
         <tbody>
           {rows.map((row, idx) => (
-            <tr key={idx} className="border-b border-base-content border-opacity-20">
-              {row.map((cell, i) => <td key={i}>{cell}</td>)}
+            <tr key={idx}>
+              {row.map((cell, i) => (
+                <td key={i}>{cell}</td>
+              ))}
             </tr>
           ))}
         </tbody>

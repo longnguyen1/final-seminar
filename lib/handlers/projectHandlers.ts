@@ -35,7 +35,7 @@ export async function softDeleteProject(id: number) {
 
 export async function undeleteProject(id: number) {
   return prisma.project.update({
-    where: { id},
+    where: { id },
     data: { deleted: false },
   });
 }

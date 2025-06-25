@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
@@ -8,14 +7,6 @@ const main = async () => {
   const hashedAdmin = await bcrypt.hash("admin123", 10);
   const hashedEditor = await bcrypt.hash("editor123", 10);
   const hashedPassword = await bcrypt.hash("123456", 10);
-=======
-import prisma from "../lib/prisma.js";
-import bcrypt from "bcryptjs";
-
-const main = async () => {
-  const hashedAdmin = await bcrypt.hash("admin123", 10);
-  const hashedEditor = await bcrypt.hash("editor123", 10);
->>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
 
   await prisma.user.upsert({
     where: { email: "admin@gmail.com" },
@@ -38,7 +29,6 @@ const main = async () => {
       role: "editor",
     },
   });
-<<<<<<< HEAD
 
   await prisma.user.create({
     data: {
@@ -48,8 +38,6 @@ const main = async () => {
       role: "admin",
     },
   });
-=======
->>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
 };
 
 main()

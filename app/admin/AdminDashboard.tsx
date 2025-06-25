@@ -1,39 +1,28 @@
 "use client";
 
-<<<<<<< HEAD
 import React from "react";
 import { useState } from "react";
 import ExpertTable from "./experts/ExpertTable";
 import StatisticsPage from "./statistics/page";
 import AdminSettingsMenu from "../components/AdminSettingsMenu";
-=======
-import { useState } from "react";
-import ExpertTable from "./experts/ExpertTable";
-import StatisticsPage from "./statistics/page";
->>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<"experts" | "statistics">("experts");
 
   return (
     <div className="p-8">
-<<<<<<< HEAD
-       <div className="relative">
+      <div className="relative">
         <h1 className="mb-4 text-2xl font-bold">Admin Dashboard</h1>
         <div className="absolute top-4 right-4">
           <AdminSettingsMenu />
         </div>
       </div>
-=======
-      <h1 className="mb-4 text-2xl font-bold">Admin Dashboard</h1>
-
->>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
-      <div className="flex gap-4 mb-4 border-b">
+      <div className="flex mt-4 mb-6 space-x-4">
         <button
           onClick={() => setActiveTab("experts")}
           className={`pb-2 border-b-2 ${activeTab === "experts" ? "border-blue-600 text-blue-600 font-bold" : "border-transparent"}`}
         >
-          📋 Danh sách chuyên gia
+          👨‍💼 Chuyên gia
         </button>
         <button
           onClick={() => setActiveTab("statistics")}

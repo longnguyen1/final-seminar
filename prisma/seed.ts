@@ -9,13 +9,8 @@ await prisma.user.create({
   data: {
     email: "nguyenthanhlong1@gmail.com",
     password: hashedPassword,
-<<<<<<< HEAD
-    name: "Nguyen Thanh Long 1 ",
-    role: "admin", // or "admin" for admin user
-=======
-    name: "Nguyen Thanh Long 1",
-    role: "editor", // or "admin" for admin user
->>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
+name: "Nguyen Thanh Long 1",
+role: "admin", // or "admin" for admin user
   },
 });
 }
