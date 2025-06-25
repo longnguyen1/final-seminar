@@ -1,10 +1,27 @@
+version: "3.1"
+
 nlu:
-- intent: ask_expert_info
-  examples: |
-    - Thông tin về TS. Bùi Công Thành
-    - Cho tôi biết TS. Trương Thục Tuyền là ai?
-    - Chi tiết về PGS. Nguyễn Văn A
-- intent: ask_count_degree
-  examples: |
-    - Có bao nhiêu tiến sĩ?
-    - Thống kê số lượng thạc sĩ
+  - intent: ask_count_degree
+    examples: |
+      - Có bao nhiêu tiến sĩ?
+      - Có bao nhiêu thạc sĩ?
+
+  - intent: ask_expert_info
+    examples: |
+      - Cho tôi biết thông tin chi tiết về chuyên gia [Cổ Thanh Thiện](name)
+      - Thông tin về chuyên gia [Nguyễn Văn A](name)
+
+  - intent: ask_most_publications
+    examples: |
+      - Chuyên gia nào có nhiều công trình khoa học nhất?
+      - Ai có nhiều bài báo nhất?
+
+  - intent: ask_top_organization
+    examples: |
+      - Trường nào có nhiều chuyên gia nhất?
+      - Đơn vị nào có nhiều chuyên gia nhất?
+
+  - intent: ask_youngest_oldest_expert
+    examples: |
+      - Ai là chuyên gia trẻ nhất?
+      - Ai là chuyên gia lớn tuổi nhất?

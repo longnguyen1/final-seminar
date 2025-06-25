@@ -127,8 +127,8 @@ export default function ExpertTable() {
         >
           <option value="">🎓 Tất cả học vị</option>
           {degreeOptions.map((deg) => (
-            <option key={deg} value={deg}>
-              {deg}
+            <option key={deg ?? ''} value={deg ?? ''}>
+              {deg ?? ''}
             </option>
           ))}
         </select>
@@ -139,8 +139,8 @@ export default function ExpertTable() {
         >
           <option value="">🏢 Tất cả đơn vị</option>
           {orgOptions.map((org) => (
-            <option key={org} value={org}>
-              {org}
+            <option key={org ?? ''} value={org ?? ''}>
+              {org ?? ''}
             </option>
           ))}
         </select>

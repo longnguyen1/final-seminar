@@ -1,9 +1,12 @@
-import prisma from "../lib/prisma.js";
+import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+
+const prisma = new PrismaClient();
 
 const main = async () => {
   const hashedAdmin = await bcrypt.hash("admin123", 10);
   const hashedEditor = await bcrypt.hash("editor123", 10);
+  const hashedPassword = await bcrypt.hash("123456", 10);
 
   await prisma.user.upsert({
     where: { email: "admin@gmail.com" },
@@ -24,6 +27,15 @@ const main = async () => {
       email: "editor@gmail.com",
       password: hashedEditor,
       role: "editor",
+    },
+  });
+
+  await prisma.user.create({
+    data: {
+      email: "nguyenthanhlong@gmail.com",
+      password: hashedPassword,
+      name: "Nguyen Thanh Long ",
+      role: "admin",
     },
   });
 };

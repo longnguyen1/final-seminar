@@ -1,8 +1,9 @@
-version: "3.1"
-
 intents:
-  - ask_expert_info
   - ask_count_degree
+  - ask_expert_info
+  - ask_most_publications
+  - ask_top_organization
+  - ask_youngest_oldest_expert
 
 entities:
   - name
@@ -20,5 +21,8 @@ responses:
     - text: "Xin lỗi, tôi chưa hiểu yêu cầu của bạn."
 
 actions:
-  - action_search_expert
   - action_count_degree
+  - action_search_expert
+  - action_most_publications
+  - action_top_organization
+  - action_youngest_oldest_expert

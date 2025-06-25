@@ -1,16 +1,22 @@
 "use client";
 
+import React from "react";
 import { useState } from "react";
 import ExpertTable from "./experts/ExpertTable";
 import StatisticsPage from "./statistics/page";
+import AdminSettingsMenu from "../components/AdminSettingsMenu";
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<"experts" | "statistics">("experts");
 
   return (
     <div className="p-8">
-      <h1 className="mb-4 text-2xl font-bold">Admin Dashboard</h1>
-
+       <div className="relative">
+        <h1 className="mb-4 text-2xl font-bold">Admin Dashboard</h1>
+        <div className="absolute top-4 right-4">
+          <AdminSettingsMenu />
+        </div>
+      </div>
       <div className="flex gap-4 mb-4 border-b">
         <button
           onClick={() => setActiveTab("experts")}
