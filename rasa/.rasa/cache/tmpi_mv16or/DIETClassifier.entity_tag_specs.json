@@ -1,0 +1,36 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-field",
+      "2": "I-field",
+      "3": "L-field",
+      "4": "U-field",
+      "5": "B-name",
+      "6": "I-name",
+      "7": "L-name",
+      "8": "U-name",
+      "9": "B-organization",
+      "10": "I-organization",
+      "11": "L-organization",
+      "12": "U-organization",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-field": 1,
+      "I-field": 2,
+      "L-field": 3,
+      "U-field": 4,
+      "B-name": 5,
+      "I-name": 6,
+      "L-name": 7,
+      "U-name": 8,
+      "B-organization": 9,
+      "I-organization": 10,
+      "L-organization": 11,
+      "U-organization": 12,
+      "O": 0
+    },
+    "num_tags": 13
+  }
+]

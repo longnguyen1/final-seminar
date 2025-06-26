@@ -1,41 +1,47 @@
-<<<<<<< HEAD
-intents:
-  - ask_count_degree
-  - ask_expert_info
-  - ask_most_publications
-  - ask_top_organization
-  - ask_youngest_oldest_expert
-=======
 version: "3.1"
 
 intents:
-  - ask_expert_info
+  - greet
+  - bye
   - ask_count_degree
->>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
-
+  - ask_expert_info 
+  - ask_most_publications
+  - ask_top_organization
+  - ask_youngest_oldest_expert
+  - ask_expert_by_field
+  - search_expert_by_name
+  - count_degree
+  - top_organization
+  - youngest_oldest_expert
+  - search_expert_by_field
+  
 entities:
   - name
+  - field
 
 slots:
   name:
     type: text
-    influence_conversation: true
     mappings:
       - type: from_entity
         entity: name
+  field:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: field
 
 responses:
-  utter_default:
-    - text: "Xin lỗi, tôi chưa hiểu yêu cầu của bạn."
+  utter_greet:
+    - text: "Xin chào! Tôi có thể giúp gì cho bạn hôm nay?"
+
+  utter_bye:
+    - text: "Chào tạm biệt! Hẹn gặp lại bạn sau."
 
 actions:
-<<<<<<< HEAD
-  - action_count_degree
+  - action_expert_by_field
   - action_search_expert
-  - action_most_publications
+  - action_count_degree
   - action_top_organization
+  - action_most_publications
   - action_youngest_oldest_expert
-=======
-  - action_search_expert
-  - action_count_degree
->>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442

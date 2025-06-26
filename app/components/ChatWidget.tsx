@@ -14,35 +14,49 @@ declare global {
 export default function ChatWidget() {
   useEffect(() => {
     if (window.myChatWidget) return;
-    // Đảm bảo React và ReactDOM global cho UMD
+
+    // Đảm bảo global cho UMD
     window.React = require("react");
     window.ReactDOM = require("react-dom");
 
     const script = document.createElement("script");
-    script.src = "/rasa-webchat.js";
+    script.src = "/rasa-webchat.js"; // <== dùng file local
     script.async = true;
+
     script.onload = () => {
-      // Tùy file UMD, thử các hàm sau:
-      const config = {
+      window.WebChat.default({
         initPayload: "/greet",
         customData: { language: "vi" },
-        title: "Trợ lý Rasa",
-        subtitle: "Hãy hỏi tôi!",
+        title: "Trợ lý AI",
+        subtitle: "Hỏi bất cứ gì!",
         inputTextFieldHint: "Nhập câu hỏi...",
         showFullScreenButton: true,
         params: { storage: "local" },
-        endpointUrl: "http://localhost:5005/webhooks/rest/webhook",
-      };
-      if (typeof window.WebChat?.default === "function") {
-        window.WebChat.default(config);
-      } else if (typeof window.WebChat === "function") {
-        window.WebChat(config);
-      } else if (typeof window.WebChat?.open === "function") {
-        window.WebChat.open(config);
-      } else {
-        console.error("Không tìm thấy hàm khởi tạo phù hợp trong window.WebChat", window.WebChat);
-      }
+        socketUrl: "http://localhost:5005",
+        socketPath: "/socket.io/",
+        onSocketEvent: {
+          'user_uttered': (msg: any) => {
+            window.localStorage.setItem("lastUserMsg", msg.message);
+          },
+          'bot_uttered': (msg: any) => {
+            const last = window.localStorage.getItem("lastUserMsg");
+            if (msg?.text && last) {
+              fetch("/api/logs", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  userMessage: last,
+                  botReply: msg.text,
+                  source: "rasa"
+                })
+              });
+              window.localStorage.removeItem("lastUserMsg");
+            }
+          }
+        }
+      }, null); // mount mặc định
     };
+
     document.body.appendChild(script);
     window.myChatWidget = true;
   }, []);

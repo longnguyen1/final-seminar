@@ -1,4 +1,16 @@
-<<<<<<< HEAD
+#  actions:
+rules:
+
+- rule: Chào hỏi
+  steps:
+    - intent: greet
+    - action: utter_greet
+
+- rule: Tạm biệt
+  steps:
+    - intent: bye
+    - action: utter_bye
+
 - rule: Trả lời số lượng tiến sĩ / thạc sĩ
   steps:
     - intent: ask_count_degree
@@ -18,17 +30,14 @@
   steps:
     - intent: ask_youngest_oldest_expert
     - action: action_youngest_oldest_expert
-=======
-version: "3.1"
 
-rules:
-- rule: Trả lời thông tin chuyên gia
+- rule: Tìm chuyên gia theo lĩnh vực
+  steps:
+    - intent: ask_expert_by_field
+    - action: action_expert_by_field
+
+- rule: Tìm thông tin chuyên gia
   steps:
     - intent: ask_expert_info
     - action: action_search_expert
-
-- rule: Thống kê số lượng học vị
-  steps:
-    - intent: ask_count_degree
-    - action: action_count_degree
->>>>>>> 85d3238e0ac3f12f942d25ace87a976b60e56442
+    - active_loop: null

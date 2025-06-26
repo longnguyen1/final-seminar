@@ -145,3 +145,12 @@ model AuditLog {
   detail    String?
   createdAt DateTime @default(now())
 }
+
+model MessageLog {
+  id          Int      @id @default(autoincrement())
+  userMessage String
+  botReply    String
+  timestamp   DateTime @default(now())
+  source      String   // "rasa", "chatgpt", ...
+  userId      String?  // nếu có NextAuth
+}
