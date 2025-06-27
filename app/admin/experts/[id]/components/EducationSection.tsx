@@ -70,7 +70,7 @@ export default function EducationSection({ expertId }: { expertId: number }) {
           <thead className="bg-gray-100">
             <tr>
               <th className="p-2">#</th>
-              <th className="p-2">Năm</th>
+              <th className="p-2">Năm tốt nghiệp</th>
               <th className="p-2">Trường</th>
               <th className="p-2">Chuyên ngành</th>
               <th className="p-2">Hành động</th>

@@ -1,0 +1,41 @@
+version: "3.1"
+nlu:
+  - intent: tra_cuu_chuyen_gia
+    examples: |
+      - Tôi muốn biết thông tin về chuyên gia [Phạm Hoàng Ái Lệ](name)
+      - Tra cưu chuyên gia [Nguyễn Lưu Thùy Ngân](name)
+      - Ai là chuyên gia tên là [Lê Văn C](name)?
+      - Cho tôi xem thông tin về chuyên gia [Hồ Văn Nhật Chương](name)
+      - Có chuyên gia nào tên là [Ngô Thị E](name)?
+      - Tôi cần tìm hiểu về chuyên gia [Phạm Văn F](name)
+      - Tôi muốn biết chuyên gia [Nguyễn Văn G](name) làm việc ở đâu
+    
+  - intent: provide_name
+    examples: |
+      - [Nguyễn Văn A](name)
+      - [Trần Thị B](name)
+      - [Lê Văn Minh C](name)
+
+  - intent: tra_cuu_chuyen_gia_theo_don_vi
+    examples: |
+      - Tôi muốn tìm chuyên gia làm việc tại [viện Hàn lâm Khoa học và Công nghệ Việt Nam](organization)
+      - Ai làm ở [trường Đại học Quốc gia Hà Nội](organization)?
+      - Dang sách chuyên gia tại [trường Đại học Bách Khoa Hà Nội](organization)
+      - Có chuyên gia nào thuộc [viện Nghiên cứu Hạt nhân Đà Lạt](organization)?
+      - Có chuyên gia nào làm việc tại [trường Đại học Quốc gia Hà Nội](organization)?
+      - Tôi cần tìm hiểu về chuyên gia ở [trường Đại học Bách Khoa Hà Nội](organization)
+      - Ai là chuyên gia đang làm việc tại [viện Nghiên cứu Hạt nhân Đà Lạt](organization)?
+      - Tôi muốn biết chuyên gia tại [trường Đại học Sư phạm Kỹ thuật TP.HCM](organization)
+
+  - intent: tra_cuu_chuyen_gia_theo_hoc_vi
+    examples: |
+      - Cho tôi danh sách [tiến sĩ](degree)
+      - Liệt kê các chuyên gia có học vị [thạc sĩ](degree)
+      - Ai có học vị [thạc sĩ](degree)?
+      - Tôi muốn tìm chuyên gia có học vị [tiến sĩ](degree)
+      - Ai là chuyên gia có học vị [thạc sĩ](degree)?
+      - Có chuyên gia nào có học vị [tiến sĩ](degree) không?
+      - Tôi cần tìm hiểu về chuyên gia có học vị [tiến sĩ](degree)
+      - Có chuyên gia nào có học vị [thạc sĩ](degree) không?
+      - Tôi muốn biết thông tin về chuyên gia có học vị [tiến sĩ](degree)
+      - Ai là chuyên gia có học vị [tiến sĩ](degree)?

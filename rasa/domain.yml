@@ -1,23 +1,34 @@
 version: "3.1"
 
 intents:
-  - greet
-  - bye
-  - ask_count_degree
-  - ask_expert_info 
-  - ask_most_publications
-  - ask_top_organization
-  - ask_youngest_oldest_expert
-  - ask_expert_by_field
-  - search_expert_by_name
-  - count_degree
-  - top_organization
-  - youngest_oldest_expert
-  - search_expert_by_field
-  
-entities:
+  - tra_cuu_chuyen_gia
+  - provide_name
+  - tra_cuu_chuyen_gia_theo_don_vi
+  - tra_cuu_chuyen_gia_theo_hoc_vi
+
+entities: 
   - name
-  - field
+  - organization
+  - degree
+
+actions:
+  - action_tra_cuu_chuyen_gia
+  - action_tra_cuu_chuyen_gia_theo_don_vi
+  - action_tra_cuu_chuyen_gia_theo_hoc_vi
+
+responses:
+  utter_hoi_chuyen_gia:
+    - text: "Bạn muốn tra cứu chuyên gia nào? Vui lòng cung cấp tên chuyên gia."
+  utter_Khong_tim_thay_chuyen_gia:
+    - text: "Không tìm thấy chuyên gia phù hợp với yêu cầu của bạn. Vui lòng thử lại với tên khác."
+  utter_hoi_dơn_vi:
+    - text: "Bạn muốn tra cứu chuyên gia làm việc tại đơn vị nào? Vui lòng cung cấp tên đơn vị."
+  utter_Khong_tim_thay_don_vi:
+    - text: "Không tìm thấy chuyên gia làm việc tại đơn vị bạn yêu cầu. Vui lòng thử lại với tên đơn vị khác."
+  utter_hoi_hoc_vi:
+    - text: "Bạn muốn tra cứu chuyên gia có học vị nào? Vui lòng cung cấp tên học vị."
+  utter_Khong_tim_thay_hoc_vi:
+    - text: "Không tìm thấy chuyên gia có học vị phù hợp với yêu cầu của bạn. Vui lòng thử lại với học vị khác."
 
 slots:
   name:
@@ -25,23 +36,13 @@ slots:
     mappings:
       - type: from_entity
         entity: name
-  field:
-    type: text
+  organization:
+    type: text  
     mappings:
       - type: from_entity
-        entity: field
-
-responses:
-  utter_greet:
-    - text: "Xin chào! Tôi có thể giúp gì cho bạn hôm nay?"
-
-  utter_bye:
-    - text: "Chào tạm biệt! Hẹn gặp lại bạn sau."
-
-actions:
-  - action_expert_by_field
-  - action_search_expert
-  - action_count_degree
-  - action_top_organization
-  - action_most_publications
-  - action_youngest_oldest_expert
+        entity: organization
+  degree:
+    type: text  
+    mappings:
+      - type: from_entity
+        entity: degree

@@ -1,43 +1,23 @@
+version: "3.1"
+
 #  actions:
 rules:
+  - rule: Tra cứu chuyên gia theo tên
+    steps:
+      - intent: tra_cuu_chuyen_gia
+      - action: action_tra_cuu_chuyen_gia
 
-- rule: Chào hỏi
-  steps:
-    - intent: greet
-    - action: utter_greet
+  - rule: Tra cứu chuyên gia theo học vị
+    steps:
+      - intent: tra_cuu_chuyen_gia_theo_hoc_vi
+      - action: action_tra_cuu_chuyen_gia_theo_hoc_vi
 
-- rule: Tạm biệt
-  steps:
-    - intent: bye
-    - action: utter_bye
+  - rule: Tra cứu chuyên gia theo đơn vị
+    steps:
+      - intent: tra_cuu_chuyen_gia_theo_don_vi
+      - action: action_tra_cuu_chuyen_gia_theo_don_vi
+      
 
-- rule: Trả lời số lượng tiến sĩ / thạc sĩ
-  steps:
-    - intent: ask_count_degree
-    - action: action_count_degree
 
-- rule: Tìm chuyên gia nhiều công trình nhất
-  steps:
-    - intent: ask_most_publications
-    - action: action_most_publications
 
-- rule: Tìm đơn vị nhiều chuyên gia nhất
-  steps:
-    - intent: ask_top_organization
-    - action: action_top_organization
 
-- rule: Trả lời chuyên gia trẻ nhất / già nhất
-  steps:
-    - intent: ask_youngest_oldest_expert
-    - action: action_youngest_oldest_expert
-
-- rule: Tìm chuyên gia theo lĩnh vực
-  steps:
-    - intent: ask_expert_by_field
-    - action: action_expert_by_field
-
-- rule: Tìm thông tin chuyên gia
-  steps:
-    - intent: ask_expert_info
-    - action: action_search_expert
-    - active_loop: null
