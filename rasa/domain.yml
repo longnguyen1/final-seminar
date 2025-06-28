@@ -9,6 +9,13 @@ intents:
   - tra_cuu_chuyen_gia_theo_noi_tot_nghiep
   - Hoi_lich_su_lam_viec
   - tra_cuu_chuyen_gia_theo_noi_lam_viec
+  - thong_ke_cong_trinh_khoa_hoc
+  - liet_ke_cong_trinh_khoa_hoc
+  - liet_ke_cong_trinh_khoa_hoc_con_lai
+  - thong_ke_du_an
+  - liet_ke_du_an
+  - liet_ke_du_an_con_lai
+  - tra_cuu_ngoai_ngu
 
 entities: 
   - name
@@ -16,6 +23,51 @@ entities:
   - degree
   - school
   - workplace
+
+slots:
+  name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: name
+
+  expert_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: name
+
+  expert_id:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+  organization:
+    type: text  
+    mappings:
+      - type: from_entity
+        entity: organization
+
+  degree:
+    type: text  
+    mappings:
+      - type: from_entity
+        entity: degree
+  
+  school:
+    type: text  
+    mappings:
+      - type: from_entity
+        entity: school
+        
+  workplace:
+    type: text  
+    mappings:
+      - type: from_entity
+        entity: workplace
 
 actions:
   - action_tra_cuu_chuyen_gia
@@ -25,6 +77,13 @@ actions:
   - action_tra_cuu_chuyen_gia_theo_noi_tot_nghiep
   - action_tra_cuu_lich_su_lam_viec
   - action_tra_cuu_chuyen_gia_theo_noi_lam_viec
+  - action_thong_ke_cong_trinh_khoa_hoc
+  - action_liet_ke_cong_trinh_khoa_hoc
+  - action_liet_ke_cong_trinh_khoa_hoc_con_lai
+  - action_thong_ke_du_an
+  - action_liet_ke_du_an
+  - action_liet_ke_du_an_con_lai
+  - action_tra_cuu_ngoai_ngu
 
 responses:
   utter_hoi_chuyen_gia:
@@ -55,40 +114,8 @@ responses:
     - text: "Bạn muốn tra cứu chuyên gia làm việc tại nơi nào? Vui lòng cung cấp tên nơi làm việc."
   utter_Khong_tim_thay_noi_lam_viec:
     - text: "Không tìm thấy chuyên gia làm việc tại nơi bạn yêu cầu. Vui lòng thử lại với tên nơi làm việc khác."
+  utter_Khong_tim_thay_ngoai_ngu:
+    - text: "Không tìm thấy thông tin về ngoại ngữ của chuyên gia. Vui lòng thử lại với tên khác."
 
 
-slots:
-  name:
-    type: text
-    mappings:
-      - type: from_entity
-        entity: name
-  organization:
-    type: text  
-    mappings:
-      - type: from_entity
-        entity: organization
-  degree:
-    type: text  
-    mappings:
-      - type: from_entity
-        entity: degree
-  
-  expert_name:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: name
 
-  school:
-    type: text  
-    mappings:
-      - type: from_entity
-        entity: school
-        
-  workplace:
-    type: text  
-    mappings:
-      - type: from_entity
-        entity: workplace

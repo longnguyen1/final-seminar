@@ -48,3 +48,44 @@ stories:
       - intent: tra_cuu_chuyen_gia_theo_noi_lam_viec
       - action: action_tra_cuu_chuyen_gia_theo_noi_lam_viec
 
+  - story: Thống kê công trình khoa học trực tiếp theo tên chuyên gia
+    steps:
+      - intent: thong_ke_cong_trinh_khoa_hoc
+        entities:
+          - name: "Nguyễn Văn A"
+      - slot_was_set:
+          - expert_name: "Nguyễn Văn A"
+      - action: action_thong_ke_cong_trinh_khoa_hoc
+
+  - story: Liệt kê công trình khoa học trực tiếp theo tên chuyên gia
+    steps:
+      - intent: liet_ke_cong_trinh_khoa_hoc
+        entities:
+          - name: "Phạm Hoàng Ái Lệ"
+      - slot_was_set:
+          - expert_name: "Phạm Hoàng Ái Lệ"
+      - action: action_liet_ke_cong_trinh_khoa_hoc
+
+  - story: Tiếp tục liệt kê công trình khoa học còn lại trực tiếp theo tên
+    steps:
+      - intent: liet_ke_cong_trinh_khoa_hoc
+        entities:
+          - name: "Nguyễn Văn B"
+      - slot_was_set:
+          - expert_name: "Nguyễn Văn B"
+      - action: action_liet_ke_cong_trinh_khoa_hoc
+      - intent: liet_ke_cong_trinh_khoa_hoc_con_lai
+      - action: action_liet_ke_cong_trinh_khoa_hoc_con_lai
+
+  - story: Tra cứu ngoại ngữ của chuyên gia
+    steps:
+      - intent: tra_cuu_chuyen_gia
+        entities:
+          - name: "Nguyễn Văn A"
+      - slot_was_set:
+          - expert_name: "Nguyễn Văn A"
+      - action: action_tra_cuu_chuyen_gia
+      - intent: tra_cuu_ngoai_ngu
+      - action: action_tra_cuu_ngoai_ngu
+
+

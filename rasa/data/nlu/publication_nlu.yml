@@ -1,0 +1,58 @@
+version: "3.1"
+
+nlu:
+  - intent: thong_ke_cong_trinh_khoa_hoc
+    examples: |
+      - Tôi muốn biết số lượng công trình của chuyên gia này
+      - Tôi muốn biết số lượng công trình khoa học của chuyên gia này
+      - Có bao nhiêu công trình được công bố bởi chuyên gia này?
+      - Có bao nhiêu công trình khoa học được công bố bởi chuyên gia này?
+      - Có bao nhiêu công trình được công bố bởi chuyên gia này?
+      - Thống kê số lượng công trình khoa học của chuyên gia này
+      - Số lượng công trình khoa học của [Nguyễn Văn A](name) là bao nhiêu?
+      - Có bao nhiêu công trình khoa học được công bố bởi [Phạm Hoàng Ái Lệ](name)?
+      - Thống kê số lượng công trình khoa học của [Nguyễn Thái Anh](name)
+      - Tôi muốn biết số lượng công trình khoa học của chuyên gia [Trần Văn B](name)
+      - Có bao nhiêu công trình khoa học của [Lê Thị C](name)?
+      - Số lượng công trình khoa học của [Nguyễn Văn D](name) là bao nhiêu?
+      - Thống kê số lượng công trình của [Trần Văn E](name)
+      - Có bao nhiêu công trình khoa học của [Phạm Hoàng Ái Lệ](name) từng công bố?
+      - Chuyên gia [Nguyễn Văn A](name) có bao nhiêu công trình khoa học?
+      - [Nguyễn Văn A](name) đã công bố bao nhiêu công trình khoa học?
+      - Tôi muốn biết số lượng công trình khoa học của [Nguyễn Văn A](name)
+
+  - intent: liet_ke_cong_trinh_khoa_hoc
+    examples: |
+      - Liệt kê công trình khoa học của chuyên gia này
+      - Tôi muốn xem danh sách công trình khoa học của chuyên gia này
+      - Tôi muốn xem danh sách công trình của chuyên gia này
+      - Có danh sách công trình khoa học của chuyên gia này không?
+      - Tôi muốn biết danh sách công trình khoa học của chuyên gia này
+      - Tôi muốn biết danh sách công trình của chuyên gia này
+      - Có danh sách công trình khoa học nào của chuyên gia này không?
+      - Danh sách công trình khoa học của [Nguyễn Văn A](name)
+      - Tôi muốn xem danh sách công trình khoa học của [Phạm Hoàng Ái Lệ](name)
+      - Có danh sách công trình khoa học nào của [Nguyễn Thái Anh](name) không?
+      - Danh sách công trình khoa học của [Trần Văn B](name) là gì?
+      - Tôi muốn biết danh sách công trình khoa học của [Lê Thị C](name)
+      - Có danh sách công trình khoa học nào của [Nguyễn Văn D](name) không?
+
+  - intent: liet_ke_cong_trinh_khoa_hoc_con_lai
+    examples: |
+      - Có, liệt kê nốt đi 
+      - Tiếp tục liệt kê công trình khoa học còn lại của chuyên gia này
+      - Tiếp tục liệt kê đi 
+      - Chuyên gia này còn công trình khoa học nào nữa không?
+      - Liệt kê nốt các công trình còn lại của chuyên gia này
+      - Tôi muốn xem danh sách công trình khoa học còn lại của chuyên gia này
+      - Tôi muốn xem danh sách công trình còn lại của chuyên gia này
+      - Có danh sách công trình khoa học còn lại của chuyên gia này không?
+      - Tôi muốn biết danh sách công trình khoa học còn lại của chuyên gia này
+      - Tôi muốn biết danh sách công trình còn lại của chuyên gia này
+      - Có danh sách công trình khoa học nào còn lại của chuyên gia này không?
+      - Danh sách công trình khoa học còn lại của [Nguyễn Văn A](name) là gì?
+      - Tôi muốn xem danh sách công trình khoa học còn lại của [Phạm Hoàng Ái Lệ](name)
+      - Có danh sách công trình khoa học nào còn lại của [Nguyễn Thái Anh](name) không?
+      - Danh sách công trình khoa học còn lại của [Trần Văn B](name) là gì?
+      - Tôi muốn biết danh sách công trình khoa học còn lại của [Lê Thị C](name)
+      - Có danh sách công trình khoa học nào còn lại của [Nguyễn Văn D](name) không?

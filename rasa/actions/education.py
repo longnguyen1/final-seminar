@@ -28,17 +28,17 @@ class ActionTraCuuQuaTrinhDaoTao(Action):
         
         try:
             # Bước 1: Lấy expertId từ tên chuyên gia
-            res = requests.get(f"{BASE_URL}/experts/search?name={expert_name}")
+            res = requests.get(f"{BASE_URL}/experts/search-all?name={expert_name}")
             if res.status_code != 200 or not res.text.strip():
                 dispatcher.utter_message("Không tìm thấy chuyên gia này.")
                 return [SlotSet("name", expert_name)]
             data = res.json()
-            if isinstance(data, list):
-                if not data:
-                    dispatcher.utter_message("Không tìm thấy chuyên gia này.")
-                    return [SlotSet("name", expert_name)]
-                data = data[0]
-            expert_id = data.get("id")
+            experts = data.get("experts", [])
+            if not experts or not isinstance(experts, list):
+                dispatcher.utter_message("Không tìm thấy chuyên gia này.")
+                return [SlotSet("name", expert_name)]
+            expert = experts[0]
+            expert_id = expert.get("id")
             if not expert_id:
                 dispatcher.utter_message("Không tìm thấy chuyên gia này.")
                 return [SlotSet("name", expert_name)]

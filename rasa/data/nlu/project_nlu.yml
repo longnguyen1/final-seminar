@@ -1,0 +1,57 @@
+version: "3.1"
+
+nlu:
+  - intent: thong_ke_du_an
+    examples: |
+      - Tôi muốn biết số lượng dự án của chuyên gia này
+      - Tôi muốn biết số lượng dự án mà chuyên gia này đã tham gia
+      - Có bao nhiêu dự án được thực hiện bởi chuyên gia này?
+      - Có bao nhiêu dự án mà chuyên gia này từng tham gia?
+      - Thống kê số lượng dự án của chuyên gia này
+      - Số lượng dự án của [Nguyễn Văn A](name) là bao nhiêu?
+      - Có bao nhiêu dự án được thực hiện bởi [Phạm Hoàng Ái Lệ](name)?
+      - Thống kê số lượng dự án của [Nguyễn Thái Anh](name)
+      - Tôi muốn biết số lượng dự án của chuyên gia [Trần Văn B](name)
+      - Có bao nhiêu dự án của [Lê Thị C](name)?
+      - Số lượng dự án của [Nguyễn Văn D](name) là bao nhiêu?
+      - Thống kê số lượng dự án của [Trần Văn E](name)
+      - Có bao nhiêu dự án của [Phạm Hoàng Ái Lệ](name) từng tham gia?
+      - Chuyên gia [Nguyễn Văn A](name) đã tham gia bao nhiêu dự án?
+      - [Nguyễn Văn A](name) đã thực hiện bao nhiêu dự án?
+      - Tôi muốn biết số lượng dự án của [Nguyễn Văn A](name)
+
+  - intent: liet_ke_du_an
+    examples: |
+      - Liệt kê dự án của chuyên gia này
+      - Tôi muốn xem danh sách dự án của chuyên gia này
+      - Tôi muốn xem danh sách dự án mà chuyên gia này đã tham gia
+      - Có danh sách dự án của chuyên gia này không?
+      - Tôi muốn biết danh sách dự án của chuyên gia này
+      - Tôi muốn biết danh sách dự án mà chuyên gia này từng tham gia
+      - Có danh sách dự án nào của chuyên gia này không?
+      - Danh sách dự án của [Nguyễn Văn A](name)
+      - Tôi muốn xem danh sách dự án của [Phạm Hoàng Ái Lệ](name)
+      - Có danh sách dự án nào của [Nguyễn Thái Anh](name) không?
+      - Danh sách dự án của [Trần Văn B](name) là gì?
+      - Tôi muốn biết danh sách dự án của [Lê Thị C](name)
+      - Có danh sách dự án nào của [Nguyễn Văn D](name) không?
+
+  - intent: liet_ke_du_an_con_lai
+    examples: |
+      - Có, liệt kê nốt dự án đi
+      - Tiếp tục liệt kê dự án còn lại của chuyên gia này
+      - Tiếp tục liệt kê dự án đi
+      - Chuyên gia này còn dự án nào nữa không?
+      - Liệt kê nốt các dự án còn lại của chuyên gia này
+      - Tôi muốn xem danh sách dự án còn lại của chuyên gia này
+      - Tôi muốn xem danh sách dự án mà chuyên gia này còn lại
+      - Có danh sách dự án còn lại của chuyên gia này không?
+      - Tôi muốn biết danh sách dự án còn lại của chuyên gia này
+      - Tôi muốn biết danh sách dự án mà chuyên gia này còn lại
+      - Có danh sách dự án nào còn lại của chuyên gia này không?
+      - Danh sách dự án còn lại của [Nguyễn Văn A](name) là gì?
+      - Tôi muốn xem danh sách dự án còn lại của [Phạm Hoàng Ái Lệ](name)
+      - Có danh sách dự án nào còn lại của [Nguyễn Thái Anh](name) không?
+      - Danh sách dự án còn lại của [Trần Văn B](name) là gì?
+      - Tôi muốn biết danh sách dự án còn lại của [Lê Thị C](name)
+      - Có danh sách dự án nào

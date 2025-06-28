@@ -3,9 +3,9 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
-    const id = searchParams.get('id'); // Lấy id chuyên gia từ query params
+    const expertId = searchParams.get('id'); // Lấy id chuyên gia từ query params
 
-    if (!id) {
+    if (!expertId) {
         return new Response(JSON.stringify({ error: 'Thiếu id chuyên gia' }), { status: 400 });
     }
 
@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
         // Lấy danh sách lịch sử làm việc của chuyên gia theo id
         const workHistories = await prisma.workHistory.findMany({
             where: {
-                expertId: Number(id),
+                expertId: Number(expertId),
                 deleted: false,
             },
             select: {

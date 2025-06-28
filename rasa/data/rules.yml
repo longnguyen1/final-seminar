@@ -37,4 +37,34 @@ rules:
       - intent: tra_cuu_chuyen_gia_theo_noi_lam_viec
       - action: action_tra_cuu_chuyen_gia_theo_noi_lam_viec
 
+  - rule: Thống kê công trình khoa học
+    steps:
+      - intent: thong_ke_cong_trinh_khoa_hoc
+      - action: action_thong_ke_cong_trinh_khoa_hoc
+
+  - rule: Liệt kê danh sách công trình khoa học đầu tiên
+    steps:
+      - intent: liet_ke_cong_trinh_khoa_hoc
+      - action: action_liet_ke_cong_trinh_khoa_hoc
+
+  - rule: Liệt kê dánh sách công trình khoa học còn lại
+    steps:
+      - intent: liet_ke_cong_trinh_khoa_hoc_con_lai
+      - action: action_liet_ke_cong_trinh_khoa_hoc_con_lai
+
+  - rule: Thống kê dự án
+    steps:
+      - intent: thong_ke_du_an
+      - action: action_thong_ke_du_an
+
+  - rule: Liệt kê danh sách dự án
+    steps:
+      - intent: liet_ke_du_an
+      - action: action_liet_ke_du_an
+
+  - rule: Liệt kê danh sách dự án còn lại
+    steps:
+      - intent: liet_ke_du_an_con_lai
+      - action: action_liet_ke_du_an_con_lai
+
 

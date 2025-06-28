@@ -18,28 +18,24 @@ class ActionTraCuuChuyenGia(Action):
             dispatcher.utter_message(response="utter_hoi_chuyen_gia")
             return []
         try:
-            res = requests.get(f"{BASE_URL}/experts/search?name={name}")
+            res = requests.get(f"{BASE_URL}/experts/search-all?name={name}")
             if res.status_code != 200 or not res.text.strip():
                 dispatcher.utter_message(response="utter_Khong_tim_thay_chuyen_gia")
                 return [SlotSet("name", name)]
             data = res.json()
-            # Nếu data là list, lấy phần tử đầu tiên
-            if isinstance(data, list):
-                if not data:
-                    dispatcher.utter_message(response="utter_Khong_tim_thay_chuyen_gia")
-                    return [SlotSet("name", name)]
-                data = data[0]
-            if not data or "fullName" not in data:
+            experts = data.get("experts", [])
+            if not experts or not isinstance(experts, list):
                 dispatcher.utter_message(response="utter_Khong_tim_thay_chuyen_gia")
                 return [SlotSet("name", name)]
-            message = f"✅ Thông tin chuyên gia {data['fullName']}:\n"
-            message += f"- Đơn vị: {data.get('organization', 'Chưa có')}\n"
-            message += f"- Lĩnh vực: {data.get('field', 'Chưa có')}\n"
-            message += f"- Giới tính: {data.get('gender', 'Chưa có')}\n"
-            message += f"- Năm sinh: {data.get('birthYear', 'Chưa có')}\n"
-            message += f"- Học vị: {data.get('degree', 'Chưa có')}\n"
-            message += f"- Email: {data.get('email', 'Không có')}\n"
-            message += f"- Số điện thoại: {data.get('phone', 'Không có')}\n"
+            expert = experts[0]
+            message = f"✅ Thông tin chuyên gia {expert.get('fullName', name)}:\n"
+            message += f"- Đơn vị: {expert.get('organization', 'Chưa có')}\n"
+            message += f"- Lĩnh vực: {expert.get('field', 'Chưa có')}\n"
+            message += f"- Giới tính: {expert.get('gender', 'Chưa có')}\n"
+            message += f"- Năm sinh: {expert.get('birthYear', 'Chưa có')}\n"
+            message += f"- Học vị: {expert.get('degree', 'Chưa có')}\n"
+            message += f"- Email: {expert.get('email', 'Không có')}\n"
+            message += f"- Số điện thoại: {expert.get('phone', 'Không có')}\n"
             dispatcher.utter_message(text=message)
         except Exception as e:
             dispatcher.utter_message(text=f"Có lỗi khi truy vấn thông tin: {e}")
@@ -56,17 +52,36 @@ class ActionTraCuuChuyenGiaTheoDonVi(Action):
             dispatcher.utter_message(response="utter_hoi_don_vi")
             return []
         try:
-            res = requests.get(f"{BASE_URL}/experts/search?organization={organization}")
+            res = requests.get(f"{BASE_URL}/experts/search-all?organization={organization}")
             if res.status_code != 200 or not res.text.strip():
                 dispatcher.utter_message(response="utter_Khong_tim_thay_don_vi")
                 return [SlotSet("organization", organization)]
             data = res.json()
-            if not data or not isinstance(data, list):
+            experts = data.get("experts", [])
+            # Lọc bỏ các chuyên gia bị xóa (deleted = 1)
+            experts = [e for e in experts if not e.get("deleted", False)]
+            if not experts or not isinstance(experts, list):
                 dispatcher.utter_message(response="utter_Khong_tim_thay_don_vi")
                 return [SlotSet("organization", organization)]
+            # Lọc trùng theo (fullName, email, phone)
+            unique_experts = []
+            seen = set()
+            for expert in experts:
+                key = (
+                    expert.get('fullName', '').strip().lower(),
+                    (expert.get('email') or '').strip().lower(),
+                    (expert.get('phone') or '').strip()
+                )
+                if key not in seen:
+                    unique_experts.append(expert)
+                    seen.add(key)
+            # Giới hạn số lượng trả về
+            max_show = 12
             message = f"✅ Danh sách chuyên gia tại {organization}:\n"
-            for expert in data:
+            for expert in unique_experts[:max_show]:
                 message += f"- {expert.get('fullName', 'Không rõ')}\n"
+            if len(unique_experts) > max_show:
+                message += f"... (Còn {len(unique_experts) - max_show} chuyên gia khác)"
             dispatcher.utter_message(text=message)
         except Exception as e:
             dispatcher.utter_message(text=f"Có lỗi khi truy vấn thông tin: {e}")
@@ -83,17 +98,36 @@ class ActionTraCuuChuyenGiaTheoHocVi(Action):
             dispatcher.utter_message(response="utter_hoi_hoc_vi")
             return []
         try:
-            res = requests.get(f"{BASE_URL}/experts/search?degree={degree}")
+            res = requests.get(f"{BASE_URL}/experts/search-all?degree={degree}")
             if res.status_code != 200 or not res.text.strip():
                 dispatcher.utter_message(response="utter_Khong_tim_thay_hoc_vi")
                 return [SlotSet("degree", degree)]
             data = res.json()
-            if not data or not isinstance(data, list):
+            experts = data.get("experts", [])
+            # Lọc bỏ các chuyên gia bị xóa (deleted = 1)
+            experts = [e for e in experts if not e.get("deleted", False)]
+            if not experts or not isinstance(experts, list):
                 dispatcher.utter_message(response="utter_Khong_tim_thay_hoc_vi")
                 return [SlotSet("degree", degree)]
+            # Lọc trùng theo (fullName, email, phone)
+            unique_experts = []
+            seen = set()
+            for expert in experts:
+                key = (
+                    expert.get('fullName', '').strip().lower(),
+                    (expert.get('email') or '').strip().lower(),
+                    (expert.get('phone') or '').strip()
+                )
+                if key not in seen:
+                    unique_experts.append(expert)
+                    seen.add(key)
+            # Giới hạn số lượng trả về
+            max_show = 12
             message = f"✅ Danh sách chuyên gia có học vị {degree}:\n"
-            for expert in data:
+            for expert in unique_experts[:max_show]:
                 message += f"- {expert.get('fullName', 'Không rõ')}\n"
+            if len(unique_experts) > max_show:
+                message += f"... (Còn {len(unique_experts) - max_show} chuyên gia khác)"
             dispatcher.utter_message(text=message)
         except Exception as e:
             dispatcher.utter_message(text=f"Có lỗi khi truy vấn thông tin: {e}")

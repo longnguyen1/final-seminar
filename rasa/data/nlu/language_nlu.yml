@@ -1,0 +1,9 @@
+version: "3.1"
+
+nlu:
+  - intent: tra_cuu_ngoai_ngu
+    examples: |
+      - Liệt kê thông tin ngoại ngữ của chuyên gia [Nguyễn Văn A](name)
+      - Chuyên gia [Phạm Hoàng Ái Lệ](name) có thể sử dụng ngôn ngữ nào?
+      - Người này có thể sử dụng ngôn ngữ nào?
+      - Liệt kê thông tin ngoại ngữ của người này

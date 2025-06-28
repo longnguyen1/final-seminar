@@ -39,3 +39,19 @@ nlu:
       - Có chuyên gia nào có học vị [thạc sĩ](degree) không?
       - Tôi muốn biết thông tin về chuyên gia có học vị [tiến sĩ](degree)
       - Ai là chuyên gia có học vị [tiến sĩ](degree)?
+
+  - synonym: Tiến sĩ
+    examples: |
+      - tiến sĩ
+      - Tiến sĩ
+      - TS
+      - ts
+      - Ts
+
+  - synonym: Thạc sĩ
+    examples: |
+      - thạc sĩ
+      - Thạc sĩ
+      - ThS
+      - ths
+      - THS

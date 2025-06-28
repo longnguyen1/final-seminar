@@ -9,7 +9,10 @@ import { withAdmin } from "@/lib/middlewares/withAdmin";
 
 export async function GET(_req: NextRequest, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;
-  const parseId = parseInt(id);
+  const parseId = parseInt(id, 10);
+  if (isNaN(parseId)) {
+    return NextResponse.json({ error: "Invalid publication id" }, { status: 400 });
+  }
   const publication = await getPublicationById(parseId);
   return NextResponse.json(publication);
 }

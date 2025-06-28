@@ -3,9 +3,9 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
-    const id = searchParams.get('id'); // Đổi từ name sang id
+    const expertId = searchParams.get('id'); // Đổi từ name sang id
 
-    if (!id) {
+    if (!expertId) {
         return NextResponse.json({ error: 'Thiếu id chuyên gia' }, { status: 400 });
     }
 
@@ -13,7 +13,7 @@ export async function GET(req: Request) {
         // Lấy danh sách quá trình đào tạo
         const educations = await prisma.education.findMany({
             where: {
-                expertId: Number(id),
+                expertId: Number(expertId),
                 deleted: false,
             },
             select: {
@@ -32,3 +32,4 @@ export async function GET(req: Request) {
         return NextResponse.json({ error: 'Đã xảy ra lỗi máy chủ' }, { status: 500 });
     }
 }
+export const dynamic = 'force-dynamic'; // Đảm bảo API luôn được gọi mới
