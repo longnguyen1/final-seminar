@@ -1,0 +1,22 @@
+{
+  "lookup": {
+    "rules": {
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia\"}}]": "action_tra_cuu_chuyen_gia",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia\"}}, {\"prev_action\": {\"action_name\": \"action_tra_cuu_chuyen_gia\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_don_vi\"}}]": "action_tra_cuu_chuyen_gia_theo_don_vi",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_don_vi\"}}, {\"prev_action\": {\"action_name\": \"action_tra_cuu_chuyen_gia_theo_don_vi\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_don_vi\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_hoc_vi\"}}]": "action_tra_cuu_chuyen_gia_theo_hoc_vi",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_hoc_vi\"}}, {\"prev_action\": {\"action_name\": \"action_tra_cuu_chuyen_gia_theo_hoc_vi\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_hoc_vi\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"hoi_qua_trinh_dao_tao\"}}]": "action_tra_cuu_qua_trinh_dao_tao",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"hoi_qua_trinh_dao_tao\"}}, {\"prev_action\": {\"action_name\": \"action_tra_cuu_qua_trinh_dao_tao\"}, \"user\": {\"intent\": \"hoi_qua_trinh_dao_tao\"}}]": "action_listen"
+    },
+    "rule_only_slots": [],
+    "rule_only_loops": [],
+    "rules_for_loop_unhappy_path": {},
+    "rules_not_in_stories": [
+      "predicting default action with intent session_start",
+      "predicting default action with intent restart",
+      "predicting default action with intent back"
+    ]
+  }
+}

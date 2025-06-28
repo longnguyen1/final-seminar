@@ -1,0 +1,27 @@
+version: "3.1"
+
+nlu:
+- intent: hoi_qua_trinh_dao_tao
+  examples: |
+    - Chuyên gia này học ở đâu?
+    - Đã tốt nghiệp trường nào?
+    - Quá trình đào tạo của người này?
+    - Có học ở nước ngoài không?
+    - Các trường mà chuyên gia từng học?
+    - Quá trình đào tạo của chuyên gia [Phạm Hoàng Ái Lệ](name)?
+    - Học vấn của [Nguyễn Thái Anh](name) là gì?
+    - Trình độ học vấn của chuyên gia [Nguyễn Thái Anh](name)
+    - Học vấn của chuyên gia [Nguyễn Thái Anh](name)
+    - Cho tôi biết quá trình đào tạo của chuyên gia [Nguyễn Thái Anh](name)
+    - Quá trình học tập của chuyên gia [Nguyễn Thái Anh](name)
+
+- intent: tra_cuu_chuyen_gia_theo_noi_tot_nghiep
+  examples: |
+    - Tôi muốn tìm chuyên gia tốt nghiệp từ [Viện Hàn lâm Khoa học và Công nghệ Việt Nam](school)
+    - Ai đã tốt nghiệp từ [Trường Đại học Quốc gia Hà Nội](school)?
+    - Danh sách chuyên gia tốt nghiệp từ [Trường Đại học Bách Khoa Hà Nội](school)
+    - Có chuyên gia nào thuộc [Viện Nghiên cứu Hạt nhân Đà Lạt](school)?
+    - Có chuyên gia nào tốt nghiệp từ [Trường Đại học Quốc gia Hà Nội](school)?
+    - Tôi cần tìm hiểu về chuyên gia tốt nghiệp từ [Trường Đại học Bách Khoa Hà Nội](school)
+    - Ai là chuyên gia tốt nghiệp từ [Viện Nghiên cứu Hạt nhân Đà Lạt](school)?
+    - Tôi muốn biết chuyên gia tốt nghiệp từ [Trường Đại học Sư phạm Kỹ thuật TP.HCM](school) 

@@ -16,8 +16,25 @@ rules:
     steps:
       - intent: tra_cuu_chuyen_gia_theo_don_vi
       - action: action_tra_cuu_chuyen_gia_theo_don_vi
-      
 
+  - rule: Tra cứu quá trình đào tạo
+    steps:
+      - intent: hoi_qua_trinh_dao_tao
+      - action: action_tra_cuu_qua_trinh_dao_tao
 
+  - rule: Tra cứu chuyên gia theo nơi tốt nghiệp
+    steps:
+      - intent: tra_cuu_chuyen_gia_theo_noi_tot_nghiep
+      - action: action_tra_cuu_chuyen_gia_theo_noi_tot_nghiep
+
+  - rule: Tra cứu lịch sử làm việc
+    steps:
+      - intent: Hoi_lich_su_lam_viec
+      - action: action_tra_cuu_lich_su_lam_viec
+
+  - rule: Tra cứu chuyên gia theo nơi làm việc
+    steps:
+      - intent: tra_cuu_chuyen_gia_theo_noi_lam_viec
+      - action: action_tra_cuu_chuyen_gia_theo_noi_lam_viec
 
 

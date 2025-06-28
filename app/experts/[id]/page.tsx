@@ -115,15 +115,19 @@ function Table({ columns, rows }: TableProps) {
 
   return (
     <div className="overflow-x-auto">
-      <table className="table w-full border table-zebra border-base-content border-opacity-20">
+      <table className="table w-full border border-base-content border-opacity-40 table-zebra">
         <thead className="bg-base-200">
-          <tr>{columns.map((col) => <th key={col}>{col}</th>)}</tr>
+          <tr>
+            <th>STT</th>
+            {columns.map((col) => <th key={col}>{col}</th>)}
+          </tr>
         </thead>
         <tbody>
           {rows.map((row, idx) => (
             <tr key={idx}>
+              <td className="font-semibold">{idx + 1}</td>
               {row.map((cell, i) => (
-                <td key={i}>{cell ?? "-"}</td>
+                <td key={i} className="border border-base-content border-opacity-20">{cell ?? "-"}</td>
               ))}
             </tr>
           ))}

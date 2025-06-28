@@ -5,16 +5,26 @@ intents:
   - provide_name
   - tra_cuu_chuyen_gia_theo_don_vi
   - tra_cuu_chuyen_gia_theo_hoc_vi
+  - hoi_qua_trinh_dao_tao
+  - tra_cuu_chuyen_gia_theo_noi_tot_nghiep
+  - Hoi_lich_su_lam_viec
+  - tra_cuu_chuyen_gia_theo_noi_lam_viec
 
 entities: 
   - name
   - organization
   - degree
+  - school
+  - workplace
 
 actions:
   - action_tra_cuu_chuyen_gia
   - action_tra_cuu_chuyen_gia_theo_don_vi
   - action_tra_cuu_chuyen_gia_theo_hoc_vi
+  - action_tra_cuu_qua_trinh_dao_tao
+  - action_tra_cuu_chuyen_gia_theo_noi_tot_nghiep
+  - action_tra_cuu_lich_su_lam_viec
+  - action_tra_cuu_chuyen_gia_theo_noi_lam_viec
 
 responses:
   utter_hoi_chuyen_gia:
@@ -29,6 +39,23 @@ responses:
     - text: "Bạn muốn tra cứu chuyên gia có học vị nào? Vui lòng cung cấp tên học vị."
   utter_Khong_tim_thay_hoc_vi:
     - text: "Không tìm thấy chuyên gia có học vị phù hợp với yêu cầu của bạn. Vui lòng thử lại với học vị khác."
+  utter_hoi_qua_trinh_dao_tao:
+    - text: "Bạn muốn biết quá trình đào tạo của chuyên gia nào? Vui lòng cung cấp tên chuyên gia."
+  utter_Khong_tim_thay_qua_trinh_dao_tao:
+    - text: "Không tìm thấy thông tin quá trình đào tạo của chuyên gia. Vui lòng thử lại với tên khác."
+  utter_hoi_noi_tot_nghiep:
+    - text: "Bạn muốn tra cứu chuyên gia tốt nghiệp từ trường nào? Vui lòng cung cấp tên trường."
+  utter_Khong_tim_thay_noi_tot_nghiep:
+    - text: "Không tìm thấy chuyên gia tốt nghiệp từ trường bạn yêu cầu. Vui lòng thử lại với tên trường khác."
+  utter_hoi_lich_su_lam_viec:
+    - text: "Bạn muốn biết lịch sử làm việc của chuyên gia nào? Vui lòng cung cấp tên chuyên gia."
+  utter_Khong_tim_thay_lich_su_lam_viec:
+    - text: "Không tìm thấy thông tin lịch sử làm việc của chuyên gia. Vui lòng thử lại với tên khác."
+  utter_hoi_noi_lam_viec:
+    - text: "Bạn muốn tra cứu chuyên gia làm việc tại nơi nào? Vui lòng cung cấp tên nơi làm việc."
+  utter_Khong_tim_thay_noi_lam_viec:
+    - text: "Không tìm thấy chuyên gia làm việc tại nơi bạn yêu cầu. Vui lòng thử lại với tên nơi làm việc khác."
+
 
 slots:
   name:
@@ -46,3 +73,22 @@ slots:
     mappings:
       - type: from_entity
         entity: degree
+  
+  expert_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: name
+
+  school:
+    type: text  
+    mappings:
+      - type: from_entity
+        entity: school
+        
+  workplace:
+    type: text  
+    mappings:
+      - type: from_entity
+        entity: workplace

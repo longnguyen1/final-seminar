@@ -20,6 +20,7 @@ function PublicSearchPage() {
   const [degreeOptions, setDegreeOptions] = useState<string[]>([]);
   const [orgOptions, setOrgOptions] = useState<string[]>([]);
   const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
   const { theme, toggleTheme } = useTheme();
 
   // ✅ Fetch gợi ý Degree & Org
@@ -39,7 +40,8 @@ function PublicSearchPage() {
     }).toString();
     const res = await fetch(`/api/experts/search?${query}`);
     const data = await res.json();
-    setExperts(data);
+    setExperts(data.experts || []);
+    setTotal(data.total || 0);
   };
 
   useEffect(() => {
@@ -101,7 +103,7 @@ function PublicSearchPage() {
         </form>
       </div>
 
-      <ExpertPublicTable experts={experts} page={page} setPage={setPage} />
+      <ExpertPublicTable experts={experts} page={page} setPage={setPage} total={total} />
     </main>
   );
 }

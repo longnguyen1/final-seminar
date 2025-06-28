@@ -16,4 +16,35 @@ stories:
       - intent: tra_cuu_chuyen_gia_theo_hoc_vi
       - action: action_tra_cuu_chuyen_gia_theo_hoc_vi
   
+  - story: Tra cứu quá trình đào tạo sau khi tra cứu chuyên gia
+    steps:
+      - intent: tra_cuu_chuyen_gia
+        entities:
+          - name: "Phạm Hoàng Ái Lệ"
+      - slot_was_set:
+          - expert_name: "Phạm Hoàng Ái Lệ"
+      - action: action_tra_cuu_chuyen_gia
+      - intent: hoi_qua_trinh_dao_tao
+      - action: action_tra_cuu_qua_trinh_dao_tao
+  
+  - story: Tra cứu chuyên gia theo nơi tốt nghiệp
+    steps:
+      - intent: tra_cuu_chuyen_gia_theo_noi_tot_nghiep
+      - action: action_tra_cuu_chuyen_gia_theo_noi_tot_nghiep
+
+  - story: Tra cứu lịch sử làm việc sau khi tra cứu chuyên gia
+    steps:
+      - intent: tra_cuu_chuyen_gia
+        entities:
+          - name: "Phạm Hoàng Ái Lệ"
+      - slot_was_set:
+          - expert_name: "Phạm Hoàng Ái Lệ"
+      - action: action_tra_cuu_chuyen_gia
+      - intent: Hoi_lich_su_lam_viec
+      - action: action_tra_cuu_lich_su_lam_viec
+
+  - story: Tra cứu chuyên gia theo nơi làm việc
+    steps:
+      - intent: tra_cuu_chuyen_gia_theo_noi_lam_viec
+      - action: action_tra_cuu_chuyen_gia_theo_noi_lam_viec
 
