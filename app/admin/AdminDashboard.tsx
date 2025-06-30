@@ -4,7 +4,7 @@ import React from "react";
 import { useState } from "react";
 import ExpertTable from "./experts/ExpertTable";
 import StatisticsPage from "./statistics/page";
-import AdminSettingsMenu from "../components/AdminSettingsMenu";
+import AdminSettingsMenu from "@/components/AdminSettingsMenu";
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<"experts" | "statistics">("experts");

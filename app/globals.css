@@ -2,7 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Optional custom styles */
+/* Optional custom styles phía dưới */
+html, body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 body {
-  @apply text-gray-900 bg-gray-50;
+  /* Use regular CSS instead of @apply if not using Tailwind's build process */
+  color: #1a202c; /* text-gray-900 */
+  background-color: #f9fafb; /* bg-gray-50 */
+}
+
+body > #root, body > main {
+  flex: 1;
 }

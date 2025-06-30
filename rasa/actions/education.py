@@ -72,13 +72,16 @@ class ActionTraCuuQuaTrinhDaoTao(Action):
         
 class ActionTraCuuChuyenGiaTheoNoiTotNghiep(Action):
     def name(self) -> Text:
-        return "action_tra_cuu_chuyen_gia_theo_noi_tot_nghiep"  
+        return "action_tra_cuu_chuyen_gia_theo_noi_tot_nghiep"
+
     def extract_school(self, tracker: Tracker) -> Text:
         entities = tracker.latest_message.get("entities", [])
-        for entity in entities:
-            if entity.get("entity") == "school":
-                return entity.get("value")
+        # Ghép tất cả entity 'school' lại thành một chuỗi
+        schools = [entity.get("value") for entity in entities if entity.get("entity") == "school"]
+        if schools:
+            return " ".join(schools)
         return tracker.get_slot("school")
+
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
@@ -103,7 +106,7 @@ class ActionTraCuuChuyenGiaTheoNoiTotNghiep(Action):
                 return [SlotSet("school", school_name)]
             message = f"✅ Danh sách chuyên gia tốt nghiệp từ trường {school_name}:\n"
             for expert in data:
-                name = expert.get("name", "Chưa có")
+                name = expert.get("fullName", "Chưa có")
                 major = expert.get("major", "Chưa có")
                 message += f"- {name}, chuyên ngành {major}\n"
             dispatcher.utter_message(text=message)

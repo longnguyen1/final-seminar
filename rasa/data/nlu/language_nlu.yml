@@ -3,7 +3,29 @@ version: "3.1"
 nlu:
   - intent: tra_cuu_ngoai_ngu
     examples: |
-      - Liệt kê thông tin ngoại ngữ của chuyên gia [Nguyễn Văn A](name)
-      - Chuyên gia [Phạm Hoàng Ái Lệ](name) có thể sử dụng ngôn ngữ nào?
+      - [Đặng Mậu Chiến](name) có thể sử dụng ngôn ngữ nào?
+      - Chuyên gia [Đặng Mậu Chiến](name) có thể sử dụng ngôn ngữ nào?
       - Người này có thể sử dụng ngôn ngữ nào?
+      - Chuyên gia [Phạm Hoàng Ái Lệ](name) biết những ngôn ngữ nào?
+      - Người này biết những ngôn ngữ nào?
+      - Chuyên gia này có thể sử dụng ngôn ngữ nào?
+      - Người này có thể sử dụng ngôn ngữ nào?
+      - Người này có thể sử dụng ngoại ngữ nào?
+      - Liệt kê các ngoại ngữ mà [Đỗ Quang Minh](name) sử dụng
+      - Liệt kê các ngoại ngữ mà chuyên gia [Nguyễn Lưu Thùy Ngân](name) sử dụng
+      - Liệt kê các ngoại ngữ mà người này sử dụng
+      - Liệt kê các ngoại ngữ mà chuyên gia này sử dụng
       - Liệt kê thông tin ngoại ngữ của người này
+      - Liệt kê thông tin ngoại ngữ của chuyên gia này
+      - Liệt kê thông tin ngoại ngữ của [Hồ Phạm Huy Ánh](name)  
+      - Liệt kê thông tin ngoại ngữ của chuyên gia [Phạm Hoàng Ái Lệ](name)
+      - Tôi muốn biết thông tin ngoại ngữ của [Dương Tuấn Anh](name)
+      - Tôi muốn biết thông tin ngoại ngữ của chuyên gia [Đặng Thành Tín](name)
+      - Tôi muốn biết thông tin ngoại ngữ của người này
+      - Tôi muốn biết thông tin ngoại ngữ của chuyên gia [Phạm Hoàng Ái Lệ](name)
+      - Tôi muốn biết các ngoại ngữ của [Bùi Công Thành](name)
+      - Tôi muốn biết các ngoại ngữ của chuyên gia [Nguyễn Thị Nguyên](name)
+      - Tôi muốn biết các ngoại ngữ của người này
+      - Tôi muốn biết các ngoại ngữ của chuyên gia này
+
+

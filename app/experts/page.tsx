@@ -103,7 +103,7 @@ function PublicSearchPage() {
         </form>
       </div>
 
-      <ExpertPublicTable experts={experts} page={page} setPage={setPage} total={total} />
+      <ExpertPublicTable experts={experts} page={page} setPage={setPage} total={total} theme={theme} />
     </main>
   );
 }

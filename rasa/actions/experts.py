@@ -44,15 +44,19 @@ class ActionTraCuuChuyenGia(Action):
 class ActionTraCuuChuyenGiaTheoDonVi(Action):
     def name(self) -> Text:
         return "action_tra_cuu_chuyen_gia_theo_don_vi"
+
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        organization = next(tracker.get_latest_entity_values("organization"), None)
+        # Ghép tất cả entity organization lại thành một chuỗi
+        entities = tracker.latest_message.get("entities", [])
+        organizations = [e.get("value") for e in entities if e.get("entity") == "organization"]
+        organization = " ".join(organizations) if organizations else tracker.get_slot("organization")
         if not organization:
             dispatcher.utter_message(response="utter_hoi_don_vi")
             return []
         try:
-            res = requests.get(f"{BASE_URL}/experts/search-all?organization={organization}")
+            res = requests.get(f"{BASE_URL}/experts/search-all?org={organization}")
             if res.status_code != 200 or not res.text.strip():
                 dispatcher.utter_message(response="utter_Khong_tim_thay_don_vi")
                 return [SlotSet("organization", organization)]
@@ -132,6 +136,50 @@ class ActionTraCuuChuyenGiaTheoHocVi(Action):
         except Exception as e:
             dispatcher.utter_message(text=f"Có lỗi khi truy vấn thông tin: {e}")
         return [SlotSet("degree", degree)]
+
+class ActionTraCuuChuyenGiaTheoHocHam(Action):
+    def name(self) -> Text:
+        return "action_tra_cuu_chuyen_gia_theo_hoc_ham"
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        academic_title = next(tracker.get_latest_entity_values("academicTitle"), None)
+        if not academic_title:
+            dispatcher.utter_message(text="Bạn muốn tra cứu học hàm nào?")
+            return []
+        try:
+            res = requests.get(f"{BASE_URL}/experts/search-all?academicTitle={academic_title}")
+            if res.status_code != 200 or not res.text.strip():
+                dispatcher.utter_message(text="Không tìm thấy chuyên gia có học hàm này.")
+                return [SlotSet("academicTitle", academic_title)]
+            data = res.json()
+            experts = data.get("experts", [])
+            experts = [e for e in experts if not e.get("deleted", False)]
+            if not experts or not isinstance(experts, list):
+                dispatcher.utter_message(text="Không tìm thấy chuyên gia có học hàm này.")
+                return [SlotSet("academicTitle", academic_title)]
+            # Lọc trùng
+            unique_experts = []
+            seen = set()
+            for expert in experts:
+                key = (
+                    expert.get('fullName', '').strip().lower(),
+                    (expert.get('email') or '').strip().lower(),
+                    (expert.get('phone') or '').strip()
+                )
+                if key not in seen:
+                    unique_experts.append(expert)
+                    seen.add(key)
+            max_show = 12
+            message = f"✅ Danh sách chuyên gia có học hàm {academic_title}:\n"
+            for expert in unique_experts[:max_show]:
+                message += f"- {expert.get('fullName', 'Không rõ')}\n"
+            if len(unique_experts) > max_show:
+                message += f"... (Còn {len(unique_experts) - max_show} chuyên gia khác)"
+            dispatcher.utter_message(text=message)
+        except Exception as e:
+            dispatcher.utter_message(text=f"Có lỗi khi truy vấn thông tin: {e}")
+        return [SlotSet("academicTitle", academic_title)]
 
 
 

@@ -110,8 +110,6 @@ export default function ExpertTable() {
 
   return (
     <div className="p-8">
-      <h1 className="mb-4 text-2xl font-bold text-gray-800">Admin Dashboard</h1>
-
       {/* Bộ lọc */}
       <div className="flex flex-wrap gap-4 mb-4">
         <input

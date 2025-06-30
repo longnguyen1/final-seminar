@@ -5,6 +5,7 @@ intents:
   - provide_name
   - tra_cuu_chuyen_gia_theo_don_vi
   - tra_cuu_chuyen_gia_theo_hoc_vi
+  - tra_cuu_chuyen_gia_theo_hoc_ham
   - hoi_qua_trinh_dao_tao
   - tra_cuu_chuyen_gia_theo_noi_tot_nghiep
   - Hoi_lich_su_lam_viec
@@ -16,6 +17,7 @@ intents:
   - liet_ke_du_an
   - liet_ke_du_an_con_lai
   - tra_cuu_ngoai_ngu
+  
 
 entities: 
   - name
@@ -23,6 +25,7 @@ entities:
   - degree
   - school
   - workplace
+  - academicTitle
 
 slots:
   name:
@@ -65,9 +68,17 @@ slots:
         
   workplace:
     type: text  
+    influence_conversation: false
     mappings:
       - type: from_entity
         entity: workplace
+
+  academicTitle:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: academicTitle
 
 actions:
   - action_tra_cuu_chuyen_gia
@@ -84,6 +95,7 @@ actions:
   - action_liet_ke_du_an
   - action_liet_ke_du_an_con_lai
   - action_tra_cuu_ngoai_ngu
+  - action_tra_cuu_chuyen_gia_theo_hoc_ham
 
 responses:
   utter_hoi_chuyen_gia:

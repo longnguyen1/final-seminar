@@ -76,13 +76,14 @@ class ActionTraCuuChuyenGiaTheoNoiLamViec(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        workplace = next(tracker.get_latest_entity_values("workplace"), None)
+        workplaces = list(tracker.get_latest_entity_values("workplace"))
+        workplace = " - ".join(workplaces) if workplaces else None
         if not workplace:
             dispatcher.utter_message(response="utter_hoi_noi_lam_viec")
             return []
         try:
             # Lấy danh sách workhistory có nơi làm việc phù hợp
-            res = requests.get(f"{BASE_URL}/workHistories/by-workplace?workplace={workplace}")
+            res = requests.get(f"{BASE_URL}/experts/by-workplace?workplace={workplace}")
             if res.status_code != 200 or not res.text.strip():
                 dispatcher.utter_message("Không tìm thấy chuyên gia làm việc tại nơi này.")
                 return [SlotSet("workplace", workplace)]
@@ -97,10 +98,9 @@ class ActionTraCuuChuyenGiaTheoNoiLamViec(Action):
 
             message = f"✅ Danh sách chuyên gia từng làm việc tại {workplace}:\n"
             for expert in work_data:
-                name = expert.get("name", "Không rõ")
-                position = expert.get("position", "Chưa rõ")
-                year = expert.get("year", "Chưa rõ")
-                message += f"- {name} ({position}, {year})\n"
+                name = expert.get("fullName", "Không rõ")
+                # Nếu có thể, lấy thêm các trường khác phù hợp với cấu trúc trả về
+                message += f"- {name}\n"
             dispatcher.utter_message(text=message)
             return [SlotSet("workplace", workplace)]
         except Exception as e:

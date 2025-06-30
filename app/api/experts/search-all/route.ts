@@ -6,11 +6,13 @@ export async function GET(req: Request) {
   const name = searchParams.get('name');
   const organization = searchParams.get('org');
   const degree = searchParams.get('degree');
+  const academicTitle = searchParams.get('academicTitle'); // Thêm dòng này
 
   const where: any = { deleted: false };
   if (name) where.fullName = { contains: name };
-  if (organization) where.organization = { contains: organization };
+  if (organization) where.organization = { equals: organization, mode: 'insensitive' };
   if (degree) where.degree = { contains: degree };
+  if (academicTitle) where.academicTitle = { contains: academicTitle }; // Thêm dòng này
 
   const experts = await prisma.expert.findMany({
     where,
@@ -19,6 +21,7 @@ export async function GET(req: Request) {
       fullName: true,
       organization: true,
       degree: true,
+      academicTitle: true, // Thêm dòng này nếu muốn trả về học hàm
       gender: true,
       birthYear: true,
       phone: true,

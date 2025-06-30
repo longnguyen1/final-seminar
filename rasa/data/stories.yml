@@ -15,6 +15,11 @@ stories:
     steps:
       - intent: tra_cuu_chuyen_gia_theo_hoc_vi
       - action: action_tra_cuu_chuyen_gia_theo_hoc_vi
+
+  - story: Tra cứu chuyên gia theo học hàm
+    steps:
+      - intent: tra_cuu_chuyen_gia_theo_hoc_ham
+      - action: action_tra_cuu_chuyen_gia_theo_hoc_ham
   
   - story: Tra cứu quá trình đào tạo sau khi tra cứu chuyên gia
     steps:
@@ -82,6 +87,17 @@ stories:
       - intent: tra_cuu_chuyen_gia
         entities:
           - name: "Nguyễn Văn A"
+      - slot_was_set:
+          - expert_name: "Nguyễn Văn A"
+      - action: action_tra_cuu_chuyen_gia
+      - intent: tra_cuu_ngoai_ngu
+      - action: action_tra_cuu_ngoai_ngu
+
+  - story: Tra cứu ngoại ngữ của chuyên gia
+    steps:
+      - intent: tra_cuu_chuyen_gia
+        entities:
+          - name: "Nguyễn Văn A"  
       - slot_was_set:
           - expert_name: "Nguyễn Văn A"
       - action: action_tra_cuu_chuyen_gia

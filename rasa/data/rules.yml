@@ -37,6 +37,11 @@ rules:
       - intent: tra_cuu_chuyen_gia_theo_noi_lam_viec
       - action: action_tra_cuu_chuyen_gia_theo_noi_lam_viec
 
+  - rule: Tra cứu chuyên gia theo học hàm
+    steps:
+      - intent: tra_cuu_chuyen_gia_theo_hoc_ham
+      - action: action_tra_cuu_chuyen_gia_theo_hoc_ham
+
   - rule: Thống kê công trình khoa học
     steps:
       - intent: thong_ke_cong_trinh_khoa_hoc
@@ -67,4 +72,8 @@ rules:
       - intent: liet_ke_du_an_con_lai
       - action: action_liet_ke_du_an_con_lai
 
+  - rule: Tra cứu ngoại ngữ
+    steps:
+      - intent: tra_cuu_ngoai_ngu
+      - action: action_tra_cuu_ngoai_ngu
 

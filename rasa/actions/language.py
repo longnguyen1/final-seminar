@@ -16,6 +16,7 @@ class ActionTraCuuNgoaiNgu(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         expert_name = next(tracker.get_latest_entity_values("name"), None)
+        print("Expert name:", expert_name)
         if expert_name:
             res = requests.get(f"{BASE_URL}/experts/search-all?name={expert_name}")
             data = res.json()

@@ -1,0 +1,48 @@
+{
+  "lookup": {
+    "rules": {
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"liet_ke_cong_trinh_khoa_hoc_con_lai\"}}]": "action_liet_ke_cong_trinh_khoa_hoc_con_lai",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"liet_ke_cong_trinh_khoa_hoc_con_lai\"}}, {\"prev_action\": {\"action_name\": \"action_liet_ke_cong_trinh_khoa_hoc_con_lai\"}, \"user\": {\"intent\": \"liet_ke_cong_trinh_khoa_hoc_con_lai\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"Hoi_lich_su_lam_viec\"}}]": "action_tra_cuu_lich_su_lam_viec",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"Hoi_lich_su_lam_viec\"}}, {\"prev_action\": {\"action_name\": \"action_tra_cuu_lich_su_lam_viec\"}, \"user\": {\"intent\": \"Hoi_lich_su_lam_viec\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"liet_ke_cong_trinh_khoa_hoc\"}}]": "action_liet_ke_cong_trinh_khoa_hoc",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"liet_ke_cong_trinh_khoa_hoc\"}}, {\"prev_action\": {\"action_name\": \"action_liet_ke_cong_trinh_khoa_hoc\"}, \"user\": {\"intent\": \"liet_ke_cong_trinh_khoa_hoc\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia\"}}]": "action_tra_cuu_chuyen_gia",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia\"}}, {\"prev_action\": {\"action_name\": \"action_tra_cuu_chuyen_gia\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"liet_ke_du_an_con_lai\"}}]": "action_liet_ke_du_an_con_lai",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"liet_ke_du_an_con_lai\"}}, {\"prev_action\": {\"action_name\": \"action_liet_ke_du_an_con_lai\"}, \"user\": {\"intent\": \"liet_ke_du_an_con_lai\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_noi_lam_viec\"}}]": "action_tra_cuu_chuyen_gia_theo_noi_lam_viec",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_noi_lam_viec\"}}, {\"prev_action\": {\"action_name\": \"action_tra_cuu_chuyen_gia_theo_noi_lam_viec\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_noi_lam_viec\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_don_vi\"}}]": "action_tra_cuu_chuyen_gia_theo_don_vi",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_don_vi\"}}, {\"prev_action\": {\"action_name\": \"action_tra_cuu_chuyen_gia_theo_don_vi\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_don_vi\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_hoc_ham\"}}]": "action_tra_cuu_chuyen_gia_theo_hoc_ham",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_hoc_ham\"}}, {\"prev_action\": {\"action_name\": \"action_tra_cuu_chuyen_gia_theo_hoc_ham\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_hoc_ham\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"hoi_qua_trinh_dao_tao\"}}]": "action_tra_cuu_qua_trinh_dao_tao",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"hoi_qua_trinh_dao_tao\"}}, {\"prev_action\": {\"action_name\": \"action_tra_cuu_qua_trinh_dao_tao\"}, \"user\": {\"intent\": \"hoi_qua_trinh_dao_tao\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_noi_tot_nghiep\"}}]": "action_tra_cuu_chuyen_gia_theo_noi_tot_nghiep",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_noi_tot_nghiep\"}}, {\"prev_action\": {\"action_name\": \"action_tra_cuu_chuyen_gia_theo_noi_tot_nghiep\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_noi_tot_nghiep\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"thong_ke_du_an\"}}]": "action_thong_ke_du_an",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"thong_ke_du_an\"}}, {\"prev_action\": {\"action_name\": \"action_thong_ke_du_an\"}, \"user\": {\"intent\": \"thong_ke_du_an\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_hoc_vi\"}}]": "action_tra_cuu_chuyen_gia_theo_hoc_vi",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_hoc_vi\"}}, {\"prev_action\": {\"action_name\": \"action_tra_cuu_chuyen_gia_theo_hoc_vi\"}, \"user\": {\"intent\": \"tra_cuu_chuyen_gia_theo_hoc_vi\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"thong_ke_cong_trinh_khoa_hoc\"}}]": "action_thong_ke_cong_trinh_khoa_hoc",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"thong_ke_cong_trinh_khoa_hoc\"}}, {\"prev_action\": {\"action_name\": \"action_thong_ke_cong_trinh_khoa_hoc\"}, \"user\": {\"intent\": \"thong_ke_cong_trinh_khoa_hoc\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"liet_ke_du_an\"}}]": "action_liet_ke_du_an",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"liet_ke_du_an\"}}, {\"prev_action\": {\"action_name\": \"action_liet_ke_du_an\"}, \"user\": {\"intent\": \"liet_ke_du_an\"}}]": "action_listen"
+    },
+    "rule_only_slots": [],
+    "rule_only_loops": [],
+    "rules_for_loop_unhappy_path": {},
+    "rules_not_in_stories": [
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"thong_ke_du_an\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"thong_ke_du_an\"}}, {\"prev_action\": {\"action_name\": \"action_thong_ke_du_an\"}, \"user\": {\"intent\": \"thong_ke_du_an\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"liet_ke_du_an\"}}, {\"prev_action\": {\"action_name\": \"action_liet_ke_du_an\"}, \"user\": {\"intent\": \"liet_ke_du_an\"}}]",
+      "predicting default action with intent session_start",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"liet_ke_du_an_con_lai\"}}]",
+      "predicting default action with intent back",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"liet_ke_du_an_con_lai\"}}, {\"prev_action\": {\"action_name\": \"action_liet_ke_du_an_con_lai\"}, \"user\": {\"intent\": \"liet_ke_du_an_con_lai\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"liet_ke_du_an\"}}]",
+      "predicting default action with intent restart"
+    ]
+  }
+}
