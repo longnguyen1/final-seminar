@@ -1,0 +1,526 @@
+version: "3.1"
+
+nlu:
+  - intent: tra_cuu_chuyen_gia_theo_ten
+    examples: |
+      - Tra cứu thông tin chuyên gia [Nguyễn Lưu Thùy Ngân](name)
+      - Tra cứu thông tin chuyên gia [nguyễn lưu thùy ngân](name)
+      - Tôi cần tìm hiểu về [Nguyễn Thái Anh](name)
+      - Tôi muốn biết thông tin về chuyên gia [Nguyễn Thái Anh](name)
+      - Ai là chuyên gia [Phạm Hoàng Ái Lệ](name)?
+      - [Nguyễn Lê Duy Khải](name) là ai?
+      - Cho tôi thông tin về chuyên gia [Vũ Đình Thành](name)
+      - Cho tôi thông tin về [Đặng Mậu Chiến](name)
+      - Hãy giới thiệu về chuyên gia [Nguyễn Thị Nguyên](name)
+      - Hãy giới thiệu về [Bùi Công Thành](name)
+      - Bạn có thể cho tôi biết về chuyên gia [Đặng Thành Tín](name) không?
+      - Thông tin cá nhân của [Đào Xuân Lộc](name) là gì?
+      - Thông tin cá nhân của [Đỗ Quang Minh](name) là gì?
+      - [Dương Hoài Nghĩa](name) là ai?
+      - Hãy cho tôi biết về chuyên gia có tên [Dương Tuấn Anh](name)
+      - Hãy cho tôi biết về [Hồ Phạm Huy Ánh](name)
+      - Giới thiệu về chuyên gia [Hồ Văn Nhật Chương](name)
+      - Tôi muốn biết chi tiết về [Cổ Thanh Thiện](name)
+      - Chuyên gia [Nguyễn Thị Thanh Mai](name) có thông tin gì?
+      - Profile của [Lê Chí Hiệp](name) như thế nào?
+      - CV của chuyên gia [Lê Tiến Thường](name)
+      - Tiểu sử của [Phan Thị Tươi](name)
+      - [Lê Văn Việt Mẫn](name) có thông tin gì?
+      - Giới thiệu [Ngô Mạnh Thắng](name)
+      - [Nguyễn Đắc Thành](name) làm việc ở đâu?
+      - Thông tin về [Nguyễn Thanh Tùng](name)
+      - [Nguyễn Văn Nhờ](name) có học vị gì?
+      - Chi tiết về [Phạm Huy Hoàng](name)
+      - [Vương Phát](name) nghiên cứu về gì?
+      - [Bùi Trọng Hiếu](name) có kinh nghiệm gì?
+      - [Võ Thế Sơn](name) là ai?
+      - Tìm hiểu về [Trương Quang Phúc](name)
+      - [Nguyễn Tử Đức](name) từng học ở đâu?
+      - [Huỳnh Ngọc Văn](name) có thông tin gì?
+      - [Nguyễn Phong Lưu](name) nghiên cứu gì?
+      - [Nguyễn Mạnh Hùng](name) là giảng viên nào?
+      - [Bùi Thị Tuyết Đan](name) dạy môn gì?
+      - [Võ Thị Ngà](name) có công trình nào?
+
+  # UPDATED: Intent for current workplace (nơi làm việc hiện tại)
+  - intent: tra_cuu_chuyen_gia_theo_don_vi
+    examples: |
+      # Pattern 1: Present tense keywords (đang, hiện tại, hiện giờ)
+      - Chuyên gia đang làm việc tại [Đại học Sư phạm kỹ thuật TPHCM](current_workplace)
+      - Ai hiện tại công tác ở [Đại học Khoa học Tự nhiên - ĐH Quốc gia TPHCM](current_workplace)?
+      - Nhân viên hiện đang ở [Đại học Bách khoa - ĐHQG TPHCM](current_workplace)
+      - Chuyên gia hiện giờ thuộc [Đại học Công nghiệp TPHCM](current_workplace)
+      - Ai đang phục vụ tại [Đại học Công nghệ thông tin - ĐHQG TPHCM](current_workplace)?
+      - Hiện công tác tại [Đại học Giao thông vận tải TPHCM](current_workplace)
+      - Đang làm việc ở [Đại học Sư phạm TPHCM](current_workplace)
+      - Hiện tại làm tại [Đại học Nông lâm TPHCM](current_workplace)
+      - Đang phục vụ tại [Đại học Tôn Đức Thắng](current_workplace)
+      - Hiện đang ở [Viện Công nghệ Nano (INT) - ĐHQG TPHCM](current_workplace)
+      
+      # Pattern 2: Role + current workplace (vai trò + nơi làm việc)
+      - Giảng viên hiện tại tại [Đại học Sư phạm kỹ thuật TPHCM](current_workplace)
+      - Nghiên cứu viên đang làm ở [Đại học Khoa học Tự nhiên - ĐH Quốc gia TPHCM](current_workplace)
+      - Tiến sĩ hiện công tác tại [Đại học Bách khoa - ĐHQG TPHCM](current_workplace)
+      - Phó trưởng khoa của [Đại học Công nghiệp TPHCM](current_workplace)
+      - Trưởng bộ môn tại [Đại học Công nghệ thông tin - ĐHQG TPHCM](current_workplace)
+      - Giáo sư hiện tại ở [Đại học Giao thông vận tải TPHCM](current_workplace)
+      - Phó giáo sư đang làm tại [Đại học Sư phạm TPHCM](current_workplace)
+      - Thạc sĩ hiện công tác ở [Đại học Nông lâm TPHCM](current_workplace)
+      - Cử nhân đang phục vụ tại [Đại học Tôn Đức Thắng](current_workplace)
+      - Kỹ sư hiện làm việc ở [Viện Công nghệ Nano (INT) - ĐHQG TPHCM](current_workplace)
+      
+      # Pattern 3: Ownership/belonging (thuộc, của, tại)
+      - Chuyên gia thuộc [Đại học Sư phạm kỹ thuật TPHCM](current_workplace)
+      - Nhân viên của [Đại học Khoa học Tự nhiên - ĐH Quốc gia TPHCM](current_workplace)
+      - Cán bộ tại [Đại học Bách khoa - ĐHQG TPHCM](current_workplace)
+      - Staff thuộc [Đại học Công nghiệp TPHCM](current_workplace)
+      - Faculty của [Đại học Công nghệ thông tin - ĐHQG TPHCM](current_workplace)
+      - Researchers tại [Đại học Giao thông vận tải TPHCM](current_workplace)
+      - Professors thuộc [Đại học Sư phạm TPHCM](current_workplace)
+      - Lecturers của [Đại học Nông lâm TPHCM](current_workplace)
+      - Scientists tại [Đại học Tôn Đức Thắng](current_workplace)
+      - Members của [Viện Công nghệ Nano (INT) - ĐHQG TPHCM](current_workplace)
+      
+      # Pattern 4: Simple query (tại, ở - without past/education context)
+      - Liệt kê chuyên gia tại [Đại học Sư phạm kỹ thuật TPHCM](current_workplace)
+      - Danh sách chuyên gia ở [Đại học Khoa học Tự nhiên - ĐH Quốc gia TPHCM](current_workplace)
+      - Tìm chuyên gia tại [Đại học Bách khoa - ĐHQG TPHCM](current_workplace)
+      - Ai làm tại [Đại học Công nghiệp TPHCM](current_workplace)?
+      - Chuyên gia trong [Đại học Công nghệ thông tin - ĐHQG TPHCM](current_workplace)
+      - Có ai ở [Đại học Giao thông vận tải TPHCM](current_workplace) không?
+      - Tôi muốn biết chuyên gia tại [Đại học Sư phạm TPHCM](current_workplace)
+      - Cho tôi danh sách ở [Đại học Nông lâm TPHCM](current_workplace)
+      - Ai làm việc tại [Đại học Tôn Đức Thắng](current_workplace)?
+      - Chuyên gia ở [Viện Công nghệ Nano (INT) - ĐHQG TPHCM](current_workplace)
+      
+      # Pattern 5: Informal/abbreviation names
+      - Chuyên gia đang tại [HCMUTE](current_workplace)
+      - Ai hiện ở [HCMUS](current_workplace)?
+      - Làm việc tại [HCMUT](current_workplace)
+      - Hiện công tác ở [IUH](current_workplace)
+      - Đang phục vụ [UIT](current_workplace)
+      - Thuộc [UTH](current_workplace)
+      - Của [HCMUP](current_workplace)
+      - Tại [HCMUAF](current_workplace)
+      - Ở [TDTU](current_workplace)
+      - Staff [INT](current_workplace)
+
+  - intent: tra_cuu_chuyen_gia_theo_hoc_vi
+    examples: |
+      - Cho tôi danh sách [Tiến sĩ](degree)
+      - Tôi muốn tìm chuyên gia có học vị [TS](degree)
+      - Ai là chuyên gia có học vị [ThS](degree)?
+      - Có chuyên gia nào là [tiến sĩ](degree)?
+      - Liệt kê các chuyên gia có học vị [thạc sĩ](degree)
+      - Tôi muốn biết thông tin về danh sách [kĩ sư](degree)
+      - Ai có học vị [thạc sĩ](degree)?
+      - Tôi muốn tìm chuyên gia có học vị [tiến sĩ](degree)
+      - Có chuyên gia nào có học vị [tiến sỹ](degree) không?
+      - Tôi cần tìm hiểu về chuyên gia có học vị [tiến sỹ](degree)
+      - Có chuyên gia nào có học vị [thạc sĩ](degree) không?
+      - Tôi muốn biết thông tin về chuyên gia có học vị [tiến sĩ](degree)
+      - Ai là chuyên gia có học vị [kĩ sư](degree)?
+      - Tôi cần tra cứu chuyên gia có học vị [thạc sĩ](degree)
+      - Tôi muốn biết chuyên gia nào có học vị [tiến sĩ](degree)
+      - Danh sách [cử nhân](degree) có ai?
+      - Tìm chuyên gia [kỹ sư](degree)
+      - Các [ths](degree) gồm những ai?
+      - Liệt kê [cn](degree) trong danh sách
+      - Doctors [PhD](degree) có ai?
+      - Masters [MSc](degree) trong hệ thống
+      - Engineers [BSc](degree) làm việc ở đâu?
+
+  - intent: tra_cuu_chuyen_gia_theo_hoc_ham
+    examples: |
+      - Cho tôi danh sách [giáo sư](academicTitle)
+      - Liệt kê các chuyên gia có học hàm [phó giáo sư](academicTitle)
+      - Ai là chuyên gia có học hàm [GS](academicTitle)?
+      - Tôi muốn tìm chuyên gia nào là [phó giáo sư](academicTitle)
+      - Có chuyên gia nào là [giáo sư](academicTitle) không?
+      - Tôi cần tìm hiểu về chuyên gia có học hàm [giáo sư](academicTitle)
+      - Tôi muốn tìm chuyên gia có học hàm [PGS](academicTitle)
+      - Những ai có học hàm [GS](academicTitle)?
+      - Tôi cần tra cứu chuyên gia có học hàm [phó giáo sư](academicTitle)
+      - Danh sách [gs](academicTitle) gồm ai?
+      - Các [pgs](academicTitle) là những ai?
+      - Tìm [giáo sư](academicTitle) trong hệ thống
+      - Liệt kê giảng viên có học hàm [phó giáo sư](academicTitle)
+      - Professors [Professor](academicTitle) có ai?
+      - Associate Professors [Associate Professor](academicTitle)
+      - Full professors [Full Professor](academicTitle)
+
+  - intent: provide_name
+    examples: |
+      - [Nguyễn Thái Anh](name)
+      - [Trương Quang Phúc](name)
+      - [Nguyễn Lưu Thùy Ngân](name)
+      - [Phạm Hoàng Ái Lệ](name)
+      - [Nguyễn Lê Duy Khải](name)
+      - [Vũ Đình Thành](name)
+      - [Đặng Mậu Chiến](name)
+      - [Cổ Thanh Thiện](name)
+      - [Lê Chí Hiệp](name)
+      - [Phan Thị Tươi](name)
+
+  # Synonyms cho học vị từ database thực
+  - synonym: Tiến sĩ
+    examples: |
+      - tiến sĩ
+      - Tiến sĩ
+      - TS
+      - ts
+      - Ts
+      - tiến sỹ
+      - Tiến sỹ
+      - PhD
+      - phd
+      - Doctor
+      - doctor
+
+  - synonym: Thạc sĩ
+    examples: |
+      - thạc sĩ
+      - Thạc sĩ
+      - ThS
+      - ths
+      - THS
+      - thạc sỹ
+      - Thạc sỹ
+      - Master
+      - master
+      - MSc
+      - msc
+
+  - synonym: Kĩ sư
+    examples: |
+      - kĩ sư
+      - Kĩ sư
+      - kỹ sư
+      - Kỹ sư
+      - KS
+      - ks
+      - Engineer
+      - engineer
+      - BSc
+      - bsc
+
+  - synonym: Cử nhân
+    examples: |
+      - cử nhân
+      - Cử nhân
+      - CN
+      - cn
+      - Bachelor
+      - bachelor
+
+  # Synonyms cho học hàm từ database thực
+  - synonym: Giáo sư
+    examples: |
+      - giáo sư
+      - Giáo sư
+      - GS
+      - gs
+      - Professor
+      - professor
+      - Full Professor
+      - full professor
+
+  - synonym: Phó giáo sư
+    examples: |
+      - phó giáo sư
+      - Phó giáo sư
+      - PGS
+      - pgs
+      - Associate Professor
+      - associate professor
+
+  # UPDATED: Synonyms cho current_workplace (nơi làm việc hiện tại)
+  - synonym: Đại học Sư phạm kỹ thuật TPHCM
+    examples: |
+      - đại học sư phạm kỹ thuật tphcm
+      - Đại học Sư phạm kỹ thuật TPHCM
+      - đại học sư phạm kỹ thuật
+      - Đại học Sư phạm kỹ thuật
+      - sư phạm kỹ thuật tphcm
+      - sư phạm kỹ thuật
+      - Sư phạm kỹ thuật
+      - HCMUTE
+      - hcmute
+      - SPKT
+      - spkt
+      - spkt tphcm
+
+  - synonym: Đại học Khoa học Tự nhiên - ĐH Quốc gia TPHCM
+    examples: |
+      - đại học khoa học tự nhiên - đh quốc gia tphcm
+      - Đại học Khoa học Tự nhiên - ĐH Quốc gia TPHCM
+      - đại học khoa học tự nhiên
+      - Đại học Khoa học Tự nhiên
+      - khoa học tự nhiên
+      - đh quốc gia tphcm
+      - HCMUS
+      - hcmus
+      - KHTN
+      - khtn
+
+  - synonym: Đại học Bách khoa - ĐHQG TPHCM
+    examples: |
+      - đại học bách khoa - đhqg tphcm
+      - Đại học Bách khoa - ĐHQG TPHCM
+      - đại học bách khoa
+      - Đại học Bách khoa
+      - bách khoa - đhqg tphcm
+      - bách khoa
+      - Bách khoa
+      - HCMUT
+      - hcmut
+      - BK
+      - bk
+      - đhqg tphcm
+
+  - synonym: Đại học Công nghiệp TPHCM
+    examples: |
+      - đại học công nghiệp tphcm
+      - Đại học Công nghiệp TPHCM
+      - đại học công nghiệp
+      - Đại học Công nghiệp
+      - công nghiệp tphcm
+      - công nghiệp
+      - Công nghiệp
+      - IUH
+      - iuh
+
+  - synonym: Đại học Công nghệ thông tin - ĐHQG TPHCM
+    examples: |
+      - đại học công nghệ thông tin - đhqg tphcm
+      - Đại học Công nghệ thông tin - ĐHQG TPHCM
+      - đại học công nghệ thông tin
+      - Đại học Công nghệ thông tin
+      - công nghệ thông tin - đhqg tphcm
+      - công nghệ thông tin
+      - UIT
+      - uit
+      - đhqg tphcm
+
+  - synonym: Đại học Giao thông vận tải TPHCM
+    examples: |
+      - đại học giao thông vận tải tphcm
+      - Đại học Giao thông vận tải TPHCM
+      - đại học giao thông vận tải
+      - Đại học Giao thông vận tải
+      - giao thông vận tải tphcm
+      - giao thông vận tải
+      - GTVT
+      - gtvt
+      - UTH
+      - uth
+
+  - synonym: Đại học Sư phạm TPHCM
+    examples: |
+      - đại học sư phạm tphcm
+      - Đại học Sư phạm TPHCM
+      - đại học sư phạm
+      - Đại học Sư phạm
+      - sư phạm tphcm
+      - sư phạm
+      - HCMUP
+      - hcmup
+
+  - synonym: Đại học Nông lâm TPHCM
+    examples: |
+      - đại học nông lâm tphcm
+      - Đại học Nông lâm TPHCM
+      - đại học nông lâm
+      - Đại học Nông lâm
+      - nông lâm tphcm
+      - nông lâm
+      - Nông lâm
+      - HCMUAF
+      - hcmuaf
+
+  - synonym: Đại học Tôn Đức Thắng
+    examples: |
+      - đại học tôn đức thắng
+      - Đại học Tôn Đức Thắng
+      - tôn đức thắng
+      - TDT
+      - tdt
+      - TDTU
+      - tdtu
+
+  - synonym: Viện Công nghệ Nano (INT) - ĐHQG TPHCM
+    examples: |
+      - viện công nghệ nano (int) - đhqg tphcm
+      - Viện Công nghệ Nano (INT) - ĐHQG TPHCM
+      - viện công nghệ nano
+      - Viện Công nghệ Nano
+      - công nghệ nano
+      - nano
+      - INT
+      - int
+
+  - synonym: Viện Dầu khí Việt Nam (Trung tâm nghiên cứu phát triển chế biến dầu khí)
+    examples: |
+      - viện dầu khí việt nam
+      - Viện Dầu khí Việt Nam
+      - dầu khí việt nam
+      - dầu khí
+      - VPI
+      - vpi
+      - trung tâm nghiên cứu phát triển chế biến dầu khí
+
+  - synonym: Viện Khoa học Vật liệu ứng dụng
+    examples: |
+      - viện khoa học vật liệu ứng dụng
+      - Viện Khoa học Vật liệu ứng dụng
+      - khoa học vật liệu ứng dụng
+      - vật liệu ứng dụng
+
+  - synonym: Viện Nhiệt đới Môi trường
+    examples: |
+      - viện nhiệt đới môi trường
+      - Viện Nhiệt đới Môi trường
+      - nhiệt đới môi trường
+
+  - synonym: Phân Viện Cơ điện Nông nghiệp & Công nghệ Sau Thu hoạch
+    examples: |
+      - phân viện cơ điện nông nghiệp & công nghệ sau thu hoạch
+      - Phân Viện Cơ điện Nông nghiệp & Công nghệ Sau Thu hoạch
+      - phân viện cơ điện nông nghiệp
+      - Phân Viện Cơ điện Nông nghiệp
+      - cơ điện nông nghiệp
+      - công nghệ sau thu hoạch
+
+  # Regex patterns cho entity extraction
+  - regex: name
+    examples: |
+      - [A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+(\s+[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+)+
+
+  # UPDATED: Separate regex for current_workplace
+  - regex: current_workplace
+    examples: |
+      - (Đại học|University|Viện|Institute|Trường|School|Phân viện|Branch)[\s\w\-,()&]*
+
+  - regex: organization
+    examples: |
+      - (Đại học|University|Viện|Institute|Trường|School|Phân viện|Branch)[\s\w\-,()]*
+
+  - regex: degree
+    examples: |
+      - (Tiến sĩ|Thạc sĩ|Kĩ sư|Cử nhân|TS|ThS|KS|CN|PhD|MSc|BSc|Doctor|Master|Engineer|Bachelor)
+
+  - regex: academicTitle
+    examples: |
+      - (Giáo sư|Phó giáo sư|GS|PGS|Professor|Associate Professor)
+
+  # Lookup tables cho dữ liệu thực từ database
+  - lookup: expert_names
+    examples: |
+      Nguyễn Thái Anh
+      Trương Quang Phúc
+      Nguyễn Tử Đức
+      Huỳnh Ngọc Văn
+      Nguyễn Phong Lưu
+      Cổ Thanh Thiện
+      Nguyễn Thị Thanh Mai
+      Nguyễn Lê Duy Khải
+      Vũ Đình Thành
+      Nguyễn Thị Nguyên
+      Bùi Công Thành
+      Đặng Thành Tín
+      Đào Xuân Lộc
+      Đỗ Quang Minh
+      Dương Hoài Nghĩa
+      Dương Tuấn Anh
+      Hồ Phạm Huy Ánh
+      Hồ Văn Nhật Chương
+      Nguyễn Lưu Thùy Ngân
+      Phạm Hoàng Ái Lệ
+      Nguyễn Thị Hạnh
+      Bùi Trung Thành
+      Huỳnh Trung Hiếu
+      Lê Nhật Duy
+      Nguyễn Thị Phi Loan
+      Phạm Xuân Kiên
+      Tôn Long Phước
+      Lê Trung Quân
+      Vũ Đức Lung
+      Đồng Văn Hướng
+      Nguyễn Minh Quyền
+      Phan Thanh Minh
+      Đặng Xuân Kiên
+      Trần Thanh Vũ
+      Võ Công Phương
+      Trần Sơn Hải
+      Nguyễn Kim Lợi
+      Lê Trung Thiên
+      Bùi Văn Miên
+      Nguyễn Mạnh Hùng
+      Bùi Thị Tuyết Đan
+      Võ Thị Ngà
+      Nguyễn Quang Khuyến
+      Đặng Ngọc Minh Đức
+      Lê Chí Hiệp
+      Lê Tiến Thường
+      Phan Thị Tươi
+      Lê Văn Việt Mẫn
+      Ngô Mạnh Thắng
+      Nguyễn Đắc Thành
+      Nguyễn Thanh Tùng
+      Nguyễn Văn Nhờ
+      Phạm Huy Hoàng
+      Vương Phát
+      Bùi Trọng Hiếu
+      Võ Thế Sơn
+      Đặng Mậu Chiến
+      Lê Phúc Nguyên
+      Phan Nghĩa Minh
+      Lê Anh Kiên
+      Phạm Văn Tấn
+
+  # UPDATED: Separate lookup for current workplaces
+  - lookup: current_workplaces
+    examples: |
+      Đại học Sư phạm kỹ thuật TPHCM
+      Đại học Khoa học Tự nhiên - ĐH Quốc gia TPHCM
+      Đại học Bách khoa - ĐHQG TPHCM
+      Đại học Công nghiệp TPHCM
+      Đại học Công nghệ thông tin - ĐHQG TPHCM
+      Đại học Giao thông vận tải TPHCM
+      Đại học Sư phạm TPHCM
+      Đại học Nông lâm TPHCM
+      Đại học Tôn Đức Thắng
+      Viện Công nghệ Nano (INT) - ĐHQG TPHCM
+      Viện Dầu khí Việt Nam (Trung tâm nghiên cứu phát triển chế biến dầu khí)
+      Viện Khoa học Vật liệu ứng dụng
+      Viện Nhiệt đới Môi trường
+      Phân Viện Cơ điện Nông nghiệp & Công nghệ Sau Thu hoạch
+
+  - lookup: organizations
+    examples: |
+      Đại học Sư phạm kỹ thuật TPHCM
+      Đại học Khoa học Tự nhiên - ĐH Quốc gia TPHCM
+      Đại học Bách khoa - ĐHQG TPHCM
+      Đại học Công nghiệp TPHCM
+      Đại học Công nghệ thông tin - ĐHQG TPHCM
+      Đại học Giao thông vận tải TPHCM
+      Đại học Sư phạm TPHCM
+      Đại học Nông lâm TPHCM
+      Đại học Tôn Đức Thắng
+      Viện Công nghệ Nano (INT) - ĐHQG TPHCM
+      Viện Dầu khí Việt Nam (Trung tâm nghiên cứu phát triển chế biến dầu khí)
+      Viện Khoa học Vật liệu ứng dụng
+      Viện Nhiệt đới Môi trường
+      Phân Viện Cơ điện Nông nghiệp & Công nghệ Sau Thu hoạch
+
+  - lookup: degrees
+    examples: |
+      Tiến sĩ
+      Thạc sĩ
+      Kĩ sư
+      Cử nhân
+
+  - lookup: academic_titles
+    examples: |
+      Giáo sư
+      Phó giáo sư

@@ -1,107 +1,205 @@
 version: "3.1"
 
 stories:
-  - story: Tra cứu chuyên gia theo tên
-    steps:  
-      - intent: tra_cuu_chuyen_gia
-      - action: action_tra_cuu_chuyen_gia
+# ===== COMPLETE EXPERT PROFILE FLOWS =====
+- story: Complete expert profile inquiry
+  steps:
+    - intent: tra_cuu_chuyen_gia
+      entities:
+        - expert_name: "Nguyễn Thái Anh"
+    - slot_was_set:
+        - expert_name: "Nguyễn Thái Anh"
+    - action: action_tra_cuu_chuyen_gia
+    - intent: hoi_qua_trinh_dao_tao
+    - action: action_tra_cuu_qua_trinh_dao_tao
+    - intent: tra_cuu_lich_su_lam_viec
+    - action: action_tra_cuu_lich_su_lam_viec
 
-  - story: Tra cứu danh sách chuyên gia theo đơn vị
-    steps:
-      - intent: tra_cuu_chuyen_gia_theo_don_vi
-      - action: action_tra_cuu_chuyen_gia_theo_don_vi
+- story: Expert to publications flow
+  steps:
+    - intent: tra_cuu_chuyen_gia
+      entities:
+        - expert_name: "Trương Quang Phúc"
+    - slot_was_set:
+        - expert_name: "Trương Quang Phúc"
+    - action: action_tra_cuu_chuyen_gia
+    - intent: thong_ke_cong_trinh_khoa_hoc
+    - action: action_thong_ke_cong_trinh_khoa_hoc
+    - intent: liet_ke_cong_trinh_khoa_hoc
+    - action: action_liet_ke_cong_trinh_khoa_hoc
 
-  - story: Tra cứu danh sách chuyên gia theo học vị
-    steps:
-      - intent: tra_cuu_chuyen_gia_theo_hoc_vi
-      - action: action_tra_cuu_chuyen_gia_theo_hoc_vi
+# ===== SEARCH BY CRITERIA FLOWS =====
+- story: Organization to workplace search
+  steps:
+    - intent: tra_cuu_chuyen_gia_theo_don_vi
+      entities:
+        - current_workplace: "HCMUT"
+    - action: action_tra_cuu_chuyen_gia_theo_don_vi
+    - intent: tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
+      entities:
+        - previous_workplace: "Microsoft"
+    - action: action_tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
 
-  - story: Tra cứu chuyên gia theo học hàm
-    steps:
-      - intent: tra_cuu_chuyen_gia_theo_hoc_ham
-      - action: action_tra_cuu_chuyen_gia_theo_hoc_ham
-  
-  - story: Tra cứu quá trình đào tạo sau khi tra cứu chuyên gia
-    steps:
-      - intent: tra_cuu_chuyen_gia
-        entities:
-          - name: "Phạm Hoàng Ái Lệ"
-      - slot_was_set:
-          - expert_name: "Phạm Hoàng Ái Lệ"
-      - action: action_tra_cuu_chuyen_gia
-      - intent: hoi_qua_trinh_dao_tao
-      - action: action_tra_cuu_qua_trinh_dao_tao
-  
-  - story: Tra cứu chuyên gia theo nơi tốt nghiệp
-    steps:
-      - intent: tra_cuu_chuyen_gia_theo_noi_tot_nghiep
-      - action: action_tra_cuu_chuyen_gia_theo_noi_tot_nghiep
+- story: Education to work history flow
+  steps:
+    - intent: tra_cuu_chuyen_gia_theo_truong_tot_nghiep
+      entities:
+        - graduated_school: "HCMUS"
+    - action: action_tra_cuu_chuyen_gia_theo_truong_tot_nghiep
+    - intent: tra_cuu_chuyen_gia_theo_chuyen_nganh
+      entities:
+        - major: "Khoa học máy tính"
+    - action: action_tra_cuu_chuyen_gia_theo_chuyen_nganh
 
-  - story: Tra cứu lịch sử làm việc sau khi tra cứu chuyên gia
-    steps:
-      - intent: tra_cuu_chuyen_gia
-        entities:
-          - name: "Phạm Hoàng Ái Lệ"
-      - slot_was_set:
-          - expert_name: "Phạm Hoàng Ái Lệ"
-      - action: action_tra_cuu_chuyen_gia
-      - intent: Hoi_lich_su_lam_viec
-      - action: action_tra_cuu_lich_su_lam_viec
+- story: Degree and academic title search
+  steps:
+    - intent: tra_cuu_chuyen_gia_theo_hoc_vi
+      entities:
+        - degree: "Tiến sĩ"
+    - action: action_tra_cuu_chuyen_gia_theo_hoc_vi
+    - intent: tra_cuu_chuyen_gia_theo_hoc_ham
+      entities:
+        - academic_title: "Giáo sư"
+    - action: action_tra_cuu_chuyen_gia_theo_hoc_ham
 
-  - story: Tra cứu chuyên gia theo nơi làm việc
-    steps:
-      - intent: tra_cuu_chuyen_gia_theo_noi_lam_viec
-      - action: action_tra_cuu_chuyen_gia_theo_noi_lam_viec
+# ===== PUBLICATION FLOWS =====
+- story: Publication inquiry with pagination
+  steps:
+    - intent: liet_ke_cong_trinh_khoa_hoc
+      entities:
+        - expert_name: "Trương Quang Phúc"
+    - slot_was_set:
+        - expert_name: "Trương Quang Phúc"
+        - publication_offset: 0
+    - action: action_liet_ke_cong_trinh_khoa_hoc
+    - intent: liet_ke_cong_trinh_con_lai
+    - action: action_liet_ke_cong_trinh_khoa_hoc_con_lai
 
-  - story: Thống kê công trình khoa học trực tiếp theo tên chuyên gia
-    steps:
-      - intent: thong_ke_cong_trinh_khoa_hoc
-        entities:
-          - name: "Nguyễn Văn A"
-      - slot_was_set:
-          - expert_name: "Nguyễn Văn A"
-      - action: action_thong_ke_cong_trinh_khoa_hoc
+- story: Publication statistics to detailed listing
+  steps:
+    - intent: thong_ke_cong_trinh_khoa_hoc
+      entities:
+        - expert_name: "Nguyễn Thái Anh"
+    - slot_was_set:
+        - expert_name: "Nguyễn Thái Anh"
+    - action: action_thong_ke_cong_trinh_khoa_hoc
+    - intent: liet_ke_cong_trinh_khoa_hoc
+    - action: action_liet_ke_cong_trinh_khoa_hoc
 
-  - story: Liệt kê công trình khoa học trực tiếp theo tên chuyên gia
-    steps:
-      - intent: liet_ke_cong_trinh_khoa_hoc
-        entities:
-          - name: "Phạm Hoàng Ái Lệ"
-      - slot_was_set:
-          - expert_name: "Phạm Hoàng Ái Lệ"
-      - action: action_liet_ke_cong_trinh_khoa_hoc
+# ===== PROJECT FLOWS =====
+- story: Project inquiry with pagination
+  steps:
+    - intent: liet_ke_du_an
+      entities:
+        - expert_name: "Nguyễn Lê Duy Khải"
+    - slot_was_set:
+        - expert_name: "Nguyễn Lê Duy Khải"
+        - project_offset: 0
+    - action: action_liet_ke_du_an
+    - intent: liet_ke_du_an_con_lai
+    - action: action_liet_ke_du_an_con_lai
 
-  - story: Tiếp tục liệt kê công trình khoa học còn lại trực tiếp theo tên
-    steps:
-      - intent: liet_ke_cong_trinh_khoa_hoc
-        entities:
-          - name: "Nguyễn Văn B"
-      - slot_was_set:
-          - expert_name: "Nguyễn Văn B"
-      - action: action_liet_ke_cong_trinh_khoa_hoc
-      - intent: liet_ke_cong_trinh_khoa_hoc_con_lai
-      - action: action_liet_ke_cong_trinh_khoa_hoc_con_lai
+- story: Project statistics to detailed listing
+  steps:
+    - intent: thong_ke_du_an
+      entities:
+        - expert_name: "Trương Quang Phúc"
+    - slot_was_set:
+        - expert_name: "Trương Quang Phúc"
+    - action: action_thong_ke_du_an
+    - intent: liet_ke_du_an
+    - action: action_liet_ke_du_an
 
-  - story: Tra cứu ngoại ngữ của chuyên gia
-    steps:
-      - intent: tra_cuu_chuyen_gia
-        entities:
-          - name: "Nguyễn Văn A"
-      - slot_was_set:
-          - expert_name: "Nguyễn Văn A"
-      - action: action_tra_cuu_chuyen_gia
-      - intent: tra_cuu_ngoai_ngu
-      - action: action_tra_cuu_ngoai_ngu
+# ===== LANGUAGE FLOWS =====
+- story: Language inquiry flow
+  steps:
+    - intent: tra_cuu_ngoai_ngu
+      entities:
+        - expert_name: "Nguyễn Thái Anh"
+    - slot_was_set:
+        - expert_name: "Nguyễn Thái Anh"
+    - action: action_tra_cuu_ngoai_ngu
+    - intent: tra_cuu_chuyen_gia_theo_ngoai_ngu
+      entities:
+        - language: "Tiếng Anh"
+    - action: action_tra_cuu_chuyen_gia_theo_ngoai_ngu
 
-  - story: Tra cứu ngoại ngữ của chuyên gia
-    steps:
-      - intent: tra_cuu_chuyen_gia
-        entities:
-          - name: "Nguyễn Văn A"  
-      - slot_was_set:
-          - expert_name: "Nguyễn Văn A"
-      - action: action_tra_cuu_chuyen_gia
-      - intent: tra_cuu_ngoai_ngu
-      - action: action_tra_cuu_ngoai_ngu
+# ===== WORKHISTORY DETAILED FLOWS =====
+- story: Work history to position search
+  steps:
+    - intent: tra_cuu_lich_su_lam_viec
+      entities:
+        - expert_name: "Nguyễn Lê Duy Khải"
+    - slot_was_set:
+        - expert_name: "Nguyễn Lê Duy Khải"
+    - action: action_tra_cuu_lich_su_lam_viec
+    - intent: tra_cuu_chuyen_gia_theo_vi_tri
+      entities:
+        - position: "Trưởng phòng"
+    - action: action_tra_cuu_chuyen_gia_theo_vi_tri
+
+# ===== ERROR RECOVERY FLOWS =====
+- story: Missing entity recovery - organization
+  steps:
+    - intent: tra_cuu_chuyen_gia_theo_don_vi
+    - action: utter_hoi_don_vi
+    - intent: provide_name
+      entities:
+        - current_workplace: "HCMUT"
+    - slot_was_set:
+        - current_workplace: "HCMUT"
+    - action: action_tra_cuu_chuyen_gia_theo_don_vi
+
+- story: Missing entity recovery - expert name
+  steps:
+    - intent: tra_cuu_chuyen_gia
+    - action: utter_hoi_ten_chuyen_gia
+    - intent: provide_name
+      entities:
+        - expert_name: "Nguyễn Thái Anh"
+    - slot_was_set:
+        - expert_name: "Nguyễn Thái Anh"
+    - action: action_tra_cuu_chuyen_gia
+
+- story: Expert not found to alternative search
+  steps:
+    - intent: tra_cuu_chuyen_gia
+      entities:
+        - expert_name: "Tên không tồn tại"
+    - action: action_tra_cuu_chuyen_gia
+    - intent: tra_cuu_chuyen_gia_theo_don_vi
+      entities:
+        - current_workplace: "HCMUT"
+    - action: action_tra_cuu_chuyen_gia_theo_don_vi
+
+# ===== MULTI-STEP COMPLEX FLOWS =====
+- story: Complete research profile lookup
+  steps:
+    - intent: tra_cuu_chuyen_gia_theo_truong_tot_nghiep
+      entities:
+        - graduated_school: "HCMUT"
+    - action: action_tra_cuu_chuyen_gia_theo_truong_tot_nghiep
+    - intent: tra_cuu_chuyen_gia
+      entities:
+        - expert_name: "Trương Quang Phúc"
+    - slot_was_set:
+        - expert_name: "Trương Quang Phúc"
+    - action: action_tra_cuu_chuyen_gia
+    - intent: thong_ke_cong_trinh_khoa_hoc
+    - action: action_thong_ke_cong_trinh_khoa_hoc
+    - intent: thong_ke_du_an
+    - action: action_thong_ke_du_an
+
+- story: Language and workplace correlation
+  steps:
+    - intent: tra_cuu_chuyen_gia_theo_ngoai_ngu
+      entities:
+        - language: "Tiếng Anh"
+    - action: action_tra_cuu_chuyen_gia_theo_ngoai_ngu
+    - intent: tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
+      entities:
+        - previous_workplace: "Google"
+    - action: action_tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
+
 
 

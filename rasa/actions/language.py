@@ -1,65 +1,121 @@
+"""
+Language skills search actions for Rasa chatbot
+"""
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
-import requests
 
-BASE_URL = "http://localhost:3000/api"
+from .utils import (
+    extract_entity,
+    safe_api_call,
+    get_expert_by_name,
+    BASE_URL
+)
 
 class ActionTraCuuNgoaiNgu(Action):
-
     def name(self) -> Text:
         return "action_tra_cuu_ngoai_ngu"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        expert_name = extract_entity(tracker, "name")
+        if not expert_name:
+            dispatcher.utter_message(text="Xin lỗi, tôi cần biết tên chuyên gia để tra cứu ngoại ngữ.")
+            return []
 
-        expert_name = next(tracker.get_latest_entity_values("name"), None)
-        print("Expert name:", expert_name)
-        if expert_name:
-            res = requests.get(f"{BASE_URL}/experts/search-all?name={expert_name}")
-            data = res.json()
-            if not data or not isinstance(data, dict) or not data.get("experts"):
-                dispatcher.utter_message(response="utter_Khong_tim_thay_chuyen_gia")
-                return []
-            expert = data["experts"][0]
-            expert_id = expert["id"]
-            name = expert["fullName"]
+        expert = get_expert_by_name(expert_name)
+        if not expert:
+            dispatcher.utter_message(text=f"Không tìm thấy chuyên gia tên {expert_name}.")
+            return []
+
+        expert_id = expert.get("id")
+        response = safe_api_call(f"{BASE_URL}/languages/by-expert-id?id={expert_id}")
+        
+        if response and response.get("data"):
+            languages = response["data"]
+            if languages:
+                message = f"Thông tin ngoại ngữ của {expert_name}:\n\n"
+                for lang in languages:
+                    message += f"🌍 Ngôn ngữ: {lang.get('language', 'N/A')}\n"
+                    message += f"👂 Nghe: {lang.get('listening', 'N/A')}\n"
+                    message += f"🗣️ Nói: {lang.get('speaking', 'N/A')}\n"
+                    message += f"📖 Đọc: {lang.get('reading', 'N/A')}\n"
+                    message += f"✍️ Viết: {lang.get('writing', 'N/A')}\n\n"
+            else:
+                message = f"{expert_name} chưa có thông tin ngoại ngữ."
         else:
-            expert_id = tracker.get_slot("expert_id")
-            name = tracker.get_slot("expert_name")
-            if not expert_id:
-                dispatcher.utter_message(text="Bạn vui lòng cung cấp tên chuyên gia.")
-                return []
+            message = "Không thể lấy thông tin ngoại ngữ."
+            
+        dispatcher.utter_message(text=message)
+        return []
 
-        lang_res = requests.get(f"{BASE_URL}/languages/by-expert-id?id={expert_id}")
-        if lang_res.status_code != 200:
-            dispatcher.utter_message(response="utter_Khong_tim_thay_ngoai_ngu")
+class ActionTraCuuChuyenGiaTheoNgoaiNgu(Action):
+    def name(self) -> Text:
+        return "action_tra_cuu_chuyen_gia_theo_ngoai_ngu"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        language = extract_entity(tracker, "language")
+        if not language:
+            dispatcher.utter_message(text="Xin lỗi, tôi cần biết ngôn ngữ để tìm chuyên gia.")
             return []
-        languages = lang_res.json()
-        if not languages or not isinstance(languages, list):
-            dispatcher.utter_message(response="utter_Khong_tim_thay_ngoai_ngu")
+
+        response = safe_api_call(f"{BASE_URL}/experts/by-language?language={language}")
+        
+        if response and response.get("data"):
+            experts = response["data"]
+            if experts:
+                count = len(experts)
+                message = f"Tìm thấy {count} chuyên gia biết {language}:\n\n"
+                for expert in experts[:5]:
+                    name = expert.get("fullName", "N/A")
+                    org = expert.get("organization", "N/A")
+                    message += f"👨‍🏫 {name}\n🏢 {org}\n\n"
+                if count > 5:
+                    message += f"... và {count - 5} chuyên gia khác."
+            else:
+                message = f"Không tìm thấy chuyên gia biết {language}."
+        else:
+            message = "Không thể tìm kiếm chuyên gia."
+            
+        dispatcher.utter_message(text=message)
+        return []
+
+class ActionTraCuuChuyenGiaTheoTrinhDoNgoaiNgu(Action):
+    def name(self) -> Text:
+        return "action_tra_cuu_chuyen_gia_theo_trinh_do_ngoai_ngu"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        language_level = extract_entity(tracker, "language_level")
+        if not language_level:
+            dispatcher.utter_message(text="Xin lỗi, tôi cần biết trình độ ngoại ngữ để tìm chuyên gia.")
             return []
 
-        # Debugging information
-        print("Expert name:", expert_name)
-        print("Expert ID:", expert_id)
-        print("API trả về:", languages)
-
-        # Hiển thị đầy đủ các kỹ năng
-        lang_text = ""
-        for l in languages:
-            lang_text += f"- {l.get('language', 'Không rõ')}"
-            skills = []
-            if l.get('listening'): skills.append(f"Nghe: {l['listening']}")
-            if l.get('speaking'): skills.append(f"Nói: {l['speaking']}")
-            if l.get('reading'): skills.append(f"Đọc: {l['reading']}")
-            if l.get('writing'): skills.append(f"Viết: {l['writing']}")
-            if skills:
-                lang_text += " (" + ", ".join(skills) + ")"
-            lang_text += "\n"
-
-        dispatcher.utter_message(text=f"Chuyên gia {name} sử dụng các ngoại ngữ sau:\n{lang_text}")
-
-        return [SlotSet("expert_id", expert_id), SlotSet("expert_name", name)]
+        response = safe_api_call(f"{BASE_URL}/experts/by-language-level?level={language_level}")
+        
+        if response and response.get("data"):
+            experts = response["data"]
+            if experts:
+                count = len(experts)
+                message = f"Tìm thấy {count} chuyên gia có trình độ ngoại ngữ {language_level}:\n\n"
+                for expert in experts[:5]:
+                    name = expert.get("fullName", "N/A")
+                    org = expert.get("organization", "N/A")
+                    message += f"👨‍🏫 {name}\n🏢 {org}\n\n"
+                if count > 5:
+                    message += f"... và {count - 5} chuyên gia khác."
+            else:
+                message = f"Không tìm thấy chuyên gia có trình độ {language_level}."
+        else:
+            message = "Không thể tìm kiếm chuyên gia."
+            
+        dispatcher.utter_message(text=message)
+        return []

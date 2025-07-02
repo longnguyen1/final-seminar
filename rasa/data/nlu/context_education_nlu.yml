@@ -1,0 +1,95 @@
+version: "3.1"
+
+nlu:
+# ===== EDUCATION TABLE INTENTS =====
+- intent: hoi_qua_trinh_dao_tao
+  examples: |
+    - quá trình đào tạo của [Nguyễn Thái Anh](expert_name)
+    - [Trương Quang Phúc](expert_name) học ở đâu
+    - lịch sử học tập [Vũ Đình Thành](expert_name)
+    - thông tin học vấn [Nguyễn Lê Duy Khải](expert_name)
+    - [Đặng Mậu Chiến](expert_name) tốt nghiệp trường nào
+    - học vị của [Nguyễn Mạnh Hùng](expert_name)
+    - [Bùi Trọng Hiếu](expert_name) có bằng cấp gì
+    - education background [Lê Chí Hiệp](expert_name)
+    - academic history [Huỳnh Ngọc Văn](expert_name)
+    - bằng cấp của [Nguyễn Trần Thi Văn](expert_name)
+
+- intent: tra_cuu_chuyen_gia_theo_truong_tot_nghiep
+  examples: |
+    # EXPLICIT EDUCATION CONTEXT - Clear education indicators
+    - tìm chuyên gia tốt nghiệp từ [HCMUT](graduated_school)
+    - ai học ở [Đại học Bách khoa TPHCM](graduated_school)
+    - cựu sinh viên [ĐHSPKT](graduated_school)
+    - alumni [UIT](graduated_school)
+    - người đã học tại [HCMUS](graduated_school)
+    - ra trường từ [Đại học Sư phạm kỹ thuật TPHCM](graduated_school)
+    - tốt nghiệp [Đại học Công nghệ thông tin](graduated_school)
+    - học xong ở [ĐHQG TPHCM](graduated_school)
+    - cử nhân từ [Đại học Nông lâm TPHCM](graduated_school)
+    - graduates from [HCMUT](graduated_school)
+    - studied at [UIT](graduated_school)
+    - education from [ĐHSPKT](graduated_school)
+
+    # REAL DATABASE SCHOOLS
+    - tốt nghiệp từ [Đại học Bách khoa - ĐHQG TPHCM](graduated_school)
+    - cựu sinh viên [ĐH SPKT TPHCM](graduated_school)
+    - alumni [ĐH Công nghệ thông tin - ĐHQG TPHCM](graduated_school)
+    - học xong ở [Đại học Khoa học tự nhiên - ĐHQG TPHCM](graduated_school)
+    - ra trường từ [Đại học Giao thông vận tải TPHCM](graduated_school)
+    - bằng cấp từ [Đại học Nông nghiệp Hà Nội](graduated_school)
+
+- intent: tra_cuu_chuyen_gia_theo_chuyen_nganh
+  examples: |
+    - tìm chuyên gia chuyên ngành [Công nghệ thông tin](major)
+    - ai học [Khoa học máy tính](major)
+    - chuyên gia [Cơ khí](major)
+    - người có chuyên môn [Điện tử viễn thông](major)
+    - [Software Engineering](major) experts
+    - [Kỹ thuật phần mềm](major) specialists
+    - chuyên ngành [Hóa học](major)
+    - [Environmental Engineering](major) professionals
+    - [Kỹ thuật môi trường](major) chuyên gia
+    - experts in [Computer Science](major)
+
+# ===== LOOKUPS =====
+- lookup: graduated_school
+  examples: |
+    - HCMUT
+    - Đại học Bách khoa TPHCM
+    - Đại học Bách khoa - ĐHQG TPHCM
+    - ĐHBK TPHCM
+    - ĐHSPKT
+    - Đại học Sư phạm kỹ thuật TPHCM
+    - ĐH SPKT TPHCM
+    - HCMUTE
+    - UIT
+    - Đại học Công nghệ thông tin
+    - ĐH Công nghệ thông tin - ĐHQG TPHCM
+    - HCMUS
+    - Đại học Khoa học Tự nhiên
+    - Đại học Khoa học tự nhiên - ĐHQG TPHCM
+    - ĐHQG TPHCM
+    - Đại học Giao thông vận tải TPHCM
+    - Đại học Nông nghiệp Hà Nội
+
+- lookup: major
+  examples: |
+    - Công nghệ thông tin
+    - CNTT
+    - IT
+    - Information Technology
+    - Khoa học máy tính
+    - Computer Science
+    - Cơ khí
+    - Mechanical Engineering
+    - Điện tử viễn thông
+    - Electronics and Telecommunications
+    - Hóa học
+    - Chemistry
+    - Kỹ thuật môi trường
+    - Environmental Engineering
+    - Software Engineering
+    - Kỹ thuật phần mềm
+    - Kỹ thuật xây dựng
+    - Civil Engineering

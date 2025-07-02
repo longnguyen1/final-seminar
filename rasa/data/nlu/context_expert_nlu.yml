@@ -1,0 +1,109 @@
+version: "3.1"
+
+nlu:
+# ===== EXPERT TABLE - CURRENT WORKPLACE CONTEXT =====
+- intent: tra_cuu_chuyen_gia
+  examples: |
+    - tìm chuyên gia [Nguyễn Thái Anh](expert_name)
+    - tra cứu thông tin [Trương Quang Phúc](expert_name)
+    - cho tôi biết về [Vũ Đình Thành](expert_name)
+    - thông tin chuyên gia [Nguyễn Lê Duy Khải](expert_name)
+    - [Đặng Mậu Chiến](expert_name) là ai
+    - tôi muốn biết về [Nguyễn Mạnh Hùng](expert_name)
+    - hồ sơ của [Bùi Trọng Hiếu](expert_name)
+    - profile [Lê Chí Hiệp](expert_name)
+    - thông tin [Huỳnh Ngọc Văn](expert_name)
+    - giới thiệu về [Nguyễn Trần Thi Văn](expert_name)
+
+- intent: tra_cuu_chuyen_gia_theo_don_vi
+  examples: |
+    # EXPLICIT CURRENT CONTEXT - Clear temporal indicators
+    - tìm chuyên gia hiện đang làm tại [HCMUT](current_workplace)
+    - ai đang làm việc ở [Đại học Bách khoa TPHCM](current_workplace)
+    - các chuyên gia hiện tại của [ĐHSPKT](current_workplace)
+    - nhân viên hiện tại [UIT](current_workplace)
+    - giảng viên đang dạy tại [HCMUS](current_workplace)
+    - ai hiện đang ở [Đại học Sư phạm kỹ thuật TPHCM](current_workplace)
+    - danh sách cán bộ hiện tại [Đại học Công nghệ thông tin](current_workplace)
+    
+    # IMPLICIT CURRENT CONTEXT - Default assumption
+    - chuyên gia ở [HCMUT](current_workplace)
+    - tìm người làm tại [ĐHSPKT](current_workplace)
+    - ai ở [UIT](current_workplace)
+    - danh sách nhân sự [HCMUS](current_workplace)
+    - chuyên gia tại [Đại học Bách khoa TPHCM](current_workplace)
+    - người làm việc ở [Đại học Sư phạm kỹ thuật](current_workplace)
+    - cán bộ [ĐHQG TPHCM](current_workplace)
+    - giảng viên [Đại học Nông lâm TPHCM](current_workplace)
+
+- intent: tra_cuu_chuyen_gia_theo_hoc_vi
+  examples: |
+    - tìm chuyên gia có học vị [Tiến sĩ](degree)
+    - ai có [Thạc sĩ](degree)
+    - danh sách [Kỹ sư](degree)
+    - chuyên gia có bằng [PGS](degree)
+    - những người có [TS](degree)
+    - các [Giáo sư](degree)
+    - [Cử nhân](degree) nào
+    - [Bác sĩ](degree) chuyên khoa
+    - ai có bằng [Tiến sĩ](degree)
+    - chuyên gia trình độ [Thạc sĩ](degree)
+
+- intent: tra_cuu_chuyen_gia_theo_hoc_ham
+  examples: |
+    - tìm [Giáo sư](academic_title)
+    - chuyên gia có học hàm [PGS](academic_title)
+    - danh sách [Phó Giáo sư](academic_title)
+    - ai là [GS](academic_title)
+    - các [Giáo sư Tiến sĩ](academic_title)
+    - những [Phó Giáo sư Tiến sĩ](academic_title)
+    - [Professor](academic_title) nào
+    - [Associate Professor](academic_title) có kinh nghiệm
+
+# ===== LOOKUPS =====
+- lookup: current_workplace
+  examples: |
+    - HCMUT
+    - Đại học Bách khoa TPHCM
+    - Đại học Bách khoa - ĐHQG TPHCM
+    - ĐHBK TPHCM
+    - ĐHSPKT
+    - Đại học Sư phạm kỹ thuật TPHCM
+    - HCMUTE
+    - UIT
+    - Đại học Công nghệ thông tin
+    - Đại học Công nghệ thông tin - ĐHQG TPHCM
+    - HCMUS
+    - Đại học Khoa học Tự nhiên
+    - ĐHQG TPHCM
+    - Đại học Nông lâm TPHCM
+
+- lookup: degree
+  examples: |
+    - Tiến sĩ
+    - TS
+    - PhD
+    - Thạc sĩ
+    - ThS
+    - Master
+    - Kỹ sư
+    - KS
+    - Engineer
+    - Cử nhân
+    - CN
+    - Bachelor
+    - Bác sĩ
+    - BS
+
+- lookup: academic_title
+  examples: |
+    - Giáo sư
+    - GS
+    - Professor
+    - Phó Giáo sư
+    - PGS
+    - Associate Professor
+    - Giáo sư Tiến sĩ
+    - GS.TS
+    - Phó Giáo sư Tiến sĩ
+    - PGS.TS

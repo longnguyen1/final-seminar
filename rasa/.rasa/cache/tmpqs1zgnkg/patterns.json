@@ -1,0 +1,86 @@
+[
+  {
+    "name": "academicTitle",
+    "pattern": "(Giáo sư|Phó giáo sư|GS|PGS|Professor|Associate Professor)"
+  },
+  {
+    "name": "current_workplace",
+    "pattern": "(Đại học|University|Viện|Institute|Trường|School|Phân viện|Branch)[\\s\\w\\-,()&]*"
+  },
+  {
+    "name": "degree",
+    "pattern": "(Tiến sĩ|Thạc sĩ|Kĩ sư|Cử nhân|TS|ThS|KS|CN|PhD|MSc|BSc|Doctor|Master|Engineer|Bachelor)"
+  },
+  {
+    "name": "language",
+    "pattern": "(English|Russian|French|Japanese|Korean|Chinese|German|Czech|Slovak)"
+  },
+  {
+    "name": "language",
+    "pattern": "(Tiếng|tiếng)\\s+[A-ZÀ-Ỹ][a-zà-ỹ]*"
+  },
+  {
+    "name": "language",
+    "pattern": "[A-Z][a-z]*(\\s+(ngữ|language))?"
+  },
+  {
+    "name": "language_level",
+    "pattern": "(Tốt|Khá|Trung bình|Good|Fair|Average|Excellent|Fluent|Basic|Advanced|Intermediate|Elementary|Beginner)"
+  },
+  {
+    "name": "name",
+    "pattern": "[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+(\\s+[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+)+"
+  },
+  {
+    "name": "name",
+    "pattern": "[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+(\\s+[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+)+"
+  },
+  {
+    "name": "name",
+    "pattern": "[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+(\\s+[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+)+"
+  },
+  {
+    "name": "name",
+    "pattern": "[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+(\\s+[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+)+"
+  },
+  {
+    "name": "organization",
+    "pattern": "(Đại học|University|Viện|Institute|Trường|School|Phân viện|Branch)[\\s\\w\\-,()]*"
+  },
+  {
+    "name": "project_role",
+    "pattern": "(Chủ nhiệm|Thành viên|Tác giả|Đồng tác giả|leader|member|author|co-author|PI|coordinator|manager|researcher|collaborator)"
+  },
+  {
+    "name": "project_status",
+    "pattern": "(Đã nghiệm thu|Hoàn thành|completed|finished|done|đã bảo vệ|kết thúc|terminated|ongoing|active|in progress)"
+  },
+  {
+    "name": "publication_type",
+    "pattern": "(Tạp chí quốc tế|Hội nghị quốc tế|Sách chuyên khảo|Tạp chí quốc gia|journal|conference|book|paper|proceeding)"
+  },
+  {
+    "name": "year",
+    "pattern": "(19|20)\\d{2}"
+  },
+  {
+    "name": "year",
+    "pattern": "(19|20)\\d{2}"
+  },
+  {
+    "name": "year",
+    "pattern": "năm\\s+(19|20)\\d{2}"
+  },
+  {
+    "name": "year",
+    "pattern": "năm\\s+(19|20)\\d{2}"
+  },
+  {
+    "name": "year",
+    "pattern": "year\\s+(19|20)\\d{2}"
+  },
+  {
+    "name": "year",
+    "pattern": "year\\s+(19|20)\\d{2}"
+  }
+]

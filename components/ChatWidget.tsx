@@ -1,65 +1,81 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 declare global {
   interface Window {
     WebChat?: any;
-    myChatWidget?: boolean;
-    React?: any;
-    ReactDOM?: any;
   }
 }
 
 export default function ChatWidget() {
+  const scriptLoaded = useRef(false);
+
   useEffect(() => {
-    if (window.myChatWidget) return;
-
-    // Đảm bảo global cho UMD
-    window.React = require("react");
-    window.ReactDOM = require("react-dom");
-
+    // Tránh load script nhiều lần
+    if (scriptLoaded.current) return;
+    
     const script = document.createElement("script");
-    script.src = "/rasa-webchat.js"; // <== dùng file local
+    script.id = "rasa-webchat";
+    script.src = "/rasa-webchat.js"; // Đảm bảo tên file khớp với file trong /public
     script.async = true;
 
     script.onload = () => {
-      window.WebChat.default({
-        initPayload: "/greet",
-        customData: { language: "vi" },
-        title: "Trợ lý AI",
-        subtitle: "Hỏi bất cứ gì!",
-        inputTextFieldHint: "Nhập câu hỏi...",
-        showFullScreenButton: true,
-        params: { storage: "local" },
-        socketUrl: "http://localhost:5005",
-        socketPath: "/socket.io/",
-        onSocketEvent: {
-          'user_uttered': (msg: any) => {
-            window.localStorage.setItem("lastUserMsg", msg.message);
+      if (window.WebChat && !document.querySelector(".rw-conversation-container")) {
+        window.WebChat.default({
+          initPayload: "/greet",
+          customData: { language: "vi" },
+          title: "Hỏi chuyên gia AI",
+          subtitle: "Chatbot hỗ trợ tra cứu chuyên gia",
+          inputTextFieldHint: "Nhập câu hỏi...",
+          showFullScreenButton: true,
+          profileAvatar: "/avatar.png",
+          embedded: true,
+          // Tắt WebSocket và cấu hình REST
+          useSocket: false,
+          socketUrl: null,
+          host: "http://localhost:5005/webhooks/rest/webhook",
+          docViewer: false,
+          // Cấu hình lưu trữ và hiệu suất
+          params: {
+            storage: "local",
+            userId: `user_${Date.now()}`,
+            cacheKey: "webchat_data",
           },
-          'bot_uttered': (msg: any) => {
-            const last = window.localStorage.getItem("lastUserMsg");
-            if (msg?.text && last) {
-              fetch("/api/logs", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  userMessage: last,
-                  botReply: msg.text,
-                  source: "rasa"
-                })
-              });
-              window.localStorage.removeItem("lastUserMsg");
-            }
-          }
-        }
-      }, null); // mount mặc định
+          // Xử lý lỗi
+          showMessageDate: true,
+          handleError: (error: any) => {
+            console.warn("Webchat error:", error);
+          },
+        });
+      }
+    };
+
+    script.onerror = (error) => {
+      console.error("Error loading webchat script:", error);
     };
 
     document.body.appendChild(script);
-    window.myChatWidget = true;
+    scriptLoaded.current = true;
+
+    // Cleanup khi unmount
+    return () => {
+      const existingScript = document.getElementById("rasa-webchat");
+      if (existingScript) {
+        existingScript.remove();
+      }
+      const widget = document.querySelector(".rw-conversation-container");
+      if (widget) {
+        widget.remove();
+      }
+    };
   }, []);
 
-  return null;
+  return (
+    <div 
+      id="webchat" 
+      className="fixed bottom-4 right-4 z-50 w-[370px] h-[500px] shadow-lg rounded-lg"
+      aria-label="Chat with AI Expert"
+    />
+  );
 }

@@ -1,189 +1,369 @@
+"""
+Publication search actions for Rasa chatbot
+"""
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import SlotSet
 import requests
+import logging
 
-BASE_URL = "http://localhost:3000/api"
+from .utils import BASE_URL, extract_entity, safe_get
+from .context.context_utils import extract_context_entity, detect_query_context
+from .context.context_normalizer import normalizer
 
-# -------------------------------
-# Action 1: Đếm số lượng công trình khoa học
-# -------------------------------
-class ActionThongKeCongTrinhKhoaHoc(Action):
+logger = logging.getLogger(__name__)
+
+class ActionSearchByPublicationTitle(Action):
     def name(self) -> Text:
-        return "action_thong_ke_cong_trinh_khoa_hoc"
+        return "action_search_by_publication_title"
 
     def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        try:
+            # Extract publication title
+            title = extract_context_entity(tracker, "publication_title", "title")
+            
+            if not title:
+                dispatcher.utter_message(
+                    text="Xin lỗi, tôi không tìm thấy tên công trình bạn muốn tìm. "
+                         "Bạn có thể cho tôi biết tên công trình cụ thể không?"
+                )
+                return []
 
-        expert_name = next(tracker.get_latest_entity_values("name"), None)
-        expert_id = None
+            # API call
+            response = requests.get(
+                f"{BASE_URL}/experts/search/by-publication-title",
+                params={"title": title},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                experts = data.get("data", [])
+                
+                if experts:
+                    count = len(experts)
+                    message = f"Tôi tìm thấy {count} chuyên gia có công trình với tên '{title}':\n\n"
+                    
+                    for expert in experts[:5]:  # Limit to 5 results
+                        name = safe_get(expert, "fullName", "N/A")
+                        org = safe_get(expert, "organization", "N/A")
+                        pub_title = safe_get(expert, "publicationTitle", title)
+                        pub_year = safe_get(expert, "publicationYear", "N/A")
+                        pub_type = safe_get(expert, "publicationType", "N/A")
+                        
+                        message += f"👨‍🏫 **{name}**\n"
+                        message += f"🏢 Cơ quan: {org}\n"
+                        message += f"📖 Công trình: {pub_title} ({pub_year})\n"
+                        message += f"📝 Loại: {pub_type}\n\n"
+                    
+                    if count > 5:
+                        message += f"... và {count - 5} chuyên gia khác."
+                else:
+                    message = f"Không tìm thấy chuyên gia nào có công trình với tên '{title}'."
+                
+                dispatcher.utter_message(text=message)
+            else:
+                dispatcher.utter_message(
+                    text="Xin lỗi, có lỗi xảy ra khi tìm kiếm. Vui lòng thử lại sau."
+                )
+                
+        except requests.exceptions.RequestException as e:
+            logger.error(f"API request failed: {e}")
+            dispatcher.utter_message(
+                text="Xin lỗi, không thể kết nối đến hệ thống. Vui lòng thử lại sau."
+            )
+        except Exception as e:
+            logger.error(f"Error in publication title search: {e}")
+            dispatcher.utter_message(
+                text="Xin lỗi, có lỗi xảy ra. Vui lòng thử lại sau."
+            )
+        
+        return []
 
-        if expert_name:
-            res = requests.get(f"{BASE_URL}/experts/search-all?name={expert_name}")
-            if res.status_code != 200 or not res.text.strip():
-                dispatcher.utter_message("Không tìm thấy chuyên gia.")
-                return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-            data = res.json()
-            experts = data.get("experts", [])
-            if not experts or not isinstance(experts, list):
-                dispatcher.utter_message("Không tìm thấy chuyên gia.")
-                return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-            expert = experts[0]
-            expert_id = expert.get("id")
-            expert_name = expert.get("fullName")
-        else:
-            expert_id = tracker.get_slot("expert_id")
-            expert_name = tracker.get_slot("expert_name") or tracker.get_slot("name")
-
-        if not expert_id:
-            dispatcher.utter_message("Không rõ chuyên gia nào để truy xuất công trình.")
-            return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-
-        res = requests.get(f"{BASE_URL}/publications/by-expert-id?id={expert_id}")
-        if res.status_code == 200:
-            pubs = res.json()
-            total = len(pubs)
-            dispatcher.utter_message(text=f"✅ Chuyên gia {expert_name} có tổng cộng {total} công trình khoa học.")
-            return [SlotSet("expert_id", expert_id), SlotSet("expert_name", expert_name), SlotSet("name", expert_name)]
-        else:
-            dispatcher.utter_message(text="Không tìm thấy công trình khoa học.")
-            return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-
-# -------------------------------
-# Action 2: Liệt kê 20 công trình đầu tiên (đầy đủ thông tin)
-# -------------------------------
-class ActionLietKeCongTrinhKhoaHoc(Action):
+class ActionSearchByPublicationType(Action):
     def name(self) -> Text:
-        return "action_liet_ke_cong_trinh_khoa_hoc"
+        return "action_search_by_publication_type"
 
     def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        try:
+            # Extract publication type
+            pub_type = extract_context_entity(tracker, "publication_type", "type")
+            
+            if not pub_type:
+                dispatcher.utter_message(
+                    text="Xin lỗi, tôi không hiểu loại công trình bạn muốn tìm. "
+                         "Bạn có thể nói rõ hơn như 'bài báo', 'sách', 'hội thảo' không?"
+                )
+                return []
 
-        expert_name = next(tracker.get_latest_entity_values("name"), None)
-        expert_id = None
+            # API call
+            response = requests.get(
+                f"{BASE_URL}/experts/search/by-publication-type",
+                params={"type": pub_type},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                experts = data.get("data", [])
+                
+                if experts:
+                    count = len(experts)
+                    message = f"Tôi tìm thấy {count} chuyên gia có công trình loại '{pub_type}':\n\n"
+                    
+                    for expert in experts[:5]:
+                        name = safe_get(expert, "fullName", "N/A")
+                        org = safe_get(expert, "organization", "N/A")
+                        pub_title = safe_get(expert, "publicationTitle", "N/A")
+                        pub_year = safe_get(expert, "publicationYear", "N/A")
+                        
+                        message += f"👨‍🏫 **{name}**\n"
+                        message += f"🏢 Cơ quan: {org}\n"
+                        message += f"📖 Công trình gần nhất: {pub_title} ({pub_year})\n\n"
+                    
+                    if count > 5:
+                        message += f"... và {count - 5} chuyên gia khác."
+                else:
+                    message = f"Không tìm thấy chuyên gia nào có công trình loại '{pub_type}'."
+                
+                dispatcher.utter_message(text=message)
+            else:
+                dispatcher.utter_message(
+                    text="Xin lỗi, có lỗi xảy ra khi tìm kiếm. Vui lòng thử lại sau."
+                )
+                
+        except requests.exceptions.RequestException as e:
+            logger.error(f"API request failed: {e}")
+            dispatcher.utter_message(
+                text="Xin lỗi, không thể kết nối đến hệ thống. Vui lòng thử lại sau."
+            )
+        except Exception as e:
+            logger.error(f"Error in publication type search: {e}")
+            dispatcher.utter_message(
+                text="Xin lỗi, có lỗi xảy ra. Vui lòng thử lại sau."
+            )
+        
+        return []
 
-        if expert_name:
-            res = requests.get(f"{BASE_URL}/experts/search-all?name={expert_name}")
-            if res.status_code != 200 or not res.text.strip():
-                dispatcher.utter_message("Không tìm thấy chuyên gia.")
-                return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-            data = res.json()
-            experts = data.get("experts", [])
-            if not experts or not isinstance(experts, list):
-                dispatcher.utter_message("Không tìm thấy chuyên gia.")
-                return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-            expert = experts[0]
-            expert_id = expert.get("id")
-            expert_name = expert.get("fullName")
-        else:
-            expert_id = tracker.get_slot("expert_id")
-            expert_name = tracker.get_slot("expert_name") or tracker.get_slot("name")
-
-        if not expert_id:
-            dispatcher.utter_message(text="Không rõ chuyên gia nào để truy xuất công trình.")
-            return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-
-        res = requests.get(f"{BASE_URL}/publications/by-expert-id?id={expert_id}")
-        if res.status_code == 200:
-            publications = res.json()
-            top20 = publications[:20]
-            remaining = len(publications) - 20
-
-            if not top20:
-                dispatcher.utter_message(text="Không tìm thấy công trình nào.")
-                return [SlotSet("expert_id", expert_id), SlotSet("expert_name", expert_name), SlotSet("name", expert_name)]
-
-            # Liệt kê đầy đủ thông tin từng công trình
-            msg = f"📄 Danh sách công trình của {expert_name}:\n"
-            for i, pub in enumerate(top20, 1):
-                year = pub.get('year', '')
-                place = pub.get('place', '')
-                title = pub.get('title', 'Không rõ tên')
-                pub_type = pub.get('type', '')
-                author = pub.get('author', '')
-                msg += f"{i}. {title}"
-                detail = []
-                if year: detail.append(f"Năm: {year}")
-                if place: detail.append(f"Nơi: {place}")
-                if pub_type: detail.append(f"Loại: {pub_type}")
-                if author: detail.append(f"Tác giả: {author}")
-                if detail:
-                    msg += " (" + "; ".join(detail) + ")"
-                msg += "\n"
-
-            if remaining > 0:
-                msg += f"\n(Còn {remaining} công trình khác. Bạn muốn xem tiếp không?)"
-
-            dispatcher.utter_message(text=msg)
-            return [SlotSet("expert_id", expert_id), SlotSet("expert_name", expert_name), SlotSet("name", expert_name)]
-        else:
-            dispatcher.utter_message(text="Lỗi khi lấy danh sách công trình.")
-            return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-
-# -------------------------------
-# Action 3: Liệt kê toàn bộ công trình còn lại (trừ 20 cái đầu, đầy đủ thông tin)
-# -------------------------------
-class ActionLietKeCongTrinhKhoaHocConLai(Action):
+class ActionSearchByPublicationYear(Action):
     def name(self) -> Text:
-        return "action_liet_ke_cong_trinh_khoa_hoc_con_lai"
+        return "action_search_by_publication_year"
 
     def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        try:
+            # Extract publication year
+            year_str = extract_context_entity(tracker, "publication_year", "year")
+            
+            if not year_str:
+                dispatcher.utter_message(
+                    text="Xin lỗi, tôi không tìm thấy năm xuất bản bạn muốn tìm. "
+                         "Bạn có thể cho tôi biết năm cụ thể không?"
+                )
+                return []
 
-        expert_name = next(tracker.get_latest_entity_values("name"), None)
-        expert_id = None
+            try:
+                year = int(year_str)
+            except ValueError:
+                dispatcher.utter_message(
+                    text="Xin lỗi, năm bạn nhập không hợp lệ. Vui lòng nhập năm dưới dạng số."
+                )
+                return []
 
-        if expert_name:
-            res = requests.get(f"{BASE_URL}/experts/search-all?name={expert_name}")
-            if res.status_code == 200 and res.text.strip():
-                data = res.json()
-                experts = data.get("experts", [])
-                if experts and isinstance(experts, list):
-                    expert = experts[0]
-                    expert_id = expert.get("id")
-                    expert_name = expert.get("fullName")
-        if not expert_id:
-            expert_id = tracker.get_slot("expert_id")
-            expert_name = tracker.get_slot("expert_name") or tracker.get_slot("name")
+            # API call
+            response = requests.get(
+                f"{BASE_URL}/experts/search/by-publication-year",
+                params={"year": year},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                experts = data.get("data", [])
+                
+                if experts:
+                    count = len(experts)
+                    message = f"Tôi tìm thấy {count} chuyên gia có công trình xuất bản năm {year}:\n\n"
+                    
+                    for expert in experts[:5]:
+                        name = safe_get(expert, "fullName", "N/A")
+                        org = safe_get(expert, "organization", "N/A")
+                        pub_title = safe_get(expert, "publicationTitle", "N/A")
+                        pub_type = safe_get(expert, "publicationType", "N/A")
+                        
+                        message += f"👨‍🏫 **{name}**\n"
+                        message += f"🏢 Cơ quan: {org}\n"
+                        message += f"📖 Công trình {year}: {pub_title}\n"
+                        message += f"📝 Loại: {pub_type}\n\n"
+                    
+                    if count > 5:
+                        message += f"... và {count - 5} chuyên gia khác."
+                else:
+                    message = f"Không tìm thấy chuyên gia nào có công trình xuất bản năm {year}."
+                
+                dispatcher.utter_message(text=message)
+            else:
+                dispatcher.utter_message(
+                    text="Xin lỗi, có lỗi xảy ra khi tìm kiếm. Vui lòng thử lại sau."
+                )
+                
+        except requests.exceptions.RequestException as e:
+            logger.error(f"API request failed: {e}")
+            dispatcher.utter_message(
+                text="Xin lỗi, không thể kết nối đến hệ thống. Vui lòng thử lại sau."
+            )
+        except Exception as e:
+            logger.error(f"Error in publication year search: {e}")
+            dispatcher.utter_message(
+                text="Xin lỗi, có lỗi xảy ra. Vui lòng thử lại sau."
+            )
+        
+        return []
 
-        if not expert_id:
-            dispatcher.utter_message(text="Chưa rõ chuyên gia nào.")
-            return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
+class ActionSearchByPublicationAuthor(Action):
+    def name(self) -> Text:
+        return "action_search_by_publication_author"
 
-        res = requests.get(f"{BASE_URL}/publications/by-expert-id?id={expert_id}")
-        if res.status_code == 200:
-            pubs = res.json()
-            if len(pubs) <= 20:
-                dispatcher.utter_message(text="Không còn công trình nào nữa.")
-                return [SlotSet("expert_id", expert_id), SlotSet("expert_name", expert_name), SlotSet("name", expert_name)]
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        try:
+            # Extract publication author
+            author = extract_context_entity(tracker, "publication_author", "author")
+            
+            if not author:
+                dispatcher.utter_message(
+                    text="Xin lỗi, tôi không tìm thấy tên tác giả bạn muốn tìm. "
+                         "Bạn có thể cho tôi biết tên tác giả cụ thể không?"
+                )
+                return []
 
-            remaining = pubs[20:]
-            msg = f"📌 Các công trình còn lại của {expert_name}:\n"
-            for i, pub in enumerate(remaining, 21):
-                year = pub.get('year', '')
-                place = pub.get('place', '')
-                title = pub.get('title', 'Không rõ tên')
-                pub_type = pub.get('type', '')
-                author = pub.get('author', '')
-                msg += f"{i}. {title}"
-                detail = []
-                if year: detail.append(f"Năm: {year}")
-                if place: detail.append(f"Nơi: {place}")
-                if pub_type: detail.append(f"Loại: {pub_type}")
-                if author: detail.append(f"Tác giả: {author}")
-                if detail:
-                    msg += " (" + "; ".join(detail) + ")"
-                msg += "\n"
+            # API call
+            response = requests.get(
+                f"{BASE_URL}/experts/search/by-publication-author",
+                params={"author": author},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                experts = data.get("data", [])
+                
+                if experts:
+                    count = len(experts)
+                    message = f"Tôi tìm thấy {count} chuyên gia có công trình của tác giả '{author}':\n\n"
+                    
+                    for expert in experts[:5]:
+                        name = safe_get(expert, "fullName", "N/A")
+                        org = safe_get(expert, "organization", "N/A")
+                        pub_title = safe_get(expert, "publicationTitle", "N/A")
+                        pub_year = safe_get(expert, "publicationYear", "N/A")
+                        pub_author = safe_get(expert, "publicationAuthor", author)
+                        
+                        message += f"👨‍🏫 **{name}**\n"
+                        message += f"🏢 Cơ quan: {org}\n"
+                        message += f"📖 Công trình: {pub_title} ({pub_year})\n"
+                        message += f"✍️ Tác giả: {pub_author}\n\n"
+                    
+                    if count > 5:
+                        message += f"... và {count - 5} chuyên gia khác."
+                else:
+                    message = f"Không tìm thấy chuyên gia nào có công trình của tác giả '{author}'."
+                
+                dispatcher.utter_message(text=message)
+            else:
+                dispatcher.utter_message(
+                    text="Xin lỗi, có lỗi xảy ra khi tìm kiếm. Vui lòng thử lại sau."
+                )
+                
+        except requests.exceptions.RequestException as e:
+            logger.error(f"API request failed: {e}")
+            dispatcher.utter_message(
+                text="Xin lỗi, không thể kết nối đến hệ thống. Vui lòng thử lại sau."
+            )
+        except Exception as e:
+            logger.error(f"Error in publication author search: {e}")
+            dispatcher.utter_message(
+                text="Xin lỗi, có lỗi xảy ra. Vui lòng thử lại sau."
+            )
+        
+        return []
 
-            dispatcher.utter_message(text=msg)
-            return [SlotSet("expert_id", expert_id), SlotSet("expert_name", expert_name), SlotSet("name", expert_name)]
-        else:
-            dispatcher.utter_message(text="Không thể truy xuất dữ liệu.")
-            return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
+class ActionSearchByPublicationPlace(Action):
+    def name(self) -> Text:
+        return "action_search_by_publication_place"
 
-# -------------------------------
-# Ghi chú:
-# - Khi liệt kê công trình, bot sẽ trả về đầy đủ các trường: năm, nơi, tên, loại, tác giả.
-# - Khi đếm, chỉ trả về số lượng.
-# - Nếu trường nào không có, sẽ bỏ qua trường đó trong thông báo.
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        try:
+            # Extract publication place
+            place = extract_context_entity(tracker, "publication_place", "place")
+            
+            if not place:
+                dispatcher.utter_message(
+                    text="Xin lỗi, tôi không tìm thấy nơi xuất bản bạn muốn tìm. "
+                         "Bạn có thể cho tôi biết nơi xuất bản cụ thể không?"
+                )
+                return []
+
+            # API call
+            response = requests.get(
+                f"{BASE_URL}/experts/search/by-publication-place",
+                params={"place": place},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                experts = data.get("data", [])
+                
+                if experts:
+                    count = len(experts)
+                    message = f"Tôi tìm thấy {count} chuyên gia có công trình xuất bản tại '{place}':\n\n"
+                    
+                    for expert in experts[:5]:
+                        name = safe_get(expert, "fullName", "N/A")
+                        org = safe_get(expert, "organization", "N/A")
+                        pub_title = safe_get(expert, "publicationTitle", "N/A")
+                        pub_year = safe_get(expert, "publicationYear", "N/A")
+                        pub_place = safe_get(expert, "publicationPlace", place)
+                        
+                        message += f"👨‍🏫 **{name}**\n"
+                        message += f"🏢 Cơ quan: {org}\n"
+                        message += f"📖 Công trình: {pub_title} ({pub_year})\n"
+                        message += f"🌍 Nơi xuất bản: {pub_place}\n\n"
+                    
+                    if count > 5:
+                        message += f"... và {count - 5} chuyên gia khác."
+                else:
+                    message = f"Không tìm thấy chuyên gia nào có công trình xuất bản tại '{place}'."
+                
+                dispatcher.utter_message(text=message)
+            else:
+                dispatcher.utter_message(
+                    text="Xin lỗi, có lỗi xảy ra khi tìm kiếm. Vui lòng thử lại sau."
+                )
+                
+        except requests.exceptions.RequestException as e:
+            logger.error(f"API request failed: {e}")
+            dispatcher.utter_message(
+                text="Xin lỗi, không thể kết nối đến hệ thống. Vui lòng thử lại sau."
+            )
+        except Exception as e:
+            logger.error(f"Error in publication place search: {e}")
+            dispatcher.utter_message(
+                text="Xin lỗi, có lỗi xảy ra. Vui lòng thử lại sau."
+            )
+        
+        return []

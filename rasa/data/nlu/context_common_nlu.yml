@@ -1,0 +1,113 @@
+version: "3.1"
+
+nlu:
+# ===== CORE INTENTS =====
+- intent: greet
+  examples: |
+    - chào bạn
+    - xin chào
+    - hello
+    - hi
+    - chào
+    - chào buổi sáng
+    - chào buổi chiều
+    - chào buổi tối
+    - good morning
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - tạm biệt
+    - chào tạm biệt
+    - bye
+    - goodbye
+    - hẹn gặp lại
+    - cảm ơn và tạm biệt
+    - chào nhé
+    - see you
+
+- intent: thanks
+  examples: |
+    - cảm ơn
+    - cảm ơn bạn
+    - thanks
+    - thank you
+    - cảm ơn nhiều
+    - cảm ơn bạn rất nhiều
+    - thank you so much
+
+- intent: bot_challenge
+  examples: |
+    - bạn là ai
+    - bạn là bot à
+    - bạn có phải robot không
+    - you are a bot
+    - are you a bot
+    - bạn là người hay máy
+    - bạn là trợ lý ảo à
+    - what are you
+
+- intent: nlu_fallback
+  examples: |
+    - abcxyz
+    - không hiểu
+    - gì vậy
+    - ???
+    - hả
+    - sao vậy
+    - random text
+    - không rõ
+
+# ===== PROVIDE NAME INTENT =====
+- intent: provide_name
+  examples: |
+    - [Nguyễn Thái Anh](expert_name)
+    - [Trương Quang Phúc](expert_name)
+    - [Vũ Đình Thành](expert_name)
+    - [Nguyễn Lê Duy Khải](expert_name)
+    - tên là [Nguyễn Mạnh Hùng](expert_name)
+    - [Đặng Mậu Chiến](expert_name)
+    - [Bùi Trọng Hiếu](expert_name)
+    - [Lê Chí Hiệp](expert_name)
+    - [Huỳnh Ngọc Văn](expert_name)
+    - [Nguyễn Trần Thi Văn](expert_name)
+
+# ===== PAGINATION INTENTS =====
+- intent: liet_ke_cong_trinh_con_lai
+  examples: |
+    - tiếp tục
+    - xem thêm
+    - còn nữa không
+    - liệt kê tiếp
+    - hiện thị thêm công trình
+    - xem các công trình còn lại
+    - show more
+    - more publications
+    - continue
+    - next
+
+- intent: liet_ke_du_an_con_lai
+  examples: |
+    - tiếp tục dự án
+    - xem thêm dự án
+    - liệt kê tiếp dự án
+    - hiển thị thêm dự án
+    - các dự án còn lại
+    - more projects
+    - show more projects
+    - continue projects
+    - next projects
+
+# ===== EXPERT NAME LOOKUP =====
+- lookup: expert_name
+  examples: |
+    - Nguyễn Thái Anh
+    - Trương Quang Phúc
+    - Vũ Đình Thành
+    - Nguyễn Lê Duy Khải
+    - Đặng Mậu Chiến
+    - Nguyễn Mạnh Hùng
+    - Bùi Trọng Hiếu
+    - Lê Chí Hiệp
+    - Huỳnh Ngọc Văn
+    - Nguyễn Trần Thi Văn

@@ -1,0 +1,56 @@
+version: "3.1"
+
+nlu:
+# ===== LANGUAGE TABLE INTENTS =====
+- intent: tra_cuu_ngoai_ngu
+  examples: |
+    - ngoại ngữ của [Nguyễn Thái Anh](expert_name)
+    - [Trương Quang Phúc](expert_name) biết ngôn ngữ gì
+    - ngôn ngữ [Vũ Đình Thành](expert_name)
+    - [Nguyễn Lê Duy Khải](expert_name) có thể nói được ngôn ngữ nào
+    - language skills [Đặng Mậu Chiến](expert_name)
+    - foreign languages [Nguyễn Mạnh Hùng](expert_name)
+    - khả năng ngoại ngữ [Bùi Trọng Hiếu](expert_name)
+    - language proficiency [Lê Chí Hiệp](expert_name)
+    - ngoại ngữ [Huỳnh Ngọc Văn](expert_name)
+    - languages spoken by [Nguyễn Trần Thi Văn](expert_name)
+
+- intent: tra_cuu_chuyen_gia_theo_ngoai_ngu
+  examples: |
+    - chuyên gia biết [Tiếng Anh](language)
+    - ai nói được [English](language)
+    - người có thể [Tiếng Nhật](language)
+    - [Japanese](language) speakers
+    - [Tiếng Hàn](language) experts
+    - [Korean](language) proficient
+    - [Tiếng Trung](language) fluent
+    - [Chinese](language) language
+    - [French](language) speakers
+    - [German](language) experts
+    - [Tiếng Pháp](language) users
+    - [Tiếng Nga](language) speakers
+
+# ===== LOOKUPS =====
+- lookup: language
+  examples: |
+    - Tiếng Anh
+    - English
+    - Tiếng Nhật
+    - Japanese
+    - Tiếng Hàn
+    - Korean
+    - Tiếng Trung
+    - Chinese
+    - Mandarin
+    - Tiếng Pháp
+    - French
+    - Tiếng Đức
+    - German
+    - Tiếng Tây Ban Nha
+    - Spanish
+    - Tiếng Nga
+    - Russian
+    - Tiếng Ý
+    - Italian
+
+

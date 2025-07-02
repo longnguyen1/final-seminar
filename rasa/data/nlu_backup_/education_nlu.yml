@@ -1,0 +1,223 @@
+version: "3.1"
+
+nlu:
+  - intent: hoi_qua_trinh_dao_tao
+    examples: |
+      # Pattern với ID (từ database thực)
+      - Quá trình đào tạo của chuyên gia có id [4](name)
+      - Lịch sử học tập của chuyên gia [5](name)
+      - Thông tin đào tạo của chuyên gia id [14](name)
+      - Quá trình học tập của chuyên gia [25](name)
+      - Education history của expert [33](name)
+      - Học vấn của chuyên gia [55](name)
+      
+      # Pattern với tên thật từ database
+      - Quá trình đào tạo của chuyên gia [Nguyễn Thái Anh](name)?
+      - Chuyên gia [Trương Quang Phúc](name) đã học ở đâu?
+      - Học vấn của [Nguyễn Lưu Thùy Ngân](name) là gì?
+      - [Phạm Hoàng Ái Lệ](name) tốt nghiệp từ đâu?
+      - Background học tập của [Vũ Đình Thành](name)
+      - [Nguyễn Thị Nguyên](name) có bằng cấp gì?
+      - Trình độ chuyên môn của [Bùi Công Thành](name)
+      - [Đặng Thành Tín](name) từng học ở trường nào?
+
+  - intent: tra_cuu_chuyen_gia_theo_truong_tot_nghiep
+    examples: |
+      # Pattern 1: Past tense keywords với trường thực từ database
+      - Ai đã tốt nghiệp từ [Đại học Khoa học Tự nhiên - ĐHQG TPHCM](graduated_school)?
+      - Chuyên gia tốt nghiệp từ [ĐH Bách khoa TPHCM](graduated_school)
+      - Cựu sinh viên [ĐH SPKT TPHCM](graduated_school) có ai?
+      - Alumni của [ĐH Công nghệ thông tin - ĐHQG TPHCM](graduated_school)
+      - Ai từng học tại [Đại học Giao thông vận tải TPHCM](graduated_school)?
+      - Tốt nghiệp [Đại học Bách khoa Hà Nội](graduated_school)
+      - Chuyên gia từ [University of Ulsan, Korea](graduated_school)
+      - Cựu sinh viên [Sungkyunkwan University, South Korea](graduated_school)
+      - Alumni [ENSERG/INPG, France](graduated_school)
+      - Ai ra trường từ [Đại học Liège, Belgium](graduated_school)?
+      - Hoàn thành chương trình tại [Học viện Công nghệ Châu Á (AIT), Thailand](graduated_school)
+      - Tốt nghiệp từ [Đại học Kinh tế TPHCM](graduated_school)
+      - Từng học [Đại học Tôn Đức Thắng](graduated_school)
+      - Ra trường [Đại học Hàng hải Việt Nam](graduated_school)
+      - Alumni [Nanyang Technological University, Singapore](graduated_school)
+      
+      # Pattern 2: Education completion keywords
+      - Chuyên gia hoàn thành chương trình tại [Đại học Bách khoa TPHCM](graduated_school)
+      - Ai nhận bằng từ [Đại học Sư phạm kỹ thuật TPHCM](graduated_school)?
+      - Học xong ở [Đại học Công nghệ thông tin](graduated_school)
+      - Hoàn thành khóa học tại [University of Sydney, Australia](graduated_school)
+
+  - intent: tra_cuu_chuyen_gia_theo_chuyen_nganh
+    examples: |
+      # Chuyên ngành phổ biến từ database
+      - Tìm chuyên gia có chuyên ngành [Công nghệ thông tin](major)
+      - Ai học chuyên ngành [Khoa học Máy tính](major)?
+      - Chuyên gia chuyên ngành [Kỹ thuật Điện tử](major)
+      - Có ai học [Điện tử - Viễn thông](major) không?
+      - Tìm chuyên gia [Kỹ thuật môi trường](major)
+      - Chuyên gia nào có background [Hóa học](major)?
+      - Ai từng học [Cơ khí ô tô](major)?
+      - Danh sách chuyên gia [Tự động hóa](major)
+      - Chuyên gia [Công nghệ thực phẩm](major) có ai?
+      - Tìm [Kỹ thuật xây dựng](major)
+      - Ai chuyên [Hóa phân tích](major)?
+      - Chuyên gia [Điện - Điện tử](major)
+      - Danh sách [Kỹ thuật Cơ khí](major)
+      - Ai học [Vật liệu polymer](major)?
+      - Chuyên gia [Trí tuệ nhân tạo](major)
+      - Tìm [Kỹ thuật điện](major)
+      - Ai chuyên [Hệ thống thông tin quản lý](major)?
+      - Chuyên gia [Kỹ thuật viễn thông](major)
+      - Danh sách [Khoa học vật liệu](major)
+      - Ai học [Cơ khí nông nghiệp](major)?
+
+  # Synonyms chính cho trường học (10 trường phổ biến)
+  - synonym: Đại học Khoa học Tự nhiên - ĐHQG TPHCM
+    examples: |
+      - HCMUS
+      - khoa học tự nhiên
+      - cựu sinh viên HCMUS
+
+  - synonym: ĐH Bách khoa TPHCM
+    examples: |
+      - bách khoa
+      - HCMUT
+      - cựu sinh viên bách khoa
+
+  - synonym: ĐH SPKT TPHCM
+    examples: |
+      - HCMUTE
+      - sư phạm kỹ thuật
+      - spkt
+
+  - synonym: ĐH Công nghệ thông tin - ĐHQG TPHCM
+    examples: |
+      - UIT
+      - công nghệ thông tin
+      - cựu sinh viên UIT
+
+  - synonym: Đại học Giao thông vận tải TPHCM
+    examples: |
+      - UTH
+      - giao thông vận tải
+      - gtvt
+
+  - synonym: Đại học Tôn Đức Thắng
+    examples: |
+      - TDTU
+      - tôn đức thắng
+      - tdt
+
+  # Synonyms chính cho chuyên ngành (15 ngành phổ biến)
+  - synonym: Công nghệ thông tin
+    examples: |
+      - information technology
+      - IT
+
+  - synonym: Khoa học Máy tính
+    examples: |
+      - computer science
+      - CS
+
+  - synonym: Kỹ thuật Điện tử
+    examples: |
+      - electronic engineering
+      - điện tử
+
+  - synonym: Điện tử - Viễn thông
+    examples: |
+      - electronics and telecommunications
+      - điện tử viễn thông
+
+  - synonym: Kỹ thuật môi trường
+    examples: |
+      - environmental engineering
+
+  - synonym: Hóa học
+    examples: |
+      - chemistry
+
+  - synonym: Cơ khí ô tô
+    examples: |
+      - automotive engineering
+
+  - synonym: Tự động hóa
+    examples: |
+      - automation
+
+  - synonym: Công nghệ thực phẩm
+    examples: |
+      - food technology
+
+  - synonym: Kỹ thuật xây dựng
+    examples: |
+      - civil engineering
+      - xây dựng
+
+  - synonym: Kỹ thuật Cơ khí
+    examples: |
+      - mechanical engineering
+      - cơ khí
+
+  - synonym: Kỹ thuật điện
+    examples: |
+      - electrical engineering
+
+  - synonym: Trí tuệ nhân tạo
+    examples: |
+      - artificial intelligence
+      - AI
+
+  - synonym: Khoa học vật liệu
+    examples: |
+      - materials science
+
+  - synonym: Cơ khí nông nghiệp
+    examples: |
+      - agricultural machinery
+
+  # Lookup tables tối ưu (TOP 20 mỗi loại)
+  - lookup: graduated_schools
+    examples: |
+      Đại học Khoa học Tự nhiên - ĐHQG TPHCM
+      ĐH Bách khoa TPHCM
+      ĐH SPKT TPHCM
+      ĐH Công nghệ thông tin - ĐHQG TPHCM
+      Đại học Giao thông vận tải TPHCM
+      Đại học Tôn Đức Thắng
+      Đại học Bách khoa Hà Nội
+      University of Ulsan, Korea
+      Sungkyunkwan University, South Korea
+      ENSERG/INPG, France
+      Đại học Liège, Belgium
+      Học viện Công nghệ Châu Á (AIT), Thailand
+      Đại học Kinh tế TPHCM
+      Đại học Hàng hải Việt Nam
+      Nanyang Technological University, Singapore
+      University of Sydney, Australia
+      Đại học Quốc gia Chonnam, Hàn Quốc
+      Đại học Kiev, Ukraine
+      Đại học MEI, Nga
+      Ecole Centrale de Lyon, France
+
+  - lookup: majors
+    examples: |
+      Công nghệ thông tin
+      Khoa học Máy tính
+      Kỹ thuật Điện tử
+      Điện tử - Viễn thông
+      Kỹ thuật môi trường
+      Hóa học
+      Cơ khí ô tô
+      Tự động hóa
+      Công nghệ thực phẩm
+      Kỹ thuật xây dựng
+      Kỹ thuật Cơ khí
+      Kỹ thuật điện
+      Trí tuệ nhân tạo
+      Khoa học vật liệu
+      Cơ khí nông nghiệp
+      Hóa phân tích
+      Vật liệu polymer
+      Kỹ thuật viễn thông
+      Hệ thống thông tin quản lý
+      Điện - Điện tử

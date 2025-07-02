@@ -1,0 +1,350 @@
+version: "3.1"
+
+intents:
+  # ===== EXPERT TABLE INTENTS =====
+  - tra_cuu_chuyen_gia
+  - provide_name
+  - tra_cuu_chuyen_gia_theo_don_vi
+  - tra_cuu_chuyen_gia_theo_hoc_vi
+  - tra_cuu_chuyen_gia_theo_hoc_ham
+  
+  # ===== EDUCATION TABLE INTENTS =====
+  - hoi_qua_trinh_dao_tao
+  - tra_cuu_chuyen_gia_theo_truong_tot_nghiep
+  - tra_cuu_chuyen_gia_theo_chuyen_nganh
+  - tra_cuu_chuyen_gia_theo_nam_tot_nghiep        # NEW: Added from rules
+  - tra_cuu_chuyen_gia_theo_thong_tin_hoc_van     # NEW: Combined education search
+  - tra_cuu_thong_tin_hoc_van_chuyen_gia          # NEW: Expert education info
+  
+  # ===== WORKHISTORY TABLE INTENTS =====
+  - tra_cuu_lich_su_lam_viec                      # FIX: Unified from hoi_lich_su_lam_viec
+  - tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
+  - tra_cuu_chuyen_gia_theo_vi_tri
+  
+  # ===== PUBLICATION INTENTS =====
+  - thong_ke_cong_trinh_khoa_hoc
+  - liet_ke_cong_trinh_khoa_hoc
+  - liet_ke_cong_trinh_con_lai
+  - tra_cuu_cong_trinh_theo_loai
+  - tra_cuu_cong_trinh_theo_nam
+  
+  # ===== PROJECT INTENTS =====
+  - thong_ke_du_an
+  - liet_ke_du_an
+  - liet_ke_du_an_con_lai
+  - tra_cuu_du_an_theo_trang_thai
+  - tra_cuu_du_an_theo_nam
+  - tra_cuu_du_an_theo_vai_tro
+  
+  # ===== LANGUAGE INTENTS =====
+  - tra_cuu_ngoai_ngu
+  - tra_cuu_chuyen_gia_theo_ngoai_ngu
+  - tra_cuu_chuyen_gia_theo_trinh_do_ngoai_ngu
+  
+  # ===== GENERAL INTENTS =====
+  - greet
+  - goodbye
+  - thanks
+  - bot_challenge
+  - nlu_fallback
+
+entities:
+  # ===== CORE ENTITIES =====
+  - name
+  
+  # ===== CONTEXT-SPECIFIC WORKPLACE ENTITIES (Plan Implementation) =====
+  - current_workplace     # Expert.organization (WHERE hiện đang làm)
+  - previous_workplace    # WorkHistory.workplace (WHERE đã làm việc)
+  - graduated_school      # Education.school (WHERE đã học)
+  
+  # ===== EDUCATION ENTITIES =====
+  - major                 # Education.major (WHAT đã học)
+  - graduation_year       # NEW: Education.year (WHEN tốt nghiệp)
+  
+  # ===== EXPERT TABLE ENTITIES =====
+  - degree               # Expert.degree
+  - academicTitle        # Expert.academicTitle
+  - position             # Expert.position OR WorkHistory.position (context-dependent)
+  
+  # ===== LEGACY ENTITIES (Backward Compatibility) =====
+  - organization         # Legacy fallback for current_workplace
+  - school              # Legacy fallback for graduated_school
+  - workplace           # Legacy fallback for previous_workplace
+  
+  # ===== PUBLICATION ENTITIES =====
+  - publication_type
+  - year
+  
+  # ===== PROJECT ENTITIES =====
+  - project_status
+  - project_role
+  
+  # ===== LANGUAGE ENTITIES =====
+  - language
+  - language_level
+
+slots:
+  # ===== CORE EXPERT SLOTS =====
+  name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: name
+
+  expert_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: name
+
+  expert_id:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+  # ===== CONTEXT-SPECIFIC WORKPLACE SLOTS =====
+  current_workplace:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: current_workplace
+
+  previous_workplace:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: previous_workplace
+
+  graduated_school:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: graduated_school
+
+  # ===== EDUCATION SLOTS =====
+  major:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: major
+
+  graduation_year:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: graduation_year
+
+  # ===== EXPERT TABLE SLOTS =====
+  degree:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: degree
+
+  academicTitle:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: academicTitle
+
+  position:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: position
+
+  # ===== LEGACY SLOTS (Backward Compatibility) =====
+  organization:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: organization
+
+  school:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: school
+
+  workplace:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: workplace
+
+  # ===== PUBLICATION SLOTS =====
+  publication_type:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: publication_type
+
+  year:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: year
+
+  # ===== PROJECT SLOTS =====
+  project_status:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: project_status
+
+  project_role:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: project_role
+
+  # ===== LANGUAGE SLOTS =====
+  language:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: language
+
+  language_level:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: language_level
+
+  # ===== PAGINATION SLOTS =====
+  publication_offset:
+    type: float
+    initial_value: 0
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+  project_offset:
+    type: float
+    initial_value: 0
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+actions:
+  # ===== EXPERT TABLE ACTIONS =====
+  - action_tra_cuu_chuyen_gia
+  - action_tra_cuu_chuyen_gia_theo_don_vi
+  - action_tra_cuu_chuyen_gia_theo_hoc_vi
+  - action_tra_cuu_chuyen_gia_theo_hoc_ham
+  
+  # ===== EDUCATION TABLE ACTIONS =====
+  - action_tra_cuu_qua_trinh_dao_tao
+  - action_tra_cuu_chuyen_gia_theo_truong_tot_nghiep
+  - action_tra_cuu_chuyen_gia_theo_chuyen_nganh
+  - action_tra_cuu_chuyen_gia_theo_nam_tot_nghiep        # NEW: Added from rules
+  - action_tra_cuu_chuyen_gia_theo_thong_tin_hoc_van     # NEW: Combined education search
+  - action_tra_cuu_thong_tin_hoc_van_chuyen_gia          # NEW: Expert education info
+  
+  # ===== WORKHISTORY TABLE ACTIONS =====
+  - action_tra_cuu_lich_su_lam_viec
+  - action_tra_cuu_chuyen_gia_theo_noi_lam_viec
+  - action_tra_cuu_chuyen_gia_theo_vi_tri
+  
+  # ===== PUBLICATION ACTIONS =====
+  - action_thong_ke_cong_trinh_khoa_hoc
+  - action_liet_ke_cong_trinh_khoa_hoc
+  - action_liet_ke_cong_trinh_khoa_hoc_con_lai
+  - action_tra_cuu_cong_trinh_theo_loai
+  - action_tra_cuu_cong_trinh_theo_nam
+  
+  # ===== PROJECT ACTIONS =====
+  - action_thong_ke_du_an
+  - action_liet_ke_du_an
+  - action_liet_ke_du_an_con_lai
+  - action_tra_cuu_du_an_theo_trang_thai
+  - action_tra_cuu_du_an_theo_nam
+  - action_tra_cuu_du_an_theo_vai_tro
+  
+  # ===== LANGUAGE ACTIONS =====
+  - action_tra_cuu_ngoai_ngu
+  - action_tra_cuu_chuyen_gia_theo_ngoai_ngu
+  - action_tra_cuu_chuyen_gia_theo_trinh_do_ngoai_ngu
+
+responses:
+  # ===== FALLBACK RESPONSES (Required by Rules) =====
+  utter_hoi_ten_chuyen_gia:
+    - text: "Bạn muốn tra cứu thông tin của chuyên gia nào?"
+  
+  utter_hoi_don_vi:
+    - text: "Bạn muốn tìm chuyên gia ở đơn vị nào?"
+  
+  utter_hoi_hoc_vi:
+    - text: "Bạn muốn tìm chuyên gia có học vị gì?"
+  
+  utter_hoi_hoc_ham:
+    - text: "Bạn muốn tìm chuyên gia có học hàm gì?"
+  
+  utter_hoi_truong_tot_nghiep:
+    - text: "Bạn muốn tìm chuyên gia tốt nghiệp từ trường nào?"
+  
+  utter_hoi_chuyen_nganh:
+    - text: "Bạn muốn tìm chuyên gia có chuyên ngành gì?"
+  
+  utter_hoi_nam_tot_nghiep:
+    - text: "Bạn muốn tìm chuyên gia tốt nghiệp năm nào?"
+  
+  utter_hoi_noi_lam_viec:
+    - text: "Bạn muốn tìm chuyên gia đã làm việc tại đâu?"
+  
+  utter_hoi_vi_tri:
+    - text: "Bạn muốn tìm chuyên gia có vị trí gì?"
+  
+  # ===== GENERAL RESPONSES =====
+  utter_greet:
+    - text: "Chào bạn! Tôi là trợ lý ảo hỗ trợ tra cứu thông tin chuyên gia. Bạn cần hỗ trợ gì?"
+  
+  utter_goodbye:
+    - text: "Tạm biệt! Cảm ơn bạn đã sử dụng dịch vụ."
+  
+  utter_happy:
+    - text: "Rất vui được hỗ trợ bạn!"
+  
+  utter_iamabot:
+    - text: "Tôi là trợ lý ảo được phát triển để hỗ trợ tra cứu thông tin chuyên gia."
+  
+  utter_default:
+    - text: "Xin lỗi, tôi chưa hiểu yêu cầu này. Tôi có thể hỗ trợ tra cứu thông tin chuyên gia, quá trình đào tạo, lịch sử làm việc, công trình khoa học và dự án nghiên cứu."
+  
+  # ===== ERROR RESPONSES =====
+  utter_khong_tim_thay_chuyen_gia:
+    - text: "Không tìm thấy chuyên gia này. Bạn có thể thử tên khác không?"
+
+  # ===== CONTEXT CLARIFICATION RESPONSES =====
+  utter_clarify_workplace_context:
+    - text: "Bạn muốn tìm chuyên gia đang làm việc, đã tốt nghiệp, hay từng làm việc tại {workplace}?"
+  
+  utter_context_disambiguation:
+    - text: "Tôi tìm thấy nhiều kết quả. Bạn có thể cụ thể hơn về ngữ cảnh không?"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+
+

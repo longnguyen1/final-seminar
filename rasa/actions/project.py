@@ -1,180 +1,136 @@
+"""
+Project search actions for Rasa chatbot
+"""
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
-import requests
 
-BASE_URL = "http://localhost:3000/api"
+from .utils import (
+    extract_entity,
+    safe_api_call,
+    get_expert_by_name,
+    BASE_URL
+)
 
-# -------------------------------
-# Action 1: Đếm số lượng dự án
-# -------------------------------
 class ActionThongKeDuAn(Action):
     def name(self) -> Text:
         return "action_thong_ke_du_an"
 
     def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        expert_name = extract_entity(tracker, "name")
+        if not expert_name:
+            dispatcher.utter_message(text="Xin lỗi, tôi cần biết tên chuyên gia để thống kê dự án.")
+            return []
 
-        expert_name = next(tracker.get_latest_entity_values("name"), None)
-        expert_id = None
+        expert = get_expert_by_name(expert_name)
+        if not expert:
+            dispatcher.utter_message(text=f"Không tìm thấy chuyên gia tên {expert_name}.")
+            return []
 
-        if expert_name:
-            res = requests.get(f"{BASE_URL}/experts/search-all?name={expert_name}")
-            if res.status_code != 200 or not res.text.strip():
-                dispatcher.utter_message("Không tìm thấy chuyên gia.")
-                return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-            data = res.json()
-            experts = data.get("experts", [])
-            if not experts or not isinstance(experts, list):
-                dispatcher.utter_message("Không tìm thấy chuyên gia.")
-                return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-            expert = experts[0]
-            expert_id = expert.get("id")
-            expert_name = expert.get("fullName")
+        expert_id = expert.get("id")
+        response = safe_api_call(f"{BASE_URL}/projects/by-expert-id?id={expert_id}")
+        
+        if response and response.get("data"):
+            projects = response["data"]
+            count = len(projects)
+            if count > 0:
+                message = f"{expert_name} có tổng cộng {count} dự án:\n\n"
+                # Count by status
+                status_count = {}
+                for project in projects:
+                    status = project.get("status", "Không xác định")
+                    status_count[status] = status_count.get(status, 0) + 1
+                
+                for status, cnt in status_count.items():
+                    message += f"📊 {status}: {cnt} dự án\n"
+            else:
+                message = f"{expert_name} chưa có dự án nào."
         else:
-            expert_id = tracker.get_slot("expert_id")
-            expert_name = tracker.get_slot("expert_name") or tracker.get_slot("name")
+            message = "Không thể thống kê dự án."
+            
+        dispatcher.utter_message(text=message)
+        return []
 
-        if not expert_id:
-            dispatcher.utter_message("Không rõ chuyên gia nào để truy xuất dự án.")
-            return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-
-        res = requests.get(f"{BASE_URL}/projects/by-expert-id?id={expert_id}")
-        if res.status_code == 200:
-            projects = res.json()
-            total = len(projects)
-            dispatcher.utter_message(text=f"✅ Chuyên gia {expert_name} đã/tham gia tổng cộng {total} dự án.")
-            return [SlotSet("expert_id", expert_id), SlotSet("expert_name", expert_name), SlotSet("name", expert_name)]
-        else:
-            dispatcher.utter_message(text="Không tìm thấy dự án.")
-            return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-
-# -------------------------------
-# Action 2: Liệt kê 20 dự án đầu tiên
-# -------------------------------
 class ActionLietKeDuAn(Action):
     def name(self) -> Text:
         return "action_liet_ke_du_an"
 
     def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        expert_name = extract_entity(tracker, "name")
+        if not expert_name:
+            dispatcher.utter_message(text="Xin lỗi, tôi cần biết tên chuyên gia để liệt kê dự án.")
+            return []
 
-        expert_name = next(tracker.get_latest_entity_values("name"), None)
-        expert_id = None
+        expert = get_expert_by_name(expert_name)
+        if not expert:
+            dispatcher.utter_message(text=f"Không tìm thấy chuyên gia tên {expert_name}.")
+            return []
 
-        if expert_name:
-            res = requests.get(f"{BASE_URL}/experts/search-all?name={expert_name}")
-            if res.status_code != 200 or not res.text.strip():
-                dispatcher.utter_message("Không tìm thấy chuyên gia.")
-                return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-            data = res.json()
-            experts = data.get("experts", [])
-            if not experts or not isinstance(experts, list):
-                dispatcher.utter_message("Không tìm thấy chuyên gia.")
-                return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-            expert = experts[0]
-            expert_id = expert.get("id")
-            expert_name = expert.get("fullName")
+        expert_id = expert.get("id")
+        response = safe_api_call(f"{BASE_URL}/projects/by-expert-id?id={expert_id}")
+        
+        if response and response.get("data"):
+            projects = response["data"]
+            if projects:
+                message = f"Danh sách dự án của {expert_name}:\n\n"
+                for i, project in enumerate(projects[:5], 1):
+                    title = project.get("title", "N/A")
+                    role = project.get("role", "N/A")
+                    status = project.get("status", "N/A")
+                    start_year = project.get("startYear", "N/A")
+                    
+                    message += f"{i}. 🚀 {title}\n"
+                    message += f"   👔 Vai trò: {role}\n"
+                    message += f"   📊 Trạng thái: {status}\n"
+                    message += f"   📅 Năm bắt đầu: {start_year}\n\n"
+                
+                if len(projects) > 5:
+                    message += f"... và {len(projects) - 5} dự án khác."
+            else:
+                message = f"{expert_name} chưa có dự án nào."
         else:
-            expert_id = tracker.get_slot("expert_id")
-            expert_name = tracker.get_slot("expert_name") or tracker.get_slot("name")
+            message = "Không thể liệt kê dự án."
+            
+        dispatcher.utter_message(text=message)
+        return []
 
-        if not expert_id:
-            dispatcher.utter_message(text="Không rõ chuyên gia nào để truy xuất dự án.")
-            return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-
-        res = requests.get(f"{BASE_URL}/projects/by-expert-id?id={expert_id}")
-        if res.status_code == 200:
-            projects = res.json()
-            top20 = projects[:20]
-            remaining = len(projects) - 20
-
-            if not top20:
-                dispatcher.utter_message(text="Không tìm thấy dự án nào.")
-                return [SlotSet("expert_id", expert_id), SlotSet("expert_name", expert_name), SlotSet("name", expert_name)]
-
-            msg = f"📋 Danh sách dự án của {expert_name}:\n"
-            for i, prj in enumerate(top20, 1):
-                start = prj.get('startYear', '')
-                end = prj.get('endYear', '')
-                years = f"{start}-{end}" if start or end else ""
-                status = prj.get('status', '')
-                role = prj.get('role', '')
-                msg += f"{i}. {prj.get('title', 'Không rõ tên')}"
-                if years or status or role:
-                    msg += " ("
-                    if years: msg += f"{years}"
-                    if status: msg += f", {status}"
-                    if role: msg += f", {role}"
-                    msg += ")"
-                msg += "\n"
-
-            if remaining > 0:
-                msg += f"\n(Còn {remaining} dự án khác. Bạn muốn xem tiếp không?)"
-
-            dispatcher.utter_message(text=msg)
-            return [SlotSet("expert_id", expert_id), SlotSet("expert_name", expert_name), SlotSet("name", expert_name)]
-        else:
-            dispatcher.utter_message(text="Lỗi khi lấy danh sách dự án.")
-            return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-
-# -------------------------------
-# Action 3: Liệt kê toàn bộ dự án còn lại (trừ 20 cái đầu)
-# -------------------------------
-class ActionLietKeDuAnConLai(Action):
+class ActionTraCuuDuAnTheoTrangThai(Action):
     def name(self) -> Text:
-        return "action_liet_ke_du_an_con_lai"
+        return "action_tra_cuu_du_an_theo_trang_thai"
 
     def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        project_status = extract_entity(tracker, "project_status")
+        if not project_status:
+            dispatcher.utter_message(text="Xin lỗi, tôi cần biết trạng thái dự án để tìm kiếm.")
+            return []
 
-        expert_name = next(tracker.get_latest_entity_values("name"), None)
-        expert_id = None
-
-        if expert_name:
-            res = requests.get(f"{BASE_URL}/experts/search-all?name={expert_name}")
-            if res.status_code == 200 and res.text.strip():
-                data = res.json()
-                experts = data.get("experts", [])
-                if experts and isinstance(experts, list):
-                    expert = experts[0]
-                    expert_id = expert.get("id")
-                    expert_name = expert.get("fullName")
-        if not expert_id:
-            expert_id = tracker.get_slot("expert_id")
-            expert_name = tracker.get_slot("expert_name") or tracker.get_slot("name")
-
-        if not expert_id:
-            dispatcher.utter_message(text="Chưa rõ chuyên gia nào.")
-            return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
-
-        res = requests.get(f"{BASE_URL}/projects/by-expert-id?id={expert_id}")
-        if res.status_code == 200:
-            projects = res.json()
-            if len(projects) <= 20:
-                dispatcher.utter_message(text="Không còn dự án nào nữa.")
-                return [SlotSet("expert_id", expert_id), SlotSet("expert_name", expert_name), SlotSet("name", expert_name)]
-
-            remaining = projects[20:]
-            msg = f"📌 Các dự án còn lại của {expert_name}:\n"
-            for i, prj in enumerate(remaining, 21):
-                start = prj.get('startYear', '')
-                end = prj.get('endYear', '')
-                years = f"{start}-{end}" if start or end else ""
-                status = prj.get('status', '')
-                role = prj.get('role', '')
-                msg += f"{i}. {prj.get('title', 'Không rõ tên')}"
-                if years or status or role:
-                    msg += " ("
-                    if years: msg += f"{years}"
-                    if status: msg += f", {status}"
-                    if role: msg += f", {role}"
-                    msg += ")"
-                msg += "\n"
-
-            dispatcher.utter_message(text=msg)
-            return [SlotSet("expert_id", expert_id), SlotSet("expert_name", expert_name), SlotSet("name", expert_name)]
+        response = safe_api_call(f"{BASE_URL}/experts/by-project-status?status={project_status}")
+        
+        if response and response.get("data"):
+            experts = response["data"]
+            if experts:
+                count = len(experts)
+                message = f"Tìm thấy {count} chuyên gia có dự án với trạng thái '{project_status}':\n\n"
+                for expert in experts[:5]:
+                    name = expert.get("fullName", "N/A")
+                    org = expert.get("organization", "N/A")
+                    message += f"👨‍🏫 {name}\n🏢 {org}\n\n"
+                if count > 5:
+                    message += f"... và {count - 5} chuyên gia khác."
+            else:
+                message = f"Không tìm thấy chuyên gia có dự án với trạng thái '{project_status}'."
         else:
-            dispatcher.utter_message(text="Không thể truy xuất dữ liệu.")
-            return [SlotSet("expert_id", None), SlotSet("expert_name", None), SlotSet("name", None)]
+            message = "Không thể tìm kiếm dự án."
+            
+        dispatcher.utter_message(text=message)
+        return []

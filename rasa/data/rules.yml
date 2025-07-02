@@ -1,79 +1,271 @@
 version: "3.1"
 
-#  actions:
 rules:
-  - rule: Tra cứu chuyên gia theo tên
-    steps:
-      - intent: tra_cuu_chuyen_gia
-      - action: action_tra_cuu_chuyen_gia
+# ===== EXPERT TABLE RULES =====
+- rule: Tra cứu chuyên gia theo tên
+  steps:
+  - intent: tra_cuu_chuyen_gia
+    entities:
+    - expert_name
+  - action: action_tra_cuu_chuyen_gia
 
-  - rule: Tra cứu chuyên gia theo học vị
-    steps:
-      - intent: tra_cuu_chuyen_gia_theo_hoc_vi
-      - action: action_tra_cuu_chuyen_gia_theo_hoc_vi
+- rule: Tra cứu chuyên gia theo đơn vị hiện tại
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_don_vi
+    entities:
+    - current_workplace
+  - action: action_tra_cuu_chuyen_gia_theo_don_vi
 
-  - rule: Tra cứu chuyên gia theo đơn vị
-    steps:
-      - intent: tra_cuu_chuyen_gia_theo_don_vi
-      - action: action_tra_cuu_chuyen_gia_theo_don_vi
+- rule: Tra cứu chuyên gia theo học vị
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_hoc_vi
+    entities:
+    - degree
+  - action: action_tra_cuu_chuyen_gia_theo_hoc_vi
 
-  - rule: Tra cứu quá trình đào tạo
-    steps:
-      - intent: hoi_qua_trinh_dao_tao
-      - action: action_tra_cuu_qua_trinh_dao_tao
+- rule: Tra cứu chuyên gia theo học hàm
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_hoc_ham
+    entities:
+    - academic_title
+  - action: action_tra_cuu_chuyen_gia_theo_hoc_ham
 
-  - rule: Tra cứu chuyên gia theo nơi tốt nghiệp
-    steps:
-      - intent: tra_cuu_chuyen_gia_theo_noi_tot_nghiep
-      - action: action_tra_cuu_chuyen_gia_theo_noi_tot_nghiep
+# ===== EDUCATION TABLE RULES =====
+- rule: Tra cứu quá trình đào tạo
+  steps:
+  - intent: hoi_qua_trinh_dao_tao
+    entities:
+    - expert_name
+  - action: action_tra_cuu_qua_trinh_dao_tao
 
-  - rule: Tra cứu lịch sử làm việc
-    steps:
-      - intent: Hoi_lich_su_lam_viec
-      - action: action_tra_cuu_lich_su_lam_viec
+- rule: Tra cứu chuyên gia theo trường tốt nghiệp
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_truong_tot_nghiep
+    entities:
+    - graduated_school
+  - action: action_tra_cuu_chuyen_gia_theo_truong_tot_nghiep
 
-  - rule: Tra cứu chuyên gia theo nơi làm việc
-    steps:
-      - intent: tra_cuu_chuyen_gia_theo_noi_lam_viec
-      - action: action_tra_cuu_chuyen_gia_theo_noi_lam_viec
+- rule: Tra cứu chuyên gia theo chuyên ngành
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_chuyen_nganh
+    entities:
+    - major
+  - action: action_tra_cuu_chuyen_gia_theo_chuyen_nganh
 
-  - rule: Tra cứu chuyên gia theo học hàm
-    steps:
-      - intent: tra_cuu_chuyen_gia_theo_hoc_ham
-      - action: action_tra_cuu_chuyen_gia_theo_hoc_ham
+# ===== WORKHISTORY TABLE RULES =====
+- rule: Tra cứu lịch sử làm việc
+  steps:
+  - intent: tra_cuu_lich_su_lam_viec
+    entities:
+    - expert_name
+  - action: action_tra_cuu_lich_su_lam_viec
 
-  - rule: Thống kê công trình khoa học
-    steps:
-      - intent: thong_ke_cong_trinh_khoa_hoc
-      - action: action_thong_ke_cong_trinh_khoa_hoc
+- rule: Tra cứu chuyên gia theo nơi từng làm việc
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
+    entities:
+    - previous_workplace
+  - action: action_tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
 
-  - rule: Liệt kê danh sách công trình khoa học đầu tiên
-    steps:
-      - intent: liet_ke_cong_trinh_khoa_hoc
-      - action: action_liet_ke_cong_trinh_khoa_hoc
+- rule: Tra cứu chuyên gia theo vị trí
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_vi_tri
+    entities:
+    - position
+  - action: action_tra_cuu_chuyen_gia_theo_vi_tri
 
-  - rule: Liệt kê dánh sách công trình khoa học còn lại
-    steps:
-      - intent: liet_ke_cong_trinh_khoa_hoc_con_lai
-      - action: action_liet_ke_cong_trinh_khoa_hoc_con_lai
+# ===== PUBLICATION RULES =====
+- rule: Thống kê công trình khoa học
+  steps:
+  - intent: thong_ke_cong_trinh_khoa_hoc
+    entities:
+    - expert_name
+  - action: action_thong_ke_cong_trinh_khoa_hoc
 
-  - rule: Thống kê dự án
-    steps:
-      - intent: thong_ke_du_an
-      - action: action_thong_ke_du_an
+- rule: Liệt kê công trình khoa học
+  steps:
+  - intent: liet_ke_cong_trinh_khoa_hoc
+    entities:
+    - expert_name
+  - action: action_liet_ke_cong_trinh_khoa_hoc
 
-  - rule: Liệt kê danh sách dự án
-    steps:
-      - intent: liet_ke_du_an
-      - action: action_liet_ke_du_an
+# ===== PROJECT RULES =====
+- rule: Thống kê dự án
+  steps:
+  - intent: thong_ke_du_an
+    entities:
+    - expert_name
+  - action: action_thong_ke_du_an
 
-  - rule: Liệt kê danh sách dự án còn lại
-    steps:
-      - intent: liet_ke_du_an_con_lai
-      - action: action_liet_ke_du_an_con_lai
+- rule: Liệt kê dự án
+  steps:
+  - intent: liet_ke_du_an
+    entities:
+    - expert_name
+  - action: action_liet_ke_du_an
 
-  - rule: Tra cứu ngoại ngữ
-    steps:
-      - intent: tra_cuu_ngoai_ngu
-      - action: action_tra_cuu_ngoai_ngu
+# ===== LANGUAGE RULES =====
+- rule: Tra cứu ngoại ngữ
+  steps:
+  - intent: tra_cuu_ngoai_ngu
+    entities:
+    - expert_name
+  - action: action_tra_cuu_ngoai_ngu
+
+- rule: Tra cứu chuyên gia theo ngoại ngữ
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_ngoai_ngu
+    entities:
+    - language
+  - action: action_tra_cuu_chuyen_gia_theo_ngoai_ngu
+
+# ===== PAGINATION RULES =====
+- rule: Liệt kê công trình khoa học còn lại
+  steps:
+  - intent: liet_ke_cong_trinh_con_lai
+  - action: action_liet_ke_cong_trinh_khoa_hoc_con_lai
+
+- rule: Liệt kê dự án còn lại
+  steps:
+  - intent: liet_ke_du_an_con_lai
+  - action: action_liet_ke_du_an_con_lai
+
+# ===== FALLBACK RULES - Entity missing =====
+- rule: Handle missing expert name
+  steps:
+  - intent: tra_cuu_chuyen_gia
+  - action: utter_hoi_ten_chuyen_gia
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing current workplace
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_don_vi
+  - action: utter_hoi_don_vi
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing degree
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_hoc_vi
+  - action: utter_hoi_hoc_vi
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing academic title
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_hoc_ham
+  - action: utter_hoi_hoc_ham
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing graduated school
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_truong_tot_nghiep
+  - action: utter_hoi_truong_tot_nghiep
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing major
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_chuyen_nganh
+  - action: utter_hoi_chuyen_nganh
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing expert name for education
+  steps:
+  - intent: hoi_qua_trinh_dao_tao
+  - action: utter_hoi_ten_chuyen_gia
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing expert name for work history
+  steps:
+  - intent: tra_cuu_lich_su_lam_viec
+  - action: utter_hoi_ten_chuyen_gia
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing previous workplace
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
+  - action: utter_hoi_noi_lam_viec
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing position
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_vi_tri
+  - action: utter_hoi_vi_tri
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing language
+  steps:
+  - intent: tra_cuu_chuyen_gia_theo_ngoai_ngu
+  - action: utter_hoi_ngon_ngu
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing expert name for publications
+  steps:
+  - intent: thong_ke_cong_trinh_khoa_hoc
+  - action: utter_hoi_ten_chuyen_gia
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing expert name for publication listing
+  steps:
+  - intent: liet_ke_cong_trinh_khoa_hoc
+  - action: utter_hoi_ten_chuyen_gia
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing expert name for projects
+  steps:
+  - intent: thong_ke_du_an
+  - action: utter_hoi_ten_chuyen_gia
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing expert name for project listing
+  steps:
+  - intent: liet_ke_du_an
+  - action: utter_hoi_ten_chuyen_gia
+  conditions:
+  - active_loop: null
+
+- rule: Handle missing expert name for language lookup
+  steps:
+  - intent: tra_cuu_ngoai_ngu
+  - action: utter_hoi_ten_chuyen_gia
+  conditions:
+  - active_loop: null
+
+# ===== GENERAL RULES =====
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Greet user
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Thank user
+  steps:
+  - intent: thanks
+  - action: utter_happy
+
+- rule: Handle out of scope
+  steps:
+  - intent: nlu_fallback
+  - action: utter_default
 

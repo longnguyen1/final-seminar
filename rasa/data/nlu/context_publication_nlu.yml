@@ -1,0 +1,91 @@
+version: "3.1"
+
+nlu:
+# ===== PUBLICATION TABLE INTENTS =====
+- intent: thong_ke_cong_trinh_khoa_hoc
+  examples: |
+    - thống kê công trình khoa học của [Nguyễn Thái Anh](expert_name)
+    - [Trương Quang Phúc](expert_name) có bao nhiêu công trình
+    - số lượng bài báo [Vũ Đình Thành](expert_name)
+    - tổng số publication [Nguyễn Lê Duy Khải](expert_name)
+    - [Đặng Mậu Chiến](expert_name) xuất bản được bao nhiêu
+    - statistics [Nguyễn Mạnh Hùng](expert_name) research
+    - research output [Bùi Trọng Hiếu](expert_name)
+    - publication count [Lê Chí Hiệp](expert_name)
+    - số công trình [Huỳnh Ngọc Văn](expert_name)
+    - research statistics [Nguyễn Trần Thi Văn](expert_name)
+
+- intent: liet_ke_cong_trinh_khoa_hoc
+  examples: |
+    - liệt kê công trình khoa học [Nguyễn Thái Anh](expert_name)
+    - danh sách bài báo của [Trương Quang Phúc](expert_name)
+    - các publication [Vũ Đình Thành](expert_name)
+    - show publications [Nguyễn Lê Duy Khải](expert_name)
+    - research papers [Đặng Mậu Chiến](expert_name)
+    - list papers [Nguyễn Mạnh Hùng](expert_name)
+    - bài viết khoa học [Bùi Trọng Hiếu](expert_name)
+    - scientific works [Lê Chí Hiệp](expert_name)
+    - công trình nghiên cứu [Huỳnh Ngọc Văn](expert_name)
+    - academic publications [Nguyễn Trần Thi Văn](expert_name)
+
+# ===== PAGINATION INTENT - PUBLICATION =====
+- intent: liet_ke_cong_trinh_con_lai
+  examples: |
+    # EXPLICIT CONTINUATION WITH CONTEXT
+    - tiếp tục liệt kê công trình của [Nguyễn Thái Anh](expert_name)
+    - xem thêm bài báo [Trương Quang Phúc](expert_name)
+    - còn công trình nào khác của [Vũ Đình Thành](expert_name) không
+    - show more publications [Nguyễn Lê Duy Khải](expert_name)
+    - continue listing [Đặng Mậu Chiến](expert_name) papers
+    - next publications [Nguyễn Mạnh Hùng](expert_name)
+    - tiếp theo của [Bùi Trọng Hiếu](expert_name)
+    - more papers from [Lê Chí Hiệp](expert_name)
+    - các công trình còn lại [Huỳnh Ngọc Văn](expert_name)
+    - other publications [Nguyễn Trần Thi Văn](expert_name)
+    
+    # IMPLICIT CONTINUATION (context-aware)
+    - tiếp tục
+    - xem thêm
+    - còn nữa không
+    - liệt kê tiếp
+    - hiển thị thêm công trình
+    - show more
+    - more publications
+    - continue
+    - next
+    - more papers
+    - additional publications
+    - other works
+    - remaining publications
+
+# ===== LOOKUPS =====
+- lookup: publication_type
+  examples: |
+    - Journal
+    - Conference
+    - Book
+    - Chapter
+    - Patent
+    - Article
+    - Proceeding
+    - Thesis
+    - Paper
+    - Research
+    - Report
+    - Manual
+    - Review
+
+- lookup: year
+  examples: |
+    - 2023
+    - 2022
+    - 2021
+    - 2020
+    - 2019
+    - 2018
+    - 2017
+    - 2016
+    - 2015
+    - 2014
+    - 2013
+    - 2012
