@@ -14,6 +14,8 @@ nlu:
     - employment history [Lê Chí Hiệp](expert_name)
     - professional experience [Huỳnh Ngọc Văn](expert_name)
     - công việc trước đây của [Nguyễn Trần Thi Văn](expert_name)
+    - [Phạm Hoàng Ái Lệ](expert_name) từng làm việc ở những đâu?
+    - [Nguyễn Tử Đức](expert_name) có lịch sử làm việc như thế nào?
 
 - intent: tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
   examples: |
@@ -45,11 +47,14 @@ nlu:
     - danh sách [Professor](position)
     - chuyên gia làm [Manager](position)
     - những người làm [Lecturer](position)
-    - [Phó Giám đốc](position) nào
-    - [Team Lead](position) có kinh nghiệm
+    - [Kỹ sư thiết kế](position) gồm những ai
+    - ai từng là hiệu [Hiệu trưởng](position)
+    -
     - ai đang làm [Developer](position)
     - chuyên gia vị trí [Researcher](position)
-    - [CTO](position) của công ty nào
+    - Ai từng là [kỹ sư](position)
+    - ai làm [giảng viên](position)
+    - ai từng làm [trợ giảng](position)
 
 # ===== LOOKUPS =====
 - lookup: previous_workplace

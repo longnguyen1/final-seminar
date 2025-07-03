@@ -41,12 +41,15 @@ intents:
 
 entities:
   # ===== ENTITIES FROM RULES/STORIES =====
+  - name                # Từ rules/stories (thay vì expert_name)
   - expert_name           # Từ rules/stories (thay vì name)
   - current_workplace     # Từ rules/stories (thay vì organization)
   - graduated_school      # Từ rules/stories (thay vì school)
   - previous_workplace    # Từ rules/stories (thay vì workplace)
   - degree               # Từ rules/stories (giữ nguyên)
   - academic_title       # Từ rules/stories (thay vì academicTitle)
+  - expert_id            # Từ rules/stories (thay vì id)
+  - academicTitle         # Từ rules/stories (giữ nguyên) 
   - major                # Từ rules/stories (giữ nguyên)
   - position             # Từ rules/stories (giữ nguyên)
   - language             # Từ rules/stories (giữ nguyên)
@@ -59,6 +62,13 @@ entities:
 
 slots:
   # ===== CORE SLOTS - MATCH ENTITIES =====
+  name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: expert_name
+
   expert_name:
     type: text
     influence_conversation: true
@@ -253,15 +263,6 @@ responses:
   
   utter_hoi_vi_tri:
     - text: "Bạn muốn tìm chuyên gia có vị trí gì?"
-  
-  utter_hoi_ngon_ngu:
-    - text: "Bạn muốn tìm chuyên gia biết ngôn ngữ nào?"
-  
-  utter_hoi_loai_cong_trinh:
-    - text: "Bạn muốn tìm công trình loại gì?"
-  
-  utter_hoi_trang_thai_du_an:
-    - text: "Bạn muốn tìm dự án có trạng thái gì?"
   
   # ===== PAGINATION RESPONSES =====
   utter_co_them_cong_trinh:

@@ -1,3 +1,4 @@
+// api/rasa/experts/by-academic-title/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { ExpertQueries } from '@/app/api/experts/lib/queries';
@@ -12,7 +13,7 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const degree = searchParams.get('degree') || '';
-    const limit = parseInt(searchParams.get('limit') || '5');
+    const limit = parseInt(searchParams.get('limit') || '15');
     const offset = parseInt(searchParams.get('offset') || '0');
 
     console.log(`🔍 RASA Degree Search: degree="${degree}", limit=${limit}, offset=${offset}`);
@@ -62,7 +63,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const entityValue = body.entity_value || '';
-    const limit = body.limit || 5;
+    const limit = body.limit || 15;
     const offset = body.offset || 0;
     const context = body.context || 'degree_search';
 

@@ -1,3 +1,4 @@
+//api/rasa/experts/by-organization/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { ExpertQueries } from '@/app/api/experts/lib/queries';
@@ -12,7 +13,7 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const organization = searchParams.get('organization') || '';
-    const limit = parseInt(searchParams.get('limit') || '5');
+    const limit = parseInt(searchParams.get('limit') || '15');
     const offset = parseInt(searchParams.get('offset') || '0');
 
     console.log(`🔍 RASA Organization Search: organization="${organization}", limit=${limit}, offset=${offset}`);
@@ -29,6 +30,8 @@ export async function GET(request: NextRequest) {
     
     const totalCount = experts.length;
     const paginatedExperts = experts.slice(offset, offset + limit);
+    console.log(`[DEBUG] API received organization: "${organization}"`);
+    console.log(`[DEBUG] Total experts found: ${totalCount}`);
 
     console.log(`✅ Found ${totalCount} experts at "${organization}", returning ${paginatedExperts.length}`);
 
@@ -62,7 +65,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const entityValue = body.entity_value || '';
-    const limit = body.limit || 5;
+    const limit = body.limit || 15;
     const offset = body.offset || 0;
     const context = body.context || 'organization_search';
 
@@ -77,7 +80,9 @@ export async function POST(request: NextRequest) {
     
     const totalCount = experts.length;
     const paginatedExperts = experts.slice(offset, offset + limit);
-
+    
+    console.log(`[DEBUG] API received entity_value: "${entityValue}"`);
+    console.log(`[DEBUG] Entities from tracker: ${entityValue}`);
     console.log(`✅ RASA Found ${totalCount} experts at "${entityValue}"`);
 
     return createRasaResponse(

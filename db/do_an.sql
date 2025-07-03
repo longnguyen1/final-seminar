@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2025 at 11:09 AM
+-- Generation Time: Jul 02, 2025 at 05:44 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,54 @@ SET time_zone = "+00:00";
 --
 -- Database: `do_an`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account`
+--
+
+CREATE TABLE `account` (
+  `id` varchar(191) NOT NULL,
+  `userId` varchar(191) NOT NULL,
+  `providerType` varchar(191) NOT NULL,
+  `providerId` varchar(191) NOT NULL,
+  `providerAccountId` varchar(191) NOT NULL,
+  `refresh_token` varchar(191) DEFAULT NULL,
+  `access_token` varchar(191) DEFAULT NULL,
+  `expires_at` int(11) DEFAULT NULL,
+  `token_type` varchar(191) DEFAULT NULL,
+  `scope` varchar(191) DEFAULT NULL,
+  `id_token` varchar(191) DEFAULT NULL,
+  `session_state` varchar(191) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auditlog`
+--
+
+CREATE TABLE `auditlog` (
+  `id` varchar(191) NOT NULL,
+  `userId` varchar(191) NOT NULL,
+  `action` varchar(191) NOT NULL,
+  `entity` varchar(191) NOT NULL,
+  `entityId` int(11) NOT NULL,
+  `detail` varchar(191) DEFAULT NULL,
+  `createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `auditlog`
+--
+
+INSERT INTO `auditlog` (`id`, `userId`, `action`, `entity`, `entityId`, `detail`, `createdAt`) VALUES
+('cmceaxay80000hnrslaya8uju', 'nguyenthanhlong1@gmail.com', 'CREATE', 'Expert', 65, 'Created Đặng Mậu Chiến', '2025-06-27 04:17:54.609'),
+('cmcej0jlu0001hnrsyfzi6wa5', 'nguyenthanhlong1@gmail.com', 'CREATE', 'Expert', 66, 'Created Lê Phúc Nguyên', '2025-06-27 08:04:22.722'),
+('cmcejtqyk0002hnrspyl5oijq', 'nguyenthanhlong1@gmail.com', 'CREATE', 'Expert', 67, 'Created Phan Nghĩa Minh', '2025-06-27 08:27:05.277'),
+('cmcek3w3q0003hnrspukw38lt', 'nguyenthanhlong1@gmail.com', 'CREATE', 'Expert', 68, 'Created Lê Anh Kiên', '2025-06-27 08:34:58.502'),
+('cmcekyrg90004hnrs2nnxqujo', 'nguyenthanhlong1@gmail.com', 'CREATE', 'Expert', 69, 'Created Phạm Văn Tấn', '2025-06-27 08:58:58.809');
 
 -- --------------------------------------------------------
 
@@ -42,45 +90,45 @@ CREATE TABLE `education` (
 
 INSERT INTO `education` (`id`, `year`, `school`, `major`, `expertId`, `deleted`) VALUES
 (1, 2002, 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM', 'Công nghệ thông tin', 4, 0),
-(2, 2003, 'ĐH KHXH&NV - ĐHQG TPHCM', 'Anh văn', 4, 0),
-(3, 2015, 'ĐH Công nghệ thông tin - ĐHQG TPHCM', 'Khoa học Máy tính', 4, 0),
-(4, 2011, 'ĐH SPKT TPHCM', 'Điện tử - Viễn thông', 5, 0),
-(5, 2014, 'ĐH SPKT TPHCM', 'Kỹ thuật Điện tử', 5, 0),
-(6, 2006, 'ĐH Bách khoa TPHCM', 'Kỹ thuật môi trường', 6, 0),
-(7, 2011, 'ĐH Bách khoa TPHCM', 'Quản lý môi trường', 6, 0),
-(8, 2016, 'ĐH Nguyên Trí, Đài Loan', 'Kỹ thuật môi trường', 6, 0),
+(2, 2003, 'Đại học KHXH&NV - ĐHQG TPHCM', 'Anh văn', 4, 0),
+(3, 2015, 'Đại học Công nghệ thông tin - ĐHQG TPHCM', 'Khoa học Máy tính', 4, 0),
+(4, 2011, 'Đại học Sư phạm kĩ thuật TPHCM', 'Điện tử - Viễn thông', 5, 0),
+(5, 2014, 'Đại học Sư phạm kĩ thuật TPHCM', 'Kỹ thuật Điện tử', 5, 0),
+(6, 2006, 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật môi trường', 6, 0),
+(7, 2011, 'Đại học Bách khoa - ĐHQG TPHCM', 'Quản lý môi trường', 6, 0),
+(8, 2016, 'Đại học Nguyên Trí, Đài Loan', 'Kỹ thuật môi trường', 6, 0),
 (9, 2003, 'Đại học Sư phạm kỹ thuật TPHCM', 'Điện khí hóa và cung cấp điện', 8, 0),
 (10, 2011, 'Đại học Giao thông vận tải TPHCM', 'Tự động hóa', 8, 0),
 (11, 1987, 'Uccraina', 'Điện - Điện tử', 9, 0),
 (12, 1999, 'Đại học Giao thông vận tải TPHCM', 'Sư phạm kỹ thuật', 9, 0),
 (13, 2007, 'Đại học MEI, Nga', 'Thiết bị điện', 10, 0),
-(14, 2013, 'Đại học Bách khoa TPHCM', 'Tự động hóa', 10, 0),
-(15, 1998, 'Đại học Khoa học tự nhiên', 'Hóa lý', 11, 0),
+(14, 2013, 'Đại học Bách khoa - ĐHQG TPHCM', 'Tự động hóa', 10, 0),
+(15, 1998, 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM', 'Hóa lý', 11, 0),
 (16, 2003, 'Đại học quốc gia Kyungpook, Hàn quốc', 'Hóa công nghiệp', 11, 0),
 (17, 2006, 'Đại học quốc gia Kyungpook, Hàn quốc', 'Hóa ứng dụng', 11, 0),
 (18, 1996, 'Đại học Khoa học tự nhiên - ĐHQG TPHCM', 'Hóa phân tích', 12, 0),
 (19, 2000, 'Đại học Bách khoa Saint-Petersburg, CHLB Nga', 'Hóa Phân tích', 12, 0),
 (20, 2005, 'Đại học Y Dược Toyama, Nhật Bản', 'Hợp chất tự nhiên - Hóa Dược', 12, 0),
-(21, 1989, 'Đại học Bách khoa TPHCM', 'Cơ khí ô tô', 13, 0),
+(21, 1989, 'Đại học Bách khoa - ĐHQG TPHCM', 'Cơ khí ô tô', 13, 0),
 (22, 2003, 'Ecole Centrale de Lyon, France', 'Nhiệt học và Năng lượng học', 13, 0),
 (23, 2009, 'Sungkyunkwan University, South Korea', 'Kỹ thuật Cơ khí động lực', 13, 0),
-(24, 1982, 'Đại học Bách khoa TPHCM', 'Ðiện tử', 14, 0),
+(24, 1982, 'Đại học Bách khoa - ĐHQG TPHCM', 'Ðiện tử', 14, 0),
 (25, 1990, 'ENSERG/INPG, France', 'Điện tử', 14, 0),
 (26, 1995, 'Institut National Polytechnique (INP) de Grenoble, France', 'Kỹ thuật điện tử', 14, 0),
-(27, 1998, 'Đại học Bách khoa TPHCM', 'Công nghệ thực phẩm', 15, 0),
-(28, 1977, 'Đại học Bách khoa TPHCM', 'Kỹ thuật xây dựng', 16, 0),
+(27, 1998, 'Đại học Bách khoa - ĐHQG TPHCM', 'Công nghệ thực phẩm', 15, 0),
+(28, 1977, 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật xây dựng', 16, 0),
 (29, 1992, 'Đại học Liège, Belgium', 'Khoa học ứng dụng', 16, 0),
 (30, 1996, 'Đại học Liège, Belgium', 'Khoa học ứng dụng', 16, 0),
-(31, 1991, 'Đại học Bách khoa TPHCM', 'Kỹ thuật điện tử', 17, 0),
+(31, 1991, 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật điện tử', 17, 0),
 (32, 1978, 'Đại học trắc địa không ảnh và bản đồ Moxcova (MIIGAiK), Russia', 'Trắc địa công trình', 18, 0),
 (33, 1987, 'Đại học Trắc địa Không ảnh Bản đồ Matxcơva (MIIGAiK), Russia', 'Trắc địa cao cấp', 18, 0),
 (34, 1978, 'Đại học Bách khoa Hà Nội', 'Công nghệ Hóa học', 19, 0),
 (35, 1994, 'Đại học Bách khoa Hà Nội', 'Công nghệ Hóa học', 19, 0),
-(36, 1976, 'Đại học Bách khoa TPHCM', 'Kỹ thuật điện tử', 21, 0),
+(36, 1976, 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật điện tử', 21, 0),
 (37, 1989, 'Học viện Công nghệ Châu Á (AIT), Thailand', 'Khoa học Máy tính', 21, 0),
 (38, 1998, 'Học viện Công nghệ Á Châu, Thailand', 'Khoa học Máy tính', 21, 0),
-(39, 1987, 'Đại học Bách khoa TPHCM', 'Kỹ thuật điện tử tự động', 22, 0),
-(40, 1994, 'Đại học Bách khoa TPHCM', 'Kỹ thuật Điện tử', 22, 0),
+(39, 1987, 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật điện tử tự động', 22, 0),
+(40, 1994, 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật Điện tử', 22, 0),
 (41, 2008, 'University of Ulsan, Korea, South', 'Kỹ thuật điều khiển và tự động hóa', 22, 0),
 (42, 1997, 'Đại học Kiev, Ukraine', 'Hệ thống điện', 23, 0),
 (43, 2003, 'Đại học Khoa học tự nhiên – ĐHQG TPHCM', 'Công nghệ thông tin', 24, 0),
@@ -94,19 +142,19 @@ INSERT INTO `education` (`id`, `year`, `school`, `major`, `expertId`, `deleted`)
 (51, 1984, 'Đại học Nông nghiệp 4, TPHCM', 'Cơ khí', 27, 0),
 (52, 2003, 'Đại học Nông lâm TPHCM', 'Cơ khí', 27, 0),
 (53, 2011, 'Đại học Nông lâm TPHCM', 'Cơ nhiệt', 27, 0),
-(54, 1998, 'Đại học Bách khoa TPHCM', 'Máy tính', 28, 0),
-(55, 2003, 'Đại học Bách khoa TPHCM', 'Máy tính', 28, 0),
+(54, 1998, 'Đại học Bách khoa - ĐHQG TPHCM', 'Máy tính', 28, 0),
+(55, 2003, 'Đại học Bách khoa - ĐHQG TPHCM', 'Máy tính', 28, 0),
 (56, 2009, 'Đại học Quốc gia Chonnam, Hàn Quốc', 'Máy tính', 28, 0),
 (57, 2008, 'Đại học Tổng hợp Quốc gia Moscow mang tên M.V. Lomonoxop, Liên bang Nga', 'Toán ứng dụng và lập trình hệ thống', 29, 0),
 (58, 2012, 'Đại học Sư phạm Quốc gia Moscow, Liên bang Nga', 'Cơ sở lý thuyết thông tin', 29, 0),
-(59, 1986, 'Đại học Bách khoa TPHCM', 'Điện tự động', 30, 0),
+(59, 1986, 'Đại học Bách khoa - ĐHQG TPHCM', 'Điện tự động', 30, 0),
 (60, 2002, 'Viện Công nghệ châu Á ( Asian Institute of Technology – AIT), Thái Lan', 'Khoa học Máy tính', 30, 0),
-(61, 1998, 'Đại học Bách khoa TPHCM', 'Khoa học máy tính', 31, 0),
-(62, 2009, 'Đại học Bách khoa TPHCM', 'Hệ thống thông tin quản lý', 31, 0),
+(61, 1998, 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học máy tính', 31, 0),
+(62, 2009, 'Đại học Bách khoa - ĐHQG TPHCM', 'Hệ thống thông tin quản lý', 31, 0),
 (63, 2014, 'Đại học Khoa học công nghệ Điện tử Trung quốc', 'Quản lý thông tin và thương mại điện tử', 31, 0),
-(64, 2007, 'Đại học Khoa học tự nhiên TPHCM', 'Công nghệ thông tin', 32, 0),
-(65, 2007, 'Đại học Công nghệ thông tin', 'Khoa học Máy tính', 32, 0),
-(66, 1998, 'Đại học Bách khoa TPHCM', 'Mạng và Hệ thống', 33, 0),
+(64, 2007, 'Đại học Khoa học tự nhiên - ĐHQG TPHCM', 'Công nghệ thông tin', 32, 0),
+(65, 2007, 'Đại học Công nghệ thông tin - ĐHQG TPHCM', 'Khoa học Máy tính', 32, 0),
+(66, 1998, 'Đại học Bách khoa - ĐHQG TPHCM', 'Mạng và Hệ thống', 33, 0),
 (67, 2002, 'Học viện Công nghệ Châu Á (AIT), Thailand', 'Viễn thông (Telecommunications)', 33, 0),
 (68, 2007, 'Johannes Kepler University Linz, Áo', 'Mạng không dây (Wireless Networks)', 33, 0),
 (69, 1998, 'Đại học Bách khoa Saint-Petersburg, CHLB Nga', 'Công nghệ thông tin', 34, 0),
@@ -116,23 +164,23 @@ INSERT INTO `education` (`id`, `year`, `school`, `major`, `expertId`, `deleted`)
 (73, 1999, 'Viện nghiên cứu kỹ thuật cơ khí, Viện Khoa học Liên Bang Nga, Cộng Hoà Liên Bang Nga', 'Điều khiển tự động', 35, 0),
 (74, 2010, 'Đại học Sư phạm kỹ thuật TPHCM', 'Kỹ thuật Điện - Điện tử', 36, 0),
 (75, 2013, 'Đại học Sư phạm kỹ thuật TPHCM', 'Kỹ thuật Điện - Điện tử', 36, 0),
-(76, 2000, 'Đại học Bách khoa TPHCM', 'Điện tử viễn thông', 37, 0),
+(76, 2000, 'Đại học Bách khoa - ĐHQG TPHCM', 'Điện tử viễn thông', 37, 0),
 (77, 2006, 'Đại học Giao thông vận tải TPHCM', 'Tự động hóa', 37, 0),
 (78, 2001, 'Đại học Hàng hải Việt Nam', 'Điện tàu thủy', 38, 0),
 (79, 2006, 'Đại học Hàng hải Việt Nam', 'Tự động hóa', 38, 0),
 (80, 2012, 'Đại học Khoa học kỹ thuật HuaZhong', 'Lý thuyết và kỹ thuật điều khiển', 38, 0),
-(81, 2004, 'Đại học Bách khoa TPHCM', 'Kỹ thuật điện', 39, 0),
-(82, 2007, 'Đại học Bách khoa TPHCM', 'Kỹ thuật điện', 39, 0),
+(81, 2004, 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật điện', 39, 0),
+(82, 2007, 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật điện', 39, 0),
 (83, 2013, 'Ðại học Ulsan, Korea, South', 'Kỹ thuật Điện', 39, 0),
 (84, 1997, 'Đại học Hàng hải Việt Nam', 'Kỹ thuật Điện tàu thủy', 40, 0),
 (85, 2004, 'Đại học Hàng hải Việt Nam', 'Tự động điện', 40, 0),
 (86, 2010, 'Đại học Kỹ thuật Điện quốc gia, TP. Xanh Petecbua, LB Nga', 'Điều khiển tự động', 40, 0),
-(87, 2003, 'Đại học Khoa học tự nhiên TPHCM', 'Toán tin học', 41, 0),
-(88, 2007, 'Đại học khoa học Tự nhiên – ĐHQG TPHCM', 'Khoa học Máy tính', 41, 0),
+(87, 2003, 'Đại học Khoa học tự nhiên - ĐHQG TPHCM', 'Toán tin học', 41, 0),
+(88, 2007, 'Đại học Khoa học tự nhiên – ĐHQG TPHCM', 'Khoa học Máy tính', 41, 0),
 (89, 2025, 'Đại học Công nghệ thông tin', 'Khoa học Máy tính', 41, 0),
 (90, 2002, 'Đại học Kasetsart', 'Quản lý lưu vực', 42, 0),
 (91, 2005, 'Đại học Kasetsart', 'Quản lý lưu vực và môi trường', 42, 0),
-(92, 2002, 'Đại học Bách khoa TPHCM', 'Hóa - Thực phẩm', 43, 0),
+(92, 2002, 'Đại học Bách khoa - ĐHQG TPHCM', 'Hóa - Thực phẩm', 43, 0),
 (93, 2006, 'Đại học Ghent, Bỉ', 'Công nghệ Thực phẩm', 43, 0),
 (94, 2012, 'Đại học Ghent, Vương Quốc Bỉ', 'Công nghệ sinh học ứng dụng', 43, 0),
 (95, 1976, 'Đại học Nông nghiệp Hà Nội', 'Cơ khí', 44, 0),
@@ -143,25 +191,25 @@ INSERT INTO `education` (`id`, `year`, `school`, `major`, `expertId`, `deleted`)
 (100, 1987, 'Uccraina', 'Điện - Điện tử', 46, 0),
 (101, 1999, 'Đại học Giao thông vận tải TPHCM', 'Sư phạm kỹ thuật', 46, 0),
 (102, 2007, 'Đại học MEI, Nga', 'Thiết bị điện', 47, 0),
-(103, 2013, 'Đại học Bách khoa TPHCM', 'Tự động hóa', 47, 0),
+(103, 2013, 'Đại học Bách khoa - ĐHQG TPHCM', 'Tự động hóa', 47, 0),
 (104, 2001, 'Đại học Sư phạm kỹ thuật TPHCM', 'Kỹ thuật điện tử', 48, 0),
 (105, 2011, 'Đại học Sư phạm kỹ thuật TPHCM', 'Kỹ thuật Điện tử', 48, 0),
-(106, 1997, 'Đại học Khoa học tự nhiên TPHCM', 'Hóa học', 49, 0),
+(106, 1997, 'Đại học Khoa học tự nhiên - ĐHQG TPHCM', 'Hóa học', 49, 0),
 (107, 2001, 'Đại học khoa học Tự nhiên – ĐHQG TPHCM', 'Hóa Hữu cơ', 49, 0),
-(108, 2013, 'Đại học Khoa học tự nhiên Tp.HCM', 'Hóa hữu cơ', 49, 0),
-(109, 2006, 'Đại học Bách khoa TPHCM', 'Kỹ thuật môi trường', 3, 0),
-(110, 2011, 'Đại học Bách khoa TPHCM', 'Quản lý môi trường', 3, 0),
+(108, 2013, 'Đại học Khoa học tự nhiên - ĐHQG TPHCM', 'Hóa hữu cơ', 49, 0),
+(109, 2006, 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật môi trường', 3, 0),
+(110, 2011, 'Đại học Bách khoa - ĐHQG TPHCM', 'Quản lý môi trường', 3, 0),
 (111, 2016, 'Đại học Nguyên Trí, Đài Loan', 'Kỹ thuật môi trường', 3, 0),
-(112, 2000, 'Đại học Bách khoa TPHCM', 'Vật liệu polymer', 50, 0),
-(113, 2003, 'Đại học Bách khoa TPHCM', 'Vật liệu polymer', 50, 0),
+(112, 2000, 'Đại học Bách khoa - ĐHQG TPHCM', 'Vật liệu polymer', 50, 0),
+(113, 2003, 'Đại học Bách khoa - ĐHQG TPHCM', 'Vật liệu polymer', 50, 0),
 (114, 2009, 'Đại học Quốc gia Changwon, Hàn Quốc', 'Nano composites', 50, 0),
-(115, 2005, 'Đại học Bách khoa TPHCM', 'Điện tử - Viễn thông', 51, 0),
+(115, 2005, 'Đại học Bách khoa - ĐHQG TPHCM', 'Điện tử - Viễn thông', 51, 0),
 (116, 2007, 'Đại học Yeungnam, Hàn Quốc', 'Kỹ thuật Điện tử', 51, 0),
 (117, 2014, 'Đại học Kyung Hee, Hàn Quốc', 'Kỹ thuật máy tính', 51, 0),
-(118, 1979, 'Đại học Bách khoa TPHCM', 'Thiết bị điện', 52, 0),
+(118, 1979, 'Đại học Bách khoa - ĐHQG TPHCM', 'Thiết bị điện', 52, 0),
 (119, 1991, 'Đại học Công nghệ lạnh Leningad, Nga, Russia', 'Kỹ thuật nhiệt', 52, 0),
-(120, 1981, 'Đại học Bách khoa TPHCM', 'Ðiện tử', 53, 0),
-(121, 1993, 'Đại học Bách khoa TPHCM', 'Điện tử', 53, 0),
+(120, 1981, 'Đại học Bách khoa - ĐHQG TPHCM', 'Ðiện tử', 53, 0),
+(121, 1993, 'Đại học Bách khoa - ĐHQG TPHCM', 'Điện tử', 53, 0),
 (122, 1998, 'University of Tamania, Australia', 'Kỹ thuật viễn thông', 53, 0),
 (123, 1976, 'Praha, Czech Republic', 'Kỹ thuật máy tính', 54, 0),
 (124, 1985, 'Praha, Czech Republic', 'Trí tuệ nhân tạo', 54, 0),
@@ -170,21 +218,21 @@ INSERT INTO `education` (`id`, `year`, `school`, `major`, `expertId`, `deleted`)
 (127, 1987, 'Univerzita Komenskeho, Bratislava, Slovakia', 'Hóa hạt nhân', 56, 0),
 (128, 1992, 'Univerzita Komenskeho, Bratislava, Slovakia', 'Hóa Hạt nhân', 56, 0),
 (129, 2000, 'Đại học Saarland, Germany', 'Khoa học Tự nhiên', 56, 0),
-(130, 1976, 'Đại học Bách khoa TPHCM', 'Công nghệ hóa', 57, 0),
-(131, 1996, 'Đại học Bách khoa', 'Cao phân tử', 57, 0),
-(132, 2009, 'Đại học Bách khoa TPHCM', 'Khoa học máy tính', 58, 0),
-(133, 2011, 'Đại học Bách khoa TPHCM', 'Khoa học Máy tính', 58, 0),
+(130, 1976, 'Đại học Bách khoa - ĐHQG TPHCM', 'Công nghệ hóa', 57, 0),
+(131, 1996, 'Đại học Bách khoa - ĐHQG TPHCM', 'Cao phân tử', 57, 0),
+(132, 2009, 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học máy tính', 58, 0),
+(133, 2011, 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học Máy tính', 58, 0),
 (134, 1988, 'University of West Bohemia, Czech Republic', 'Kỹ thuật điện, điện tử', 59, 0),
 (135, 1991, 'University of Westbohemia, Czech Republic', 'Electrical drives and traction', 59, 0),
-(136, 1991, 'Đại học Bách khoa TPHCM', 'Kỹ thuật cơ khí', 60, 0),
-(137, 1997, 'Đại học Bách khoa TPHCM', 'Kỹ thuật máy tính', 60, 0),
-(138, 1998, 'Đại học Bách khoa TPHCM', 'Kỹ thuật Cơ khí', 60, 0),
+(136, 1991, 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật cơ khí', 60, 0),
+(137, 1997, 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật máy tính', 60, 0),
+(138, 1998, 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật Cơ khí', 60, 0),
 (139, 2005, 'Nanyang Technological University, Singapore', 'Kỹ thuật Cơ khí', 60, 0),
-(140, 1998, 'Đại học Bách khoa TPHCM', 'Công nghệ thông tin', 61, 0),
-(141, 1998, 'Đại học Bách khoa TPHCM', 'Cơ khí chế tạo máy', 62, 0),
+(140, 1998, 'Đại học Bách khoa - ĐHQG TPHCM', 'Công nghệ thông tin', 61, 0),
+(141, 1998, 'Đại học Bách khoa - ĐHQG TPHCM', 'Cơ khí chế tạo máy', 62, 0),
 (142, 2002, 'Đại học Nông lâm TPHCM', 'Thiết kế máy', 62, 0),
 (143, 2004, 'Đại học Quốc gia Pukyong, Busan, Korea, South', 'Cơ điện tử', 62, 0),
-(144, 1988, 'Đại học Bách khoa TPHCM', 'Kỹ thuật cơ khí', 63, 0),
+(144, 1988, 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật cơ khí', 63, 0),
 (145, 1994, 'Đại học Công Nghệ Nagaoka, Nhật Bản', 'Kỹ thuật vật liệu', 63, 0),
 (146, 1983, 'Đại học Bách khoa Belorussia (BPI), TP. Minsk, Belorussia (LX cũ)', 'Thiết bị và Công nghệ sản xuất đúc', 64, 0),
 (147, 1991, 'Đại học Quốc gia Chung Hsing (Đài Loan)', 'Quản trị Xí nghiệp', 64, 0),
@@ -194,14 +242,14 @@ INSERT INTO `education` (`id`, `year`, `school`, `major`, `expertId`, `deleted`)
 (151, 1983, 'Đại học Bách khoa Belorussia (BPI), TP. Minsk, Belorussia (LX cũ)', 'Thiết bị và Công nghệ sản xuất đúc', 65, 0),
 (152, 1991, 'Đại học Quốc gia Chung Hsing (Đài Loan)', 'Quản trị Xí nghiệp', 65, 0),
 (153, 1994, 'Viện Quốc gia Bách khoa Grenoble (INPG), Cộng hòa Pháp', 'Khoa học và công nghệ vật liệu', 65, 0),
-(154, 1996, 'Đại học Bách khoa TPHCM', 'Khoa học và Công nghệ Vật liệu', 65, 0),
+(154, 1996, 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học và Công nghệ Vật liệu', 65, 0),
 (155, 2007, 'Viện Quốc gia Bách khoa Grenoble (INPG), Cộng hòa Pháp', 'Vật liệu và Công nghệ các Quy trình', 65, 0),
-(156, 2004, 'Đại học Khoa học tự nhiên', 'Hóa vô cơ', 66, 0),
+(156, 2004, 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM', 'Hóa vô cơ', 66, 0),
 (157, 2005, 'Đại học Toulouse', 'Khoa học vật liệu', 66, 0),
 (158, 2009, 'Đại học Poitiers', 'Hóa ứng dụng', 66, 0),
 (159, 2011, 'Đại học Tôn Đức Thắng', 'Vật liệu vô cơ', 67, 0),
-(160, 2016, 'Đại học Bách khoa TPHCM', 'Vật liệu vô cơ', 67, 0),
-(161, 1998, 'Đại học Bách khoa TPHCM', 'Công nghệ Hóa học', 68, 0),
+(160, 2016, 'Đại học Bách khoa - ĐHQG TPHCM', 'Vật liệu vô cơ', 67, 0),
+(161, 1998, 'Đại học Bách khoa - ĐHQG TPHCM', 'Công nghệ Hóa học', 68, 0),
 (162, 2002, 'Viện Môi Trường và Tài Nguyên', 'Kỹ thuật Môi trường', 68, 0),
 (163, 2011, 'Đào tạo theo chương trình TS phối hợp giữa ĐH Sheffield (Vương Quốc Anh) và ĐHQG TPHCM', 'Công nghệ Hóa học', 68, 0),
 (164, 1984, 'Đại học Nông lâm TPHCM', 'Cơ khí nông nghiệp', 69, 0),
@@ -246,8 +294,8 @@ INSERT INTO `expert` (`id`, `gender`, `organization`, `academicTitle`, `birthYea
 (8, 'Nam', 'Đại học Sư phạm kỹ thuật TPHCM', '', 1980, '', NULL, 'Nguyễn Tử Đức', 'Thạc sĩ', NULL, '', 0, 'ducnt@hcmute.edu.vn', '0908550450'),
 (9, 'Nam', 'Đại học Sư phạm kỹ thuật TPHCM', '', 1958, '', NULL, 'Huỳnh Ngọc Văn', 'Thạc sĩ', NULL, '', 0, 'vanhn@hcmute.edu.vn', '0903776424'),
 (10, 'Nam', 'Đại học Sư phạm kỹ thuật TPHCM', '', 1983, '', NULL, 'Nguyễn Phong Lưu', 'Thạc sĩ', NULL, '', 0, 'luunp@hcmte.edu.vn', '0931428058'),
-(11, 'Nam', 'Đại học Khoa học Tự nhiên - ĐH Quốc gia TPHCM', '', 1975, '', NULL, 'Cổ Thanh Thiện', 'Tiến sĩ', NULL, '', 0, 'ctthien@hcmus.edu.vn', '0977022375'),
-(12, 'Nữ', 'Đại học Khoa học Tự nhiên - ĐH Quốc gia TPHCM', '', 1974, '', NULL, 'Nguyễn Thị Thanh Mai', 'Tiến sĩ', NULL, '', 0, 'nttmai@hcmus.edu.vn', '0907426331'),
+(11, 'Nam', 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM', '', 1975, '', NULL, 'Cổ Thanh Thiện', 'Tiến sĩ', NULL, '', 0, 'ctthien@hcmus.edu.vn', '0977022375'),
+(12, 'Nữ', 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM', '', 1974, '', NULL, 'Nguyễn Thị Thanh Mai', 'Tiến sĩ', NULL, '', 0, 'nttmai@hcmus.edu.vn', '0907426331'),
 (13, 'Nam', 'Đại học Bách khoa - ĐHQG TPHCM', '', 1965, '', NULL, 'Nguyễn Lê Duy Khải', 'Tiến sĩ', NULL, '', 0, 'khainguyen@hcmut.edu.vn', '0168.960.8039'),
 (14, 'Nam', 'Đại học Bách khoa - ĐHQG TPHCM', '', 1959, '', NULL, 'Vũ Đình Thành', '', NULL, '', 0, 'vdthanh@hcmut.edu.vn', '0903365498'),
 (15, 'Nữ', 'Đại học Bách khoa - ĐHQG TPHCM', 'Giáo sư', 1971, '', NULL, 'Nguyễn Thị Nguyên', 'Kĩ sư', NULL, '', 0, 'ntnguyen@hcmut.edu.vn', '0903163869'),
@@ -259,7 +307,7 @@ INSERT INTO `expert` (`id`, `gender`, `organization`, `academicTitle`, `birthYea
 (21, 'Nam', 'Đại học Bách khoa - ĐHQG TPHCM', '', 1953, '', NULL, 'Dương Tuấn Anh', 'Tiến sĩ', NULL, '', 0, 'dtanh@hcmut.edu.vn', '0938996090'),
 (22, 'Nam', 'Đại học Bách khoa - ĐHQG TPHCM', '', 1960, '', NULL, 'Hồ Phạm Huy Ánh', 'Tiến sĩ', NULL, '', 0, 'hphanh@hcmut.edu.vn', '0908229736'),
 (23, 'Nam', 'Đại học Bách khoa - ĐHQG TPHCM', '', 1954, '', NULL, 'Hồ Văn Nhật Chương', 'Tiến sĩ', NULL, '', 0, 'hvnchuong@hcmut.edu.vn', '0903644499'),
-(24, 'Nữ', '	Đại học Công nghệ thông tin – ĐHQG TPHCM', '', 1981, '', NULL, 'Nguyễn Lưu Thùy Ngân', 'Tiến sĩ', NULL, '', 0, 'ngannlt@uit.edu.vn', '0915446667'),
+(24, 'Nữ', 'Đại học Công nghệ thông tin – ĐHQG TPHCM', '', 1981, '', NULL, 'Nguyễn Lưu Thùy Ngân', 'Tiến sĩ', NULL, '', 0, 'ngannlt@uit.edu.vn', '0915446667'),
 (25, 'Nữ', 'Đại học Công nghiệp TPHCM', '', 1988, '', NULL, 'Phạm Hoàng Ái Lệ', 'Thạc sĩ', NULL, '', 0, 'phamhoangaile@gmail.com', '0935513131'),
 (26, 'Nữ', 'Đại học Công nghiệp TPHCM', '', 1971, '', NULL, 'Nguyễn Thị Hạnh', 'Tiến sĩ', NULL, '', 0, 'ngthihanh@iuh.edu.vn', ''),
 (27, 'Nam', 'Đại học Công nghiệp TPHCM', '', 1963, '', NULL, 'Bùi Trung Thành', 'Tiến sĩ', NULL, '', 0, 'E-mail: btt.nhietlanh@gmail.com, buitrungthanh@hui.edu.vn, buitrungthanh@iuh.edu.vn', '0913921407'),
@@ -269,7 +317,7 @@ INSERT INTO `expert` (`id`, `gender`, `organization`, `academicTitle`, `birthYea
 (31, 'Nam', 'Đại học Công nghiệp TPHCM', '', 19975, '', NULL, 'Phạm Xuân Kiên', 'Tiến sĩ', NULL, '', 0, 'phamxuankien@iuh.edu.vn', '0913729747'),
 (32, 'Nam', 'Đại học Công nghiệp TPHCM', '', 1979, '', NULL, 'Tôn Long Phước', '', NULL, '', 0, 'tonlongphuoc@iuh.edu.vn', '0918 306458'),
 (33, 'Nam', 'Đại học Công nghệ thông tin – ĐHQG TPHCM', '', 1975, '', NULL, 'Lê Trung Quân', 'Tiến sĩ', NULL, '', 0, 'quanle.trung@gmail.com quanlt@uit.edu.vn', '01222501188'),
-(34, 'Nam', '	Đại học Công nghệ thông tin – ĐHQG TPHCM', '', 1974, '', NULL, 'Vũ Đức Lung', 'Tiến sĩ', NULL, '', 0, 'lungvd@uit.edu.vn', '0919.361.424'),
+(34, 'Nam', 'Đại học Công nghệ thông tin – ĐHQG TPHCM', '', 1974, '', NULL, 'Vũ Đức Lung', 'Tiến sĩ', NULL, '', 0, 'lungvd@uit.edu.vn', '0919.361.424'),
 (35, 'Nam', 'Đại học Giao thông vận tải TPHCM', '', 1960, '', NULL, 'Đồng Văn Hướng', 'Tiến sĩ', NULL, '', 0, 'huong_dv@hcmutrans.edu.vn', '090938124'),
 (36, 'Nam', 'Đại học Giao thông vận tải TPHCM', '', 1987, '', NULL, 'Nguyễn Minh Quyền', 'Thạc sĩ', NULL, '', 0, 'quyennguyen.reallab@gmail.com', '0984691074'),
 (37, 'Nam', 'Đại học Giao thông vận tải TPHCM', '', 1978, '', NULL, 'Phan Thanh Minh', 'Thạc sĩ', NULL, '', 0, 'phanthanhminh@gmail.com', '0989120125'),
@@ -285,8 +333,8 @@ INSERT INTO `expert` (`id`, `gender`, `organization`, `academicTitle`, `birthYea
 (47, 'Nam', 'Đại học Sư phạm kỹ thuật TPHCM', '', 1983, '', NULL, 'Nguyễn Phong Lưu', 'Thạc sĩ', NULL, '', 0, 'luunp@hcmte.edu.vn', '0931428058'),
 (48, 'Nữ', 'Đại học Sư phạm kỹ thuật TPHCM', '', 1978, '', NULL, 'Bùi Thị Tuyết Đan', 'Thạc sĩ', NULL, '', 0, 'danntt@hcmute.edu.vn', '0933474908'),
 (49, 'Nữ', 'Đại học Sư phạm kỹ thuật TPHCM', '', 1975, '', NULL, 'Võ Thị Ngà', 'Tiến sĩ', NULL, '', 0, 'ngavt@hcmute.edu.vn', ''),
-(50, 'Nam', 'Đại học Tôn Đức Thắng', '', 1976, '', NULL, 'Nguyễn Quang Khuyến', 'Tiến sĩ', NULL, '', 0, 'nguyenquangkhuyen@tdt.edu.vn', '0908207020'),
-(51, 'Nam', 'Đại học Tôn Đức Thắng', '', 1982, '', NULL, 'Đặng Ngọc Minh Đức', 'Tiến sĩ', NULL, '', 0, 'dangngocminhduc@tdt.edu.vn', '84 98 969 9299'),
+(50, 'Nam', 'Đại học Tôn Đức Thắng TPHCM', '', 1976, '', NULL, 'Nguyễn Quang Khuyến', 'Tiến sĩ', NULL, '', 0, 'nguyenquangkhuyen@tdt.edu.vn', '0908207020'),
+(51, 'Nam', 'Đại học Tôn Đức Thắng TPHCM', '', 1982, '', NULL, 'Đặng Ngọc Minh Đức', 'Tiến sĩ', NULL, '', 0, 'dangngocminhduc@tdt.edu.vn', '84 98 969 9299'),
 (52, 'Nam', 'Đại học Bách khoa - ĐHQG TPHCM', 'Giáo sư', 1956, '', NULL, 'Lê Chí Hiệp', 'Tiến sĩ', NULL, '', 0, 'lechihiep@hcmut.edu.vn', '0903637777'),
 (53, 'Nam', 'Đại học Bách khoa - ĐHQG TPHCM', 'Giáo sư', 1957, '', NULL, 'Lê Tiến Thường', 'Tiến sĩ', NULL, '', 0, 'thuongle@hcmut.edu.vn', '0903787989'),
 (54, 'Nữ', 'Đại học Bách khoa - ĐHQG TPHCM', 'Giáo sư', 1953, '', NULL, 'Phan Thị Tươi', 'Tiến sĩ', NULL, '', 0, 'tuoi@hcmut.edu.vn', '0903907360'),
@@ -428,6 +476,21 @@ INSERT INTO `language` (`id`, `listening`, `speaking`, `reading`, `writing`, `ex
 (98, 'Khá', 'Trung bình', 'Khá', 'Trung bình', 67, 'Tiếng Anh', 0),
 (99, 'Tốt', 'Tốt', 'Tốt', 'Tốt', 68, 'Tiếng Anh', 0),
 (100, 'Tốt', 'Tốt', 'Tốt', 'Tốt', 69, 'Tiếng Anh', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messagelog`
+--
+
+CREATE TABLE `messagelog` (
+  `id` int(11) NOT NULL,
+  `userMessage` varchar(191) NOT NULL,
+  `botReply` varchar(191) NOT NULL,
+  `timestamp` datetime(3) NOT NULL DEFAULT current_timestamp(3),
+  `source` varchar(191) NOT NULL,
+  `userId` varchar(191) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1554,6 +1617,56 @@ INSERT INTO `publication` (`id`, `year`, `title`, `type`, `expertId`, `author`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `session`
+--
+
+CREATE TABLE `session` (
+  `id` varchar(191) NOT NULL,
+  `sessionToken` varchar(191) NOT NULL,
+  `userId` varchar(191) NOT NULL,
+  `expires` datetime(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` varchar(191) NOT NULL,
+  `name` varchar(191) DEFAULT NULL,
+  `email` varchar(191) DEFAULT NULL,
+  `emailVerified` datetime(3) DEFAULT NULL,
+  `image` varchar(191) DEFAULT NULL,
+  `password` varchar(191) DEFAULT NULL,
+  `role` varchar(191) NOT NULL DEFAULT 'admin'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `email`, `emailVerified`, `image`, `password`, `role`) VALUES
+('cmbx70w0x0000hnxcnpvk14cd', 'Admin', 'nguyenthanhlong601@gmail.com', NULL, NULL, '$2b$10$S4gRXeK7GLdnJhmDyUN2X.miZUDahVGmu5wVrVoQ3dj.W0nupQHR2', 'admin'),
+('cmcbf629v0000hnispl9d80dw', 'Nguyen Thanh Long ', 'nguyenthanhlong@gmail.com', NULL, NULL, '$2b$10$g4L9w2I6T0BH5k3CvN6IteWtAKPcbEh6G3MrJJDAdBvt9BQP7MZsW', 'admin'),
+('cmcbf9sdi0000hnkwsb0svxm6', 'Nguyen Thanh Long 1 ', 'nguyenthanhlong1@gmail.com', NULL, NULL, '$2b$10$XjgtNliR9q6dTMKn2z.LtueDqz7R9ZUrEikRwKq1H7eI5F.wDe3MW', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `verificationtoken`
+--
+
+CREATE TABLE `verificationtoken` (
+  `identifier` varchar(191) NOT NULL,
+  `token` varchar(191) NOT NULL,
+  `expires` datetime(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `workhistory`
 --
 
@@ -1574,36 +1687,36 @@ CREATE TABLE `workhistory` (
 
 INSERT INTO `workhistory` (`id`, `startYear`, `endYear`, `position`, `workplace`, `field`, `expertId`, `deleted`) VALUES
 (1, 2003, 2017, 'Giảng viên', 'Đại học Sư phạm kỹ thuật TPHCM', 'Công nghệ thông tin', 4, 0),
-(2, 2012, 2017, 'Giảng viên a', 'ĐH SPKT TPHCM', 'Kỹ thuật máy tính viễn thông', 5, 0),
+(2, 2012, 2017, 'Giảng viên a', 'Đại học Sư phạm kĩ thuật TPHCM', 'Kỹ thuật máy tính viễn thông', 5, 0),
 (3, 2006, 2009, 'Nhân viên môi trường', 'Công ty CP Đầu tư xây dựng Bình Chánh (BCCI), KCN Lê Minh Xuân', 'Giám sát quản lý chất lượng môi trường. Quản lý chất lượng (QA)', 6, 0),
 (4, 2009, 2010, 'Kỹ sư môi trường', 'Công ty CP Kỹ thuật SEEN', 'Thiết kế công nghệ. Quản lý vận hành nhà máy xử lý nước thải', 6, 0),
 (5, 2010, 2011, 'Chuyên viên SHE', 'Công ty CP VINAMIT', 'Quản lý an toàn, sức khỏe, môi trường cho các dự án', 6, 0),
-(6, 2011, 2017, 'Giảng viên', 'ĐH SPKT TPHCM', 'Giảng dạy và nghiên cứu khoa học', 6, 0),
+(6, 2011, 2017, 'Giảng viên', 'Đại học Sư phạm kĩ thuật TPHCM', 'Giảng dạy và nghiên cứu khoa học', 6, 0),
 (7, 2004, 2017, 'Giảng viên', '	Đại học Sư phạm kỹ thuật TPHCM', 'Tự động hóa', 8, 0),
-(8, 1988, 2017, 'Giảng viên', 'ĐH SPKT TPHCM', 'Điện – Điện tử', 9, 0),
+(8, 1988, 2017, 'Giảng viên', 'Đại học Sư phạm kĩ thuật TPHCM', 'Điện – Điện tử', 9, 0),
 (9, 2007, 2017, 'Giảng viên', 'Đại học Sư phạm kỹ thuật TPHCM', 'Tự động điều khiển', 10, 0),
 (10, 1998, 2009, 'Nghiên cứu viên, Trưởng phòng chuyên môn', 'Viện Hàn lâm Khoa học và Công nghệ Việt Nam', 'Vật liệu xúc tác', 11, 0),
 (11, 2009, 2017, 'Giảng viên, Phó trưởng Bộ môn Hóa lý', 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM', 'Hóa học xúc tác', 11, 0),
-(12, 1998, 2000, 'Trợ giảng', 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM (Khoa Hóa học)', 'Hóa phân tích', 12, 0),
+(12, 1998, 2000, 'Trợ giảng', 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM', 'Hóa phân tích', 12, 0),
 (13, 2001, 2007, 'Giảng viên', 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM', 'Hóa phân tích', 12, 0),
-(14, 2007, 2012, 'Giảng viên', 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM (Khoa Hóa học)', 'Hóa dược', 12, 0),
-(15, 2009, 2014, 'Phó trưởng Khoa', '	Đại học Khoa học Tự nhiên - ĐHQG TPHCM (Khoa Hóa học)', 'Hóa phân tích', 12, 0),
-(16, 2013, 2017, 'Trưởng bộ môn', 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM (Khoa Hóa học, Bộ môn Hóa Phân tích)', 'Hóa dược', 12, 0),
+(14, 2007, 2012, 'Giảng viên', 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM', 'Hóa dược', 12, 0),
+(15, 2009, 2014, 'Phó trưởng Khoa', 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM', 'Hóa phân tích', 12, 0),
+(16, 2013, 2017, 'Trưởng bộ môn', 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM', 'Hóa dược', 12, 0),
 (17, 1990, 1991, 'Kỹ sư thực hành', 'Garage ô tô Mười Chánh, Nha Trang', 'Ô tô và Động cơ đốt trong', 13, 0),
 (18, 1992, 1993, 'Kỹ sư bảo trì', 'Xí nghiệp Dây kéo Nha Trang', 'Máy cơ khí', 13, 0),
-(19, 1993, 1995, 'Kỹ sư thiết kế', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí)', 'Thiết kế chế tạo máy', 13, 0),
-(20, 1995, 1997, 'Kỹ sư thiết kế', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí)', 'Cải tạo đặc trưng xe', 13, 0),
+(19, 1993, 1995, 'Kỹ sư thiết kế', 'Đại học Bách khoa - ĐHQG TPHCM', 'Thiết kế chế tạo máy', 13, 0),
+(20, 1995, 1997, 'Kỹ sư thiết kế', 'Đại học Bách khoa - ĐHQG TPHCM', 'Cải tạo đặc trưng xe', 13, 0),
 (21, 1997, 1999, 'Trưởng phòng Kỹ thuật', 'Công ty TNHH Cơ điện lạnh Văn Minh, TPHCM', 'Thiết bị Cơ điện lạnh', 13, 0),
 (22, 2000, 2001, 'Kỹ sư', 'Công ty TNHH Fujikasui Engineeering Việt Nam', 'Thiết bị cơ khí', 13, 0),
-(23, 2001, 2017, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí)', 'Ô tô và Động cơ đốt trong', 13, 0),
+(23, 2001, 2017, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Ô tô và Động cơ đốt trong', 13, 0),
 (24, 1982, 1989, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật xung_số, mạch điện tử', 14, 0),
 (25, 1989, 1993, 'Nghiên cứu sinh', 'Nghiên cứu sinh tại Pháp', 'Nghiên cứu sinh', 14, 0),
 (26, 1993, 2017, 'Hiệu trưởng', 'Đại học Bách khoa - ĐHQG TPHCM', 'Quản lý trường đại học', 14, 0),
-(27, 1992, 2003, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí)', 'Đại học Bách Khoa TPHCM', 15, 0),
-(28, 2003, 2017, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí)', 'Đại học Bách Khoa TPHCM', 15, 0),
+(27, 1992, 2003, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'cơ khí', 15, 0),
+(28, 2003, 2017, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'cơ khí', 15, 0),
 (29, 1977, 1998, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'XD - Sức Bền & Kết Cấu, Cơ học XD', 16, 0),
-(30, 1998, 2007, 'Phó trưởng Khoa', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí)', 'Xây Dựng - Sức Bền & Kết Cấu, Cơ học XD', 16, 0),
-(31, 2007, 2013, 'Trưởng khoa', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí)', 'Xây Dựng - Sức Bền & Kết Cấu', 16, 0),
+(30, 1998, 2007, 'Phó trưởng Khoa', 'Đại học Bách khoa - ĐHQG TPHCM ', 'Xây Dựng - Sức Bền & Kết Cấu, Cơ học XD', 16, 0),
+(31, 2007, 2013, 'Trưởng khoa', 'Đại học Bách khoa - ĐHQG TPHCM', 'Xây Dựng - Sức Bền & Kết Cấu', 16, 0),
 (32, 1991, 2017, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa Điện - Điện Tử', 17, 0),
 (33, 1984, 1987, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM ', 'Trắc địa cao cấp, sai số, thiên văn, trọng lực', 18, 0),
 (34, 1988, 1996, 'Phó trưởng Khoa', 'Đại học Bách khoa - ĐHQG TPHCM', 'bộ môn địa tin học khoa ktxd và ttxd', 18, 0),
@@ -1611,9 +1724,9 @@ INSERT INTO `workhistory` (`id`, `startYear`, `endYear`, `position`, `workplace`
 (36, 2015, 2017, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Lý thuyết sai số đo đạc, trắc địa công trình, ứng dụng , trắc địa đại cương', 18, 0),
 (37, 1979, 1985, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ Thuật Hoá Vô Cơ', 19, 0),
 (38, 1999, 2015, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ Thuật Hoá Vô Cơ', 19, 0),
-(39, 1976, 1988, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Điện - Điện tử)', 'Khoa học máy tính', 21, 0),
+(39, 1976, 1988, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học máy tính', 21, 0),
 (40, 1988, 2000, 'Nghiên cứu sinh (Học cao học, tiến sĩ và làm việc)', 'Học Viện Công Nghệ Á châu (A.l.T) Băng Cốc, Thái Lan', 'Khoa học máy tính', 21, 0),
-(41, 2001, 2017, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Khoa học và Kỹ thuật máy tính)', 'Khoa học máy tính', 21, 0),
+(41, 2001, 2017, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học máy tính', 21, 0),
 (42, 1987, 2017, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa Điện - Điện tử', 22, 0),
 (43, 1997, 2017, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Kỹ thuật cao áp, thiết kế môn học cao', 23, 0),
 (44, 2003, 2005, 'Trợ giảng', 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM', 'Công nghệ thông tin', 24, 0),
@@ -1626,17 +1739,17 @@ INSERT INTO `workhistory` (`id`, `startYear`, `endYear`, `position`, `workplace`
 (51, 1995, 1998, 'Trưởng phòng Kỹ thuật', 'Trung tâm Nghiên cứu Ứng dụng Cơ điện - Viện Cơ điện Nông nghiệp', 'Thiết kế máy', 27, 0),
 (52, 1998, 1999, 'Trưởng phòng Nghiên cứu và Chuyển giao Công nghệ', 'Trung tâm Nghiên cứu Ứng dụng Cơ điện – Viện Cơ điện Nông nghiệp', 'Thiết kế máy', 27, 0),
 (53, 2000, 2005, 'Phó Giám đốc Kỹ thuật và Hợp tác quốc tế', 'Công ty Tư vấn & Đầu tư Kỹ thuật Cơ điện - Bộ Nông Nghiệp', 'Quản lý điều hành kỹ thuật', 27, 0),
-(54, 2005, 2007, 'Giảng viên', 'Đại học Công nghiệp TPHCM (Khoa Công nghệ Cơ khí)', 'Giảng dạy', 27, 0),
-(55, 2008, 2017, 'Phó trưởng Khoa', 'Đại học Công nghiệp TPHCM (Khoa Công nghệ Cơ khí, Trung tâm nghiên cứu và phát triển công nghệ máy công nghiệp (R&D TECH)', 'Giảng dạy, kết hợp nghiên cứu và Quản lý điều hành nghiên cứu', 27, 0),
-(56, 2015, 2017, 'Trưởng phòng -Giám đốc -Giảng viên', 'Đại học Công nghiệp TPHCM (Phòng Quản lý Khoa học & Hợp tác Quốc tế -Trung tâm nghiên cứu và phát triển công nghệ máy công nghiệp (R&D TECH) - Khoa Công nghệ Nhiệt lạnh)', 'Giảng dạy, kết hợp nghiên cứu và Quản lý điều hành nghiên cứu', 27, 0),
-(57, 1998, 2005, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Điện - Điện tử)', 'Máy tính', 28, 0),
+(54, 2005, 2007, 'Giảng viên', 'Đại học Công nghiệp TPHCM', 'Giảng dạy', 27, 0),
+(55, 2008, 2017, 'Phó trưởng Khoa', 'Đại học Công nghiệp TPHCM', 'Giảng dạy, kết hợp nghiên cứu và Quản lý điều hành nghiên cứu', 27, 0),
+(56, 2015, 2017, 'Trưởng phòng -Giám đốc -Giảng viên', 'Đại học Công nghiệp TPHCM', 'Giảng dạy, kết hợp nghiên cứu và Quản lý điều hành nghiên cứu', 27, 0),
+(57, 1998, 2005, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Máy tính', 28, 0),
 (58, 2009, 2010, 'Sau Tiến sĩ', 'Đại học Quốc gia Chonnam, Hàn Quốc', 'Công nghệ thông tin', 28, 0),
 (59, 2010, 2011, 'Phó khoa', 'Đại học Công nghiệp TPHCM', 'Công nghệ thông tin', 28, 0),
 (60, 2011, 2012, 'Visiting professor', 'Đại học Chicago, Hoa Kỳ', 'Công nghệ thông tin', 28, 0),
 (61, 2012, 2017, 'Trưởng khoa', 'Đại học Công nghiệp TPHCM', 'Công nghệ thông tin', 28, 0),
-(62, 2009, 2009, 'Giảng viên', 'Đại học Công nghiệp TPHCM (Khoa Công nghệ thông tin)', 'Giảng dạy', 29, 0),
+(62, 2009, 2009, 'Giảng viên', 'Đại học Công nghiệp TPHCM', 'Giảng dạy', 29, 0),
 (63, 2009, 2012, 'Nghiên cứu sinh', 'Đại học Sư phạm Quốc gia Moscow – LB. Nga', 'Nghiên cứu sinh', 29, 0),
-(64, 2012, 2017, 'Giảng viên', 'Đại học Công nghiệp TPHCM (Khoa Công nghệ thông tin)', 'Giảng dạy', 29, 0),
+(64, 2012, 2017, 'Giảng viên', 'Đại học Công nghiệp TPHCM', 'Giảng dạy', 29, 0),
 (65, 1986, 1992, 'Nhân viên phòng Khoa học', 'Viện nghiên cứu cà phê Eakmat', 'Quản lý thiết bị điện tử phòng thí nghiệm', 30, 0),
 (66, 1993, 1996, 'Giảng viên', 'ĐH Tây Nguyên (Trung tâm Tin học )', 'Dạy tin học – Tham gia lập trình 1 số dự án nhỏ', 30, 0),
 (67, 1996, 2000, 'Giảng viên', 'Đai học Tây Nguyên', 'Dạy tin học – Lập trình', 30, 0),
@@ -1646,16 +1759,16 @@ INSERT INTO `workhistory` (`id`, `startYear`, `endYear`, `position`, `workplace`
 (71, 2005, 2017, 'Giảng viên', 'Đại học Công nghiệp TPHCM', 'Dạy tin học', 30, 0),
 (72, 2001, 2017, 'Giảng viên', 'Đại học Công nghiệp TPHCM', 'Công nghệ thông tin', 31, 0),
 (73, 2001, 2017, 'Giảng viên', 'Đại học Công nghiệp TPHCM', 'Công nghệ thông tin', 32, 0),
-(74, 1998, 2000, 'Đại học Bách khoa - ĐHQG TPHCM', 'Trợ giảng', 'Mạng và hệ thống', 33, 0),
+(74, 1998, 2000, 'Trợ giảng', 'Đại học Bách khoa - ĐHQG TPHCM', 'Mạng và hệ thống', 33, 0),
 (75, 2003, 2004, 'Nghiên cứu sinh', 'Đại học Johannes-Kepler University Linz, Áo', 'Mạng không dây, giải pháp tích hợp mạng không dây và Internet', 33, 0),
 (76, 2004, 2007, 'Quản lý dự án (Project Manager/Researcher)', 'Đại học Oslo, Nauy', 'IoTs, mạng cảm biến không dây', 33, 0),
 (77, 2007, 2008, 'Trường Đại học Johannes-Kepler University Linz, Áo', 'Postdoc/Researcher', 'Mạng không dây, giải pháp tích hợp mạng không dây và Internet', 33, 0),
 (78, 2008, 2010, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Mạng và hệ thống', 33, 0),
 (79, 2011, 2014, 'Giảng viên', 'Đại học Quốc tế - ĐHQG TPHCM', 'Mạng và hệ thống, điện toán đám mây, IoTs', 33, 0),
 (80, 2014, 2017, 'Trưởng bộ môn Mạng máy tính', 'Đại học Công nghệ Thông tin - ĐHQG TPHCM', 'IoTs, hệ thống nhúng, mạng không dây, hệ thống CPSs, hạ tầng và kiến trúc mạng tốc độ cao, bảo mật mạng và hệ thống, các hệ thống điều khiển thông minh và tự động, điện toán đám mây,…', 33, 0),
-(81, 2006, 2017, 'Giảng viên', '	Đại học Công nghệ thông tin – ĐHQG TPHCM', 'Khoa học và Kỹ thuật máy tính', 34, 0),
+(81, 2006, 2017, 'Giảng viên', 'Đại học Công nghệ thông tin – ĐHQG TPHCM', 'Khoa học và Kỹ thuật máy tính', 34, 0),
 (82, 2006, 2008, 'Phó trưởng khoa Kỹ thuật Máy tính', 'Đại học Công nghệ thông tin – ĐHQG TPHCM', 'Khoa học và Kỹ thuật máy tính', 34, 0),
-(83, 2009, 2014, 'Trưởng khoa Kỹ thuật Máy tính', '	Đại học Công nghệ thông tin – ĐHQG TPHCM', 'Khoa học và Kỹ thuật máy tính', 34, 0),
+(83, 2009, 2014, 'Trưởng khoa Kỹ thuật Máy tính', 'Đại học Công nghệ thông tin – ĐHQG TPHCM', 'Khoa học và Kỹ thuật máy tính', 34, 0),
 (84, 2014, 2017, 'Phó Hiệu trưởng', 'Đại học Công nghệ thông tin – ĐHQG TPHCM', 'Khoa học và Kỹ thuật máy tính', 34, 0),
 (85, 1984, 2001, 'Giảng viên', 'Phân hiệu Đại học Hàng hải phía nam', 'Điện tàu biển', 35, 0),
 (86, 2001, 2017, 'Giảng viên', 'Đại học Giao thông vận tải TPHCM', 'Điện tàu biển', 35, 0),
@@ -1695,7 +1808,7 @@ INSERT INTO `workhistory` (`id`, `startYear`, `endYear`, `position`, `workplace`
 (120, 2006, 2009, 'Nghiên cứu sinh', 'Đại học Changwon Hàn Quốc; Viện Nghiên cứu vật liệu Hàn Quốc', 'Nghiên cứu vật liệu nanocomposites', 50, 0),
 (121, 2009, 2017, 'Giảng viên', 'Đại học Tôn Đức Thắng TPHCM', 'Giảng dạy và nghiên cứu ngành vật liệu polymer', 50, 0),
 (122, 2005, 2008, 'Trưởng nhóm', 'Công ty Tường Minh', 'Viễn thông, mạng máy tính', 51, 0),
-(123, 2008, 2017, 'Trưởng bộ môn Điện tử - Viễn thông', 'Đại học Tôn Đức Thắng	', 'Điện tử - Viễn thông', 51, 0),
+(123, 2008, 2017, 'Trưởng bộ môn Điện tử - Viễn thông', 'Đại học Tôn Đức Thắng TPHCM', 'Điện tử - Viễn thông', 51, 0),
 (124, 1979, 2017, 'Trưởng bộ môn', 'Đại học Bách khoa - ĐHQG TPHCM', 'Các môn về nhiệt & lạnh, điều hòa KK & năng lượng mặt trời', 52, 0),
 (125, 1981, 1984, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Ghi âm Ghi Hình, Mạch Điện Tử', 53, 0),
 (126, 1984, 1989, 'Trưởng phòng Thí nghiệm', 'Đại học Bách khoa - ĐHQG TPHCM', 'Điện thoại - Điện tín, Thiết bị thu phát, Mạch điện tử', 53, 0),
@@ -1712,48 +1825,48 @@ INSERT INTO `workhistory` (`id`, `startYear`, `endYear`, `position`, `workplace`
 (137, 1995, 1996, 'Giảng dạy', 'Đại học Bách khoa - ĐHQG TPHCM', 'Hóa Hạt nhân', 56, 0),
 (138, 1996, 2000, 'Nghiên cứu', 'Forschungszentrum Karlsruhe', 'Hóa Hạt nhân', 56, 0),
 (139, 2001, 2017, 'Giảng dạy', 'Đại học Bách khoa - ĐHQG TPHCM', 'Hóa Hạt nhân', 56, 0),
-(140, 1976, 2017, 'Giảng viên', 'Đại học Bách khoa', 'KT hóa học đại cương; Hướng dẫn sinh viên TN chuyên ngành CPT', 57, 0),
+(140, 1976, 2017, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'KT hóa học đại cương; Hướng dẫn sinh viên TN chuyên ngành CPT', 57, 0),
 (141, 2012, 2015, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Hệ thống thông tin', 58, 0),
 (142, 2015, 2017, 'Bí thư Đoàn Khoa', 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học và Kỹ thuật máy tính', 58, 0),
-(143, 1992, 1997, 'Giảng viên', '	Đại học Bách khoa - ĐHQG TPHCM (Khoa Điện - Điện tử)', 'Giảng dạy Điện tử Công suất, Truyên động điện', 59, 0),
-(144, 1997, 1998, 'Trưởng bộ môn', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Điện - Điện tử, Bộ môn Cung cấp điện)', 'Power Electronics', 59, 0),
-(145, 1998, 2007, 'Phó trưởng Khoa', '	Đại học Bách khoa - ĐHQG TPHCM (Khoa Điện - Điện tử)', 'Điên tử công suất', 59, 0),
+(143, 1992, 1997, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Giảng dạy Điện tử Công suất, Truyên động điện', 59, 0),
+(144, 1997, 1998, 'Trưởng bộ môn', 'Đại học Bách khoa - ĐHQG TPHCM', 'Power Electronics', 59, 0),
+(145, 1998, 2007, 'Phó trưởng Khoa', 'Đại học Bách khoa - ĐHQG TPHCM', 'Điên tử công suất', 59, 0),
 (146, 2001, 2002, 'Nghiên cứu sau tiến sĩ', 'Phòng thí nghiệm Điện tử công suất, Viện KAIST, Korea (2/2001-8/2001)', 'Điện tử công suất', 59, 0),
 (147, 2003, 2004, 'Nghiên cứu viên sau tiến sĩ', 'Phòng thí nghiệm Điện tử công suất, Viện KAIST, Korea (visiting professor 9.2003-8.2004)', 'Điện tử công suất', 59, 0),
 (148, 2007, 2010, 'Trưởng phòng', 'Phòng Khoa học công nghệ và Dự án', 'Điên tử công suất', 59, 0),
 (149, 2009, 2009, 'Thực tập sinh', 'Depart. of EE, UIUC, USA (1 tháng)', 'Điện tử công suất', 59, 0),
 (150, 2010, 2013, 'Trưởng phòng Thí nghiệm', 'Phòng thí nghiệm Hệ thống năng lượng', 'Điện tử công suất và ứng dụng', 59, 0),
 (151, 2013, 2017, 'Trưởng phòng Thí nghiệm', 'Phòng thí nghiệm Hệ thống năng lượng', 'Điện tử công suất và ứng dụng', 59, 0),
-(152, 1991, 1995, 'Trợ giảng', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí)', 'Chế tạo máy', 60, 0),
-(153, 1997, 2000, 'Giảng viên', '	Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí)', 'Chế tạo máy', 60, 0),
-(154, 2006, 2007, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí)', 'Chế tạo máy', 60, 0),
-(155, 2007, 2013, 'Giám đốc Trung tâm', 'Đại học Bách khoa - ĐHQG TPHCM (Trung tâm Đào tạo Bảo dưỡng Công nghiệp)', 'Chế tạo máy, Thiết kế máy và Cơ điện tử', 60, 0),
-(156, 2010, 2013, 'Trưởng bộ môn', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí, Bộ môn Thiết kế máy)', 'Chế tạo máy, Thiết kế máy và Cơ điện tử', 60, 0),
-(157, 2013, 2017, 'Giám đốc Trung tâm', 'Đại học Bách khoa - ĐHQG TPHCM (Trung tâm Đào tạo Bảo dưỡng Công nghiệp)', 'Chế tạo máy, Thiết kế máy và Cơ điện tử', 60, 0),
+(152, 1991, 1995, 'Trợ giảng', 'Đại học Bách khoa - ĐHQG TPHCM', 'Chế tạo máy', 60, 0),
+(153, 1997, 2000, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Chế tạo máy', 60, 0),
+(154, 2006, 2007, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'Chế tạo máy', 60, 0),
+(155, 2007, 2013, 'Giám đốc Trung tâm', 'Đại học Bách khoa - ĐHQG TPHCM', 'Chế tạo máy, Thiết kế máy và Cơ điện tử', 60, 0),
+(156, 2010, 2013, 'Trưởng bộ môn', 'Đại học Bách khoa - ĐHQG TPHCM', 'Chế tạo máy, Thiết kế máy và Cơ điện tử', 60, 0),
+(157, 2013, 2017, 'Giám đốc Trung tâm', 'Đại học Bách khoa - ĐHQG TPHCM', 'Chế tạo máy, Thiết kế máy và Cơ điện tử', 60, 0),
 (158, 1992, 2017, 'Giảng viên', 'Đại học Bách khoa - ĐHQG TPHCM', 'BM Viễn Thông ĐHBK', 61, 0),
 (159, 2000, 2002, 'Học viên cao học', 'Ðại học Quốc gia PUKYONG, Hàn Quốc', 'Thiết kế máy', 62, 0),
 (160, 2002, 2004, 'Nghiên cứu sinh', 'Ðại học Quốc gia PUKYONG, Hàn Quốc', 'Cơ điện tử', 62, 0),
 (161, 2004, 2004, 'Nghiên cứu sau tiến sĩ', 'Ðại học Quốc gia PUKYONG, Hàn Quốc', 'Thiết kế máy, Cơ điện tử', 62, 0),
-(162, 2004, 2007, 'Trưởng phòng Thí nghiệm', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí, Bộ môn Thiết kế máy)', 'Thiết kế máy, Cơ điện tử', 62, 0),
-(163, 2007, 2009, 'Trưởng bộ môn', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí, Bộ môn Thiết kế máy)', 'Thiết kế máy, Cơ điện tử', 62, 0),
-(164, 2009, 2010, 'Phó trưởng Khoa', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí, Bộ môn Thiết kế máy)', 'Thiết kế máy, Cơ điện tử', 62, 0),
-(165, 2010, 2013, 'Trưởng phòng Thí nghiệm', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí, Bộ môn Thiết kế máy)', 'Thiết kế máy, Cơ điện tử', 62, 0),
-(166, 2013, 2016, 'Trưởng bộ môn', '	Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí, Bộ môn Thiết kế máy)', 'Thiết kế máy, Cơ điện tử', 62, 0),
+(162, 2004, 2007, 'Trưởng phòng Thí nghiệm', 'Đại học Bách khoa - ĐHQG TPHCM', 'Thiết kế máy, Cơ điện tử', 62, 0),
+(163, 2007, 2009, 'Trưởng bộ môn', 'Đại học Bách khoa - ĐHQG TPHCM', 'Thiết kế máy, Cơ điện tử', 62, 0),
+(164, 2009, 2010, 'Phó trưởng Khoa', 'Đại học Bách khoa - ĐHQG TPHCM', 'Thiết kế máy, Cơ điện tử', 62, 0),
+(165, 2010, 2013, 'Trưởng phòng Thí nghiệm', 'Đại học Bách khoa - ĐHQG TPHCM', 'Thiết kế máy, Cơ điện tử', 62, 0),
+(166, 2013, 2016, 'Trưởng bộ môn', 'Đại học Bách khoa - ĐHQG TPHCM', 'Thiết kế máy, Cơ điện tử', 62, 0),
 (167, 1978, 1989, 'Quản đốc xưởng', 'Đại học Bách khoa - ĐHQG TPHCM', 'Vật liệu Kim loại', 63, 0),
 (168, 1989, 2000, 'Phó giám đốc', 'Đại học Bách khoa - ĐHQG TPHCM', 'Trung tâm vật liệu mới', 63, 0),
-(169, 1984, 1990, 'Giảng viên, kiêm nhiệm Trợ lý Khoa, Bí thư Đoàn khoa, Bí thư Đoàn trường', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí)', 'Cơ khí - Luyện kim, Công nghệ đúc, Vật liệu làm khuôn đúc', 64, 0),
+(169, 1984, 1990, 'Giảng viên, kiêm nhiệm Trợ lý Khoa, Bí thư Đoàn khoa, Bí thư Đoàn trường', 'Đại học Bách khoa - ĐHQG TPHCM', 'Cơ khí - Luyện kim, Công nghệ đúc, Vật liệu làm khuôn đúc', 64, 0),
 (170, 1990, 1996, 'Học Sau Đại học tại Pháp (về Khoa học và Công nghệ Vật liệu, và Quản trị Doanh nghiệp), kiêm nhiệm Trưởng Đơn vị Thực tập sinh và NCS Việt Nam tại TP. Grenoble', 'Viện Quốc gia Bách khoa Grenoble (INPG), Viện Đại học Pierre Mendes France (TP. Grenoble, Cộng hòa Pháp)', 'Khoa học và Công nghệ Vật liệu, Quản trị Doanh nghiệp', 64, 0),
-(171, 1996, 1999, 'Giảng viên, kiêm nhiệm Bí thư Chi bộ', 'Đại học Bách khoa - ĐHQG TPHCM (Trung tâm Nghiên cứu Vật liệu mới)', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến', 64, 0),
-(172, 1999, 2001, 'Giảng viên, Phó Giám đốc Trung tâm, kiêm nhiệm Phó Bí thư Chi bộ', 'Đại học Bách khoa - ĐHQG TPHCM (Trung tâm Đào tạo Bảo dưỡng Công nghiệp)', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến, Bảo dưỡng Công nghiệp', 64, 0),
-(173, 2001, 2004, 'Giảng viên, Chủ nhiệm Bộ môn Vật liệu kim loại, Phó Trưởng khoa, kiêm nhiệm Phó Bí thư Chi bộ', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Công nghệ vật liệu)', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến, Vật liệu Kim loại và Hợp kim', 64, 0),
-(174, 2004, 2006, 'Chủ nhiệm Bộ môn, - Giám đốc Phòng Thí nghiệm Công nghệ Nano (LNT) - ĐHQG TP. HCM', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Công nghệ Vật liệu, Bộ môn Cơ sở Khoa học Vật liệu)', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến, Khoa học và Công nghệ Nano', 64, 0),
+(171, 1996, 1999, 'Giảng viên, kiêm nhiệm Bí thư Chi bộ', 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến', 64, 0),
+(172, 1999, 2001, 'Giảng viên, Phó Giám đốc Trung tâm, kiêm nhiệm Phó Bí thư Chi bộ', 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến, Bảo dưỡng Công nghiệp', 64, 0),
+(173, 2001, 2004, 'Giảng viên, Chủ nhiệm Bộ môn Vật liệu kim loại, Phó Trưởng khoa, kiêm nhiệm Phó Bí thư Chi bộ', 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến, Vật liệu Kim loại và Hợp kim', 64, 0),
+(174, 2004, 2006, 'Chủ nhiệm Bộ môn, - Giám đốc Phòng Thí nghiệm Công nghệ Nano (LNT) - ĐHQG TP. HCM', 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến, Khoa học và Công nghệ Nano', 64, 0),
 (175, 2006, 2017, 'Giám đốc Phòng Thí nghiệm Công nghệ Nano (LNT), Viện Trưởng Viện Công nghệ Nano (INT), kiêm nhiệm Phó Bí Thư, Bí thư Chi bộ.', 'Phòng Thí nghiệm Công nghệ Nano (LNT) - Đại học Quốc gia TP. HCM (Khu Phố 6, Phường Linh Trung, Quận Thủ Đức, TP. HCM)', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến, Khoa học và Công nghệ Nano', 64, 0),
-(176, 1984, 1990, 'Giảng viên, kiêm nhiệm Trợ lý Khoa, Bí thư Đoàn khoa, Bí thư Đoàn trường', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Cơ khí)', 'Cơ khí - Luyện kim, Công nghệ đúc, Vật liệu làm khuôn đúc', 65, 0),
+(176, 1984, 1990, 'Giảng viên, kiêm nhiệm Trợ lý Khoa, Bí thư Đoàn khoa, Bí thư Đoàn trường', 'Đại học Bách khoa - ĐHQG TPHCM', 'Cơ khí - Luyện kim, Công nghệ đúc, Vật liệu làm khuôn đúc', 65, 0),
 (177, 1990, 1996, 'Học Sau Đại học tại Pháp (về Khoa học và Công nghệ Vật liệu, và Quản trị Doanh nghiệp), kiêm nhiệm Trưởng Đơn vị Thực tập sinh và NCS Việt Nam tại TP. Grenoble', 'Viện Quốc gia Bách khoa Grenoble (INPG), Viện Đại học Pierre Mendes France (TP. Grenoble, Cộng hòa Pháp)', 'Khoa học và Công nghệ Vật liệu, Quản trị Doanh nghiệp', 65, 0),
-(178, 1996, 1999, 'Giảng viên, kiêm nhiệm Bí thư Chi bộ', 'Đại học Bách khoa - ĐHQG TPHCM (Trung tâm Nghiên cứu Vật liệu mới)', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến', 65, 0),
-(179, 1999, 2001, 'Giảng viên, Phó Giám đốc Trung tâm, kiêm nhiệm Phó Bí thư Chi bộ', 'Đại học Bách khoa - ĐHQG TPHCM (Trung tâm Đào tạo Bảo dưỡng Công nghiệp)', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến, Bảo dưỡng Công nghiệp', 65, 0),
-(180, 2001, 2004, 'Giảng viên, Chủ nhiệm Bộ môn Vật liệu kim loại, Phó Trưởng khoa, kiêm nhiệm Phó Bí thư Chi bộ', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Công nghệ vật liệu)', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến, Vật liệu Kim loại và Hợp kim', 65, 0),
-(181, 2004, 2006, 'Chủ nhiệm Bộ môn, - Giám đốc Phòng Thí nghiệm Công nghệ Nano (LNT) - ĐHQG TP. HCM', 'Đại học Bách khoa - ĐHQG TPHCM (Khoa Công nghệ Vật liệu, Bộ môn Cơ sở Khoa học Vật liệu)', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến, Khoa học và Công nghệ Nano', 65, 0),
+(178, 1996, 1999, 'Giảng viên, kiêm nhiệm Bí thư Chi bộ', 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến', 65, 0),
+(179, 1999, 2001, 'Giảng viên, Phó Giám đốc Trung tâm, kiêm nhiệm Phó Bí thư Chi bộ', 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến, Bảo dưỡng Công nghiệp', 65, 0),
+(180, 2001, 2004, 'Giảng viên, Chủ nhiệm Bộ môn Vật liệu kim loại, Phó Trưởng khoa, kiêm nhiệm Phó Bí thư Chi bộ', 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến, Vật liệu Kim loại và Hợp kim', 65, 0),
+(181, 2004, 2006, 'Chủ nhiệm Bộ môn, - Giám đốc Phòng Thí nghiệm Công nghệ Nano (LNT) - ĐHQG TP. HCM', 'Đại học Bách khoa - ĐHQG TPHCM', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến, Khoa học và Công nghệ Nano', 65, 0),
 (182, 2006, 2017, 'Giám đốc Phòng Thí nghiệm Công nghệ Nano (LNT), Viện Trưởng Viện Công nghệ Nano (INT), kiêm nhiệm Phó Bí Thư, Bí thư Chi bộ.', 'Phòng Thí nghiệm Công nghệ Nano (LNT) - Đại học Quốc gia TP. HCM (Khu Phố 6, Phường Linh Trung, Quận Thủ Đức, TP. HCM)', 'Khoa học và Công nghệ Vật liệu, Vật liệu Tiên tiến, Khoa học và Công nghệ Nano', 65, 0),
 (183, 2010, 2012, 'Giảng viên', 'Đại học Khoa học Tự nhiên - ĐHQG TPHCM', '(Không có thông tin)', 66, 0),
 (184, 2012, 2014, 'Chuyên viên nghiên cứu', 'Trung tâm nghiên cứu phát triển chế biến dầu khí - Viện Dầu khí Việt Nam', '(Không có thông tin)', 66, 0),
@@ -1768,9 +1881,59 @@ INSERT INTO `workhistory` (`id`, `startYear`, `endYear`, `position`, `workplace`
 (193, 1995, 2003, 'Nghiên cứu viên, Phó Giám đốc Trung tâm', 'Trung tâm Nghiên cứu Ứng dụng Cơ điện Nông nghiệp', 'Nghiên cứu Cơ khí hóa Nông nghiệp', 69, 0),
 (194, 2003, 2017, 'Nghiên cứu viên chính, Phó Giám đốc Phân Viện', 'Phân Viện Cơ điện Nông nghiệp & Công nghệ sau thu hoạch tại TPHCM, thuộc Viện Cơ điện Nông nghiệp và CNSTH', 'Nghiên cứu Cơ khí hóa Nông nghiệp', 69, 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_prisma_migrations`
+--
+
+CREATE TABLE `_prisma_migrations` (
+  `id` varchar(36) NOT NULL,
+  `checksum` varchar(64) NOT NULL,
+  `finished_at` datetime(3) DEFAULT NULL,
+  `migration_name` varchar(255) NOT NULL,
+  `logs` text DEFAULT NULL,
+  `rolled_back_at` datetime(3) DEFAULT NULL,
+  `started_at` datetime(3) NOT NULL DEFAULT current_timestamp(3),
+  `applied_steps_count` int(10) UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `_prisma_migrations`
+--
+
+INSERT INTO `_prisma_migrations` (`id`, `checksum`, `finished_at`, `migration_name`, `logs`, `rolled_back_at`, `started_at`, `applied_steps_count`) VALUES
+('145267e4-a469-4e06-a3df-71e422d7a909', '7e6f6dc8083fd0d7e7036afb62c08a9f1f8915e07fd3114abbedb0525a80e244', '2025-06-13 11:42:22.787', '20250613114222_init', NULL, NULL, '2025-06-13 11:42:22.629', 1),
+('19fa6e8c-03d0-4b36-92e6-0de971fa3db9', 'a710ce2e19ab7d6a1d3cc56e57ac9a1834b46c5bb160d7ba728a0c4f7849445f', '2025-06-13 15:12:52.311', '20250613151251_add_deleted_to_all', NULL, NULL, '2025-06-13 15:12:52.297', 1),
+('3145e16f-ccc0-4ffb-bd8c-1d47fe995079', 'ec4287e0f20ff4be20559064e92bb8793cd82e3a899e64e8f0ce1e5e9b470f39', '2025-06-15 19:15:58.703', '20250615191558_add_role_to_user', NULL, NULL, '2025-06-15 19:15:58.698', 1),
+('4baaa8ae-5c49-4032-93e5-cf2db21c03bd', 'f29927dbd059f03d47cb48e7b47db9bfdebc14945c6819e8efa8a454fa68e515', '2025-06-26 08:33:26.459', '20250626083326_add_message_log', NULL, NULL, '2025-06-26 08:33:26.452', 1),
+('5593b41f-0dcb-417a-ae84-316ba03d3778', '4c15be2c7e57dd49a0e065ea185dae215045fdfc4c5e66892c14c2119b87a8bb', '2025-06-13 11:07:43.476', '20250613110743_init', NULL, NULL, '2025-06-13 11:07:43.470', 1),
+('76aa9cdb-aee5-4bd3-8a1b-425683f27f6c', '0bc9e010ec3ddfca66c577a15a2341fc6408251b2aa1232d766fbabb6c0cb037', '2025-06-23 16:38:55.104', '20250623163854_audit_log', NULL, NULL, '2025-06-23 16:38:55.098', 1),
+('985dcc62-e896-4cb8-b4b6-feb052dd8f00', '9079d39dc966f7cf881a542ad42078eb0b5f8e08f30ec93efcbe68508d0cb174', '2025-06-13 13:51:35.312', '20250613135134_add_deleted_to_expert', NULL, NULL, '2025-06-13 13:51:35.307', 1),
+('c4b286a3-ccfe-4f0b-86cd-8cae514242b7', '03f23d35480cd9bbfd4208ef768cdbef9c0f41642f9a1502946fa8aa44ea7910', '2025-06-16 18:35:26.034', '20250616183525_add_email_phone', NULL, NULL, '2025-06-16 18:35:26.028', 1),
+('cefd8d36-ac81-4079-b3c3-6d412e225de8', 'f823d408612aa24d5bec0249c40225b44df81232fc975e668d1758146feae319', '2025-06-15 03:39:57.689', '20250615033957_add_nextauth_models', NULL, NULL, '2025-06-15 03:39:57.595', 1),
+('dcb9d668-b378-49c0-911b-a6f6dae48d30', '843284989f59cfaf785d14afde6ba3e10904f88f979fe2fb3492941cdf8ae9e8', '2025-06-13 11:35:43.983', '20250613113543_add_expert_fields', NULL, NULL, '2025-06-13 11:35:43.976', 1),
+('e2d88213-b65a-49c2-b0ef-ad250f8b203e', '203d9e1a0284a057445fd9efe2211b429e6848edd8a027531d661060d4502c20', '2025-06-15 04:01:04.315', '20250615040103_add_user_password', NULL, NULL, '2025-06-15 04:01:04.309', 1),
+('ed13db81-0915-4bd8-8d38-39ab5aff79ce', 'd92c9c565e19bcc9d3e72632c5d4c22c1a6a59a41ec2bbd25041c156f00e5c4a', '2025-06-13 11:24:21.351', '20250613112420_init', NULL, NULL, '2025-06-13 11:24:21.187', 1),
+('fac13400-1380-46ea-9585-34712362c1bd', '38c9de2c22612dae3cc4b6aabd2c290c2236975b23e0aca559ce04db87af9a5e', '2025-06-13 10:59:10.444', '20250613105910_init', NULL, NULL, '2025-06-13 10:59:10.302', 1);
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `account`
+--
+ALTER TABLE `account`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `Account_providerId_providerAccountId_key` (`providerId`,`providerAccountId`),
+  ADD KEY `Account_userId_fkey` (`userId`);
+
+--
+-- Indexes for table `auditlog`
+--
+ALTER TABLE `auditlog`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `education`
@@ -1793,6 +1956,12 @@ ALTER TABLE `language`
   ADD KEY `Language_expertId_fkey` (`expertId`);
 
 --
+-- Indexes for table `messagelog`
+--
+ALTER TABLE `messagelog`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `project`
 --
 ALTER TABLE `project`
@@ -1807,11 +1976,39 @@ ALTER TABLE `publication`
   ADD KEY `Publication_expertId_fkey` (`expertId`);
 
 --
+-- Indexes for table `session`
+--
+ALTER TABLE `session`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `Session_sessionToken_key` (`sessionToken`),
+  ADD KEY `Session_userId_fkey` (`userId`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `User_email_key` (`email`);
+
+--
+-- Indexes for table `verificationtoken`
+--
+ALTER TABLE `verificationtoken`
+  ADD UNIQUE KEY `VerificationToken_token_key` (`token`),
+  ADD UNIQUE KEY `VerificationToken_identifier_token_key` (`identifier`,`token`);
+
+--
 -- Indexes for table `workhistory`
 --
 ALTER TABLE `workhistory`
   ADD PRIMARY KEY (`id`),
   ADD KEY `WorkHistory_expertId_fkey` (`expertId`);
+
+--
+-- Indexes for table `_prisma_migrations`
+--
+ALTER TABLE `_prisma_migrations`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1836,6 +2033,12 @@ ALTER TABLE `language`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
+-- AUTO_INCREMENT for table `messagelog`
+--
+ALTER TABLE `messagelog`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
@@ -1856,6 +2059,12 @@ ALTER TABLE `workhistory`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `account`
+--
+ALTER TABLE `account`
+  ADD CONSTRAINT `Account_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `education`
@@ -1880,6 +2089,12 @@ ALTER TABLE `project`
 --
 ALTER TABLE `publication`
   ADD CONSTRAINT `Publication_expertId_fkey` FOREIGN KEY (`expertId`) REFERENCES `expert` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `session`
+--
+ALTER TABLE `session`
+  ADD CONSTRAINT `Session_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `workhistory`

@@ -14,6 +14,10 @@ nlu:
     - profile [Lê Chí Hiệp](expert_name)
     - thông tin [Huỳnh Ngọc Văn](expert_name)
     - giới thiệu về [Nguyễn Trần Thi Văn](expert_name)
+    - ai là [Cổ Thanh Thiện](expert_name)
+    - chuyên gia [Nguyễn Thị Thanh Mai](expert_name) là ai
+    - tìm kiếm [Đặng Thành Tín](expert_name)
+    - thông tin về [Nguyễn Thị Hạnh](expert_name)
 
 - intent: tra_cuu_chuyen_gia_theo_don_vi
   examples: |
@@ -25,6 +29,7 @@ nlu:
     - giảng viên đang dạy tại [HCMUS](current_workplace)
     - ai hiện đang ở [Đại học Sư phạm kỹ thuật TPHCM](current_workplace)
     - danh sách cán bộ hiện tại [Đại học Công nghệ thông tin](current_workplace)
+    - ai đang dạy học ở [đại học khoa học tự nhiên tphcm](current_workplace)
     
     # IMPLICIT CURRENT CONTEXT - Default assumption
     - chuyên gia ở [HCMUT](current_workplace)
@@ -48,6 +53,7 @@ nlu:
     - [Bác sĩ](degree) chuyên khoa
     - ai có bằng [Tiến sĩ](degree)
     - chuyên gia trình độ [Thạc sĩ](degree)
+    - ai là [Kĩ sư](degree)
 
 - intent: tra_cuu_chuyen_gia_theo_hoc_ham
   examples: |

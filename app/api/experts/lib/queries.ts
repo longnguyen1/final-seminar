@@ -148,6 +148,45 @@ export class ExpertQueries {
     `;
   }
 
+  // queries.ts
+async searchByWorkPositionAndOrWorkplace(
+  position: string,
+  workplace: string,
+  mode: 'and' | 'or' | 'position' | 'workplace' = 'and'
+): Promise<ExpertWorkHistoryJoin[]> {
+  let where = 'e.deleted = false AND wh.deleted = false';
+  const params: any[] = [];
+
+  if (mode === 'and') {
+    where += ' AND LOWER(wh.position) LIKE ? AND LOWER(wh.workplace) LIKE ?';
+    params.push(`%${position.toLowerCase()}%`, `%${workplace.toLowerCase()}%`);
+  } else if (mode === 'or') {
+    where += ' AND (LOWER(wh.position) LIKE ? OR LOWER(wh.workplace) LIKE ?)';
+    params.push(`%${position.toLowerCase()}%`, `%${workplace.toLowerCase()}%`);
+  } else if (mode === 'position') {
+    where += ' AND LOWER(wh.position) LIKE ?';
+    params.push(`%${position.toLowerCase()}%`);
+  } else if (mode === 'workplace') {
+    where += ' AND LOWER(wh.workplace) LIKE ?';
+    params.push(`%${workplace.toLowerCase()}%`);
+  }
+
+  const sql = `
+    SELECT 
+      e.id, e.fullName, e.birthYear, e.gender, e.academicTitle, e.academicTitleYear,
+      e.degree, e.degreeYear, e.position, e.currentWork, e.organization, 
+      e.email, e.phone, e.deleted,
+      wh.id as workHistoryId, wh.startYear, wh.endYear, 
+      wh.position as workPosition, wh.workplace, wh.field
+    FROM Expert e
+    INNER JOIN WorkHistory wh ON e.id = wh.expertId
+    WHERE ${where}
+    ORDER BY e.fullName ASC, wh.startYear DESC
+  `;
+
+  return await this.prisma.$queryRawUnsafe<ExpertWorkHistoryJoin[]>(sql, ...params);
+}
+
   // ============ LANGUAGE JOIN QUERIES ============
 
   async searchByLanguage(language: string): Promise<ExpertLanguageJoin[]> {

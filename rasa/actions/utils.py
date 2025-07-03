@@ -1,39 +1,31 @@
+# File: expert-dashboard/rasa/actions/utils.py
 import requests
-from typing import Dict, List, Optional
 import urllib.parse
+from typing import Optional, Dict, List
 
 BASE_URL = "http://localhost:3000/api"
 
-def get_expert_by_name(name: str) -> Optional[Dict]:
-    """Lấy thông tin expert theo tên"""
+def safe_api_call_get(url: str) -> dict:
+    """Simple GET API call"""
     try:
-        encoded_name = urllib.parse.quote(name)
-        res = requests.get(f"{BASE_URL}/experts/search-all?name={encoded_name}", timeout=10)
-        if res.status_code == 200 and res.text.strip():
-            data = res.json()
-            experts = data.get("experts", [])
-            return experts[0] if experts else None
-    except Exception as e:
-        print(f"Error getting expert by name: {e}")
-        return None
+        response = requests.get(url, timeout=10)
+        if response.status_code == 200:
+            return response.json()
+        return {}
+    except:
+        return {}
 
-def format_expert_list(experts: List[Dict], max_show: int = 12) -> str:
-    """Format danh sách chuyên gia"""
-    if not experts:
-        return "Không tìm thấy chuyên gia nào."
+def safe_api_call_post(url: str, payload: dict) -> dict:
+    """Simple POST API call"""
+    try:
+        headers = {"Content-Type": "application/json"}
+        response = requests.post(url, json=payload, headers=headers, timeout=10)
+        if response.status_code == 200:
+            return response.json()
+        return {}
+    except:
+        return {}
     
-    message = ""
-    for expert in experts[:max_show]:
-        message += f"- {expert.get('fullName', 'Không rõ')}"
-        if expert.get('academicTitle'):
-            message += f" ({expert.get('academicTitle')})"
-        message += "\n"
-    
-    if len(experts) > max_show:
-        message += f"... (Còn {len(experts) - max_show} chuyên gia khác)"
-    
-    return message
-
 def safe_api_call(url: str) -> Optional[Dict]:
     """Safe API call với error handling"""
     try:
@@ -55,28 +47,40 @@ def safe_api_call(url: str) -> Optional[Dict]:
         print(f"DEBUG: Unexpected error: {e}")
     return None
 
-def extract_entity(tracker, entity_name: str) -> Optional[str]:
-    """Extract entity value từ tracker"""
+def get_expert_by_name(name: str) -> Optional[Dict]:
+    """Lấy thông tin expert theo tên"""
     try:
-        # Ưu tiên latest entity
-        value = next(tracker.get_latest_entity_values(entity_name), None)
-        if value and value.strip():
-            return value.strip()
-        
-        # Fallback to slot
-        slot_value = tracker.get_slot(entity_name)
-        return slot_value.strip() if slot_value and slot_value.strip() else None
-    except Exception:
+        url = f"{BASE_URL}/experts/search-all"
+        payload = {"name": name}
+        encoded_name = urllib.parse.quote(name)
+        print(f"[DEBUG] Gửi POST tới {url} với payload: {payload}")
+        res = requests.get(f"{BASE_URL}/experts/search-all?name={encoded_name}", timeout=10)
+        print(f"[DEBUG] Status code: {res.status_code}")
+        print(f"[DEBUG] Response text: {res.text}")
+        if res.status_code == 200 and res.text.strip():
+            data = res.json()
+            experts = data.get("experts", [])
+            return experts[0] if experts else None
+    except Exception as e:
+        print(f"Error getting expert by name: {e}")
         return None
-
-def extract_multiple_entities(tracker, entity_name: str) -> List[str]:
-    """Extract multiple entity values"""
-    try:
-        entities = tracker.latest_message.get("entities", [])
-        values = [e.get("value") for e in entities if e.get("entity") == entity_name and e.get("value")]
-        return [v.strip() for v in values if v and v.strip()]
-    except Exception:
-        return []
+    
+def format_expert_list(experts: List[Dict], max_show: int = 12) -> str:
+    """Format danh sách chuyên gia"""
+    if not experts:
+        return "Không tìm thấy chuyên gia nào."
+    
+    message = ""
+    for expert in experts[:max_show]:
+        message += f"- {expert.get('fullName', 'Không rõ')}"
+        if expert.get('academicTitle'):
+            message += f" ({expert.get('academicTitle')})"
+        message += "\n"
+    
+    if len(experts) > max_show:
+        message += f"... (Còn {len(experts) - max_show} chuyên gia khác)"
+    
+    return message
 
 def format_expert_detail(expert: Dict) -> str:
     """Format thông tin chi tiết expert"""

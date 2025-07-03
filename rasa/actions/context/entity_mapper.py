@@ -1,3 +1,4 @@
+# expert-dashboard/rasa/actions/context/entity_mapper.py
 """
 Optimized entity mapping for fast API performance
 # Chức năng: Map variations của entities với performance optimization
@@ -11,21 +12,31 @@ class EntityMapper:
     # ✅ SIMPLIFIED Entity variations (performance focused - max 3 per entity)
     ENTITY_VARIATIONS = {
         # Institution variations (limited for performance)
-        "đại học sư phạm kỹ thuật thành phố hồ chí minh": [
-            "ĐHSPKT", "UTE", "ĐH SPKT TPHCM"
+        "đại học khoa học tự nhiên - đhqg tphcm": [
+            "hcmus", "đại học khoa học tự nhiên tphcm", "đại học khoa học tự nhiên - đhqg tphcm"
+        ],
+        "đại học bách khoa - đhqg tphcm": [
+            "hcmut", "đại học bách khoa tphcm", "đại học bách khoa - đh quốc gia tphcm"
+        ],
+        "đại học sư phạm kỹ thuật tphcm": [
+            "hcmute", "đh sư phạm kỹ thuật tphcm", "đại học sư phạm kỹ thuật - đhqg tphcm"
         ],
         
-        "đại học bách khoa tphcm": [
-            "ĐHBK", "HCMUT", "ĐHBK TPHCM"
+        "đại học kinh tế - luật - đhqg tphcm": [
+            "UEL", "ĐH Kinh tế - Luật", "ĐH Kinh tế - Luật TPHCM"
+        ],
+
+        "đại học khoa học xã hội và nhân văn - đhqg tphcm": [
+            "USSH", "ĐHKHXH&NV", "ĐHKHXH&NV TPHCM"
         ],
         
-        "đại học công nghệ thông tin": [
-            "UIT", "ĐH Công nghệ thông tin - ĐHQG TPHCM"
+        "đại học công nghệ thông tin - đhqg tphcm": [
+            "UIT", "ĐHCNTT", "ĐHCNTT TPHCM"
         ],
         
         # Major variations (essential only)
         "công nghệ thông tin": [
-            "CNTT", "IT", "Information Technology"
+            "IT", "CNTT", "Công nghệ thông tin"
         ],
         
         "khoa học máy tính": [
@@ -65,7 +76,9 @@ class EntityMapper:
             return ""
         
         cleaned = entity_value.strip().lower()
-        return self.reverse_mappings.get(cleaned, entity_value.strip())
+        canonical = self.reverse_mappings.get(cleaned, entity_value.strip())
+        print(f"[DEBUG] get_canonical_form: input='{entity_value}' -> '{canonical}'")
+        return canonical
     
     def get_search_variations(self, entity_value: str, max_variations: int = 3) -> List[str]:
         """Get OPTIMIZED search variations (max 3 for performance)"""

@@ -1,2 +1,11 @@
 action_endpoint:
   url: "http://localhost:5055/webhook"
+
+tracker_store:
+  type: InMemoryTrackerStore
+
+# Optional: Database tracker store
+# tracker_store:
+#   type: SQL
+#   dialect: "mysql+pymysql"
+#   url: "http://localhost/phpmyadmin/index.php?route=/database/structure&db=do_an"

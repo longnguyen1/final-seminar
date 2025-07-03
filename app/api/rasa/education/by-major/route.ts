@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const major = searchParams.get('major') || '';
-    const limit = parseInt(searchParams.get('limit') || '5');
+    const limit = parseInt(searchParams.get('limit') || '10');
     const offset = parseInt(searchParams.get('offset') || '0');
 
     console.log(`🔍 RASA Education Major Search: major="${major}", limit=${limit}, offset=${offset}`);
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const entityValue = body.entity_value || '';
-    const limit = body.limit || 5;
+    const limit = body.limit || 10;
     const offset = body.offset || 0;
     const context = body.context || 'education_major_search';
 
