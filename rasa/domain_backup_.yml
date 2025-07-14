@@ -342,9 +342,42 @@ responses:
   utter_context_disambiguation:
     - text: "Tôi tìm thấy nhiều kết quả. Bạn có thể cụ thể hơn về ngữ cảnh không?"
 
+  utter_confirm_suggestion:
+    - text: "Bạn có muốn tìm với '{suggestion}' không?"
+    - text: "Bạn có đồng ý với gợi ý '{suggestion}' này không?"
+  utter_no_experts_found_and_no_suggestion:
+    - text: "Không tìm thấy chuyên gia với thông tin bạn cung cấp. Vui lòng thử lại với thông tin khác."
+
+  utter_no_experts_found_criteria:
+    - text: "Không tìm thấy chuyên gia nào với tiêu chí bạn cung cấp."
+  utter_experts_found:
+    - text: "Tôi đã tìm thấy các chuyên gia phù hợp với tiêu chí của bạn. "
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
+form:
+  list_experts_form:
+    # Các slot mà form này sẽ cố gắng điền vào
+    # Chúng ta sẽ không liệt kê tất cả ở đây mà sẽ dùng logic trong `required_slots`
+    # để linh hoạt hơn tùy theo câu hỏi của người dùng.
+    # Tuy nhiên, vẫn cần liệt kê tất cả các slot mà form có thể điền.
+    current_workplace:
+      - type: from_entity
+        entity: current_workplace
+    degree:
+      - type: from_entity
+        entity: degree
+    academic_title:
+      - type: from_entity
+        entity: academic_title
+    graduated_school:
+      - type: from_entity
+        entity: graduated_school
+    major:
+      - type: from_entity
+        entity: major
 
 
 

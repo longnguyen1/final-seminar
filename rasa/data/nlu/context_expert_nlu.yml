@@ -2,69 +2,129 @@ version: "3.1"
 
 nlu:
 # ===== EXPERT TABLE - CURRENT WORKPLACE CONTEXT =====
-- intent: tra_cuu_chuyen_gia
+- intent: potfolio_expert
   examples: |
-    - tìm chuyên gia [Nguyễn Thái Anh](expert_name)
-    - tra cứu thông tin [Trương Quang Phúc](expert_name)
+    - thông tin cơ bản về [Nguyễn Thái Anh](expert_name)
+    - tra cứu thông tin về [Trương Quang Phúc](expert_name)
     - cho tôi biết về [Vũ Đình Thành](expert_name)
     - thông tin chuyên gia [Nguyễn Lê Duy Khải](expert_name)
-    - [Đặng Mậu Chiến](expert_name) là ai
-    - tôi muốn biết về [Nguyễn Mạnh Hùng](expert_name)
+    - [Đặng Mậu Chiến](expert_name) là người như thế nào
+    - information về [Nguyễn Mạnh Hùng](expert_name)
+    - tôi muốn biết hồ sơ của [Nguyễn Mạnh Hùng](expert_name)
+    - tiểu sử của [Đặng Mậu Chiến](expert_name)
     - hồ sơ của [Bùi Trọng Hiếu](expert_name)
-    - profile [Lê Chí Hiệp](expert_name)
-    - thông tin [Huỳnh Ngọc Văn](expert_name)
-    - giới thiệu về [Nguyễn Trần Thi Văn](expert_name)
-    - ai là [Cổ Thanh Thiện](expert_name)
-    - chuyên gia [Nguyễn Thị Thanh Mai](expert_name) là ai
-    - tìm kiếm [Đặng Thành Tín](expert_name)
-    - thông tin về [Nguyễn Thị Hạnh](expert_name)
+    - profile của [Lê Chí Hiệp](expert_name)
+    - thông tin sơ bộ về [Huỳnh Ngọc Văn](expert_name)
+    - giới thiệu vài điều về [Nguyễn Trần Thi Văn](expert_name)
+    - tiểu sử sơ luợc của [Phan Nghĩa Minh](expert_name)
+    - bạn có thể cho tôi biết sơ lược về [Nguyễn Mạnh Hùng](expert_name) không?
+    - ban có sẵn sàng cung cấp cho tôi thông tin sơ lược về [Phạm Văn Tấn](expert_name) không?   
+    - thông tin sơ lược về [Nguyễn Mạnh Hùng](expert_name)
+    - tôi muốn biết sơ lược về [Phạm Văn Tấn](expert_name)
+    - [Cổ Thanh Thiện](expert_name) có proflie như thế nào
+    - [Nguyễn Thị Kim Oanh](expert_name) có information gì
+    - chuyên gia [Nguyễn Thị Thanh Mai](expert_name) có profile gì
+    - tìm kiếm profile của [Đặng Thành Tín](expert_name)
+    - basic information [Nguyễn Thị Hạnh](expert_name)
+    - tôi muốn biết cơ bản về [Bùi Trọng Hiếu](expert_name)
+  
+    - cho tôi biết thông tin chung về người này
+    - information về người này
+    - tôi muốn biết thông tin sơ lược về người này
+    - thông tin cá nhân của chuyên gia này
+    - tôi muốn biết tin tưc cơ bản người này
+    - thông tin cơ bản về chuyên gia này
+    - thông tin chung về chuyên gia này
+    - tiểu sử cơ bản của ông này
+    - giới thiệu sơ lược về người này
+    - ông ấy có information gì không?
+    - thông tin cơ bản của chuyên gia này
+    - thông tin cá nhân của nhà khoa học này
+    - bà này là có thông tin sơ lược gì
+    - bạn có thể cho tôi biết sơ lược về người này không?
+    - bạn có thể cung cấp cho tôi thông tin sơ lược về người này không?
 
-- intent: tra_cuu_chuyen_gia_theo_don_vi
-  examples: |
-    # EXPLICIT CURRENT CONTEXT - Clear temporal indicators
-    - tìm chuyên gia hiện đang làm tại [HCMUT](current_workplace)
-    - ai đang làm việc ở [Đại học Bách khoa TPHCM](current_workplace)
-    - các chuyên gia hiện tại của [ĐHSPKT](current_workplace)
-    - nhân viên hiện tại [UIT](current_workplace)
-    - giảng viên đang dạy tại [HCMUS](current_workplace)
-    - ai hiện đang ở [Đại học Sư phạm kỹ thuật TPHCM](current_workplace)
-    - danh sách cán bộ hiện tại [Đại học Công nghệ thông tin](current_workplace)
-    - ai đang dạy học ở [đại học khoa học tự nhiên tphcm](current_workplace)
-    
-    # IMPLICIT CURRENT CONTEXT - Default assumption
-    - chuyên gia ở [HCMUT](current_workplace)
-    - tìm người làm tại [ĐHSPKT](current_workplace)
-    - ai ở [UIT](current_workplace)
-    - danh sách nhân sự [HCMUS](current_workplace)
-    - chuyên gia tại [Đại học Bách khoa TPHCM](current_workplace)
-    - người làm việc ở [Đại học Sư phạm kỹ thuật](current_workplace)
-    - cán bộ [ĐHQG TPHCM](current_workplace)
-    - giảng viên [Đại học Nông lâm TPHCM](current_workplace)
 
-- intent: tra_cuu_chuyen_gia_theo_hoc_vi
+- intent: list_experts_by_current_workplace
   examples: |
-    - tìm chuyên gia có học vị [Tiến sĩ](degree)
-    - ai có [Thạc sĩ](degree)
-    - danh sách [Kỹ sư](degree)
-    - chuyên gia có bằng [PGS](degree)
-    - những người có [TS](degree)
-    - các [Giáo sư](degree)
-    - [Cử nhân](degree) nào
-    - [Bác sĩ](degree) chuyên khoa
-    - ai có bằng [Tiến sĩ](degree)
-    - chuyên gia trình độ [Thạc sĩ](degree)
-    - ai là [Kĩ sư](degree)
+    - thống kê chuyên gia hiện đang làm tại [HCMUT](current_workplace)
+    - list người đang làm việc ở [Đại học Bách khoa TPHCM](current_workplace)
+    - danh sách chuyên gia hiện tại làm ở [ĐHSPKT](current_workplace)
+    - tổng hợp chuyên gia hiện tại của [UIT](current_workplace)
+    - thống kê người đang làm tại [HCMUS](current_workplace)
+    - liệt kê người có current workplace ở [Đại học Sư phạm kỹ thuật TPHCM](current_workplace)
+    - list người đang công tác tại [Đại học Sư phạm kỹ thuật TPHCM](current_workplace)
+    - danh sách cán bộ hiện tại của [Đại học Công nghệ thông tin](current_workplace)
+    - liệt kê chuyên gia bây giờ làm ở [đại học khoa học tự nhiên tphcm](current_workplace)
+    - thống kê người đang công tác tại [Viện Khoa học Vật liệu ứng dụng](current_workplace)
+    - tôi muốn bạn thống kê những người hiện tại làm việc ở [HCMUT](current_workplace)
+    - tôi nóng lòng muốn biết danh sách những người hiện tại làm việc ở [Đại học Bách khoa TPHCM](current_workplace)
+    - bạn có thể liệt kê những người đang làm ở [Đại học Bách khoa TPHCM](current_workplace) không?
+    - liệu bạn có thể list những người có previous workplace ở [ĐHSPKT](current_workplace) không?
+    - tôi tò mò muốn biết danh sách những người hiện tại đang công tác ở [UIT](current_workplace)
 
-- intent: tra_cuu_chuyen_gia_theo_hoc_ham
+    - bạn có thể thống kê những người hiện tại làm việc ở đó không?
+    - tôi muốn biết danh sách những người hiện tại làm việc ở nơi này
+    - tôi tò mò muốn biết danh sách những người hiện tại đang công tác ở nơi này
+    - bạn có thể thống kê những người hiện tại làm việc ở nơi này không?
+    - tôi muốn biết danh sách những người hiện tại làm việc ở nơi này là gì?
+    - tôi tò mò muốn biết danh sách những người hiện tại đang công tác ở nơi này
+    - bạn có thể thống kê những người hiện tại làm việc ở nơi này không?
+    - tôi nóng lòng muốn biết danh sách những người hiện tại làm việc ở nơi này
+    - tôi muốn biết danh sách những người hiện tại làm việc ở nơi này là gì?
+
+- intent: list_experts_by_degree
   examples: |
-    - tìm [Giáo sư](academic_title)
-    - chuyên gia có học hàm [PGS](academic_title)
+    - danh sách chuyên gia có học vị [tiến sĩ](degree)
+    - liệt kê người có degree là [thạc sĩ](degree)
+    - danh sách chuyên gia có bằng cấp [kỹ sư](degree)
+    - thống kê người có học vị [TS](degree)
+    - list chuyên gia có degree [cử nhân](degree) nào
+    - list người có degree [tiến sĩ](degree)
+    - thống kê người có bằng cấp [tiến sĩ](degree)
+    - tổng hợp chuyên gia trình độ [thạc sĩ](degree)
+    - danh sách người có trình độ [Kĩ sư](degree)
+    - những người có học vị [KS](degree)
+
+    - xin hãy thống kê những người có học vị [Tiến sĩ](degree) đi
+    - bạn có thể liệt kê những người có bằng cấp [Thạc sĩ](degree) không?
+    - tôi nóng lòng muốn biết danh sách những người có degree [Kỹ sư](degree)
+    - liệu bạn có thể thống kê những người có degree [Kỹ sư](degree) không?
+    - tôi muốn biết danh sách những người có học vị [Tiến sĩ](degree)
+    - tôi tò mò muốn biết danh sách những người có degree [Thạc sĩ](degree)
+    - bạn có thể thống kê những người có học vị [Kỹ sư](degree) không?
+
+    - tôi muốn biết danh sách những người có bằng cấp như trên
+    - tôi tò mò muốn biết danh sách những người có bằng cấp như vậy
+    - tôi muốn biết danh sách những người có học vị như trên
+    - bạn có thể thống kê những người có học vị như vậy không?
+    - bạn có vui lòng liệt kê những người có học vị như trên không?
+    - tổng hợp những người có bằng cấp như vậy
+    - tôi nóng lòng muốn biết danh sách những người có bằng cấp như vậy
+
+- intent: list_experts_by_academic_title
+  examples: |
+    - danh sách những người có academic title [Giáo sư](academic_title)
+    - thống kê chuyên gia có học hàm [PGS](academic_title)
     - danh sách [Phó Giáo sư](academic_title)
-    - ai là [GS](academic_title)
-    - các [Giáo sư Tiến sĩ](academic_title)
-    - những [Phó Giáo sư Tiến sĩ](academic_title)
-    - [Professor](academic_title) nào
-    - [Associate Professor](academic_title) có kinh nghiệm
+    - tổng hợp những chuyên gia có academic title [GS](academic_title)
+    - list những người có học hàm [Giáo sư](academic_title)
+    - thống kê người có academic title [Phó Giáo sư](academic_title)
+    - danh sách người có academic title là [Professor](academic_title) nào
+
+    - bạn hãy thóng kê những người có học hàm [Giáo sư](academic_title) đi
+    - xin hãy liệt kê những người có học hàm [Phó Giáo sư](academic_title)
+    - liệu bạn có thể liệt kê những người có học hàm [Giáo sư](academic_title) không?
+    - tôi muốn biết danh sách những người có học hàm [Phó Giáo sư](academic_title)
+    - bạn có thể thống kê những người có học hàm [Giáo sư](academic_title) không?
+    - tôi tò mò muốn biết danh sách những người có academic title [Phó Giáo sư](academic_title)
+
+    - bạn có thể thống kê những người có học hàm như trên không?
+    - tôi muốn biết danh sách những người có học hàm như vậy
+    - tôi tò mò muốn biết danh sách những người có học hàm như trên
+    - bạn có thể liệt kê những người có học hàm như vậy không?
+    - tôi thắc mắc về danh sách những người có học hàm như vậy
+    - tôi nóng lòng muốn biết danh sách những người có học hàm như vậy
 
 # ===== LOOKUPS =====
 - lookup: current_workplace
@@ -80,9 +140,16 @@ nlu:
     - Đại học Công nghệ thông tin
     - Đại học Công nghệ thông tin - ĐHQG TPHCM
     - HCMUS
-    - Đại học Khoa học Tự nhiên
+    - Đại học Khoa học Tự nhiên - ĐHQG TPHCM
     - ĐHQG TPHCM
     - Đại học Nông lâm TPHCM
+    - Đại học Sư phạm kỹ thuật TPHCM
+    - Đại học Giao thông vận tải TPHCM
+    - Đại học Công nghiệp TPHCM
+    - Đại học Tôn Đức Thắng TPHCM
+    - Viện Công nghệ Nano (INT) - ĐHQG TPHCM
+    - Viện Nhiệt đới Môi trường
+
 
 - lookup: degree
   examples: |
@@ -91,25 +158,16 @@ nlu:
     - PhD
     - Thạc sĩ
     - ThS
-    - Master
     - Kỹ sư
     - KS
-    - Engineer
-    - Cử nhân
-    - CN
-    - Bachelor
-    - Bác sĩ
-    - BS
 
 - lookup: academic_title
   examples: |
     - Giáo sư
     - GS
-    - Professor
-    - Phó Giáo sư
-    - PGS
-    - Associate Professor
-    - Giáo sư Tiến sĩ
-    - GS.TS
-    - Phó Giáo sư Tiến sĩ
-    - PGS.TS
+
+
+
+
+
+  

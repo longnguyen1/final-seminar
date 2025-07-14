@@ -153,32 +153,11 @@ class ContextNormalizer:
         "engineer": "Kỹ sư",
     }
 
-    ACADEMICTITLE_MAP = {
+    ACADEMIC_TITLE_MAP = {
         "professor": "Giáo sư",
         "gs": "Giáo sư",
         "associate professor": "Phó Giáo sư",
         "pgs": "Phó Giáo sư",
-    }
-
-    LANGUAGE_MAPPING = {
-        "tiếng anh": "Tiếng Anh",
-        "english": "Tiếng Anh",
-        "tiếng pháp": "Tiếng Pháp",
-        "french": "Tiếng Pháp",
-        "tiếng đức": "Tiếng Đức",
-        "german": "Tiếng Đức",
-        "tiếng nhật": "Tiếng Nhật",
-        "japanese": "Tiếng Nhật",
-        "tiếng hàn": "Tiếng Hàn",
-        "korean": "Tiếng Hàn",
-        "tiếng trung": "Tiếng Trung",
-        "chinese": "Tiếng Trung",
-        "tiếng nga": "Tiếng Nga",
-        "russian": "Tiếng Nga",
-        "tiếng ý": "Tiếng Ý",
-        "italian": "Tiếng Ý",
-        "tiếng tây ban nha": "Tiếng Tây Ban Nha",
-        "spanish": "Tiếng Tây Ban Nha",
     }
 
     def normalize_institution(self, value: str) -> str:
@@ -231,12 +210,6 @@ class ContextNormalizer:
         title_clean = title.strip().lower()
         return self.POSITION_MAP.get(title_clean, title.strip())
     
-    def normalize_language(self, language: str) -> str:
-        """Chuẩn hóa tên ngoại ngữ"""
-        if not language:
-            return language
-        language_clean = language.strip().lower()
-        return self.LANGUAGE_MAPPING.get(language_clean, language.strip)
 
     def get_search_variations(self, value: str, context: str = None) -> List[str]:
         """Sinh các biến thể tìm kiếm (case-insensitive, ưu tiên mapping)"""

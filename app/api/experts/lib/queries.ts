@@ -21,9 +21,15 @@ import {
 export class ExpertQueries {
   constructor(private prisma: PrismaClient) {}
 
-  // ============ EXPERT SEARCH QUERIES ============
+  // ============ GENERIC EXPERT SEARCH ============
 
-  async searchByName(name: string): Promise<ExpertResult[]> {
+  /**
+   * Generic search for Expert by a single field (LIKE, case-insensitive)
+   */
+  private async searchExpertByField(
+    field: 'fullName' | 'organization' | 'degree' | 'academicTitle',
+    value: string
+  ): Promise<ExpertResult[]> {
     return await this.prisma.$queryRaw<ExpertResult[]>`
       SELECT 
         e.id, e.fullName, e.birthYear, e.gender, e.academicTitle, 
@@ -31,48 +37,27 @@ export class ExpertQueries {
         e.currentWork, e.organization, e.email, e.phone, e.deleted
       FROM Expert e
       WHERE e.deleted = false 
-        AND LOWER(e.fullName) LIKE LOWER(${`%${name}%`})
+        AND LOWER(e.${field}) LIKE LOWER(${`%${value}%`})
       ORDER BY e.fullName ASC
     `;
+  }
+
+  // ============ EXPERT SEARCH QUERIES ============
+
+  async searchByName(name: string): Promise<ExpertResult[]> {
+    return this.searchExpertByField('fullName', name);
   }
 
   async searchByOrganization(org: string): Promise<ExpertResult[]> {
-    return await this.prisma.$queryRaw<ExpertResult[]>`
-      SELECT 
-        e.id, e.fullName, e.birthYear, e.gender, e.academicTitle,
-        e.academicTitleYear, e.degree, e.degreeYear, e.position, 
-        e.currentWork, e.organization, e.email, e.phone, e.deleted
-      FROM Expert e
-      WHERE e.deleted = false 
-        AND LOWER(e.organization) LIKE LOWER(${`%${org}%`})
-      ORDER BY e.fullName ASC
-    `;
+    return this.searchExpertByField('organization', org);
   }
 
   async searchByDegree(degree: string): Promise<ExpertResult[]> {
-    return await this.prisma.$queryRaw<ExpertResult[]>`
-      SELECT 
-        e.id, e.fullName, e.birthYear, e.gender, e.academicTitle, e.academicTitleYear,
-        e.degree, e.degreeYear, e.position, e.currentWork, e.organization, 
-        e.email, e.phone, e.deleted
-      FROM Expert e
-      WHERE e.deleted = false 
-        AND LOWER(e.degree) LIKE LOWER(${`%${degree}%`})
-      ORDER BY e.fullName ASC
-    `;
+    return this.searchExpertByField('degree', degree);
   }
 
   async searchByAcademicTitle(title: string): Promise<ExpertResult[]> {
-    return await this.prisma.$queryRaw<ExpertResult[]>`
-      SELECT 
-        e.id, e.fullName, e.birthYear, e.gender, e.academicTitle, e.academicTitleYear,
-        e.degree, e.degreeYear, e.position, e.currentWork, e.organization, 
-        e.email, e.phone, e.deleted
-      FROM Expert e
-      WHERE e.deleted = false 
-        AND LOWER(e.academicTitle) LIKE LOWER(${`%${title}%`})
-      ORDER BY e.fullName ASC
-    `;
+    return this.searchExpertByField('academicTitle', title);
   }
 
   // ============ EDUCATION JOIN QUERIES ============
@@ -172,17 +157,18 @@ async searchByWorkPositionAndOrWorkplace(
   }
 
   const sql = `
-    SELECT 
-      e.id, e.fullName, e.birthYear, e.gender, e.academicTitle, e.academicTitleYear,
-      e.degree, e.degreeYear, e.position, e.currentWork, e.organization, 
-      e.email, e.phone, e.deleted,
-      wh.id as workHistoryId, wh.startYear, wh.endYear, 
-      wh.position as workPosition, wh.workplace, wh.field
-    FROM Expert e
-    INNER JOIN WorkHistory wh ON e.id = wh.expertId
-    WHERE ${where}
-    ORDER BY e.fullName ASC, wh.startYear DESC
-  `;
+  SELECT 
+    e.id, e.fullName, e.birthYear, e.gender, e.academicTitle, e.academicTitleYear,
+    e.degree, e.degreeYear, e.position, e.currentWork, e.organization, 
+    e.email, e.phone, e.deleted,
+    wh.id as workHistoryId, wh.startYear, wh.endYear, 
+    wh.position as workPosition, wh.workplace, wh.field,
+    wh.expertId as expertId -- Thêm dòng này
+  FROM Expert e
+  INNER JOIN WorkHistory wh ON e.id = wh.expertId
+  WHERE ${where}
+  ORDER BY e.fullName ASC, wh.startYear DESC
+`;
 
   return await this.prisma.$queryRawUnsafe<ExpertWorkHistoryJoin[]>(sql, ...params);
 }
@@ -207,6 +193,21 @@ async searchByWorkPositionAndOrWorkplace(
   }
 
   // ============ RELATION QUERIES ============
+
+async getExpertsByIds(ids: number[], options?: { limit?: number; offset?: number }): Promise<ExpertResult[]> {
+  if (!ids || ids.length === 0) return [];
+  const { limit = 10, offset = 0 } = options || {};
+  return await this.prisma.$queryRaw<ExpertResult[]>`
+    SELECT 
+      id, fullName, birthYear, gender, academicTitle, academicTitleYear,
+      degree, degreeYear, position, currentWork, organization, 
+      email, phone, deleted
+    FROM Expert
+    WHERE deleted = false AND id IN (${(ids)})
+    ORDER BY fullName ASC
+    LIMIT ${limit} OFFSET ${offset}
+  `;
+}
 
   async getEducationsByExpertId(expertId: number): Promise<EducationResult[]> {
     return await this.prisma.$queryRaw<EducationResult[]>`
@@ -270,6 +271,15 @@ async searchByWorkPositionAndOrWorkplace(
 
     return results.length > 0 ? results[0] : null;
   }
+
+  async getWorkHistoriesByExpertIds(expertIds: number[]): Promise<WorkHistoryResult[]> {
+  if (!expertIds || expertIds.length === 0) return [];
+  return await this.prisma.$queryRaw<WorkHistoryResult[]>`
+    SELECT * FROM WorkHistory 
+    WHERE expertId IN (${expertIds}) AND deleted = false
+    ORDER BY expertId ASC, startYear DESC
+  `;
+}
 
   async getExpertEducation(expertId: number): Promise<EducationResult[]> {
     return await this.prisma.$queryRaw<EducationResult[]>`
@@ -347,64 +357,6 @@ async searchByWorkPositionAndOrWorkplace(
     };
   }
 
-  async getPublicationStats(expertId: number): Promise<{
-    total: number;
-    byType: Record<string, number>;
-    byYear: Record<string, number>;
-  }> {
-    const results = await this.prisma.$queryRaw<PublicationStatsResult[]>`
-      SELECT 
-        COALESCE(type, 'Unknown') as type,
-        year,
-        COUNT(*) as count
-      FROM Publication 
-      WHERE expertId = ${expertId} AND deleted = false
-      GROUP BY type, year
-      ORDER BY year DESC, type ASC
-    `;
-
-    const byType: Record<string, number> = {};
-    const byYear: Record<string, number> = {};
-    let total = 0;
-
-    results.forEach(row => {
-      const count = Number(row.count);
-      byType[row.type] = (byType[row.type] || 0) + count;
-      byYear[row.year?.toString() || 'Unknown'] = (byYear[row.year?.toString() || 'Unknown'] || 0) + count;
-      total += count;
-    });
-
-    return { total, byType, byYear };
-  }
-
-  async getProjectStats(expertId: number): Promise<{
-    total: number;
-    byStatus: Record<string, number>;
-    byRole: Record<string, number>;
-  }> {
-    const results = await this.prisma.$queryRaw<ProjectStatsResult[]>`
-      SELECT 
-        COALESCE(status, 'Unknown') as status,
-        COALESCE(role, 'Unknown') as role,
-        COUNT(*) as count
-      FROM Project 
-      WHERE expertId = ${expertId} AND deleted = false
-      GROUP BY status, role
-    `;
-
-    const byStatus: Record<string, number> = {};
-    const byRole: Record<string, number> = {};
-    let total = 0;
-
-    results.forEach(row => {
-      const count = Number(row.count);
-      byStatus[row.status] = (byStatus[row.status] || 0) + count;
-      byRole[row.role] = (byRole[row.role] || 0) + count;
-      total += count;
-    });
-
-    return { total, byStatus, byRole };
-  }
 
   async getPublicationsPaginated(expertId: number, limit: number = 5, offset: number = 0): Promise<{
     publications: PublicationResult[];
@@ -492,5 +444,71 @@ async searchByWorkPositionAndOrWorkplace(
     }
 
     return [];
+  }
+
+  /**
+ * Tìm chuyên gia thỏa mãn đồng thời filter education và workhistory (giao tại DB)
+ */
+async searchExpertByEducationAndWork(
+  educationFilter: { school?: string; major?: string },
+  workFilter: { workplace?: string; position?: string },
+  options?: { limit?: number; offset?: number }
+): Promise<ExpertResult[]> {
+  const { school, major } = educationFilter;
+  const { workplace, position } = workFilter;
+  const { limit = 10, offset = 0 } = options || {};
+
+  let educationExists = '';
+  let workExists = '';
+  const params: any[] = [];
+
+  if (school || major) {
+    let eduConds: string[] = [];
+    if (school) {
+      eduConds.push('LOWER(ed.school) LIKE ?');
+      params.push(`%${school.toLowerCase()}%`);
+    }
+    if (major) {
+      eduConds.push('LOWER(ed.major) LIKE ?');
+      params.push(`%${major.toLowerCase()}%`);
+    }
+    educationExists = `EXISTS (
+      SELECT 1 FROM Education ed
+      WHERE ed.expertId = e.id AND ed.deleted = false AND (${eduConds.join(' OR ')})
+    )`;
+  }
+
+  if (workplace || position) {
+    let workConds: string[] = [];
+    if (workplace) {
+      workConds.push('LOWER(wh.workplace) LIKE ?');
+      params.push(`%${workplace.toLowerCase()}%`);
+    }
+    if (position) {
+      workConds.push('LOWER(wh.position) LIKE ?');
+      params.push(`%${position.toLowerCase()}%`);
+    }
+    workExists = `EXISTS (
+      SELECT 1 FROM WorkHistory wh
+      WHERE wh.expertId = e.id AND wh.deleted = false AND (${workConds.join(' OR ')})
+    )`;
+  }
+
+  let where = 'e.deleted = false';
+  if (educationExists) where += ` AND ${educationExists}`;
+  if (workExists) where += ` AND ${workExists}`;
+
+  const sql = `
+    SELECT 
+      e.id, e.fullName, e.birthYear, e.gender, e.academicTitle, e.academicTitleYear,
+      e.degree, e.degreeYear, e.position, e.currentWork, e.organization, 
+      e.email, e.phone, e.deleted
+    FROM Expert e
+    WHERE ${where}
+    ORDER BY e.fullName ASC
+    LIMIT ${limit} OFFSET ${offset}
+  `;
+
+  return await this.prisma.$queryRawUnsafe<ExpertResult[]>(sql, ...params);
   }
 }

@@ -2,111 +2,138 @@ version: "3.1"
 
 nlu:
 # ===== WORKHISTORY TABLE INTENTS =====
-- intent: tra_cuu_lich_su_lam_viec
+- intent: potfolio_workhistory
   examples: |
-    - lịch sử làm việc của [Nguyễn Thái Anh](expert_name)
-    - [Trương Quang Phúc](expert_name) từng làm ở đâu
-    - kinh nghiệm làm việc [Vũ Đình Thành](expert_name)
-    - quá trình công tác [Nguyễn Lê Duy Khải](expert_name)
-    - [Đặng Mậu Chiến](expert_name) đã làm việc tại đâu
-    - work history [Nguyễn Mạnh Hùng](expert_name)
-    - career path [Bùi Trọng Hiếu](expert_name)
-    - employment history [Lê Chí Hiệp](expert_name)
-    - professional experience [Huỳnh Ngọc Văn](expert_name)
-    - công việc trước đây của [Nguyễn Trần Thi Văn](expert_name)
-    - [Phạm Hoàng Ái Lệ](expert_name) từng làm việc ở những đâu?
-    - [Nguyễn Tử Đức](expert_name) có lịch sử làm việc như thế nào?
+    - lịch sử làm việc của [Nguyễn Thái Anh](expert_name) là gì?
+    - quá trình làm việc [Bùi Thị Tuyết Đan](expert_name) là như thế nào?
+    - work history of [Nguyễn Quang Khuyến](expert_name)
+    - quá trính công tác trước đây của chuyên gia [Vũ Đình Thành](expert_name)
+    - quá trình công tác của [Nguyễn Lê Duy Khải](expert_name)
+    - liệu bạn có thể cung cấp cho tôi lịch sử làm việc của [Nguyễn Mạnh Hùng](expert_name)?
+    - tôi muốn biết quá trình làm việc của [Phạm Văn Tấn](expert_name)
+    - tôi tò mò về lịch sử làm việc của [Nguyễn Thị Kim Oanh](expert_name)
+    - tôi thắc mắc về quá trình làm việc của [Nguyễn Trần Thi Văn](expert_name)
 
-- intent: tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
-  examples: |
-    # EXPLICIT PREVIOUS CONTEXT - Clear past indicators
-    - tìm chuyên gia đã từng làm tại [HCMUT](previous_workplace)
-    - ai trước đây làm ở [Microsoft](previous_workplace)
-    - cựu nhân viên [FPT](previous_workplace)
-    - ex-employee [Google](previous_workplace)
-    - người đã có kinh nghiệm tại [Samsung](previous_workplace)
-    - từng làm việc ở [Đại học Bách khoa TPHCM](previous_workplace)
-    - đã làm tại [Intel](previous_workplace)
-    - cựu cán bộ [ĐHSPKT](previous_workplace)
-    - former staff [IBM](previous_workplace)
-    - alumni [Viettel](previous_workplace)
-    - used to work at [Grab](previous_workplace)
-    - previously at [Shopee](previous_workplace)
+    - work history of [Nguyễn Mạnh Hùng](expert_name)
+    - career path of [Bùi Trọng Hiếu](expert_name)
+    - work experience of [Phạm Hoàng Ái Lệ(expert_name)
+    - work background của [Nguyễn Trần Thi Văn](expert_name)
+    - employment history của [Lê Chí Hiệp](expert_name)
+    - career history của [Phan Thanh Minh](expert_name)
     
-    # REAL DATABASE WORKPLACES
-    - từng làm tại [Đại học Bách khoa - ĐHQG TPHCM](previous_workplace)
-    - cựu nhân viên [Công ty CP Đầu tư xây dựng Bình Chánh](previous_workplace)
-    - đã làm ở [Viện Hàn lâm Khoa học và Công nghệ Việt Nam](previous_workplace)
-    - kinh nghiệm tại [Công ty TNHH Cơ điện lạnh Văn Minh](previous_workplace)
-    - ex-employee [Học viện Công nghệ Châu Á](previous_workplace)
 
-- intent: tra_cuu_chuyen_gia_theo_vi_tri
+    - lịch sử làm việc của người này là gì?
+    - ông này có quá trình làm việc như thế nào?
+    - quá trình công tác của người này là gì?
+    - work history của bà này là gì?
+    - employment history của anh ta là gì?
+    - career path của cô ta là gì?
+    - work experience of this person is what?
+    - work background of this person is what?
+    - tôi muốn biết quá trình làm việc của người này
+    - tôi tò mò về lịch sử làm việc của người này
+
+- intent: list_experts_by_position_and_or_previous_workplace
   examples: |
-    - tìm chuyên gia có vị trí [Giảng viên](position)
-    - ai là [Trưởng phòng](position)
-    - danh sách [Professor](position)
-    - chuyên gia làm [Manager](position)
-    - những người làm [Lecturer](position)
-    - [Kỹ sư thiết kế](position) gồm những ai
-    - ai từng là hiệu [Hiệu trưởng](position)
-    -
-    - ai đang làm [Developer](position)
-    - chuyên gia vị trí [Researcher](position)
-    - Ai từng là [kỹ sư](position)
-    - ai làm [giảng viên](position)
-    - ai từng làm [trợ giảng](position)
+    - danh sách người từng làm ở [Đại học Bách khoa - ĐHQG TPHCM](previous_workplace)?
+    - liệt kê người nào từng công tác ở [Đại học Khoa học tự nhiên - ĐHQG TPHCM](previous_workplace)?
+    - thống kê những ai từng làm việc tại [Đại học Sư phạm kỹ thuật TPHCM](previous_workplace)?
+    - thống kê chuyên gia từng làm việc ở [Đại học Công nghiệp TPHCM](previous_workplace)
+    - liệt kê nhà khoa học từng làm việc tại [Đại học Công nghệ thông tin - ĐHQG TPHCM](previous_workplace)?
+    - tìm kiếm chuyên gia có previous workplace ở [Đại học Công nghệ thông tin - ĐHQG TPHCM](previous_workplace)
+    - liệu bạn có thể thống kê người từng làm việc tại [Đại học Khoa học Tự nhiên - ĐHQG TPHCM](previous_workplace)?
+    - tôi muốn biết danh sách người từng công tác tại [Đại học Bách khoa - ĐHQG TPHCM](previous_workplace)
+    - tôi tò mò về danh sách người từng làm việc ở [Đại học Sư phạm kỹ thuật TPHCM](previous_workplace)
+    - xin bạn hãy liệt kê những người từng làm việc tại [Đại học Công nghiệp TPHCM](previous_workplace)
+
+    - tôi thắc mắc về thống kê người từng làm việc tại đó
+    - tôi muốn biết danh sách người từng làm việc ở đó
+    - tôi tò mò về danh sách người từng công tác tại đó
+    - tôi muốn biết danh sách người từng làm việc ở nơi này
+    - tôi tò mò về thống kê người từng làm việc tại nơi này
+    - tôi thắc mắc về thống kê người từng công tác tại nơi này
+    - liệt kê người từng làm việc tại nơi này
+    - thống kê người từng làm việc ở nơi này
+    - danh sách người từng công tác tại nơi này
+
+    - liệt kê nhà khoa học có vị trí [giảng viên](position)?
+    - Chuyên gia nào có công việc [trợ giảng](position)?
+    - Tìm kiếm chuyên gia có vị trí [nghiên cứu viên](position)
+    - danh sách người có vị trí [professor](position)
+    - thông kê người có position là [trưởng phòng](position)
+    - liệt kê người có công việc [trưởng phòng](position)
+    - thống kê nhà khoa học đảm nhiệm chức vụ [phó trưởng Khoa](position)
+    - tổng hơp chuyên gia có position là [phó Giám đốc](position)
+    - tôi muốn biết danh sách người có chức vụ [hiệu trưởng](position)
+    - tôi tò mò về thống kê người có chức vụ [nghiên cứu sinh](position)
+    - liệu bạn có thể thống kê người có chức vụ [phó Hiệu trưởng](position)?
+
+    - tôi muốn biết danh sách người có chức vụ như trên
+    - tôi tò mò về thống kê người có chức vụ như trên
+    - tôi thắc mắc về thống kê người có chức vụ như trên
+    - tôi muốn biết danh sách người có chức vụ như vậy
+    - liệt kê người có chức vụ như vậy
+    - thống kê người có chức vụ như vậy
+    - danh sách người có chức vụ như vậy
+
+    - Tìm danh sách chuyên gia từng làm ở [Đại học Bách khoa - ĐHQG TPHCM](previous_workplace) với vị trí [giảng viên](position)
+    - danh sách nhà khoa học từng làm tại [Đại học Khoa học tự nhiên - ĐHQG TPHCM](previous_workplace) với chức vị [trưởng bộ môn](position) 
+    - thống kê chuyên gia từng làm công tác ở [Công ty TNHH Fujikasui Engineeering Việt Nam](previous_workplace) và có chức vụ [kỹ sư](position) không?
+    - Tìm kiếm chuyên gia trước đây làm việc tại [Viện Công cụ và Cơ giới hóa Nông nghiệp](previous_workplace) và có vị trí [Kỹ sư](position)
+    - liệt kê người từng làm việc tại [Viện Hàn lâm Khoa học và Công nghệ Việt Nam](previous_workplace) và có chức vụ [phó Giám đốc](position)
+    - tổng hợp người có previous workplace là [Công ty CP Đầu tư xây dựng Bình Chánh](previous_workplace) và có chức vụ [phó Hiệu trưởng](position)
+    - liệt kê chuyên gia từng làm việc tại [Học viện Công nghệ Châu Á](previous_workplace) và có postion là [hiệu trưởng](position)
+    - thống kê chuyên gia trước đây công tác tại [Công ty TNHH Cơ điện lạnh Văn Minh](previous_workplace) và có đẳm nhiệm vị trí [nghiên cứu sinh](position)
+    - tôi muốn biết danh sách người từng làm việc tại [Xí nghiệp Dây kéo Nha Trang](previous_workplace) và có chức vụ [kỹ sư thiết kế](position)
+    - tôi tò mò về thống kê người từng công tác tại [Trung tâm nghiên cứu phát triển chế biến dầu khí - Viện Dầu khí Việt Nam](previous_workplace) và có vị trí [kỹ sư môi trường](position)
+    - liệu bạn có thể liệt kê người từng làm việc tại [Công ty TNHH Fujikasui Engineeering Việt Nam](previous_workplace) và có chức vụ [nghiên cứu viên](position)?
+
+    - Danh sách người có vị trí [kỹ sư thiết kế](position) với từng làm ở [Đại học Bách khoa - ĐHQG TPHCM](previous_workplace)
+    - tổng hợp chuyên gia có postion là [trợ giảng](position) và previous worplace là [Đại học Khoa học Tự nhiên - ĐHQG TPHCM](previous_workplace)
+    - thống kê nhà khoa học có vị trí [phó trưởng Khoa](position) và từng làm tại [Đại học Khoa học Tự nhiên - ĐHQG TPHCM](previous_workplace)
+    - liệt kê người đảm nhiệm vị trí [Chuyên viên nghiên cứu](position) và từng làm việc tại [Trung tâm nghiên cứu phát triển chế biến dầu khí - Viện Dầu khí Việt Nam](previous_workplace)
+    - danh sách người có chức vị [kỹ sư môi trường](position) và từng công tác ở [Công ty CP Kỹ thuật SEEN](previous_workplace)
+    - thống kế người có previous workplace là [Xí nghiệp Dây kéo Nha Trang](previous_workplace) và có position là [nghiên cứu viên](position)
+    - thống kê chuyên gia nào nắm giữ công việc [trưởng khoa](position) và đã làm tại [Đại học Bách khoa - ĐHQG TPHCM](previous_workplace)?
+    - liệt kê người có chức vụ [hiệu trưởng](position) và từng làm việc tại [Đại học Bách khoa - ĐHQG TPHCM](previous_workplace)
+    - danh sách nhà khoa học có vị trí [giảng viên](position) và từng làm ở [Đại học Công nghệ thông tin - ĐHQG TPHCM](previous_workplace)?
+    - tôi muốn biết danh sách người có chức vụ [phó Giám đốc](position) và từng làm việc tại [Đại học Công nghệ thông tin - ĐHQG TPHCM](previous_workplace)
+    - tôi tò mò về thống kê người có chức vụ [kỹ sư](position) và từng làm việc tại [Đại học Công nghiệp TPHCM](previous_workplace)?
+    - liệu bạn có thể thống kê người có chức vụ [kỹ sư phần mềm](position) và từng làm việc tại [Đại học Công nghệ thông tin - ĐHQG TPHCM](previous_workplace)?
 
 # ===== LOOKUPS =====
 - lookup: previous_workplace
   examples: |
-    # Tech companies
-    - Microsoft
-    - FPT
-    - Google
-    - Samsung
-    - Intel
-    - IBM
-    - Viettel
-    - Grab
-    - Shopee
-    - Zalo
-    - VNG
-    - Tiki
-    
-    # Universities (as previous workplace)
     - HCMUT
-    - Đại học Bách khoa TPHCM
+    - Đại học Khoa học Tự nhiên - ĐHQG TPHCM
+    - HCMUS
     - Đại học Bách khoa - ĐHQG TPHCM
     - ĐHSPKT
     - Đại học Sư phạm kỹ thuật TPHCM
     - UIT
-    - HCMUS
+    - Đại học Công nghiệp TPHCM
+    - Đại học Công nghệ thông tin - ĐHQG TPHCM
     
-    # Real database workplaces
     - Viện Hàn lâm Khoa học và Công nghệ Việt Nam
     - Công ty CP Đầu tư xây dựng Bình Chánh
     - Công ty TNHH Cơ điện lạnh Văn Minh
     - Học viện Công nghệ Châu Á
+    - Xí nghiệp Dây kéo Nha Trang
+    - Công ty TNHH Fujikasui Engineeering Việt Nam
+    - Trung tâm nghiên cứu phát triển chế biến dầu khí - Viện Dầu khí Việt Nam
 
 - lookup: position
   examples: |
-    - Giảng viên
-    - GV
-    - Lecturer
-    - Professor
-    - Trưởng phòng
-    - Department Head
-    - Phó Giám đốc
-    - Deputy Director
-    - Manager
-    - Team Lead
-    - Technical Lead
-    - Developer
-    - Software Engineer
-    - Researcher
-    - Project Manager
-    - CTO
-    - Director
-    - Giám đốc
-
+    - giảng viên
+    - trợ giảng
+    - nghiên cứu viên
+    - trưởng phòng
+    - phó trưởng Khoa
+    - phó Giám đốc
+    - hiệu trưởng
+    - nghiên cứu sinh
+    - phó Hiệu trưởng
+    - thực tập sinh
+    - trưởng bộ môn
+    - phó viện trưởng
 

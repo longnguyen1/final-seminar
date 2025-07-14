@@ -11,6 +11,9 @@ class EntityMapper:
     
     # ✅ SIMPLIFIED Entity variations (performance focused - max 3 per entity)
     ENTITY_VARIATIONS = {
+        # Common institution variations (essential only)
+        "n"
+
         # Institution variations (limited for performance)
         "đại học khoa học tự nhiên - đhqg tphcm": [
             "hcmus", "đại học khoa học tự nhiên tphcm", "đại học khoa học tự nhiên - đhqg tphcm"
@@ -152,8 +155,6 @@ class EntityMapper:
             "organization": "current_workplace",
             "school": "graduated_school", 
             "workplace": "previous_workplace",
-            "field": "major",
-            "title": "position"
         }
         
         return legacy_mappings.get(entity_name, entity_name)

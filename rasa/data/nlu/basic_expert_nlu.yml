@@ -1,0 +1,363 @@
+version: "3.1"
+
+nlu:
+- intent: ask_expert_current_workplace
+  examples: |
+    - nơi làm việc hiện tại của [Nguyễn Thá An](expert_name) ở đâu?
+    - công ty hiện tại của [Trương Qu Phú](expert_name)
+    - current workplace của [Vũ Đình Thành](expert_name)là gì?
+    - nơi làm việc hiện nay của [Nguyễn Lê Duy Khánh](expert_name)
+    - chỗ làm hiên tại của [Đặng Mậu Chiến](expert_name)
+    - hiện tại [Nguyễn Mạnh Hùng](expert_name) đang làm việc ở đâu?
+    - [Bùi Trọng Hiếu](expert_name) hiện đang làm việc ở đâu?
+    - chuyên gia [Lê Chí Hiệp](expert_name) hiện tại làm việc ở đâu?
+    - [Huỳnh Ngọc Văn](expert_name) có current workplace ở đâu?
+    - [Huỳnh Ngọc Văn](expert_name) hiện đang công tác ở đâu?
+    - tôi muốn biết nơi làm việc bây giờ của [Huỳnh Ngọc Văn](expert_name)
+    - current workplace của [Nguyễn Trần Thi Văn](expert_name) là gì?
+    
+    - tôi tò mò nơi làm việc hiện tại của [Nguyễn Thái](expert_name) là gì?
+    - tôi muốn biết nơi làm việc hiện tại của [Trương Quang](expert_name)
+    - liệu bạn có biết nơi công tác hiện nay của [Vũ Đình Thành](expert_name) không?
+    - bạn có biết current workplace của [Nguyễn Lê Duy Khải](expert_name) là gì không?
+    - tôi thắc mắc chỗ làm hiện tại của [Đặng Mậu C](expert_name) là ở đâu?
+
+    - cho tôi biết nơi làm việc hiện tại của người này
+    - công ty hiện tại của chuyên gia này là gì?
+    - nơi làm việc hiện tại của chuyên gia vừa nhắc là ở đâu?
+    - công ty hiện tại của nhà khoa học này ở đâu?
+    - chỗ làm hiện tại của người vừa nãy là gì
+
+    - tôi muốn biết nơi làm việc hiện tại của ông ấy
+    - tôi tò mò chỗ làm hiện nay của bà ấy là ở đâu?
+    - bạn có biết current workplace của anh ấy không?
+    - liệu bạn có biết nơi công tác hiện tại của chị ấy là gì không?
+    
+
+- intent: ask_expert_degree
+  examples: |
+    - học vị của [Nguyễn Thái](expert_name) là gì?
+    - [Trương Quang](expert_name) có học vị gì?
+    - học vị của chuyên gia [Nguyễn Lê Khả](expert_name) là gì?
+    - degree của [Vũ Đình Thành](expert_name) là gì?
+    - chuyên gia [Nguyễn Lê Duy Khải](expert_name) có học vị là gì?
+    - [Nguyễn Mạnh Hùng](expert_name) có degree là gì?
+    - tôi tò mò học vị của [Bùi Trọng Hiếu](expert_name) là gì?
+    - tôi tự hỏi học vị của [Lê Chí Hiệp](expert_name) là gì?
+    - bạn có biết [Huỳnh Ngọc Văn](expert_name) có học vị gì không?
+    - liệu bạn có biết [Nguyễn Trần Thi Văn](expert_name) có degree là gì không?
+
+    - người này có học vị là gì?
+    - chuyên gia này có học vị gì?
+    - degree của bà ấy là gì?
+    - bà ấy có học vị gì?
+    - tôi muốn biết học vị của người này là gì?
+    - tôi tò mò học vị của chuyên gia này là gì?
+    - bạn có biết degree của người này không?
+
+- intent: ask_expert_contact
+  examples: |
+    - cách liên hệ với [Nguyễn Thái Anh](expert_name)
+    - tôi muốn liên hệ với [Nguyễn Văn A](expert_name)
+    - cách liên lạc với [Vũ Đình B](expert_name)
+    - cách contact với [Nguyễn Lê Duy Khải](expert_name)
+    - làm sao liên lạc với [Nguyễn Lê Duy Ki](expert_name)
+    - làm thế nào để liên hệ với [Đặng Mậu C](expert_name)?
+    - tôi muốn contact với [Nguyễn Mạnh H](expert_name)
+    - tôi muốn biết cách liên lạc với [Bùi Trọng H](expert_name)
+    - [Lê Chí Hiệp](expert_name) có cách liên hệ gì?
+
+    - cho tôi biết cách liên hệ với [Huỳnh Ngọc V](expert_name)
+    - chuyên gia [Nguyễn Trần Thi V](expert_name) có thông tin liên hệ gì?  
+    - tôi muốn biết cách liên lạc với [Nguyễn Thái Anh](expert_name) là gì?
+    - tôi tự hỏi cách liên hệ với [Trương Quang Phúc](expert_name) là gì?
+    - bạn có biết cách liên hệ với [Vũ Đình Thành](expert_name) không?
+    - liệu bạn có biết cách liên lạc với [Nguyễn Lê Duy Khải](expert_name) không?
+
+    - chuyên gia này có thông tin liên hệ gì?
+    - người này có thông tin liên hệ gì?
+    - cho tôi biết cách liên hệ với người này
+    - làm thế nào để liên hệ với chuyên gia này?
+    - cho tôi biết cách liên lạc với chuyên gia này
+    - cho tôi contact với người này
+    - tôi muốn contact với người này
+    - cho tôi liên lạc với người này
+    - làm sao để liên lạc với ông ấy?
+    - tôi muốn biết cách liên lạc với bà ấy
+    - làm thế nào để liên hệ với anh ấy?
+
+
+- intent: ask_expert_graduated_school
+  examples: |
+    - [Nguyễn T Anh](expert_name) tốt nghiệp trường nào?
+    - [Trương Quan Phú](expert_name) học ở trường nào?
+    - chuyên gia [Vũ Đình Th](expert_name) học ở những trường nào?
+    - graduated school của [Nguyễn Lê Duy Kh](expert_name) là trường gì?
+    - chuyên gia [Vũ Đ T](expert_name) tốt nghiệp trường gì?
+    - chuyên gia [Nguyễn Lê Duy Kh](expert_name) học ở đâu?
+    - [Nguyễn Mạnh H](expert_name) là cựu sinh viên của trường nào?
+    - [Bùi Trọng H](expert_name) đã tốt nghiệp trường nào?
+    - graduated school của chuyên gia này là trường gì?
+    - anh ấy tốt nghiệp trường nào?
+    - chị ấy là cựu sinh viên của trường nào?
+    - người này học ở trường nào?
+    - chuyên gia này tốt nghiệp trường gì?
+    - người này học ở những trường nào?
+    - ông ấy có graduated school là trường nào?
+
+
+- intent: ask_expert_major
+  examples: |
+    - [Nguyễn Anh](expert_name) theo chuyên ngành gì?
+    - [Trương Phúc](expert_name) có chuyên môn về lĩnh vực nào?
+    - chuyên gia [Vũ Đình Thành](expert_name) có major là gì?
+    - major của chuyên gia [Vũ Đình](expert_name) là gì?
+    - chuyên gia [Vũ Thành](expert_name) chuyên ngành gì?
+    - [Nguyễn Lê Duy Khải](expert_name) chuyên sâu về lĩnh vực nào?
+    - major của [Nguyễn Mạnh Hùng](expert_name) là gì?
+    - chuyên gia [Vũ Đình](expert_name) có major là gì?
+    - chuyên gia [Nguyễn Duy Khải](expert_name) có chuyên môn về lĩnh vực nào?
+    - người này chuyên ngành gì?
+    - chuyên gia này có major là gì?
+    - chuyên gia này có chuyên môn về lĩnh vực nào?
+    - người này chuyên ngành gì?
+    - chuyên gia này có major là gì?
+    - ông ấy có chuyên môn bên lĩnh vực nào?
+    - bà ấy theo chuyên ngành gì?
+    - major của người này là gì?
+    - anh ta có chuyên sâu về lĩnh vực nào?
+
+- intent: ask_expert_previous_workplace
+  examples: |
+    - [Nguyễn Thái](expert_name) đã làm việc ở đâu trước đây?
+    - [Trương Quang Phúc](expert_name) có previous workplace ở đâu?
+    - [Trương Qua](expert_name) từng làm việc ở công ty nào?
+    - chuyên gia [Vũ Đình](expert_name) có previous workplace ở đâu?
+    - [Vũ Đình](expert_name) trước đây làm việc ở những nơi nào?
+    - chuyên gia [Vũ Thành](expert_name) có kinh nghiệm làm việc ở những nơi nào?
+    - previous workplace của [Nguyễn Lê Duy Khải](expert_name) là công ty nào?
+    - chuyên gia [Nguyễn Khải](expert_name) đã làm việc ở đâu trước đây?
+    - [Nguyễn Mạnh Hùng](expert_name) từng làm việc ở công ty nào?
+    - người này đã làm việc ở đâu trước đây?
+    - ông ấy có previous workplace là công ty nào?
+    - chuyên gia này từng làm việc ở công ty nào?
+    - ông ấy đã làm việc ở những nơi nào?
+    - bà ấy trước đây làm việc ở những nơi nào?
+    - anh ta là cựu nhân viên của công ty nào?
+    - previous workplace của người này là công ty nào?
+    - người này có kinh nghiệm làm việc ở những nơi nào?
+
+- intent: ask_expert_position
+  examples: |
+    - [Nguyễn Thái Anh](expert_name) giữ chức vụ gì?
+    - [Trương Quang Phúc](expert_name) có position gì?
+    - [Trương Quang Phúc](expert_name) đảm nhiệm vị trí nào?
+    - chuyên gia [Vũ Đình Thành](expert_name) có vị trí nào?
+    - position của [Nguyễn Lê Duy Khải](expert_name) là gì?
+    - chuyên gia [Nguyễn Lê Duy Khải](expert_name) ở vị trí gì?
+    - [Nguyễn Mạnh Hùng](expert_name) có position nào?
+    - [Trương Quang Phúc](expert_name) có công việc gì không?
+    - chuyên gia [Trần Thành](expert_name) đảm nhiệm công việc gì?
+    - postion của [Nguyễn Lê Duy Khải](expert_name) là gì?
+
+    - ông ấy đảm nhiệm chức vụ gì?
+    - bà ấy có giữ chức vụ gì?  
+    - bà ấy ở vị trí nào?
+    - anh ấy có position gì?
+    - position của [Nguyễn Mạnh Hùng](expert_name) là gì?
+    - chị ấy có công việc gì không?
+    - người này giữ chức vụ gì?
+    - position của người này là gì?
+    - chuyên gia này ở vị trí nào?
+    - người này có chức vụ là gì?
+
+- intent: expert_yes_no_question_current_workplace
+  examples: |
+    - [Nguyễn Thái Anh](expert_name) đang ở [Đại học Bách khoa](current_workplace) phải không?
+    - [Trương Quang Phúc](expert_name) đang làm tại [FPT](current_workplace)?
+    - current workplace của [Vũ Đình Thành](expert_name) là [HCMUT](current_workplace) phải không?
+    - chuyên gia [Vũ Đình Thành](expert_name) đang làm việc tại [HCMUT](current_workplace) phải không?
+    - chuyên gia [Nguyễn Lê Duy Khải](expert_name) có làm việc tại [Đại học Quốc gia](current_workplace) phải không?
+    - [Nguyễn Mạnh Hùng](expert_name) có current workplace ở [Đại học Sư phạm Kỹ thuật](current_workplace) phải không?
+    - [Nguyễn Mạnh Hùng](expert_name) có chỗ làm hiện tại là [Đại học Công nghệ thông tin](current_workplace) phải không?
+    - có phải [Nguyễn Lê Duy Khải](expert_name) hiện tại đang làm việc tại [Đại học Bách khoa](current_workplace) đúng không?
+    - có đúng là [Nguyễn Lê Duy Khải](expert_name) hiện tại đang ở [Đại học Quốc gia](current_workplace) phải không?
+    - có phải đúng là [Nguyễn Mạnh Hùng](expert_name) hiện tại đang làm việc tại [Đại học Sư phạm Kỹ thuật](current_workplace) không?
+
+    - người này bây giờ đang tại [Đại học Sư phạm Kỹ thuật](current_workplace) phải không?
+    - chuyên gia này hiện tại làm việc tại [hcmus](current_workplace) phải không? 
+    - người này hiện ở [Đại học Công nghệ thông tin](current_workplace) phải không?
+    - có hay không [Nguyễn Lê Duy Khải](expert_name) đang làm việc tại [Đại học Quốc gia](current_workplace)?
+    - có phải người này hiện tại đang ở [Đại học Sư phạm Kỹ thuật](current_workplace)?
+    - có đúng là [HCMUS]urrent_workplace) là nơi làm việc hiện tại của chuyên gia này?
+    - có phải ông ấy hiện tại đang làm việc ở [Đại học Công nghệ thông tin](current_workplace)?
+    - có chắc là bà ấy đang công tác tại [Đại học Bách khoa](current_workplace)?
+    - current workplace của ông ấy là [Đại học Bách khoa](current_workplace) phải không?
+    - anh ấy có current workplace là [Đại học Quốc gia](current_workplace) phải không?
+
+    - [Nguyễn Lê Duy Khải](expert_name) có current workplace là ở đó phải không?
+    - chuyên gia [Nguyễn Mạnh Hùng](expert_name) có nơi làm việc hiện tại là ở đó phải không?
+    - [Nguyễn Mạnh Hùng](expert_name) có chỗ làm việc bây giờ là ở đó phải không?
+    - có phải [Nguyễn Lê Duy Khải](expert_name) hiện tại đang làm việc ở đó không?
+    - có đúng là [Nguyễn Mạnh Hùng](expert_name) hiện tại đang ở đó không?
+    - có chắc là [Nguyễn Lê Duy Khải](expert_name) hiện tại đang làm việc ở đó không?
+    
+- intent: expert_yes_no_question_degree
+  examples: |
+    - [Nguyễn VĂn Anh](expert_name) có học vị [Tiến sĩ](degree) phải không?
+    - [Trương Quang Phúc](expert_name) là [Thạc sĩ](degree) phải không?
+    - degree của [Vũ Đình Thành](expert_name) là [Kỹ sư](degree) phải không?
+    - chuyên gia [Vũ Đình Thành](expert_name) là [Kỹ sư](degree) nhỉ?
+    - [Trương Minh Phúc](expert_name) có bằng [Thạc sĩ](degree) hả?
+    - [Nguyễn Lê Duy Khải](expert_name) có degree là [Tiến sĩ](degree) phải không?
+    - chuyên gia [Vũ Trọng Thành](expert_name) có bằng [Kỹ sư](degree) hử?
+    - có phải [Nguyễn Mạnh Hùng](expert_name) có degree là [Thạc sĩ](degree) không?
+    - có đúng là [Nguyễn Mạnh Hùng](expert_name) có bằng cấp [Kỹ sư](degree) phải không?
+    - chuyên gia [Nguyễn Mạnh Hùng](expert_name) có bằng [Thạc sĩ](degree) phải không?
+
+    - người này có học vị [TS](degree) phải không?
+    - chuyên gia này có học vị [ThS](degree) phải không?
+    - người này có degree là [Kỹ sư](degree) phải không?
+    - người này bằng cấp học thuật [Cử nhân](degree) đúng không?
+    - có hay không [Nguyễn Lê Duy Khải](expert_name) có học vị [CN](degree) phải không?
+    - ông ấy có degree là [Tiến sĩ](degree) hả?
+    - degree của bà ấy là [Thạc sĩ](degree) phải không?
+
+    - [Nguyễn Lê Duy Khải](expert_name) có degree là như trên phải không?
+    - chuyên gia [Nguyễn Mạnh Hùng](expert_name) có học vị là như trên phải không?
+    - Có phải [Nguyễn Mạnh Hùng](expert_name) có degree là như trên không?
+    - có đúng là [Nguyễn Lê Duy Khải](expert_name) có học vị là như trên không?
+    - có chắc là [Nguyễn Mạnh Hùng](expert_name) có degree là như trên không?
+
+- intent: expert_yes_no_question_academic_title
+  examples: |
+    - [Nguyễn Thái Anh](expert_name) có học hàm [Giáo sư](academic_title) phải không?
+    - [Trương Quang Phúc](expert_name) có danh hiệu giảng dạy là [Phó Giáo sư](academic_title) hả?
+    - chuyên gia [Vũ Đình Thành](expert_name) có degree là [Giáo sư](academic_title) hả?
+    - chuyên gia [Vũ Đình Thành](expert_name) có học hàm [Giảng viên chính](academic_title) nhỉ?
+    - [Nguyễn Lê Duy Khải](expert_name) có academic title [Phó Giáo sư](academic_title) hả?
+    - Có phải [Nguyễn Lê Duy Khải](expert_name) có học hàm [Giáo sư](academic_title) không?
+    - có đúng là [Nguyễn Mạnh Hùng](expert_name) có học hàm [Phó Giáo sư](academic_title) không?
+    - tôi thắc mắc [Nguyễn Mạnh Hùng](expert_name) có danh hiệu [Giáo sư](academic_title) đúng không?
+
+    - người này có học hàm [PGS](academic_title) đúng không?
+    - chuyên gia này có danh hiệu[GS](academic_title) hả?
+    - người này có danh tiêng [GS](academic_title) phải không?
+    - có hay không [Nguyễn Lê Duy Khải](expert_name) có học hàm [TSKH](academic_title)?
+    - ông ấy có danh hiệu giảng dạy là [Giáo sư](academic_title) không?
+    - bà ấy có academic title là [Phó Giáo sư](academic_title) hả?
+
+    - [Nguyễn Lê Duy Khải](expert_name) có academic title là như trên phải không?
+    - chuyên gia [Nguyễn Mạnh Hùng](expert_name) có học hàm là như trên phải không?
+    - có phải [Nguyễn Mạnh Hùng](expert_name) có danh hiệu là như trên không?
+    - có đúng là [Nguyễn Lê Duy Khải](expert_name) có học hàm là như trên không?
+    - có chắc là [Nguyễn Mạnh Hùng](expert_name) có danh hiệu là như trên không?
+
+
+- intent: expert_yes_no_question_graduated_school
+  examples: |
+    - [Nguyễn Thái Anh](expert_name) đã tốt nghiệp trường [Đại học Bách khoa](graduated_school) đúng không?
+    - [Trương Quang Phúc](expert_name) có học ở [Đại học Quốc gia](graduated_school) đúng không?
+    - chuyên gia [Vũ Đình Thành](expert_name) đã tốt nghiệp trường [HCMUT](graduated_school) hử?
+    - [Vũ Đình Thành](expert_name) có graduated school là [Đại học Sư phạm Kỹ thuật](graduated_school) phải không?
+    - chuyên gia [Nguyễn Lê Duy Khải](expert_name) có graduated school là [Đại học Sư phạm Kỹ thuật](graduated_school) đúng không?
+    - có đúng là [Nguyễn Lê Duy Khải](expert_name) đã học ở [HCMUS](graduated_school) không?
+    - có phải [Nguyễn Mạnh Hùng](expert_name) đã tốt nghiệp trường [Đại học Công nghệ thông tin](graduated_school) không?
+
+    - có hay không [Nguyễn Lê Duy Khải](expert_name) đã học xong ở trường [Đại học Bách khoa](graduated_school) phải không?
+    - ông ấy là cựu sinh viên của [Đại học Quốc gia](graduated_school) phải không?
+    - chuyên gia này đã ra trường từ [HCMUT](graduated_school) hả? 
+    - có phải người này đã tốt nghiệp trường [Đại học Sư phạm Kỹ thuật](graduated_school) không?
+    - graduated school của [Nguyễn Mạnh Hùng](expert_name) là [Đại học Sư phạm Kỹ thuật](graduated_school) phải không?
+    - ông ấy có graduated school là [HCMUS](graduated_school) phải không?
+
+    - [Nguyễn Lê Duy Khải](expert_name) có graduated school là như trên phải không?
+    - chuyên gia [Nguyễn Mạnh Hùng](expert_name) có học ở trường như trên phải không?
+    - có phải [Nguyễn Mạnh Hùng](expert_name) đã tốt nghiệp trường như trên không?
+    - có đúng là [Nguyễn Lê Duy Khải](expert_name) đã học ở trường như trên không?
+    - có chắc là [Nguyễn Mạnh Hùng](expert_name) đã tốt nghiệp trường như trên không?
+
+
+- intent: expert_yes_no_question_major
+  examples: |
+    - [Nguyễn Thái Anh](expert_name) theo lĩnh vực [Công nghệ thông tin](major) phải không?
+    - major của [Trương Quang Phúc](expert_name) là [Khoa học máy tính](major) phải không?
+    - [Trương Quang Phúc](expert_name) có chuyên môn về [Khoa học máy tính](major) hể?
+    - chuyên gia [Vũ Đình Thành](expert_name) có chuyên ngành về [Mạng máy tính](major) nhỉ?
+    - [Nguyễn Lê Duy Khải](expert_name) theo chuyên ngành [An toàn thông tin](major) hả?  
+    - [Nguyễn Lê Duy Khải](expert_name) có chuyên môn bên [Trí tuệ nhân tạo](major) phải không?
+    - [Nguyễn Mạnh Hùng](expert_name) có major là [Hệ thống thông tin](major) không?
+    - có phải [Nguyễn Mạnh Hùng](expert_name) có chuyên môn về [Kỹ thuật phần mềm](major) đúng không?
+    - có đúng là [Nguyễn Mạnh Hùng](expert_name) theo chuyên ngành [Mạng máy tính](major) không?
+    - có đúng hay không [Nguyễn Lê Duy Khải](expert_name) có chuyên môn về [An toàn thông tin](major)?
+
+    - người này có chuyên môn về [An toàn thông tin](major) không?
+    - chuyên gia này có chuyên ngành [Hệ thống thông tin](major) hả?
+    - người này có chuyên môn về [Kỹ thuật phần mềm](major)?
+    - có hay không [Nguyễn Lê Duy Khải](expert_name) có chuyên ngành [Trí tuệ nhân tạo](major) hử?
+    - ông ấy có theo lĩnh vực [Khoa học máy tính](major) không?
+    - major của bà ấy là [An toàn thông tin](major) phải không?
+    - anh ấy theo chuyên sâu bên [Mạng máy tính](major) phải không?
+
+    - [Nguyễn Lê Duy Khải](expert_name) có major là như trên phải không?
+    - chuyên gia [Nguyễn Mạnh Hùng](expert_name) có chuyên môn là như trên phải không?
+    - có phải [Nguyễn Mạnh Hùng](expert_name) có chuyên ngành là như trên không?
+    - có đúng là [Nguyễn Lê Duy Khải](expert_name) theo lĩnh vực là như trên không?
+    - có chắc là [Nguyễn Mạnh Hùng](expert_name) có chuyên môn là như trên không?
+
+
+- intent: expert_yes_no_question_previous_workplace
+  examples: |
+    - [Nguyễn Thái Anh](expert_name) đã làm việc ở [FPT](previous_workplace) phải không?
+    - [Trương Quang Phúc](expert_name) có kinh nghiệm làm việc tại [VNG](previous_workplace)?
+    - [Trương Quang Phúc](expert_name) có previous workplace tại [VNG](previous_workplace)?
+    - chuyên gia [Vũ Đình Thành](expert_name) đã từng làm việc ở [VNPT](previous_workplace)?
+    - [Nguyễn Lê Duy Khải](expert_name) là cựu nhân viên của [Viettel](previous_workplace) phải không?
+    - previous workplace của [Nguyễn Mạnh Hùng](expert_name) là [FPT Software](previous_workplace) phải không?
+    - có đúng là [Nguyễn Mạnh Hùng](expert_name) đã làm việc ở [MobiFone](previous_workplace) phải không?
+    - có phải [Nguyễn Mạnh Hùng](expert_name) đã làm việc ở [Viettel](previous_workplace) không?
+    - có đúng hay không [Nguyễn Lê Duy Khải](expert_name) đã làm việc ở [FPT Software](previous_workplace)?
+    
+    - người này có kinh nghiệm làm việc tại [Viettel](previous_workplace) không?
+    - chuyên gia này có từng làm việc ở [MobiFone](previous_workplace) hả?
+    - người này đã làm việc ở [Zalo](previous_workplace)?
+    - có hay không [Nguyễn Lê Duy Khải](expert_name) đã từng làm việc ở [FPT Software](previous_workplace)?
+    - ông ấy từng làm việc ở [VNG](previous_workplace) không?
+    - bà ấy có kinh nghiệm làm việc ở [VNPT](previous_workplace) phải không?
+    - previous workplace của anh ấy là [MobiFone](previous_workplace) phải không?
+    - anh ta là cựu nhân viên của [Viettel](previous_workplace) phải không?
+    - cô ấy có previous workplace là [FPT Software](previous_workplace) không?
+
+    - [Nguyễn Lê Duy Khải](expert_name) có previous workplace là như trên phải không?
+    - chuyên gia [Nguyễn Mạnh Hùng](expert_name) từng làm việc ở đó phải không?
+    - có phải [Nguyễn Mạnh Hùng](expert_name) đã làm việc ở đó không?
+    - có đúng là [Nguyễn Lê Duy Khải](expert_name) đã công tác ở đó không?  
+    - có chắc là [Nguyễn Mạnh Hùng](expert_name) đã làm việc ở đó không?
+
+- intent: expert_yes_no_question_position
+  examples: |
+    - [Nguyễn Thái Tuấn](expert_name) giữ chức vụ [Trưởng phòng](position) phải không?
+    - [Trương Quang Phúc](expert_name) có position là [Kỹ sư trưởng](position)?
+    - [Trương Quang Linh](expert_name) có vị trí công việc là [Kỹ sư trưởng](position) phải không?
+    - chuyên gia [Vũ Đình Thảo](expert_name) có vị trí [Giảng viên](position)?
+    - position của [Nguyễn Lê Duy Khải](expert_name) là [Chuyên viên cao cấp](position) phải không?
+    - có phải [Nguyễn Lê Duy Khải](expert_name) giữ chức vụ [Kỹ sư phần mềm](position) không?
+    - có đúng là [Nguyễn Mạnh Hùng](expert_name) có position là [Trợ lý giám đốc](position) không?
+    - có đúng hay không [Nguyễn Mạnh Hùng](expert_name) giữ chức vụ [Kỹ sư phần mềm](position)?
+    - người này có position là [Kỹ sư](position) phải không?
+
+    - người này có đảm nhiệm công việc [kỹ sư](position) không?
+    - chuyên gia này đảm nhiệm vị trí [Chuyên viên cao cấp](position) hả?
+    - người này có position là [Kỹ sư phần mềm](position) không?
+    - người này có công việc [kỹ sư phần mềm](position) không?
+    - có hay không [Nguyễn Lê Duy Khải](expert_name) giữ vị trí [Trợ lý giám đốc](position)?
+    - ông ấy có đảm nhiệm vị trí [Trưởng phòng](position) không?
+    - bà ấy có công việc vị trí [Kỹ sư trưởng](position) hả?
+    - anh ta có giữ chức vụ [Giảng viên](position) không?
+    - position của cô ấy là [Chuyên viên cao cấp](position) phải không?
+
+    - [Nguyễn Lê Duy Khải](expert_name) có position là như trên phải không?
+    - chuyên gia [Nguyễn Mạnh Hùng](expert_name) có công việc là như trên phải không?
+    - có phải [Nguyễn Mạnh Hùng](expert_name) giữ chức vụ là như trên không?
+    - có đúng là [Nguyễn Lê Duy Khải](expert_name) có position là như trên không?
+    - có chắc là [Nguyễn Mạnh Hùng](expert_name) có công việc là như trên không?

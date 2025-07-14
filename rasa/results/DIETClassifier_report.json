@@ -1,0 +1,137 @@
+{
+  "current_workplace": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 347,
+    "confused_with": {}
+  },
+  "position": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 114,
+    "confused_with": {}
+  },
+  "previous_workplace": {
+    "precision": 1.0,
+    "recall": 0.9407114624505929,
+    "f1-score": 0.969450101832994,
+    "support": 253,
+    "confused_with": {}
+  },
+  "academic_title": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 15,
+    "confused_with": {}
+  },
+  "academicTitle": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 30,
+    "confused_with": {}
+  },
+  "expert_name": {
+    "precision": 0.9795221843003413,
+    "recall": 0.9379084967320261,
+    "f1-score": 0.9582637729549249,
+    "support": 306,
+    "confused_with": {
+      "name": 16
+    }
+  },
+  "project_role": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 28,
+    "confused_with": {}
+  },
+  "language": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 79,
+    "confused_with": {}
+  },
+  "degree": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 58,
+    "confused_with": {}
+  },
+  "language_level": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 28,
+    "confused_with": {}
+  },
+  "year": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 45,
+    "confused_with": {}
+  },
+  "name": {
+    "precision": 0.9780521262002744,
+    "recall": 0.9916550764951322,
+    "f1-score": 0.9848066298342542,
+    "support": 719,
+    "confused_with": {
+      "expert_name": 6
+    }
+  },
+  "publication_type": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 58,
+    "confused_with": {}
+  },
+  "graduated_school": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 190,
+    "confused_with": {}
+  },
+  "major": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 109,
+    "confused_with": {}
+  },
+  "project_status": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 28,
+    "confused_with": {}
+  },
+  "micro avg": {
+    "precision": 0.9907911259941398,
+    "recall": 0.9833818030743664,
+    "f1-score": 0.9870725604670558,
+    "support": 2407
+  },
+  "macro avg": {
+    "precision": 0.9973483944062884,
+    "recall": 0.9918921897298595,
+    "f1-score": 0.9945325315388859,
+    "support": 2407
+  },
+  "weighted avg": {
+    "precision": 0.9908405762916085,
+    "recall": 0.9833818030743664,
+    "f1-score": 0.9869445605063495,
+    "support": 2407
+  },
+  "accuracy": 0.9941348973607038
+}

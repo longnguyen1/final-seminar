@@ -1,0 +1,346 @@
+{
+  "thong_ke_cong_trinh_khoa_hoc": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 33,
+    "confused_with": {}
+  },
+  "tra_cuu_du_an_theo_trang_thai": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 15,
+    "confused_with": {}
+  },
+  "list_experts_by_graduated_school": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1,
+    "confused_with": {
+      "tra_cuu_chuyen_gia_theo_truong_tot_nghiep": 1
+    }
+  },
+  "liet_ke_cong_trinh_khoa_hoc": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 26,
+    "confused_with": {}
+  },
+  "potfolio_project": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 18,
+    "confused_with": {}
+  },
+  "tra_cuu_chuyen_gia_theo_hoc_ham": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 16,
+    "confused_with": {}
+  },
+  "tra_cuu_du_an_theo_nam": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 20,
+    "confused_with": {}
+  },
+  "confirm_chatgpt": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 5,
+    "confused_with": {}
+  },
+  "tra_cuu_chuyen_gia_theo_truong_tot_nghiep": {
+    "precision": 0.975609756097561,
+    "recall": 1.0,
+    "f1-score": 0.9876543209876543,
+    "support": 40,
+    "confused_with": {}
+  },
+  "liet_ke_du_an": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 33,
+    "confused_with": {}
+  },
+  "tra_cuu_chuyen_gia_theo_vi_tri": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 20,
+    "confused_with": {}
+  },
+  "greet": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 10,
+    "confused_with": {}
+  },
+  "potfolio_education": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 1,
+    "confused_with": {}
+  },
+  "tra_cuu_chuyen_gia_theo_chuyen_nganh": {
+    "precision": 0.967741935483871,
+    "recall": 1.0,
+    "f1-score": 0.9836065573770492,
+    "support": 30,
+    "confused_with": {}
+  },
+  "deny_chatgpt": {
+    "precision": 0.4,
+    "recall": 1.0,
+    "f1-score": 0.5714285714285715,
+    "support": 4,
+    "confused_with": {}
+  },
+  "bot_challenge": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 8,
+    "confused_with": {}
+  },
+  "list_experts_by_degree": {
+    "precision": 0.8571428571428571,
+    "recall": 1.0,
+    "f1-score": 0.923076923076923,
+    "support": 12,
+    "confused_with": {}
+  },
+  "potfolio_expert": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 18,
+    "confused_with": {}
+  },
+  "out_of_scope": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 24,
+    "confused_with": {}
+  },
+  "list_experts_by_posision_and_or_previous_workplace": {
+    "precision": 1.0,
+    "recall": 0.08,
+    "f1-score": 0.14814814814814814,
+    "support": 25,
+    "confused_with": {
+      "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec": 23
+    }
+  },
+  "list_experts_by_major": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1,
+    "confused_with": {
+      "tra_cuu_chuyen_gia_theo_chuyen_nganh": 1
+    }
+  },
+  "list_experts_by_academic_title": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 7,
+    "confused_with": {}
+  },
+  "tra_cuu_chuyen_gia_theo_ten": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 38,
+    "confused_with": {}
+  },
+  "tra_cuu_chuyen_gia_theo_hoc_vi": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 22,
+    "confused_with": {}
+  },
+  "tra_cuu_chuyen_gia_theo_trinh_do_ngoai_ngu": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 24,
+    "confused_with": {}
+  },
+  "tra_cuu_chuyen_gia_theo_don_vi": {
+    "precision": 0.9615384615384616,
+    "recall": 1.0,
+    "f1-score": 0.9803921568627451,
+    "support": 50,
+    "confused_with": {}
+  },
+  "hoi_qua_trinh_dao_tao": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 24,
+    "confused_with": {}
+  },
+  "nlu_fallback": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 8,
+    "confused_with": {
+      "deny_chatgpt": 6,
+      "list_experts_by_degree": 2
+    }
+  },
+  "provide_name": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 21,
+    "confused_with": {}
+  },
+  "tra_cuu_cong_trinh_theo_loai": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 24,
+    "confused_with": {}
+  },
+  "tra_cuu_chuyen_gia_theo_ngoai_ngu": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 28,
+    "confused_with": {}
+  },
+  "tra_cuu_du_an_theo_vai_tro": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 20,
+    "confused_with": {}
+  },
+  "liet_ke_du_an_con_lai": {
+    "precision": 0.9821428571428571,
+    "recall": 0.9649122807017544,
+    "f1-score": 0.9734513274336283,
+    "support": 57,
+    "confused_with": {
+      "liet_ke_cong_trinh_con_lai": 2
+    }
+  },
+  "tra_cuu_chuyen_gia_theo_noi_tung_lam_viec": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 25,
+    "confused_with": {}
+  },
+  "liet_ke_cong_trinh_con_lai": {
+    "precision": 0.9459459459459459,
+    "recall": 0.9722222222222222,
+    "f1-score": 0.9589041095890412,
+    "support": 36,
+    "confused_with": {
+      "liet_ke_du_an_con_lai": 1
+    }
+  },
+  "potfolio_workhistory": {
+    "precision": 1.0,
+    "recall": 0.05,
+    "f1-score": 0.09523809523809523,
+    "support": 20,
+    "confused_with": {
+      "tra_cuu_lich_su_lam_viec": 19
+    }
+  },
+  "tra_cuu_cong_trinh_theo_nam": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 25,
+    "confused_with": {}
+  },
+  "list_experts_by_current_workplace": {
+    "precision": 1.0,
+    "recall": 0.8666666666666667,
+    "f1-score": 0.9285714285714286,
+    "support": 15,
+    "confused_with": {
+      "tra_cuu_chuyen_gia_theo_don_vi": 2
+    }
+  },
+  "goodbye": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 8,
+    "confused_with": {}
+  },
+  "potfolio_publication": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 20,
+    "confused_with": {}
+  },
+  "thanks": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 7,
+    "confused_with": {}
+  },
+  "tra_cuu_ngoai_ngu": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 42,
+    "confused_with": {}
+  },
+  "hoi_lich_su_lam_viec": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 10,
+    "confused_with": {}
+  },
+  "thong_ke_du_an": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 43,
+    "confused_with": {}
+  },
+  "micro avg": {
+    "precision": 0.9831838565022422,
+    "recall": 0.9389721627408993,
+    "f1-score": 0.9605695509309967,
+    "support": 934
+  },
+  "macro avg": {
+    "precision": 0.9111391321216261,
+    "recall": 0.8848591174906965,
+    "f1-score": 0.8761470826980292,
+    "support": 934
+  },
+  "weighted avg": {
+    "precision": 0.9775754631501636,
+    "recall": 0.9389721627408993,
+    "f1-score": 0.9378382499063721,
+    "support": 934
+  },
+  "accuracy": 0.9389721627408993
+}

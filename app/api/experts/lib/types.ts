@@ -165,6 +165,7 @@ export interface ExpertWorkHistoryJoin extends ExpertResult {
   workplace: string | null;
   workPosition: string | null; // Renamed to avoid conflict with expert.position
   field: string | null;
+  expertId: number;
 }
 
 export interface ExpertPublicationJoin extends ExpertResult {
@@ -250,9 +251,10 @@ export interface RasaExpertRequest extends RasaBaseRequest {
   major?: string;
   position?: string;
   language?: string;
+  enrich?: boolean;
 }
 
-export interface RasaResponse<T = ExpertWithRelations[]> {
+export interface RasaResponse<T> {
   success: boolean;
   data: T;
   total: number;

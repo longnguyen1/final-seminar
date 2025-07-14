@@ -1,0 +1,65 @@
+version: "3.1"
+
+nlu:
+- intent: provide_name
+  examples: |
+    - [Nguyễn Văn A](expert_name)
+    - [Trần Thị B](expert_name)
+    - [Lê Văn C](expert_name)
+    - [Phạm Thị D](expert_name)
+    - [Nguyễn Thị E](expert_name)
+    - [Nguyễn Văn F](expert_name)
+    - [Trần Văn G](expert_name)
+    - [Lê Thị H](expert_name)
+    - [Phạm Văn I](expert_name)
+
+- intent: provide_current_workplace
+  examples: |
+    - hiện tại ở [Đại học Bách khoa TPHCM](current_workplace)
+    - đang ở [Đại học Khoa học tự nhiên - ĐHQG TPHCM](current_workplace)
+    - đang tại [Đại học Công nghệ thông tin - ĐHQG TPHCM](current_workplace)
+    - đang công tác ở [Đại học Sư phạm kỹ thuật TPHCM](current_workplace) 
+    - hiện nay ở [Đại học Công nghiệp TPHCM](current_workplace)
+
+    
+- intent: provide_position
+  examples: |
+    - ở vị trí [giảng viên](position)
+    - có chức vụ [trợ giảng](position)
+    - với vai trò [nghiên cứu viên](position)
+    - đảm nhiệm chức vụ [giám đốc](position)
+
+- intent: provide_previous_workplace
+  examples: |
+    - từng làm việc tại [Công ty ABC](previous_workplace)
+    - đã làm ở [Công ty XYZ](previous_workplace)
+    - trước đây làm việc tại [Trường Đại học DEF](previous_workplace)
+    - đã từng công tác ở [Viện Nghiên cứu GHI](previous_workplace)
+    
+- intent: provide_graduated_school
+  examples: |
+    - học xong từ [Đại học Bách khoa TPHCM](graduated_school)
+    - tốt nghiệp ở [Đại học Khoa học tự nhiên - ĐHQG TPHCM](graduated_school)
+    - học ở [Đại học Công nghệ thông tin - ĐHQG TPHCM](graduated_school)
+    - ra trường từ [Đại học Sư phạm kỹ thuật TPHCM](graduated_school)
+    - tốt nghiệp từ [Đại học Công nghiệp TPHCM](graduated_school)
+
+- intent: provide_major
+  examples: |
+    - chuyên ngành [Khoa học máy tính](major)
+    - chuyên môn [Công nghệ thông tin](major)
+    - ngành [Kỹ thuật phần mềm](major)
+    - chuyên môn [Mạng máy tính](major)
+
+- intent: provide_degree
+  examples: |
+    - degree [Cử nhân](degree)
+    - học vị [Thạc sĩ](degree)
+    - degree [Tiến sĩ](degree)
+    - degree [Kỹ sư](degree)
+
+- intent: provide_academic_title
+  examples: |   
+    - học hàm [Giáo sư](academic_title)
+    - học hàm [Phó giáo sư](academic_title) 
+

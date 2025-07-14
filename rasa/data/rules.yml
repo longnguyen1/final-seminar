@@ -1,134 +1,203 @@
 version: "3.1"
 
 rules:
-# ===== EXPERT TABLE RULES =====
-- rule: Tra cứu chuyên gia theo tên
+# ===== BASIC EXPERT INFO SHORT RULES =====
+- rule: Hỏi nơi làm việc hiện tại chuyên gia
   steps:
-  - intent: tra_cuu_chuyen_gia
+    - intent: ask_expert_current_workplace
+      entities:
+        - expert_name: "Vũ Đình Thành"
+    - action: action_ask_expert_current_workplace
+
+- rule: Hỏi học vị chuyên gia
+  steps:
+    - intent: ask_expert_degree
+      entities:
+        - expert_name: "Nguyễn Thái Anh"
+    - action: action_ask_expert_degree
+
+- rule: Hỏi thông tin liên hệ chuyên gia
+  steps:
+    - intent: ask_expert_contact
+      entities:
+        - expert_name: "Lê Chí Hiệp"
+    - action: action_ask_expert_contact
+
+- rule: Hỏi trường tốt nghiệp chuyên gia
+  steps:
+    - intent: ask_expert_graduated_school
+      entities:
+        - expert_name: "Vũ Đình Thành"
+    - action: action_ask_expert_graduated_school
+
+- rule: Hỏi chuyên ngành chuyên gia
+  steps:
+    - intent: ask_expert_major
+      entities:
+        - expert_name: "Vũ Đình Thành"
+    - action: action_ask_expert_major
+
+- rule: Hỏi nơi từng làm việc chuyên gia
+  steps:
+    - intent: ask_expert_previous_workplace
+      entities:
+        - expert_name: "Vũ Đình Thành"
+    - action: action_ask_expert_previous_workplace
+
+- rule: Hỏi chức vụ chuyên gia
+  steps:
+    - intent: ask_expert_position
+      entities:
+        - expert_name: "Vũ Đình Thành"
+    - action: action_ask_expert_position
+
+# ===== YES/NO RULE =====
+
+- rule: Yes/No nơi làm việc hiện tại chuyên gia
+  steps:
+    - intent: expert_yes_no_question_current_workplace
+      entities:
+        - expert_name: "Vũ Đình Thành"
+        - current_workplace: "Đại học Bách khoa - ĐHQG TPHCM"
+    - action: action_expert_yes_no_question
+
+- rule: Yes/No học vị chuyên gia
+  steps:
+    - intent: expert_yes_no_question_degree
+      entities:
+        - expert_name: "Nguyễn Thái Anh"
+        - degree: "Tiến sĩ"
+    - action: action_expert_yes_no_question
+
+- rule: Yes/No học hàm chuyên gia
+  steps:
+    - intent: expert_yes_no_question_academic_title
+      entities:
+        - expert_name: "Lê Chí Hiệp"
+        - academic_title: "Giáo sư"
+    - action: action_expert_yes_no_question
+
+- rule: Yes/No trường tốt nghiệp chuyên gia
+  steps:
+    - intent: expert_yes_no_question_graduated_school
+      entities:
+        - expert_name: "Vũ Đình Thành"
+        - graduated_school: "Đại học Bách khoa - ĐHQG TPHCM"
+    - action: action_expert_yes_no_question
+
+- rule: Yes/No chuyên ngành chuyên gia
+  steps:
+    - intent: expert_yes_no_question_major
+      entities:
+        - expert_name: "Vũ Đình Thành"
+        - major: "Kỹ thuật xung_số, mạch điện tử"
+    - action: action_expert_yes_no_question
+
+- rule: Yes/No nơi từng làm việc chuyên gia
+  steps:
+    - intent: expert_yes_no_question_previous_workplace
+      entities:
+        - expert_name: "Vũ Đình Thành"
+        - previous_workplace: "Nghiên cứu sinh tại Pháp"
+    - action: action_expert_yes_no_question
+
+- rule: Yes/No chức vụ chuyên gia
+  steps:
+    - intent: expert_yes_no_question_position
+      entities:
+        - expert_name: "Vũ Đình Thành"
+        - position: "Hiệu trưởng"
+    - action: action_expert_yes_no_question
+
+- rule: Form tra cứu chuyên gia theo vị trí và nơi từng làm việc
+  steps:
+    - intent: list_experts_by_position_and_or_previous_workplace
+    - action: list_experts_by_position_and_or_previous_workplace_form
+    - active_loop: list_experts_by_position_and_or_previous_workplace_form
+
+- rule: Submit form tra cứu chuyên gia theo vị trí và nơi từng làm việc
+  condition:
+    - active_loop: list_experts_by_position_and_or_previous_workplace_form
+  steps:
+    - action: list_experts_by_position_and_or_previous_workplace_form
+    - active_loop: null
+    - action: action_list_experts_by_position_and_or_previous_workplace
+
+# ===== EXPERT TABLE RULES =====
+- rule: Tra cứu thôn tin chuyên gia
+  steps:
+  - intent: potfolio_expert
     entities:
     - expert_name
-  - action: action_tra_cuu_chuyen_gia
+  - action: action_potfolio_expert
 
 - rule: Tra cứu chuyên gia theo đơn vị hiện tại
   steps:
-  - intent: tra_cuu_chuyen_gia_theo_don_vi
+  - intent: list_experts_by_current_workplace
     entities:
     - current_workplace
-  - action: action_tra_cuu_chuyen_gia_theo_don_vi
+  - action: action_list_experts_by_current_workplace
 
 - rule: Tra cứu chuyên gia theo học vị
   steps:
-  - intent: tra_cuu_chuyen_gia_theo_hoc_vi
+  - intent: list_experts_by_degree
     entities:
     - degree
-  - action: action_tra_cuu_chuyen_gia_theo_hoc_vi
+  - action: action_list_experts_by_degree
 
 - rule: Tra cứu chuyên gia theo học hàm
   steps:
-  - intent: tra_cuu_chuyen_gia_theo_hoc_ham
+  - intent: list_experts_by_academic_title
     entities:
     - academic_title
-  - action: action_tra_cuu_chuyen_gia_theo_hoc_ham
+  - action: action_list_experts_by_academic_title
 
 # ===== EDUCATION TABLE RULES =====
 - rule: Tra cứu quá trình đào tạo
   steps:
-  - intent: hoi_qua_trinh_dao_tao
+  - intent: potfolio_education
     entities:
     - expert_name
-  - action: action_tra_cuu_qua_trinh_dao_tao
+  - action: action_potfolio_education
 
 - rule: Tra cứu chuyên gia theo trường tốt nghiệp
   steps:
-  - intent: tra_cuu_chuyen_gia_theo_truong_tot_nghiep
+  - intent: list_experts_by_graduated_school
     entities:
     - graduated_school
-  - action: action_tra_cuu_chuyen_gia_theo_truong_tot_nghiep
+  - action: action_list_experts_by_graduated_school
 
 - rule: Tra cứu chuyên gia theo chuyên ngành
   steps:
-  - intent: tra_cuu_chuyen_gia_theo_chuyen_nganh
+  - intent: list_experts_by_major
     entities:
     - major
-  - action: action_tra_cuu_chuyen_gia_theo_chuyen_nganh
+  - action: action_list_experts_by_major
 
 # ===== WORKHISTORY TABLE RULES =====
 - rule: Tra cứu lịch sử làm việc
   steps:
-  - intent: tra_cuu_lich_su_lam_viec
+  - intent: potfolio_workhistory
     entities:
     - expert_name
-  - action: action_tra_cuu_lich_su_lam_viec
-
-- rule: Tra cứu chuyên gia theo nơi từng làm việc
-  steps:
-  - intent: tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
-    entities:
-    - previous_workplace
-  - action: action_tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
-
-- rule: Tra cứu chuyên gia theo vị trí
-  steps:
-  - intent: tra_cuu_chuyen_gia_theo_vi_tri
-    entities:
-    - position
-  - action: action_tra_cuu_chuyen_gia_theo_vi_tri
+  - action: action_potfolio_workhistory
 
 # ===== PUBLICATION RULES =====
-- rule: Thống kê công trình khoa học
-  steps:
-  - intent: thong_ke_cong_trinh_khoa_hoc
-    entities:
-    - expert_name
-  - action: action_thong_ke_cong_trinh_khoa_hoc
-
 - rule: Liệt kê công trình khoa học
   steps:
-  - intent: liet_ke_cong_trinh_khoa_hoc
+  - intent: potfolio_publication
     entities:
     - expert_name
-  - action: action_liet_ke_cong_trinh_khoa_hoc
+  - action: action_potfolio_publication
 
 # ===== PROJECT RULES =====
-- rule: Thống kê dự án
-  steps:
-  - intent: thong_ke_du_an
-    entities:
-    - expert_name
-  - action: action_thong_ke_du_an
-
 - rule: Liệt kê dự án
   steps:
-  - intent: liet_ke_du_an
+  - intent: potfolio_project
     entities:
     - expert_name
-  - action: action_liet_ke_du_an
+  - action: action_potfolio_project
 
-# ===== LANGUAGE RULES =====
-- rule: Tra cứu ngoại ngữ
-  steps:
-  - intent: tra_cuu_ngoai_ngu
-    entities:
-    - expert_name
-  - action: action_tra_cuu_ngoai_ngu
-
-- rule: Tra cứu chuyên gia theo ngoại ngữ
-  steps:
-  - intent: tra_cuu_chuyen_gia_theo_ngoai_ngu
-    entities:
-    - language
-  - action: action_tra_cuu_chuyen_gia_theo_ngoai_ngu
-
-# ===== PAGINATION RULES =====
-- rule: Liệt kê công trình khoa học còn lại
-  steps:
-  - intent: liet_ke_cong_trinh_con_lai
-  - action: action_liet_ke_cong_trinh_khoa_hoc_con_lai
-
-- rule: Liệt kê dự án còn lại
-  steps:
-  - intent: liet_ke_du_an_con_lai
-  - action: action_liet_ke_du_an_con_lai
 
 # ===== GENERAL RULES =====
 - rule: Say goodbye anytime the user says goodbye
@@ -146,13 +215,42 @@ rules:
   - intent: greet
   - action: utter_greet
 
-- rule: Thank user
+- rule: wonder
   steps:
-  - intent: thanks
-  - action: utter_happy
-
-- rule: Handle out of scope
-  steps:
-  - intent: nlu_fallback
+  - intent: not_sure
   - action: utter_default
+
+- rule: Praise bot
+  steps:  
+  - intent: praise_bot
+  - action: utter_thank_you
+
+- rule: Complain bot
+  steps:
+  - intent: complain_bot
+  - action: utter_sorry
+
+
+# ===== FALLBACK RULES =====
+- rule: Out of scope
+  steps:
+    - intent: out_of_scope
+    - action: action_store_pending_chatgpt_question
+    - action: utter_default
+    - action: utter_ask_use_chatgpt
+
+- rule: nlu fallback
+  steps:
+    - intent: nlu_fallback
+    - action: action_reset_chuyen_gia
+
+- rule: Chuyển sang ChatGPT nếu xác nhận
+  steps:
+    - intent: confirm_chatgpt
+    - action: action_fallback_chatgpt
+
+- rule: Hủy nếu từ chối
+  steps:
+    - intent: deny_chatgpt
+    - action: utter_cancel_chatgpt
 

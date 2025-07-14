@@ -5,8 +5,8 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), 'actions'))
 
 try:
-    from actions.data_normalizer import normalizer
+    from actions.context.context_normalizer import normalizer
     print("✅ Import thành công!")
-    print(f"Test normalize: {normalizer.normalize_name('nguyễn văn an')}")
+    print(f"Test normalize: {normalizer.normalize_expert_name('HCMUS')}")
 except ImportError as e:
     print(f"❌ Lỗi import: {e}")

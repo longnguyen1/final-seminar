@@ -1,205 +1,885 @@
 version: "3.1"
 
 stories:
-# ===== COMPLETE EXPERT PROFILE FLOWS =====
-- story: Complete expert profile inquiry
+# ===== OUT_OF_SCOPE ACCEPT/DENY ASK CHATGPT ====
+
+- story: form 
   steps:
-    - intent: tra_cuu_chuyen_gia
+  - intent: list_experts_by_position_and_or_previous_workplace
+  - action: list_experts_by_position_and_or_previous_workplace_form
+  - active_loop: list_experts_by_position_and_or_previous_workplace_form
+
+- story: Tra cứu chuyên gia theo vị trí và nơi từng làm việc (đủ thông tin)
+  steps:
+    - intent: list_experts_by_position_and_or_previous_workplace
       entities:
-        - expert_name: "Nguyễn Thái Anh"
+        - position: "giảng viên"
+        - previous_workplace: "Đại học Bách khoa"
+    - action: list_experts_by_position_and_or_previous_workplace_form
+    - active_loop: list_experts_by_position_and_or_previous_workplace_form
     - slot_was_set:
-        - expert_name: "Nguyễn Thái Anh"
-    - action: action_tra_cuu_chuyen_gia
-    - intent: hoi_qua_trinh_dao_tao
-    - action: action_tra_cuu_qua_trinh_dao_tao
-    - intent: tra_cuu_lich_su_lam_viec
-    - action: action_tra_cuu_lich_su_lam_viec
+        - position: "giảng viên"
+        - previous_workplace: "Đại học Bách khoa"
+    - action: list_experts_by_position_and_or_previous_workplace_form
+    - active_loop: null
+    - action: action_list_experts_by_position_and_or_previous_workplace
 
-- story: Expert to publications flow
+- story: Tra cứu chuyên gia theo vị trí và nơi từng làm việc (thiếu vị trí)
   steps:
-    - intent: tra_cuu_chuyen_gia
+    - intent: list_experts_by_position_and_or_previous_workplace
       entities:
-        - expert_name: "Trương Quang Phúc"
+        - previous_workplace: "Đại học Bách khoa"
+    - action: list_experts_by_position_and_or_previous_workplace_form
+    - active_loop: list_experts_by_position_and_or_previous_workplace_form
+    - intent: provide_position_or_workplace
+      entities:
+        - position: "giảng viên"
     - slot_was_set:
-        - expert_name: "Trương Quang Phúc"
-    - action: action_tra_cuu_chuyen_gia
-    - intent: thong_ke_cong_trinh_khoa_hoc
-    - action: action_thong_ke_cong_trinh_khoa_hoc
-    - intent: liet_ke_cong_trinh_khoa_hoc
-    - action: action_liet_ke_cong_trinh_khoa_hoc
+        - position: "giảng viên"
+    - action: list_experts_by_position_and_or_previous_workplace_form
+    - active_loop: null
+    - action: action_list_experts_by_position_and_or_previous_workplace
 
-# ===== SEARCH BY CRITERIA FLOWS =====
-- story: Organization to workplace search
+- story: Tra cứu chuyên gia theo vị trí và nơi từng làm việc (thiếu nơi làm việc)
   steps:
-    - intent: tra_cuu_chuyen_gia_theo_don_vi
+    - intent: list_experts_by_position_and_or_previous_workplace
       entities:
-        - current_workplace: "HCMUT"
-    - action: action_tra_cuu_chuyen_gia_theo_don_vi
-    - intent: tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
+        - position: "giảng viên"
+    - action: list_experts_by_position_and_or_previous_workplace_form
+    - active_loop: list_experts_by_position_and_or_previous_workplace_form
+    - intent: provide_position_or_workplace
       entities:
-        - previous_workplace: "Microsoft"
-    - action: action_tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
+        - previous_workplace: "Đại học Bách khoa"
+    - slot_was_set:
+        - previous_workplace: "Đại học Bách khoa"
+    - action: list_experts_by_position_and_or_previous_workplace_form
+    - active_loop: null
+    - action: action_list_experts_by_position_and_or_previous_workplace
 
-- story: Education to work history flow
+- story: Tra cứu chuyên gia theo vị trí và nơi từng làm việc (thiếu cả hai, hỏi từng bước)
   steps:
-    - intent: tra_cuu_chuyen_gia_theo_truong_tot_nghiep
+    - intent: list_experts_by_position_and_or_previous_workplace
+    - action: list_experts_by_position_and_or_previous_workplace_form
+    - active_loop: list_experts_by_position_and_or_previous_workplace_form
+    - intent: provide_position_or_workplace
       entities:
-        - graduated_school: "HCMUS"
-    - action: action_tra_cuu_chuyen_gia_theo_truong_tot_nghiep
-    - intent: tra_cuu_chuyen_gia_theo_chuyen_nganh
+        - position: "giảng viên"
+    - slot_was_set:
+        - position: "giảng viên"
+    - intent: provide_position_or_workplace
       entities:
-        - major: "Khoa học máy tính"
-    - action: action_tra_cuu_chuyen_gia_theo_chuyen_nganh
+        - previous_workplace: "Đại học Bách khoa"
+    - slot_was_set:
+        - previous_workplace: "Đại học Bách khoa"
+    - action: list_experts_by_position_and_or_previous_workplace_form
+    - active_loop: null
+    - action: action_list_experts_by_position_and_or_previous_workplace
 
-- story: Degree and academic title search
+- story: out_of_scope -> hỏi ChatGPT -> xác nhận -> hỏi ChatGPT
   steps:
-    - intent: tra_cuu_chuyen_gia_theo_hoc_vi
+  - intent: out_of_scope
+  - action: action_store_pending_chatgpt_question
+  - action: utter_default
+  - action: utter_ask_use_chatgpt
+  - intent: confirm_chatgpt
+  - action: action_fallback_chatgpt
+
+- story: out_of_scope -> hỏi ChatGPT -> từ chối -> kết thúc
+  steps:
+  - intent: out_of_scope
+  - action: action_store_pending_chatgpt_question
+  - action: utter_default
+  - action: utter_ask_use_chatgpt
+  - intent: deny_chatgpt
+  - action: utter_cancel_chatgpt
+
+# ====== HỎI 1 LẦN =====
+- story: hỏi 1 lần về thông tin cơ bản bảng expert LẦN 1
+  steps:
+  - intent: ask_expert_current_workplace
+    entities:
+    - expert_name: "Nguyễn Văn A"
+  - action: action_ask_expert_current_workplace
+
+- story: hỏi về thông tin chung expert
+  steps:
+  - intent: potfolio_expert
+    entities:
+    - expert_name: "Nguyễn Văn A"
+  - action: action_potfolio_expert
+
+- story: hỏi 1 lần education của chuyên gia
+  steps:
+  - intent: potfolio_education
+    entities:
+      - expert_name: "Nguyễn Văn A"
+  - action: action_potfolio_education
+
+- story: hỏi 1 lần work_history của chuyên gia
+  steps:
+  - intent: potfolio_workhistory
+    entities:
+    - expert_name: "Nguyễn Văn A"
+  - action: action_potfolio_workhistory
+
+- story: hỏi thông tin danh sách project của 1 chuyên gia
+  steps:
+  - intent: potfolio_project
+    entities:
+      - expert_name: "Nguyễn Văn A"
+  - slot_was_set:
+      - expert_name: "Nguyễn Văn A"
+  - action: action_potfolio_project
+
+- story: hỏi về thông tin cơ bản bảng education
+  steps:
+    - intent: ask_expert_graduated_school
+      entities:
+      - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_graduated_school
+
+- story: hỏi 1 lần về thông tin cơ bản bảng education nhưng không có tên chuyên gia
+  steps:
+    - intent: ask_expert_graduated_school
+    - action: utter_ask_name
+    - intent: provide_name
+      entities:
+      - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_graduated_school
+
+- story: hỏi 1 lần về thông tin cơ bản bảng work_history nhưng không có tên chuyên gia
+  steps:
+    - intent: ask_expert_previous_workplace
+    - action: utter_ask_name
+    - intent: provide_name
+      entities:
+      - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_previous_workplace
+
+- story: hỏi list chuyên gia theo current_workplace nhưng thiếu current_workplace
+  steps:
+    - intent: list_experts_by_current_workplace
+    - action: utter_ask_current_workplace
+    - intent: provide_current_workplace
+      entities:
+      - current_workplace: "Đại học Bách khoa TPHCM"
+    - action: action_list_experts_by_current_workplace
+
+
+# ===== HỎI 2 LẦN CƠ BẢN VỚI 1 TÊN CHUYÊN GIA=====
+- story: hỏi 2 lần về thông tin cơ bản bảng expert lần 1
+  steps:
+    - intent: ask_expert_current_workplace
+      entities:
+      - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_current_workplace
+    - intent: ask_expert_degree
+    - action: action_ask_expert_degree
+
+- story: hỏi 2 lần về thông tin cơ bản bảng expert lần 2
+  steps:
+    - intent: ask_expert_current_workplace
+      entities:
+      - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_current_workplace
+    - intent: ask_expert_contact
+    - action: action_ask_expert_contact
+
+- story: hỏi 2 lần về thông tin cơ bản bảng education
+  steps:
+    - intent: ask_expert_graduated_school
+      entities:
+      - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_graduated_school
+    - intent: ask_expert_major
+    - action: action_ask_expert_major
+
+- story: hỏi 2 lần về thông tin cơ bản bảng work_history
+  steps:
+    - intent: ask_expert_previous_workplace
+      entities:
+      - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_previous_workplace
+    - intent: ask_expert_position
+    - action: action_ask_expert_position
+
+# ====== HỎI 2 LẦN VÀ CÓ YES/NO ======
+- story: hỏi 2 lần về thông tin cơ bản bảng expert với yes/no
+  steps:
+    - intent: ask_expert_current_workplace
+      entities:
+      - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_current_workplace
+    - intent: expert_yes_no_question_current_workplace
+      entities:
+      - current_workplace: "Đại học Bách khoa TPHCM"
+    - action: action_expert_yes_no_question
+
+- story: hỏi 1 chuyên gia 2 portfolio
+  steps:
+  - intent: potfolio_expert
+    entities:
+    - expert_name: "Nguyễn Văn A"
+  - slot_was_set:
+    - expert_name: "Nguyễn Văn A"
+  - action: action_potfolio_expert
+  - intent: potfolio_education
+  - action: action_potfolio_education
+
+- story: hỏi thông tin chung về work_history của 1 chuyên gia và list chuyên gia theo previous_workplace của chuyên gia đó
+  steps:
+  - intent: potfolio_workhistory
+    entities:
+    - expert_name: "Nguyễn Văn A"
+  - slot_was_set:
+    - expert_name: "Nguyễn Văn A"
+  - action: action_potfolio_workhistory
+
+
+- story: hỏi thông tin chung về work_history của 1 chuyên gia và list chuyên gia theo position của chuyên gia đó
+  steps:
+  - intent: potfolio_workhistory
+    entities:
+    - expert_name: "Nguyễn Văn A"
+  - slot_was_set:
+    - expert_name: "Nguyễn Văn A"
+  - action: action_potfolio_workhistory
+
+
+- story: hỏi thông tin chung về work_history của 1 chuyên gia và list chuyên gia theo previous workplace của chuyên gia đó
+  steps:
+    # potfolio_workhistory trả về nhiều thông tin, nên phải hỏi kĩ
+  - intent: potfolio_workhistory
+    entities:
+    - expert_name: "Nguyễn Văn A"
+  - slot_was_set:
+    - expert_name: "Nguyễn Văn A"
+  - action: action_potfolio_workhistory
+  
+
+- story: hỏi liên tiếp dạng bảng và list chuyên trong bảng expert
+  steps:
+  # potfolio_expert trả về nhiều thông tin, nên phải hỏi kĩ
+  - intent: potfolio_expert
+    entities:
+      - expert_name: "Nguyễn Văn A"
+  - slot_was_set:
+      - expert_name: "Nguyễn Văn A"
+  - action: action_potfolio_expert
+
+  - intent: list_experts_by_current_workplace
+  - action: utter_ask_current_workplace.
+  - intent: provide_current_workplace
+    entities:
+      - current_workplace: "Đại học Bách khoa TPHCM"
+  - action: action_list_experts_by_current_workplace
+  - intent: list_experts_by_degree
+
+- story: Hỏi 3 lần bắt đầu từ list chuyên gia theo current_workplace
+  steps:
+    - intent: list_experts_by_current_workplace
+    - action: utter_ask_current_workplace
+    - intent: provide_current_workplace
+      entities:
+        - current_workplace: "Đại học Bách khoa TPHCM"
+    - slot_was_set:
+        - current_workplace: "Đại học Bách khoa TPHCM"  
+    - action: action_list_experts_by_current_workplace
+    - intent: ask_expert_current_workplace
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_current_workplace
+
+
+
+
+- story: hỏi 2 lần về thông tin cơ bản 3 bảng expert, education, work_history lần 1
+  steps:
+  - intent: ask_expert_current_workplace
+    entities:
+    - expert_name: "Nguyễn Văn A"
+  - action: action_ask_expert_current_workplace
+  - intent: ask_expert_degree
+  - action: action_ask_expert_degree
+
+- story: hỏi 2 lần về thông tin cơ bản 3 bảng expert, education, work_history lần 2
+  steps:
+    - intent: ask_expert_previous_workplace
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_previous_workplace
+    - intent: ask_expert_contact
+    - action: action_ask_expert_contact
+
+# ====== HỎI 2 LẦN CƠ BẢN NHƯNG KHÁC TÊN CHUYÊN GIA ======
+- story: hỏi 2 lần về thông tin cơ bản bảng expert với tên khác
+  steps:
+    - intent: ask_expert_current_workplace
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_current_workplace
+    - intent: ask_expert_degree
+      entities:
+        - expert_name: "Nguyễn Văn B"
+    - action: action_ask_expert_degree
+
+- story: hỏi 2 lần về thông tin cơ bản bảng education với tên khác
+  steps:
+    - intent: ask_expert_graduated_school
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_graduated_school
+    - intent: ask_expert_major
+      entities:
+        - expert_name: "Nguyễn Văn B"
+    - action: action_ask_expert_major
+
+- story: hỏi 2 lần về thông tin cơ bản bảng work_history với tên khác
+  steps:
+    - intent: ask_expert_previous_workplace
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_previous_workplace
+    - intent: ask_expert_position
+      entities:
+        - expert_name: "Nguyễn Văn B"
+    - action: action_ask_expert_position
+
+- story: hỏi 2 lần về thông tin cơ bản 3 bảng expert, education, work_history với tên khác
+  steps:
+    - intent: ask_expert_current_workplace
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_current_workplace
+    - intent: ask_expert_degree
+      entities:
+        - expert_name: "Nguyễn Văn B"
+    - action: action_ask_expert_degree
+
+- story: list chuyên gia theo postion và hỏi projects của chuyên gia nhưng thiếu tên chuyên gia
+  steps:
+    - action: utter_ask_name
+    - intent: provide_name   
+      entities:
+        - expert_name: "Nguyễn Văn A" 
+    - action: action_potfolio_project
+
+- story: hỏi thông tin cơ bản về education và work_history của chuyên gia nhưng thiếu tên
+  steps:
+    - intent: potfolio_education
+    - action: utter_ask_name
+    - intent: provide_name
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_potfolio_education
+    - intent: potfolio_workhistory
+    - action: action_potfolio_workhistory
+
+# ====== HỎI 2 LẦN NHƯNG CÓ OUT_OF_SCOPE ======
+- story: hỏi 2 lần về thông tin cơ bản bảng expert nhưng có out_of_scope
+  steps:
+    - intent: ask_expert_current_workplace
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_current_workplace
+    - intent: out_of_scope
+    - action: action_store_pending_chatgpt_question
+    - action: utter_default
+    - action: utter_ask_use_chatgpt
+    - intent: confirm_chatgpt
+    - action: action_fallback_chatgpt
+
+- story: hỏi 2 lần về thông tin cơ bản bảng education nhưng có out_of_scope
+  steps:
+    - intent: potfolio_education
+    - action: utter_ask_name
+    - intent: provide_name
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_potfolio_education
+    - intent: out_of_scope
+    - action: action_store_pending_chatgpt_question
+    - action: utter_default
+    - action: utter_ask_use_chatgpt
+    - intent: deny_chatgpt
+    - action: utter_cancel_chatgpt
+
+
+
+
+
+
+# ===== HỎI 4 LẦN VỀ THÔNG TIN CƠ BẢN =====
+- story: Tình huống hội thoại cơ bản có reset chuyên gia
+  steps:
+    - intent: ask_expert_current_workplace
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_current_workplace
+
+    - intent: reset_chuyen_gia
+    - action: action_reset_chuyen_gia
+
+    - intent: ask_expert_degree
+    - action: utter_ask_name
+    - intent: provide_name
+      entities:
+        - expert_name: "Nguyễn Văn B"
+    - action: action_ask_expert_degree
+    - intent: list_experts_by_graduated_school
+    - action: action_list_experts_by_graduated_school
+
+- story: Tình huống hội thoại cơ bản có reset chuyên gia và hỏi thông tin cơ bản
+  steps:
+    - intent: ask_expert_current_workplace
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_current_workplace
+
+    - intent: reset_chuyen_gia
+    - action: action_reset_chuyen_gia
+
+    - intent: potfolio_publication
+      entities:
+        - expert_name: "Nguyễn Văn B"
+    - action: action_potfolio_publication
+    - intent: list_experts_by_graduated_school
+    - action: utter_ask_graduated_school
+    - intent: provide_graduated_school
+      entities:
+        - graduated_school: "Đại học Bách khoa TPHCM"
+    - action: action_list_experts_by_graduated_school
+
+- story: tình huống out_of_scope và potfolio_education
+  steps:
+    - intent: potfolio_education
+    - action: utter_ask_name
+    - intent: provide_name
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_potfolio_education
+
+    - intent: out_of_scope
+    - action: action_store_pending_chatgpt_question
+    - action: utter_default
+    - action: utter_ask_use_chatgpt
+    - intent: deny_chatgpt
+    - action: utter_cancel_chatgpt
+    - intent: potfolio_education
+    - action: action_potfolio_education
+
+- story: tình huống out_of_scope và not_sure 
+  steps:
+    - intent: potfolio_education
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_potfolio_education
+    - intent: not_sure
+    - action: utter_default
+    - intent: reset_chuyen_gia
+    - action: action_reset_chuyen_gia
+
+
+- story: tình huống out_of_scope chatgpt và not_sure
+  steps:
+    - intent: out_of_scope
+    - action: action_store_pending_chatgpt_question
+    - action: utter_default
+    - action: utter_ask_use_chatgpt
+    - intent: confirm_chatgpt
+    - action: action_fallback_chatgpt
+
+    - intent: not_sure
+    - action: utter_default
+    - intent: reset_chuyen_gia
+    - action: action_reset_chuyen_gia
+
+
+- story: tình huống out_of_scope và hỏi thông tin cơ bản
+  steps:
+    - intent: out_of_scope
+    - action: action_store_pending_chatgpt_question
+    - action: utter_default
+    - action: utter_ask_use_chatgpt
+    - intent: deny_chatgpt
+    - action: utter_cancel_chatgpt
+
+    - intent: ask_expert_current_workplace
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_current_workplace
+    - intent: expert_yes_no_question_current_workplace
+    - action: action_expert_yes_no_question
+    - intent: reset_chuyen_gia
+    - action: action_reset_chuyen_gia
+    - intent: ask_expert_degree
+      entities:
+        - expert_name: "Nguyễn Văn B"
+    - action: action_ask_expert_degree
+
+- story: chào hỏi cơ bản và out_of_scope not_sure
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: out_of_scope
+    - action: action_store_pending_chatgpt_question
+    - action: utter_default
+    - action: utter_ask_use_chatgpt
+    - intent: deny_chatgpt
+    - action: utter_cancel_chatgpt
+
+    - intent: not_sure
+    - action: utter_default
+    - intent: complain_bot
+    - action: utter_sorry
+
+    - intent: ask_expert_current_workplace
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_current_workplace
+    - intent: reset_chuyen_gia
+    - action: action_reset_chuyen_gia
+
+- story: xen kẻ hỏi nhanh và yes/no
+  steps:
+    - intent: ask_expert_current_workplace
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - slot_was_set:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_current_workplace
+    - intent: expert_yes_no_question_current_workplace
+      entities:
+      - current_workplace: "Đại học Bách khoa TPHCM"
+    - action: action_expert_yes_no_question
+
+    - intent: ask_expert_degree
+    - action: action_ask_expert_degree
+
+    - intent: ask_expert_contact
+    - action: action_ask_expert_contact
+
+    - intent: expert_yes_no_question_graduated_school
+    - action: action_expert_yes_no_question
+
+- story: xen kẽ yes/no và hỏi thông tin cơ bản
+  steps:
+    - intent: ask_expert_current_workplace
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - slot_was_set:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_current_workplace
+    - intent: expert_yes_no_question_current_workplace
+    - action: utter_ask_current_workplace
+    - intent: provide_current_workplace
+      entities:
+        - current_workplace: "Đại học Bách khoa TPHCM"
+    - action: action_expert_yes_no_question
+
+    - intent: potfolio_education
+    - action: action_potfolio_education
+
+    - intent: potfolio_workhistory
+    - action: action_potfolio_workhistory
+
+    - intent: potfolio_project
+    - action: action_potfolio_project 
+
+- story: xen kẽ yes/no và portfolio
+  steps:
+    - intent: potfolio_expert
+      entities:
+      - expert_name: "Nguyễn Văn A"
+    - slot_was_set:
+      - expert_name: "Nguyễn Văn A"
+    - action: action_potfolio_expert
+
+    - intent: potfolio_education
+    - action: action_potfolio_education
+
+    - intent: complain_bot
+    - action: utter_sorry
+
+    - intent: potfolio_workhistory
+    - action: action_potfolio_workhistory
+
+    - intent: potfolio_project
+    - action: action_potfolio_project
+
+    - intent: expert_yes_no_question_degree
+    - action: action_expert_yes_no_question
+
+- story: xen kẽ yes/no và portfolio với tên khác
+  steps:
+    - intent: potfolio_expert
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_potfolio_expert
+
+    - intent: potfolio_education
+    - action: action_potfolio_education
+
+    - intent: potfolio_workhistory
+    - action: action_potfolio_workhistory
+
+    - intent: potfolio_project
+    - action: action_potfolio_project
+    - intent: reset_chuyen_gia
+    - action: action_reset_chuyen_gia
+    - intent: expert_yes_no_question_graduated_school
+      entities:
+        - graduated_school: "Đại học Bách khoa TPHCM"
+    - intent: provide_name
+      entities:
+      - expert_name: "Nguyễn Văn B"
+    - slot_was_set:
+      - expert_name: "Nguyễn Văn B"
+    - action: action_expert_yes_no_question
+
+- story: xen kẽ yes/no và portfolio với tên khác và out_of_scope
+  steps:
+    - intent: potfolio_education
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_potfolio_education
+
+    - intent: ask_expert_contact
+    - action: action_ask_expert_contact
+
+    - intent: potfolio_project
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_potfolio_project
+
+    - intent: expert_yes_no_question_graduated_school
+      entities:
+        - expert_name: "Nguyễn Văn B"
+        - graduated_school: "Đại học Bách khoa TPHCM"
+    - slot_was_set:
+        - expert_name: "Nguyễn Văn B"
+    - action: action_expert_yes_no_question
+
+    - intent: out_of_scope
+    - action: action_store_pending_chatgpt_question
+    - action: utter_default
+    - action: utter_ask_use_chatgpt
+    - intent: deny_chatgpt
+    - action: utter_cancel_chatgpt
+
+- story: Hỏi xen kẽ giữa list và portfolio
+  steps:
+    - intent: list_experts_by_current_workplace
+    - action: utter_ask_current_workplace
+    - intent: provide_current_workplace
+      entities:
+        - current_workplace: "Đại học Bách khoa TPHCM"
+    - action: action_list_experts_by_current_workplace
+
+    - intent: expert_yes_no_question_current_workplace
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: utter_ask_current_workplace
+    - intent: provide_current_workplace
+      entities:
+        - current_workplace: "Đại học Bách khoa TPHCM"
+    - action: action_expert_yes_no_question
+    - intent: reset_chuyen_gia
+    - action: action_reset_chuyen_gia
+
+    - intent: potfolio_expert
+      entities:
+        - expert_name: "Nguyễn Văn C"
+    - slot_was_set:
+        - expert_name: "Nguyễn Văn C"
+    - action: action_potfolio_expert
+
+# ====== STORY DÀI TỔNG HỢP ======
+
+- story: chào hỏi thông tin cơ bản
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_expert_current_workplace
+    - action: utter_ask_name
+    - intent: provide_name
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_ask_expert_current_workplace
+
+    - intent: out_of_scope
+    - action: action_store_pending_chatgpt_question
+    - action: utter_default
+    - action: utter_ask_use_chatgpt
+    - intent: deny_chatgpt
+    - action: utter_cancel_chatgpt
+    - intent: nlu_fallback
+    - action: action_reset_chuyen_gia
+
+    - intent: ask_expert_degree
+    - action: utter_ask_name
+    - intent: provide_name
+      entities:
+        - expert_name: "Nguyễn Văn B"
+    - action: action_ask_expert_degree
+
+    - intent: reset_chuyen_gia
+    - action: action_reset_chuyen_gia
+
+    - intent: expert_yes_no_question_previous_workplace
+      entities:
+        - expert_name: "Nguyễn Văn C"
+    - slot_was_set:
+        - expert_name: "Nguyễn Văn C"
+    - action: utter_ask_previous_workplace
+    - intent: provide_position_or_workplace
+      entities:
+        - previous_workplace: "Đại học Bách khoa TPHCM"
+    - action: action_expert_yes_no_question
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: chào hỏi và list portfolio
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: list_experts_by_current_workplace
+    - action: utter_ask_current_workplace
+    - intent: provide_current_workplace
+      entities:
+        - current_workplace: "Đại học Bách khoa TPHCM"
+    - action: action_list_experts_by_current_workplace
+
+    - intent: potfolio_expert
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - slot_was_set:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_potfolio_expert
+
+    - intent: potfolio_education
+    - action: action_potfolio_education
+
+    - intent: praise_bot
+    - action: utter_thank_you
+
+    - intent: ask_expert_current_workplace
+    - action: action_ask_expert_current_workplace
+    - intent: expert_yes_no_question_current_workplace
+      entities:
+        - current_workplace: "Đại học Bách khoa TPHCM"
+    - action: action_expert_yes_no_question
+    - intent: reset_chuyen_gia
+    - action: action_reset_chuyen_gia
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: chào hỏi và list portfolio với tên khác
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: list_experts_by_academic_title
+    - action: utter_ask_academic_title
+    - intent: provide_academic_title
+      entities:
+        - academic_title: "GS"
+    - action: action_list_experts_by_academic_title
+
+    - intent: list_experts_by_current_workplace
+    - action: utter_ask_current_workplace
+    - intent: provide_current_workplace
+      entities:
+        - current_workplace: "Đại học Bách khoa TPHCM"
+    - action: action_potfolio_expert
+
+    - intent: potfolio_education
+    - action: utter_ask_name
+    - intent: provide_name
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - slot_was_set:
+        - expert_name: "Nguyễn Văn A"
+    - action: action_potfolio_education
+    - intent: potfolio_workhistory
+    - action: action_potfolio_workhistory
+    - intent: reset_chuyen_gia
+    - action: action_reset_chuyen_gia
+    - intent: potfolio_project
+      entities:
+        - expert_name: "Nguyễn Văn B"
+    - slot_was_set:
+        - expert_name: "Nguyễn Văn B"
+    - action: action_potfolio_project
+    - intent: ask_expert_current_workplace
+      entities:
+        - expert_name: "Nguyễn Văn B"
+    - action: action_ask_expert_current_workplace
+    - intent: goodbye
+    - action: utter_goodbye
+    - intent: list_experts_by_current_workplace
+    - action: utter_ask_current_workplace
+    - intent: provide_current_workplace
+      entities:
+        - current_workplace: "Đại học Bách khoa TPHCM"
+    - action: action_list_experts_by_current_workplace
+
+- story: story dài tổng hợp
+  steps:
+    - intent: bot_challenge
+    - action: utter_iamabot
+    - intent: nlu_fallback
+    - action: action_reset_chuyen_gia
+    - intent: expert_yes_no_question_major
+      entities:
+        - expert_name: "Nguyễn Văn A"
+    - slot_was_set:
+        - expert_name: "Nguyễn Văn A"
+    - action: ask_expert_major
+    - intent: expert_yes_no_question_academic_title
+      entities:
+        - academic_title: "GS"
+    - action: action_expert_yes_no_question
+    - intent: provide_major
+      entities:
+        - major: "Công nghệ thông tin"
+    - action: action_expert_yes_no_question
+    - intent: expert_yes_no_question_position
+      entities:
+        - position: "giảng viên"
+    - action: action_expert_yes_no_question
+    - intent: list_experts_by_major
+      entities:
+        - major: "Công nghệ thông tin"
+    - action: action_list_experts_by_major
+    - intent: nlu_fallback
+    - action: action_reset_chuyen_gia
+    - intent: potfolio_education
+      entities:
+        - expert_name: "Nguyễn Văn B"
+    - slot_was_set:
+        - expert_name: "Nguyễn Văn B"
+    - action: action_potfolio_education
+    - intent: expert_yes_no_question_academic_title
+    - action: utter_ask_academic_title
+    - intent: provide_academic_title
+      entities:
+        - academic_title: "GS"
+    - action: action_expert_yes_no_question
+    - intent: expert_yes_no_question_degree
+    - action: utter_ask_degree
+    - intent: provide_degree
       entities:
         - degree: "Tiến sĩ"
-    - action: action_tra_cuu_chuyen_gia_theo_hoc_vi
-    - intent: tra_cuu_chuyen_gia_theo_hoc_ham
-      entities:
-        - academic_title: "Giáo sư"
-    - action: action_tra_cuu_chuyen_gia_theo_hoc_ham
+    - action: action_expert_yes_no_question
 
-# ===== PUBLICATION FLOWS =====
-- story: Publication inquiry with pagination
-  steps:
-    - intent: liet_ke_cong_trinh_khoa_hoc
-      entities:
-        - expert_name: "Trương Quang Phúc"
-    - slot_was_set:
-        - expert_name: "Trương Quang Phúc"
-        - publication_offset: 0
-    - action: action_liet_ke_cong_trinh_khoa_hoc
-    - intent: liet_ke_cong_trinh_con_lai
-    - action: action_liet_ke_cong_trinh_khoa_hoc_con_lai
 
-- story: Publication statistics to detailed listing
-  steps:
-    - intent: thong_ke_cong_trinh_khoa_hoc
-      entities:
-        - expert_name: "Nguyễn Thái Anh"
-    - slot_was_set:
-        - expert_name: "Nguyễn Thái Anh"
-    - action: action_thong_ke_cong_trinh_khoa_hoc
-    - intent: liet_ke_cong_trinh_khoa_hoc
-    - action: action_liet_ke_cong_trinh_khoa_hoc
 
-# ===== PROJECT FLOWS =====
-- story: Project inquiry with pagination
-  steps:
-    - intent: liet_ke_du_an
-      entities:
-        - expert_name: "Nguyễn Lê Duy Khải"
-    - slot_was_set:
-        - expert_name: "Nguyễn Lê Duy Khải"
-        - project_offset: 0
-    - action: action_liet_ke_du_an
-    - intent: liet_ke_du_an_con_lai
-    - action: action_liet_ke_du_an_con_lai
 
-- story: Project statistics to detailed listing
-  steps:
-    - intent: thong_ke_du_an
-      entities:
-        - expert_name: "Trương Quang Phúc"
-    - slot_was_set:
-        - expert_name: "Trương Quang Phúc"
-    - action: action_thong_ke_du_an
-    - intent: liet_ke_du_an
-    - action: action_liet_ke_du_an
+  
 
-# ===== LANGUAGE FLOWS =====
-- story: Language inquiry flow
-  steps:
-    - intent: tra_cuu_ngoai_ngu
-      entities:
-        - expert_name: "Nguyễn Thái Anh"
-    - slot_was_set:
-        - expert_name: "Nguyễn Thái Anh"
-    - action: action_tra_cuu_ngoai_ngu
-    - intent: tra_cuu_chuyen_gia_theo_ngoai_ngu
-      entities:
-        - language: "Tiếng Anh"
-    - action: action_tra_cuu_chuyen_gia_theo_ngoai_ngu
 
-# ===== WORKHISTORY DETAILED FLOWS =====
-- story: Work history to position search
-  steps:
-    - intent: tra_cuu_lich_su_lam_viec
-      entities:
-        - expert_name: "Nguyễn Lê Duy Khải"
-    - slot_was_set:
-        - expert_name: "Nguyễn Lê Duy Khải"
-    - action: action_tra_cuu_lich_su_lam_viec
-    - intent: tra_cuu_chuyen_gia_theo_vi_tri
-      entities:
-        - position: "Trưởng phòng"
-    - action: action_tra_cuu_chuyen_gia_theo_vi_tri
 
-# ===== ERROR RECOVERY FLOWS =====
-- story: Missing entity recovery - organization
-  steps:
-    - intent: tra_cuu_chuyen_gia_theo_don_vi
-    - action: utter_hoi_don_vi
-    - intent: provide_name
-      entities:
-        - current_workplace: "HCMUT"
-    - slot_was_set:
-        - current_workplace: "HCMUT"
-    - action: action_tra_cuu_chuyen_gia_theo_don_vi
 
-- story: Missing entity recovery - expert name
-  steps:
-    - intent: tra_cuu_chuyen_gia
-    - action: utter_hoi_ten_chuyen_gia
-    - intent: provide_name
-      entities:
-        - expert_name: "Nguyễn Thái Anh"
-    - slot_was_set:
-        - expert_name: "Nguyễn Thái Anh"
-    - action: action_tra_cuu_chuyen_gia
-
-- story: Expert not found to alternative search
-  steps:
-    - intent: tra_cuu_chuyen_gia
-      entities:
-        - expert_name: "Tên không tồn tại"
-    - action: action_tra_cuu_chuyen_gia
-    - intent: tra_cuu_chuyen_gia_theo_don_vi
-      entities:
-        - current_workplace: "HCMUT"
-    - action: action_tra_cuu_chuyen_gia_theo_don_vi
-
-# ===== MULTI-STEP COMPLEX FLOWS =====
-- story: Complete research profile lookup
-  steps:
-    - intent: tra_cuu_chuyen_gia_theo_truong_tot_nghiep
-      entities:
-        - graduated_school: "HCMUT"
-    - action: action_tra_cuu_chuyen_gia_theo_truong_tot_nghiep
-    - intent: tra_cuu_chuyen_gia
-      entities:
-        - expert_name: "Trương Quang Phúc"
-    - slot_was_set:
-        - expert_name: "Trương Quang Phúc"
-    - action: action_tra_cuu_chuyen_gia
-    - intent: thong_ke_cong_trinh_khoa_hoc
-    - action: action_thong_ke_cong_trinh_khoa_hoc
-    - intent: thong_ke_du_an
-    - action: action_thong_ke_du_an
-
-- story: Language and workplace correlation
-  steps:
-    - intent: tra_cuu_chuyen_gia_theo_ngoai_ngu
-      entities:
-        - language: "Tiếng Anh"
-    - action: action_tra_cuu_chuyen_gia_theo_ngoai_ngu
-    - intent: tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
-      entities:
-        - previous_workplace: "Google"
-    - action: action_tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
 
 
 

@@ -1,0 +1,21 @@
+version: "3.1"
+nlu:
+  - intent: reset_chuyen_gia
+    examples: |
+      - tôi muốn hỏi chuyên gia khác
+      - hỏi người khác đi
+      - tra cứu người mới
+      - reset chuyên gia
+      - không hỏi người này nữa
+      - đổi người khác
+      - đủ rồi, tôi muốn hỏi người khác
+      - ta chuyển sang người khác đi
+      - tìm thông tin của người khác
+      - tôi muốn hỏi người khác
+      - đổi người đi
+      - không phải chuyên gia này
+      - không đúng người, hỏi lại
+      - không phải người này
+      - bạn trả lời sai người rồi
+      - không đúng thông tin người tôi cần
+      - bạn không hiểu câu hỏi của tôi

@@ -1,91 +1,45 @@
 version: "3.1"
 
 nlu:
-# ===== PUBLICATION TABLE INTENTS =====
-- intent: thong_ke_cong_trinh_khoa_hoc
+- intent: potfolio_publication
   examples: |
-    - thống kê công trình khoa học của [Nguyễn Thái Anh](expert_name)
-    - [Trương Quang Phúc](expert_name) có bao nhiêu công trình
-    - số lượng bài báo [Vũ Đình Thành](expert_name)
-    - tổng số publication [Nguyễn Lê Duy Khải](expert_name)
-    - [Đặng Mậu Chiến](expert_name) xuất bản được bao nhiêu
-    - statistics [Nguyễn Mạnh Hùng](expert_name) research
-    - research output [Bùi Trọng Hiếu](expert_name)
-    - publication count [Lê Chí Hiệp](expert_name)
-    - số công trình [Huỳnh Ngọc Văn](expert_name)
-    - research statistics [Nguyễn Trần Thi Văn](expert_name)
-
-- intent: liet_ke_cong_trinh_khoa_hoc
-  examples: |
-    - liệt kê công trình khoa học [Nguyễn Thái Anh](expert_name)
-    - danh sách bài báo của [Trương Quang Phúc](expert_name)
-    - các publication [Vũ Đình Thành](expert_name)
+    - cung cấp công trình khoa học của [Nguyễn Thái Anh](expert_name)
+    - danh sách bài báo [Võ Thị Ngà](expert_name)
+    - liệt kê bài báo của [Trương Quang Phúc](expert_name)
+    - danh sách báo cáo khoa học của [Vũ Đình Thành](expert_name)
+    - danh sách công trình nghiên cứu của [Nguyễn Lê Duy Khải](expert_name)
+    - thống kê publication [Vũ Đình Thành](expert_name)
     - show publications [Nguyễn Lê Duy Khải](expert_name)
+    - liệt kê nghiên cứu của [Đặng Mậu Chiến](expert_name)
     - research papers [Đặng Mậu Chiến](expert_name)
-    - list papers [Nguyễn Mạnh Hùng](expert_name)
     - bài viết khoa học [Bùi Trọng Hiếu](expert_name)
     - scientific works [Lê Chí Hiệp](expert_name)
     - công trình nghiên cứu [Huỳnh Ngọc Văn](expert_name)
-    - academic publications [Nguyễn Trần Thi Văn](expert_name)
+    - publication details [Phan Nghĩa Minh](expert_name)
+    - publication information [Nguyễn Mạnh Hùng](expert_name)
+    - publication list [Phạm Văn Tấn](expert_name)
+    - publication overview [Võ Thế Sơn](expert_name)
+    - bạn có thể cung cấp cho tôi danh sách công trình khoa học của [Nguyễn Thị Kim Oanh](expert_name) không?
+    - tôi muốn biết danh sách công trình nghiên cứu của [Nguyễn Trần Thi Văn](expert_name)
+    - tôi tò mò về danh sách bài báo của [Nguyễn Thị Thanh Mai](expert_name)
+    - tôi thắc mắc về danh sách báo cáo khoa học của [Đặng Thành Tín](expert_name)
+    - bạn có sẵn sàng cung cấp cho tôi danh sách công trình khoa học của [Nguyễn Thị Hạnh](expert_name) không?
+  
 
-# ===== PAGINATION INTENT - PUBLICATION =====
-- intent: liet_ke_cong_trinh_con_lai
-  examples: |
-    # EXPLICIT CONTINUATION WITH CONTEXT
-    - tiếp tục liệt kê công trình của [Nguyễn Thái Anh](expert_name)
-    - xem thêm bài báo [Trương Quang Phúc](expert_name)
-    - còn công trình nào khác của [Vũ Đình Thành](expert_name) không
-    - show more publications [Nguyễn Lê Duy Khải](expert_name)
-    - continue listing [Đặng Mậu Chiến](expert_name) papers
-    - next publications [Nguyễn Mạnh Hùng](expert_name)
-    - tiếp theo của [Bùi Trọng Hiếu](expert_name)
-    - more papers from [Lê Chí Hiệp](expert_name)
-    - các công trình còn lại [Huỳnh Ngọc Văn](expert_name)
-    - other publications [Nguyễn Trần Thi Văn](expert_name)
-    
-    # IMPLICIT CONTINUATION (context-aware)
-    - tiếp tục
-    - xem thêm
-    - còn nữa không
-    - liệt kê tiếp
-    - hiển thị thêm công trình
-    - show more
-    - more publications
-    - continue
-    - next
-    - more papers
-    - additional publications
-    - other works
-    - remaining publications
+    - list of publications của người này
+    - list công trình khoa học của ông ấy
+    - list công trình của bà ấy
+    - list báo cáo của anh ấy
+    - liệt kê công trình khoa học của chị ấy
+    - thống kê nghiên cứu của ông ấy
+    - show báo cáo khoa học của bà ấy
+    - danh sách bài báo của anh ấy
+    - tôi muốn biết danh sách công trình khoa học của người này
+    - tôi tò mò về danh sách công trình nghiên cứu của ông này
+    - tôi thắc mắc về danh sách bài báo của bà này
+    - bạn có thể cung cấp cho tôi danh sách công trình khoa học của người này không?
+    - bạn sẵn sàng cung cấp cho tôi danh sách công trình nghiên cứu của người này không?
+    - bạn có thể cho tôi biết danh sách bài báo của người này không?
 
-# ===== LOOKUPS =====
-- lookup: publication_type
-  examples: |
-    - Journal
-    - Conference
-    - Book
-    - Chapter
-    - Patent
-    - Article
-    - Proceeding
-    - Thesis
-    - Paper
-    - Research
-    - Report
-    - Manual
-    - Review
 
-- lookup: year
-  examples: |
-    - 2023
-    - 2022
-    - 2021
-    - 2020
-    - 2019
-    - 2018
-    - 2017
-    - 2016
-    - 2015
-    - 2014
-    - 2013
-    - 2012
+

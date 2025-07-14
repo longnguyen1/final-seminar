@@ -28,7 +28,7 @@ import { ExpertQueries } from './queries';
 
 // ============ RESPONSE HELPERS ============
 
-export function createRasaResponse<T = ExpertWithRelations[]>(
+export function createRasaResponse<T>(
   data: T,
   context: string,
   total?: number,

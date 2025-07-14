@@ -13,17 +13,34 @@ BASE_URL = "http://localhost:3000/api/rasa"
 # Context detection keywords
 CONTEXT_KEYWORDS = {
     "current_workplace": [
-        "hiện tại", "đang làm", "hiện đang", "làm việc tại", 
-        "currently", "working at", "employed at", "đang công tác"
+        "hiện tại làm", "đang làm", "đang công tác", "hiện làm việc tại", 
+        "bây giờ làm", "làm việc hiện tại", "công ty hiện tại", "đang công tác"
     ],
     "graduated_school": [
-        "tốt nghiệp", "học", "cựu sinh viên", "alumni", "ra trường",
-        "graduated", "studied", "education", "degree from", "học tại"
+        "tốt nghiệp", "học ở", "cựu sinh viên", "alumni", "ra trường",
+        "graduated", "học xong", "education", "đã ra trường" , "học tại"
     ],
     "previous_workplace": [
         "đã làm", "từng làm", "trước đây", "cựu nhân viên", "ex-",
-        "former", "previously", "used to work", "worked at", "đã từng"
-    ]
+        "từng công tác", "previously", "used to work", "worked at", "đã từng"
+    ],
+    "major": [
+        "chuyên ngành về", "chuyên môn", "lĩnh vực", "chuyên môn",
+        "chuyên môn bên", "chuyên ngành bên", "chuyên sâu", "theo chuyên ngành"
+    ],
+    "academic_title": [
+        "danh hiệu", "học hàm ", "giáo sư", "associate professor", 
+        "danh tiếng", "danh hiệu giảng dạy", "PhD", "academic title"
+    ],
+    "position": [
+        "vị trí", "chức vụ", "công việc", "đảm nhiệm", "chức vị",
+        "current position", "current role", "current job", "current title"
+    ],
+    "degree": [
+        "bằng cấp", "degree", "qualification", "academic degree",
+        "bằng", "học vị", "bằng cấp học thuật"
+    ],
+    
 }
 
 def safe_api_call_get(url: str) -> dict:
@@ -87,17 +104,49 @@ def get_expert_by_name(name: str) -> Optional[Dict]:
         return None
     
 def extract_context_entity(tracker: Tracker, primary_entity: str, fallback_entity: str = None) -> Optional[str]:
-    """Extract entity with context priority - COMPATIBLE với actions"""
+    """Extract entity with context priority, hỗ trợ đại từ thay thế"""
     entities = tracker.latest_message.get('entities', [])
-    
-    # Priority 1: Primary context-specific entity
+    user_message = tracker.latest_message.get('text', '').lower()
+
+    # 1. Ưu tiên entity trong message
     for entity in entities:
         if entity.get('entity') == primary_entity:
             value = entity.get('value')
-            if value and value.strip():  # ✅ Ensure non-empty
+            if value and value.strip():
                 return value.strip()
-    
-    # Priority 2: Fallback to legacy entity
+
+    # 2. Nhận diện đại từ thay thế (ví dụ: "ông ấy", "bà ấy", "trường này", "vị trí đó")
+    pronoun_map = {
+        "ông ấy": "expert_name",
+        "ông ta": "expert_name",
+        "cô ta": "expert_name",
+        "bà ấy": "expert_name",
+        "bà ta": "expert_name",
+        "anh ấy": "expert_name",
+        "anh ta": "expert_name",
+        "cô ấy": "expert_name",
+        "chị ấy": "expert_name",
+        "chị ta": "expert_name",
+        "người đó": "expert_name",
+        "người này": "expert_name",
+        "trường này": "graduated_school",
+        "vị trí đó": "position",
+        "nơi này": "current_workplace",
+        "nơi đó": "previous_workplace"
+
+    }
+    for pronoun, slot_name in pronoun_map.items():
+        if pronoun in user_message and slot_name == primary_entity:
+            slot_value = tracker.get_slot(slot_name)
+            if slot_value:
+                return slot_value
+
+    # 3. Fallback: lấy từ slot nếu không có entity trong message
+    slot_value = tracker.get_slot(primary_entity)
+    if slot_value:
+        return slot_value
+
+    # 4. Fallback tiếp theo (nếu có)
     if fallback_entity:
         for entity in entities:
             if entity.get('entity') == fallback_entity:

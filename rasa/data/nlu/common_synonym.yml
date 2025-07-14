@@ -1,0 +1,175 @@
+version: "3.1"
+nlu:
+# ===== COMMON INTENTS =====
+- synonym: Đại học Khoa học tự nhiên - ĐHQG TPHCM
+  examples: |
+    - Đại học Khoa học Tự nhiên - ĐHQG TPHCM
+    - HCMUS
+    - ĐH Khoa học Tự nhiên
+    - ĐH KHTN
+    - Đại học KHTN
+    - ĐH Khoa học tự nhiên
+    - đại học khoa học tự nhiên
+
+- synonym: Đại học Công nghệ thông tin - ĐHQG TPHCM
+  examples: |
+    - Đại học Công nghệ thông tin - ĐHQG TPHCM
+    - HCMUT
+    - UIT
+    - ĐH Công nghệ thông tin
+    - ĐH CNTT
+    - Đại học CNTT
+    - đại học công nghệ thông tin
+
+- synonym: Đại học Bách khoa - ĐHQG TPHCM
+  examples: |
+    - Đại học Bách khoa - ĐHQG TPHCM
+    - HCMUT
+    - ĐHBK TPHCM
+    - ĐH Bách khoa
+    - ĐH BK
+    - Đại học Bách khoa
+    - đại học bách khoa
+
+- synonym: Đại học Giao thông vận tải TPHCM
+  examples: |
+    - Đại học Giao thông vận tải TPHCM
+    - ĐH Giao thông vận tải
+    - ĐH GTVT
+    - Đại học GTVT
+    - đại học giao thông vận tải
+
+- synonym: Đại học Tôn Đức Thắng TPHCM
+  examples: |
+    - Đại học Tôn Đức Thắng
+    - TDTU
+    - ĐH Tôn Đức Thắng
+    - ĐH TDT
+    - Đại học TDT
+    - đại học tôn đức thắng
+
+- synonym: Đại học Nông nghiệp Hà Nội
+  examples: |
+    - Đại học Nông nghiệp Hà Nội
+    - HUA
+    - ĐH Nông nghiệp
+    - ĐH NN
+    - Đại học NN
+    - đại học nông nghiệp
+
+- synonym: Đại học Sư phạm kỹ thuật TPHCM
+  examples: |
+    - Đại học Sư phạm kỹ thuật TPHCM
+    - ĐHSPKT
+    - HCMUTE
+    - ĐH Sư phạm kỹ thuật
+    - ĐH SPKT
+    - Đại học SPKT
+    - đại học sư phạm kỹ thuật
+
+- synonym: Đại học Công nghiệp TPHCM
+  examples: |
+    - Đại học Công nghiệp TPHCM
+    - HUI
+    - ĐH Công nghiệp
+    - ĐH CN
+    - Đại học CN
+    - đại học công nghiệp
+
+- synonym: Tiến sĩ
+  examples: |
+    - tiến sĩ
+    - TS
+    - PhD
+    - doctor of philosophy
+
+- synonym: Thạc sĩ
+  examples: |
+    - thạc sĩ
+    - ThS
+    - master
+    - master of science
+
+- synonym: Kỹ sư
+  examples: |
+    - kỹ sư
+    - KS
+    - engineer
+    - engineer of technology
+    - engineer of information technology
+
+- synonym: Giáo sư
+  examples: |
+    - giáo sư
+    - GS
+    - professor
+
+- synonym: Giảng viên
+  examples: |
+    - giảng viên
+    - GV
+    - lecturer
+    - teacher
+
+- synonym: Nghiên cứu sinh
+  examples: |
+    - nghiên cứu sinh
+    - NCS
+    - PhD student
+    - doctoral student
+
+- synonym: Trưởng bộ môn
+  examples: |
+    - trưởng bộ môn
+    - TBM
+    - head of department
+    - head of faculty
+
+- synonym: Điện tử công suất
+  examples: |
+    - điện tử công suất
+    - power electronics
+    - power electronic
+
+- synonym: Hóa phân tích
+  examples: |
+    - hóa phân tích
+    - analytical chemistry
+    - chemistry analysis
+
+- synonym: cơ khí
+  examples: |
+    - cơ khí
+    - mechanical engineering
+    - mechanical
+
+- synonym: Khoa học máy tính
+  examples: |
+    - khoa học máy tính
+    - computer science
+    - computer engineering
+
+- synonym: Điện tử - Viễn thông
+  examples: |
+    - điện tử - viễn thông
+    - electronics and telecommunications
+    - electronics and telecommunication
+    - DTVT
+- synonym: Hóa phân tích
+  examples: |
+    - hóa phân tích
+    - analytical chemistry
+    - chemistry analysis
+- synonym: Ðiện tử
+  examples: |
+    - điện tử
+    - electronics
+    - electronic
+- synonym: Khoa học Máy tính
+  examples: |
+    - khoa học máy tính
+    - computer science
+    - computer engineering
+
+
+

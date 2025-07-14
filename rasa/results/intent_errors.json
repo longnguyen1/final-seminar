@@ -1,0 +1,458 @@
+[
+  {
+    "text": "abcxyz",
+    "intent": "nlu_fallback",
+    "intent_prediction": {
+      "name": "deny_chatgpt",
+      "confidence": 0.01354410033673048
+    }
+  },
+  {
+    "text": "không hiểu",
+    "intent": "nlu_fallback",
+    "intent_prediction": {
+      "name": "deny_chatgpt",
+      "confidence": 0.025673503056168556
+    }
+  },
+  {
+    "text": "gì vậy",
+    "intent": "nlu_fallback",
+    "intent_prediction": {
+      "name": "deny_chatgpt",
+      "confidence": 0.012343785725533962
+    }
+  },
+  {
+    "text": "???",
+    "intent": "nlu_fallback",
+    "intent_prediction": {
+      "name": "list_experts_by_degree",
+      "confidence": 0.011458913795650005
+    }
+  },
+  {
+    "text": "hả",
+    "intent": "nlu_fallback",
+    "intent_prediction": {
+      "name": "deny_chatgpt",
+      "confidence": 0.013722253032028675
+    }
+  },
+  {
+    "text": "sao vậy",
+    "intent": "nlu_fallback",
+    "intent_prediction": {
+      "name": "list_experts_by_degree",
+      "confidence": 0.009389746934175491
+    }
+  },
+  {
+    "text": "random text",
+    "intent": "nlu_fallback",
+    "intent_prediction": {
+      "name": "deny_chatgpt",
+      "confidence": 0.01586337201297283
+    }
+  },
+  {
+    "text": "không rõ",
+    "intent": "nlu_fallback",
+    "intent_prediction": {
+      "name": "deny_chatgpt",
+      "confidence": 0.020061252638697624
+    }
+  },
+  {
+    "text": "ai đang làm việc ở Đại học Bách khoa TPHCM",
+    "intent": "list_experts_by_current_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_don_vi",
+      "confidence": 0.5401108264923096
+    }
+  },
+  {
+    "text": "chuyên gia tại Đại học Sư phạm kỹ thuật TPHCM",
+    "intent": "list_experts_by_current_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_don_vi",
+      "confidence": 0.5649473667144775
+    }
+  },
+  {
+    "text": "lịch sử làm việc của Nguyễn Thái Anh",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9181583523750305
+    }
+  },
+  {
+    "text": "quá trình làm việc Bùi Thị Tuyết Đan",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9801259636878967
+    }
+  },
+  {
+    "text": "Trương Quang Phúc từng làm ở đâu",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9309474229812622
+    }
+  },
+  {
+    "text": "work history of Nguyễn Quang Khuyến",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9834280610084534
+    }
+  },
+  {
+    "text": "kinh nghiệm làm việc Vũ Đình Thànhs",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9864502549171448
+    }
+  },
+  {
+    "text": "work history Lê Tiến Thường",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.984510600566864
+    }
+  },
+  {
+    "text": "quá trình công tác Nguyễn Lê Duy Khải",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9392942786216736
+    }
+  },
+  {
+    "text": "Đặng Mậu Chiến đã làm việc tại đâu",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9253111481666565
+    }
+  },
+  {
+    "text": "work history Nguyễn Mạnh Hùng",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9734651446342468
+    }
+  },
+  {
+    "text": "career path Bùi Trọng Hiếu",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9760702252388
+    }
+  },
+  {
+    "text": "work experience [Phạm Hoàng Ái Lệ(expert_name)",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9742333292961121
+    }
+  },
+  {
+    "text": "work background Nguyễn Trần Thi Văn",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9783810973167419
+    }
+  },
+  {
+    "text": "employment history Lê Chí Hiệp",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9789674878120422
+    }
+  },
+  {
+    "text": "career history Phan Thanh Minh",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9537059664726257
+    }
+  },
+  {
+    "text": "professional experience Huỳnh Ngọc Văn",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9807726144790649
+    }
+  },
+  {
+    "text": "công việc trước đây của Nguyễn Trần Thi Văn",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9767693877220154
+    }
+  },
+  {
+    "text": "Phạm Hoàng Ái Lệ từng làm việc ở những đâu?",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9217406511306763
+    }
+  },
+  {
+    "text": "Nguyễn Tử Đức có lịch sử làm việc như thế nào?",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9768392443656921
+    }
+  },
+  {
+    "text": "Hồ Văn Nhật Chương đã làm việc ở đâu?",
+    "intent": "potfolio_workhistory",
+    "intent_prediction": {
+      "name": "tra_cuu_lich_su_lam_viec",
+      "confidence": 0.9780299663543701
+    }
+  },
+  {
+    "text": "Tìm chuyên gia từng làm giảng viên ở Đại học Bách khoa - ĐHQG TPHCM",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.962744414806366
+    }
+  },
+  {
+    "text": "Ai là trưởng bộ môn từng làm tại Đại học Khoa học tự nhiên - ĐHQG TPHCM",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9865682125091553
+    }
+  },
+  {
+    "text": "Có chuyên gia nào từng làm kỹ sư ở Công ty TNHH Fujikasui Engineeering Việt Nam không?",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9476848840713501
+    }
+  },
+  {
+    "text": "Tìm kiếm Kỹ sư từng làm việc tại Viện Công cụ và Cơ giới hóa Nông nghiệp",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9866132140159607
+    }
+  },
+  {
+    "text": "Danh sách kỹ sư thiết kế từng làm ở Đại học Bách khoa - ĐHQG TPHCM",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9865228533744812
+    }
+  },
+  {
+    "text": "Ai từng làm phó trưởng Khoa tại Đại học Khoa học Tự nhiên - ĐHQG TPHCM",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9847367405891418
+    }
+  },
+  {
+    "text": "Tìm kiếm Chuyên viên nghiên cứu từng làm việc tại Trung tâm nghiên cứu phát triển chế biến dầu khí - Viện Dầu khí Việt Nam",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.980604887008667
+    }
+  },
+  {
+    "text": "Những người từng làm kỹ sư môi trường ở Công ty CP Kỹ thuật SEEN",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9845949411392212
+    }
+  },
+  {
+    "text": "Chuyên gia nào từng làm trưởng khoa tại Đại học Bách khoa - ĐHQG TPHCM?",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9781937599182129
+    }
+  },
+  {
+    "text": "Tìm kiếm hiệu trưởng từng làm việc tại Đại học Bách khoa - ĐHQG TPHCM",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9860938787460327
+    }
+  },
+  {
+    "text": "Ai là nghiên cứu viên từng làm ở Trung tâm Nghiên cứu Cơ điện, Bộ Nông nghiệp?",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9801594018936157
+    }
+  },
+  {
+    "text": "Danh sách nghiên cứu sinh từng làm tại Đại học Johannes-Kepler University Linz, Áo",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9792799353599548
+    }
+  },
+  {
+    "text": "Tìm kiếm sinh viên từng làm ở Học viện AIT Thái Lan",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9827362298965454
+    }
+  },
+  {
+    "text": "Có ai từng làm phó Hiệu trưởng tại Đại học Công nghệ thông tin - ĐHQG TPHCM",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9777562618255615
+    }
+  },
+  {
+    "text": "Tìm lập trình viên từng làm việc tại Công ty PSV",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9602657556533813
+    }
+  },
+  {
+    "text": "Tìm Trưởng nhóm từng làm ở Công ty Tường Minh",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9838167428970337
+    }
+  },
+  {
+    "text": "Tìm Trưởng bộ môn Điện tử - Viễn thông từng làm tại Đại học Tôn Đức Thắng TPHCM",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9892893433570862
+    }
+  },
+  {
+    "text": "Tìm Thực tập sinh từng làm ở Depart. of EE, UIUC, USA (1 tháng)",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9870376586914062
+    }
+  },
+  {
+    "text": "Tìm Trưởng phòng Thí nghiệm từng làm ở Phòng thí nghiệm Hệ thống năng lượng",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9858476519584656
+    }
+  },
+  {
+    "text": "Tìm Giám đốc Trung tâm từng làm ở Trường Đại học Bách khoa - ĐHQG TPHCM",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9891155362129211
+    }
+  },
+  {
+    "text": "Có ai từng làm Học viên cao học tại Ðại học Quốc gia PUKYONG, Hàn Quốc?",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9848538637161255
+    }
+  },
+  {
+    "text": "Tìm Phó giám đốc từng làm ở Trường Đại học Bách khoa - ĐHQG TPHCM",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9876761436462402
+    }
+  },
+  {
+    "text": "Ai là giảng viên từng làm việc tại Đại học Khoa học Tự nhiên - ĐHQG TPHCM?",
+    "intent": "list_experts_by_posision_and_or_previous_workplace",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_vi_tri_noi_lam_viec",
+      "confidence": 0.9598478078842163
+    }
+  },
+  {
+    "text": "Continue listing",
+    "intent": "liet_ke_du_an_con_lai",
+    "intent_prediction": {
+      "name": "liet_ke_cong_trinh_con_lai",
+      "confidence": 0.6629811525344849
+    }
+  },
+  {
+    "text": "Keep going",
+    "intent": "liet_ke_du_an_con_lai",
+    "intent_prediction": {
+      "name": "liet_ke_cong_trinh_con_lai",
+      "confidence": 0.5403497815132141
+    }
+  },
+  {
+    "text": "Load more",
+    "intent": "liet_ke_cong_trinh_con_lai",
+    "intent_prediction": {
+      "name": "liet_ke_du_an_con_lai",
+      "confidence": 0.5635845065116882
+    }
+  },
+  {
+    "text": "tìm chuyên gia tốt nghiệp từ HCMUT",
+    "intent": "list_experts_by_graduated_school",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_truong_tot_nghiep",
+      "confidence": 0.4850539267063141
+    }
+  },
+  {
+    "text": "tìm chuyên gia chuyên ngành Công nghệ thông tin",
+    "intent": "list_experts_by_major",
+    "intent_prediction": {
+      "name": "tra_cuu_chuyen_gia_theo_chuyen_nganh",
+      "confidence": 0.72990882396698
+    }
+  }
+]

@@ -1,0 +1,224 @@
+[
+  {
+    "text": "Nguyễn Thái Anh",
+    "entities": [
+      {
+        "start": 0,
+        "end": 15,
+        "value": "Nguyễn Thái Anh",
+        "entity": "expert_name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 0,
+        "end": 15,
+        "confidence_entity": 0.5790435075759888,
+        "value": "Nguyễn Thái Anh",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Trương Quang Phúc",
+    "entities": [
+      {
+        "start": 0,
+        "end": 17,
+        "value": "Trương Quang Phúc",
+        "entity": "expert_name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 0,
+        "end": 17,
+        "confidence_entity": 0.5223032832145691,
+        "value": "Trương Quang Phúc",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Vũ Đình Thành",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "value": "Vũ Đình Thành",
+        "entity": "expert_name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 0,
+        "end": 13,
+        "confidence_entity": 0.5756421089172363,
+        "value": "Vũ Đình Thành",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Nguyễn Lê Duy Khải",
+    "entities": [
+      {
+        "start": 0,
+        "end": 18,
+        "value": "Nguyễn Lê Duy Khải",
+        "entity": "expert_name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 0,
+        "end": 18,
+        "confidence_entity": 0.5065744519233704,
+        "value": "Nguyễn Lê Duy Khải",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "tên là Nguyễn Mạnh Hùng",
+    "entities": [
+      {
+        "start": 7,
+        "end": 23,
+        "value": "Nguyễn Mạnh Hùng",
+        "entity": "expert_name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "name",
+        "start": 7,
+        "end": 23,
+        "confidence_entity": 0.6045160293579102,
+        "value": "Nguyễn Mạnh Hùng",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "kinh nghiệm làm việc Vũ Đình Thànhs",
+    "entities": [
+      {
+        "start": 21,
+        "end": 34,
+        "value": "Vũ Đình Thành",
+        "entity": "expert_name"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Tìm Thực tập sinh từng làm ở Depart. of EE, UIUC, USA (1 tháng)",
+    "entities": [
+      {
+        "start": 4,
+        "end": 17,
+        "value": "Thực tập sinh",
+        "entity": "position"
+      },
+      {
+        "start": 29,
+        "end": 63,
+        "value": "Depart. of EE, UIUC, USA (1 tháng)",
+        "entity": "previous_workplace"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "position",
+        "start": 4,
+        "end": 17,
+        "confidence_entity": 0.9929097294807434,
+        "value": "Thực tập sinh",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Đặng Mậu Chiến",
+    "entities": [
+      {
+        "start": 0,
+        "end": 14,
+        "value": "Đặng Mậu Chiến",
+        "entity": "name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "expert_name",
+        "start": 0,
+        "end": 14,
+        "confidence_entity": 0.6004355549812317,
+        "value": "Đặng Mậu Chiến",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Lê Chí Hiệp",
+    "entities": [
+      {
+        "start": 0,
+        "end": 11,
+        "value": "Lê Chí Hiệp",
+        "entity": "name"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "expert_name",
+        "start": 0,
+        "end": 11,
+        "confidence_entity": 0.5490837693214417,
+        "value": "Lê Chí Hiệp",
+        "extractor": "DIETClassifier",
+        "processors": [
+          "EntitySynonymMapper"
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Ai từng làm tại Viện Tin học Quốc gia Nhật Bản (NII)?",
+    "entities": [
+      {
+        "start": 16,
+        "end": 52,
+        "value": "Viện Tin học Quốc gia Nhật Bản (NII)",
+        "entity": "previous_workplace"
+      }
+    ],
+    "predicted_entities": []
+  }
+]

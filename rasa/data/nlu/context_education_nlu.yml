@@ -2,55 +2,111 @@ version: "3.1"
 
 nlu:
 # ===== EDUCATION TABLE INTENTS =====
-- intent: hoi_qua_trinh_dao_tao
+- intent: potfolio_education
   examples: |
     - quá trình đào tạo của [Nguyễn Thái Anh](expert_name)
     - [Trương Quang Phúc](expert_name) học ở đâu
     - lịch sử học tập [Vũ Đình Thành](expert_name)
     - thông tin học vấn [Nguyễn Lê Duy Khải](expert_name)
-    - [Đặng Mậu Chiến](expert_name) tốt nghiệp trường nào
-    - học vị của [Nguyễn Mạnh Hùng](expert_name)
-    - [Bùi Trọng Hiếu](expert_name) có bằng cấp gì
+    - education history of [Đặng Mậu Chiến](expert_name)
+    - lịch sử học tập của [Nguyễn Mạnh Hùng](expert_name)
+    - đưa ra quá trình học tập của [Nguyễn Văn A](expert_name)
+    - tôi muốn hỏi quá trình học tập của [Nguyễn Văn B](expert_name)
+    - [Bùi Trọng Hiếu](expert_name) có education history gì
+    - quá trình học tập của [Nguyễn Văn C](expert_name) là gì
+    - [Đặng Mậu Chiến](expert_name) có thông tin học vấn gì
+    - quá trình học tập của [Nguyễn Mạnh Hùng](expert_name)
     - education background [Lê Chí Hiệp](expert_name)
     - academic history [Huỳnh Ngọc Văn](expert_name)
-    - bằng cấp của [Nguyễn Trần Thi Văn](expert_name)
+    - education history of [Nguyễn Thị Mai](expert_name)
+    - cho tôi biết quá trình học tập của [Nguyễn Trần Thi Văn](expert_name)
+    - liệu bạn có thể cung cấp cho tôi thông tin học vấn của [Phan Nghĩa Minh](expert_name)?
+    - tôi thắc mắc về quá trình học tập của [Nguyễn Mạnh Hùng](expert_name)
+    - xin vui lòng cho tôi biết quá trình học tập của [Phạm Văn Tấn](expert_name)
 
-- intent: tra_cuu_chuyen_gia_theo_truong_tot_nghiep
+    - ông này có quá trình học tập như thế nào?
+    - anh lúc này có lịch sử học tập ra sao?
+    - bà ấy có education history gì không?
+    - chị ấy có thông tin học vấn gì không?
+    - quá trình học tập của người này là gì?
+    - quá trình đào tạo của người này là gì?
+    - đưa ra thông tin học vấn của người này
+    - education history của người này là gì?
+    - tôi muốn biết quá trình học tập của người này
+    - quá trình học tập của chuyên gia này là gì?
+    - cho tôi hỏi quá trình học tập của chuyên gia này
+    - liệu bạn có thể cung cấp cho tôi thông tin học vấn của chuyên gia này?
+    - xin vui lòng cho tôi biết quá trình học tập của chuyên gia này
+
+- intent: list_experts_by_graduated_school
   examples: |
     # EXPLICIT EDUCATION CONTEXT - Clear education indicators
-    - tìm chuyên gia tốt nghiệp từ [HCMUT](graduated_school)
-    - ai học ở [Đại học Bách khoa TPHCM](graduated_school)
-    - cựu sinh viên [ĐHSPKT](graduated_school)
-    - alumni [UIT](graduated_school)
-    - người đã học tại [HCMUS](graduated_school)
-    - ra trường từ [Đại học Sư phạm kỹ thuật TPHCM](graduated_school)
-    - tốt nghiệp [Đại học Công nghệ thông tin](graduated_school)
-    - học xong ở [ĐHQG TPHCM](graduated_school)
-    - cử nhân từ [Đại học Nông lâm TPHCM](graduated_school)
-    - graduates from [HCMUT](graduated_school)
-    - studied at [UIT](graduated_school)
-    - education from [ĐHSPKT](graduated_school)
+    - thống kê chuyên gia học ở [HCMUT](graduated_school)s
+    - liệt kê ai học ở [Đại học Bách khoa TPHCM](graduated_school)
+    - thống kê chuyên gia có graduated school là [ĐHSPKT](graduated_school)
+    - danh sách ai là cựu sinh viên [ĐHSPKT](graduated_school)
+    - danh sách alumni of [UIT](graduated_school)
+    - show chuyên gia nào đã học tại [HCMUS](graduated_school)
+    - list người ra trường từ [Đại học Sư phạm kỹ thuật TPHCM](graduated_school)
+    - danh sách chuyên gia nào tốt nghiệp [Đại học Công nghệ thông tin](graduated_school)
+    - tổng hợp chuyên gia có graduated school là [Đại học Khoa học tự nhiên - ĐHQG TPHCM](graduated_school)
+    - liệt kê studied at [UIT](graduated_school)
+    - thống kê chuyên gia học ở [Đại học Bách khoa TPHCM](graduated_school)
+    - list alumnus of [Đại học Sư phạm kỹ thuật TPHCM](graduated_school)
+    - show người tốt nghiệp ở [Đại học Công nghệ thông tin - ĐHQG TPHCM](graduated_school)
+    - list alumni of [Đại học Khoa học tự nhiên - ĐHQG TPHCM](graduated_school)
+    - tôi mong muốn biết danh sách người học ở [Đại học Bách khoa - ĐHQG TPHCM](graduated_school)
+    - tôi tò mò về danh sách người học ở [Đại học Khoa học tự nhiên - ĐHQG TPHCM](graduated_school)
+    - bạn có thể thống kê những người học ở [Đại học Công nghệ thông tin - ĐHQG TPHCM](graduated_school) không?
+    - bạn có sẵn sàng cung cấp cho tôi danh sách người học ở [Đại học Sư phạm kỹ thuật TPHCM](graduated_school) không?
 
-    # REAL DATABASE SCHOOLS
-    - tốt nghiệp từ [Đại học Bách khoa - ĐHQG TPHCM](graduated_school)
-    - cựu sinh viên [ĐH SPKT TPHCM](graduated_school)
-    - alumni [ĐH Công nghệ thông tin - ĐHQG TPHCM](graduated_school)
-    - học xong ở [Đại học Khoa học tự nhiên - ĐHQG TPHCM](graduated_school)
-    - ra trường từ [Đại học Giao thông vận tải TPHCM](graduated_school)
-    - bằng cấp từ [Đại học Nông nghiệp Hà Nội](graduated_school)
+    - tôi muốn biết danh sách người học ở đó
+    - tôi tò mò về danh sách người học ở nơi này
+    - tôi muốn biết danh sách người học ở nơi này
+    - danh sách người học ở nơi này là gì?
+    - tôi muốn biết danh sách người học ở nơi này là gì?
+    - thông kê người học ở nơi này
+    - liệt kê chuyên gia học ở nơi này
+    - bạn có thể thống kê những người học ở nơi này không?
+    - bạn có thể cung cấp cho tôi danh sách người học ở nơi này không?
+    - bạn có vui lòng thống kê những người học ở nơi này không?
+    
 
-- intent: tra_cuu_chuyen_gia_theo_chuyen_nganh
+- intent: list_experts_by_major
   examples: |
-    - tìm chuyên gia chuyên ngành [Công nghệ thông tin](major)
-    - ai học [Khoa học máy tính](major)
-    - chuyên gia [Cơ khí](major)
-    - người có chuyên môn [Điện tử viễn thông](major)
-    - [Software Engineering](major) experts
-    - [Kỹ thuật phần mềm](major) specialists
-    - chuyên ngành [Hóa học](major)
-    - [Environmental Engineering](major) professionals
-    - [Kỹ thuật môi trường](major) chuyên gia
-    - experts in [Computer Science](major)
+    - tìm kiếm chuyên gia có chuyên ngành [Công nghệ thông tin](major)
+    - cho tôi danh sách người theo chuyên ngành [Khoa học máy tính](major)
+    - liệt kê chuyên gia học bên ngành [Cơ khí](major)
+    - điểm danh người có chuyên môn [Điện tử viễn thông](major)
+    - trình bày những người học ngành [Hóa học](major)
+    - thông kê người theo major là [Kỹ thuật phần mềm](major)
+    - trình bày chuyên gia bên [Kỹ thuật phần mềm](major)
+    - điểm danh chuyên gia bên ngành [Kỹ thuật môi trường](major)
+    - nêu ra người có chuyên ngành [Cơ khí](major)
+    - những ai học bên ngành [Khoa học máy tính](major)?
+    - tìm những chuyên gia bên ngành [Cơ khí](major)
+    - liệt kê người có chuyên môn [Điện tử viễn thông](major)
+    - [Software Engineering](major) experts list
+    - list [Kỹ thuật phần mềm](major) specialists
+    - thống kê chuyên môn bên [Environmental Engineering](major)
+    - chuyên gia nào theo lĩnh vực [Kỹ thuật môi trường](major) 
+    - danh sách người theo học bên chuyên ngành[Computer Science](major)
+    - bạn có thể thống kê chuyên gia theo chuyên ngành [Công nghệ thông tin](major) không?
+    - tôi muốn biết danh sách người theo chuyên ngành [Hóa học](major)
+    - tôi tò mò về danh sách người theo chuyên ngành [Kỹ thuật phần mềm](major)
+    - liệu bạn có thể thống kê chuyên gia theo chuyên ngành [Kỹ thuật môi trường](major)?
+
+    - list chuyên gia theo theo chuyên ngành này
+    - tổng hợp người có major này
+    - thống kê chuyên gia theo lĩnh vực này
+    - liệt kê người theo chuyên môn này
+    - danh sách người có chuyên môn này
+    - tôi muốn biết danh sách người theo chuyên ngành này
+    - tôi tò mò về danh sách người theo chuyên ngành này
+    - tôi muốn biết danh sách người theo chuyên môn này
+    - bạn có thể thống kê chuyên gia theo chuyên ngành này không?
+    - bạn có thể cung cấp cho tôi danh sách người theo chuyên môn này không?
+    - liệu bạn có thể thống kê chuyên gia theo chuyên môn này không?
 
 # ===== LOOKUPS =====
 - lookup: graduated_school
@@ -89,7 +145,13 @@ nlu:
     - Chemistry
     - Kỹ thuật môi trường
     - Environmental Engineering
-    - Software Engineering
+    - Điện - Điện tử
     - Kỹ thuật phần mềm
     - Kỹ thuật xây dựng
-    - Civil Engineering
+    - Công nghệ Thực phẩm
+    - Kỹ thuật Điện
+    - Vật liệu polymer
+    - Kỹ thuật nhiệt
+    - Trí tuệ nhân tạo
+    - Điện tử - Viễn thông
+    - Hóa Hạt nhân

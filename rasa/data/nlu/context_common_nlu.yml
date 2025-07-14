@@ -25,16 +25,40 @@ nlu:
     - cảm ơn và tạm biệt
     - chào nhé
     - see you
+    - hẹn gặp lại
+    - hẹn gặp lại sau
+    - tôi bận rồi
+    - tôi không chat nữa
+    - tôi đi đây
+    - tôi đi làm việc khác
 
-- intent: thanks
+- intent: praise_bot
   examples: |
-    - cảm ơn
-    - cảm ơn bạn
-    - thanks
-    - thank you
-    - cảm ơn nhiều
-    - cảm ơn bạn rất nhiều
-    - thank you so much
+    - Cảm ơn bạn
+    - Bot giỏi quá
+    - Bạn tuyệt vời lắm
+    - Good job!
+    - Thanks
+    - tuyệt vời
+    - bạn làm tốt lắm
+    - xuất sắc
+    - bạn trả lời đúng rồi
+    - mình thích câu trả lời của bạn
+    - bạn trả lời rất hay
+    - trúng phóc
+    - bạn rất thông minh
+
+- intent: complain_bot
+  examples: |
+    - quá thất vọng
+    - bạn trả lời không đúng
+    - Bot dở quá
+    - tôi không hài lòng
+    - Tệ quá
+    - Sorry, bạn chưa giúp được tôi
+    - bạn chưa trả lời đúng
+    - bạn chưa giúp được tôi
+    - bạn chưa trả lời đúng câu hỏi của tôi
 
 - intent: bot_challenge
   examples: |
@@ -50,53 +74,40 @@ nlu:
 - intent: nlu_fallback
   examples: |
     - abcxyz
-    - không hiểu
     - gì vậy
     - ???
     - hả
     - sao vậy
     - random text
-    - không rõ
+    - con chó
+    - thằng kia
+    - biết tao là ai không
+    - A
+    - !
+    - ~
+    - ...
+    - muốn gì
+    - có ý gì
+    - là sao
+    - ***
+    - hôn tôi đi 
+    - làm quen tôi đi
 
-# ===== PROVIDE NAME INTENT =====
-- intent: provide_name
+- intent: not_sure
   examples: |
-    - [Nguyễn Thái Anh](expert_name)
-    - [Trương Quang Phúc](expert_name)
-    - [Vũ Đình Thành](expert_name)
-    - [Nguyễn Lê Duy Khải](expert_name)
-    - tên là [Nguyễn Mạnh Hùng](expert_name)
-    - [Đặng Mậu Chiến](expert_name)
-    - [Bùi Trọng Hiếu](expert_name)
-    - [Lê Chí Hiệp](expert_name)
-    - [Huỳnh Ngọc Văn](expert_name)
-    - [Nguyễn Trần Thi Văn](expert_name)
+    - tôi muốn hỏi về 
+    - tôi tò mò là 
+    - bạn có biết
+    - tôi thắc mắc là
+    - tôi không chắc là
+    - tôi không rõ là
+    - tôi muốn biết
+    - bạn giúp tôi không
+    - tôi muốn tìm hiểu về
+    - tôi muốn hỏi về vấn đề
+    - tôi muốn hỏi về chủ đề
+    - 
 
-# ===== PAGINATION INTENTS =====
-- intent: liet_ke_cong_trinh_con_lai
-  examples: |
-    - tiếp tục
-    - xem thêm
-    - còn nữa không
-    - liệt kê tiếp
-    - hiện thị thêm công trình
-    - xem các công trình còn lại
-    - show more
-    - more publications
-    - continue
-    - next
-
-- intent: liet_ke_du_an_con_lai
-  examples: |
-    - tiếp tục dự án
-    - xem thêm dự án
-    - liệt kê tiếp dự án
-    - hiển thị thêm dự án
-    - các dự án còn lại
-    - more projects
-    - show more projects
-    - continue projects
-    - next projects
 
 # ===== EXPERT NAME LOOKUP =====
 - lookup: expert_name

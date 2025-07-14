@@ -10,37 +10,10 @@ import {
 
 const prisma = new PrismaClient();
 
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const position = searchParams.get('position') || '';
-  const workplace = searchParams.get('workplace') || '';
-  const limit = parseInt(searchParams.get('limit') || '15', 10);
-  const offset = parseInt(searchParams.get('offset') || '0', 10);
-  const context = searchParams.get('context') || 'workhistory_position_workplace_search';
-  const mode = (searchParams.get('mode') as 'and' | 'or' | 'position' | 'workplace') || 'and';
-
-  if (!position && !workplace) {
-    return createRasaErrorResponse('Missing position and workplace in query', context);
-  }
-
-  const queries = new ExpertQueries(prisma);
-  const joined = await queries.searchByWorkPositionAndOrWorkplace(position, workplace, mode);
-
-  const totalCount = joined.length;
-  const paginated = joined.slice(offset, offset + limit);
-  const experts = transformWorkHistoryJoinToExperts(paginated);
-
-  return createRasaResponse(
-    experts,
-    context,
-    totalCount,
-    { offset, limit, hasMore: (offset + limit) < totalCount }
-  );
-}
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    console.log('[DEBUG] Nhận request body:', body);
     const position = body.position || '';
     const workplace = body.workplace || '';
     const limit = body.limit || 10;
@@ -53,24 +26,37 @@ export async function POST(request: NextRequest) {
     }
 
     const queries = new ExpertQueries(prisma);
-    const joined = await queries.searchByWorkPositionAndOrWorkplace(position, workplace, mode);
 
-    const totalCount = joined.length;
-    const paginated = joined.slice(offset, offset + limit);
+    let joined: any[] = [];
+    if (mode === 'and' && position && workplace) {
+      // Lấy expertId theo từng điều kiện rồi giao lại
+      const byPosition = await queries.searchByWorkPositionAndOrWorkplace(position, '', 'position');
+      const byWorkplace = await queries.searchByWorkPositionAndOrWorkplace('', workplace, 'workplace');
+      const idsByPosition = new Set(byPosition.map(r => r.expertId));
+      const idsByWorkplace = new Set(byWorkplace.map(r => r.expertId));
+      const intersectIds = [...idsByPosition].filter(id => idsByWorkplace.has(id));
+      // Lấy tất cả workHistory của các expert này (hoặc chỉ lấy expert)
+      joined = await queries.getWorkHistoriesByExpertIds(intersectIds);
+    } else {
+      // Giữ nguyên logic cũ cho các mode khác
+      joined = await queries.searchByWorkPositionAndOrWorkplace(position, workplace, mode);
+    }
 
-    // Chuyển dữ liệu join về dạng ExpertWithRelations (giống các API khác)
-    const experts = transformWorkHistoryJoinToExperts(paginated);
+    // Nhóm thành expert duy nhất
+    const experts = transformWorkHistoryJoinToExperts(joined);
+    const totalCount = experts.length;
+
+    // Phân trang trên danh sách expert
+    const paginated = experts.slice(offset, offset + limit);
 
     return createRasaResponse(
-      experts,
+      paginated,
       context,
       totalCount,
       { offset, limit, hasMore: (offset + limit) < totalCount }
     );
-  } catch (error: any) {
-    console.error('❌ RASA WorkHistory Position+Workplace Error:', error);
-    return createRasaErrorResponse(error.message, 'workhistory_position_workplace_search');
-  } finally {
-    await prisma.$disconnect();
+  } catch (error) {
+    console.error('[ERROR] ', error);
+    return createRasaErrorResponse('Internal server error', 'workhistory_position_workplace_search');
   }
 }

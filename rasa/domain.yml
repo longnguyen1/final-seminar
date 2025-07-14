@@ -1,285 +1,281 @@
 version: "3.1"
 
 intents:
-  # ===== CORE INTENTS =====
+# ===== CORE INTENTS =====
   - greet
   - goodbye
-  - thanks
   - bot_challenge
   - nlu_fallback
-  
-  # ===== EXPERT TABLE INTENTS =====
-  - tra_cuu_chuyen_gia
+  - praise_bot
+  - complain_bot
+  - not_sure
+  - out_of_scope
+# ===== CHATGPT INTENTS =====
+  - confirm_chatgpt
+  - deny_chatgpt
+#===== BASIC INTENTS =====
+  - ask_expert_current_workplace
+  - ask_expert_degree
+  - ask_expert_contact
+  - ask_expert_graduated_school
+  - ask_expert_major
+  - ask_expert_previous_workplace
+  - ask_expert_position
+#===== YES/NO INTENTS =====
+  - expert_yes_no_question_current_workplace
+  - expert_yes_no_question_degree
+  - expert_yes_no_question_academic_title
+  - expert_yes_no_question_graduated_school
+  - expert_yes_no_question_major
+  - expert_yes_no_question_previous_workplace
+  - expert_yes_no_question_position
+# ===== EXPERT TABLE INTENTS =====
+  - potfolio_expert
+  - list_experts_by_current_workplace
+  - list_experts_by_degree
+  - list_experts_by_academic_title
+# ===== EDUCATION TABLE INTENTS =====
+  - potfolio_education
+  - list_experts_by_graduated_school
+  - list_experts_by_major
+# ===== WORKHISTORY TABLE INTENTS =====
+  - potfolio_workhistory
+  - list_experts_by_position_and_or_previous_workplace
+  - reset_chuyen_gia # Thêm intent để reset thông tin chuyên gia
+# ===== PUBLICATION INTENTS =====
+  - potfolio_publication
+# ===== PROJECT INTENTS =====
+  - potfolio_project
+# ===== PROVIDE ENTITIES INTENTS =====
   - provide_name
-  - tra_cuu_chuyen_gia_theo_don_vi
-  - tra_cuu_chuyen_gia_theo_hoc_vi
-  - tra_cuu_chuyen_gia_theo_hoc_ham
+  - provide_current_workplace
+  - provide_graduated_school
+  - provide_major
+  - provide_degree
+  - provide_academic_title
+  - provide_position_or_workplace
   
-  # ===== EDUCATION TABLE INTENTS =====
-  - hoi_qua_trinh_dao_tao
-  - tra_cuu_chuyen_gia_theo_truong_tot_nghiep
-  - tra_cuu_chuyen_gia_theo_chuyen_nganh
-  
-  # ===== WORKHISTORY TABLE INTENTS =====
-  - tra_cuu_lich_su_lam_viec
-  - tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
-  - tra_cuu_chuyen_gia_theo_vi_tri
-  
-  # ===== PUBLICATION INTENTS =====
-  - thong_ke_cong_trinh_khoa_hoc
-  - liet_ke_cong_trinh_khoa_hoc
-  - liet_ke_cong_trinh_con_lai
-  
-  # ===== PROJECT INTENTS =====
-  - thong_ke_du_an
-  - liet_ke_du_an
-  - liet_ke_du_an_con_lai
-  
-  # ===== LANGUAGE INTENTS =====
-  - tra_cuu_ngoai_ngu
-  - tra_cuu_chuyen_gia_theo_ngoai_ngu
+forms:
+  list_experts_by_position_and_or_previous_workplace_form:
+    required_slots:
+      - position
+      - previous_workplace
 
 entities:
-  # ===== ENTITIES FROM RULES/STORIES =====
-  - name                # Từ rules/stories (thay vì expert_name)
-  - expert_name           # Từ rules/stories (thay vì name)
+# ===== ENTITIES FROM RULES/STORIES =====
+  - expert_name          # Từ rules/stories (thay vì name)
   - current_workplace     # Từ rules/stories (thay vì organization)
   - graduated_school      # Từ rules/stories (thay vì school)
   - previous_workplace    # Từ rules/stories (thay vì workplace)
   - degree               # Từ rules/stories (giữ nguyên)
   - academic_title       # Từ rules/stories (thay vì academicTitle)
-  - expert_id            # Từ rules/stories (thay vì id)
-  - academicTitle         # Từ rules/stories (giữ nguyên) 
   - major                # Từ rules/stories (giữ nguyên)
-  - position             # Từ rules/stories (giữ nguyên)
-  - language             # Từ rules/stories (giữ nguyên)
-  
-  # ===== ADDITIONAL ENTITIES FOR COMPLETENESS =====
-  - publication_type      # Cho publication searches
-  - year                 # Cho year-based searches
-  - project_status       # Cho project status searches
-  - project_role         # Cho project role searches
+  - position             # Từ rules/stories (thay vì jobTitle)
 
 slots:
-  # ===== CORE SLOTS - MATCH ENTITIES =====
-  name:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: expert_name
-
+# ===== CORE SLOTS - MATCH ENTITIES =====
   expert_name:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
       - type: from_entity
         entity: expert_name
-
-  expert_id:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: custom
-
-  # ===== EXPERT TABLE SLOTS =====
+      - type: from_text
+# ===== EXPERT TABLE SLOTS =====
   current_workplace:
     type: text
-    influence_conversation: false
+    influence_conversation: true
     mappings:
       - type: from_entity
         entity: current_workplace
-
+      - type: from_text
   degree:
     type: text
-    influence_conversation: false
+    influence_conversation: true
     mappings:
       - type: from_entity
         entity: degree
-
+      - type: from_text
   academic_title:
     type: text
-    influence_conversation: false
+    influence_conversation: true
     mappings:
       - type: from_entity
         entity: academic_title
-
-  # ===== EDUCATION SLOTS =====
+      - type: from_text
+# ===== EDUCATION SLOTS =====
   graduated_school:
     type: text
-    influence_conversation: false
+    influence_conversation: true
     mappings:
       - type: from_entity
         entity: graduated_school
-
+# Thêm trường hợp từ text để hỗ trợ tìm kiếm tự do
+      - type: from_text
   major:
     type: text
-    influence_conversation: false
+    influence_conversation: true
     mappings:
       - type: from_entity
         entity: major
-
-  graduation_year:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_entity
-        entity: year
-
-  # ===== WORKHISTORY SLOTS =====
+      - type: from_text
+# ===== WORKHISTORY SLOTS =====
   previous_workplace:
     type: text
-    influence_conversation: false
+    influence_conversation: true
     mappings:
       - type: from_entity
         entity: previous_workplace
-
+      - type: from_text
   position:
     type: text
-    influence_conversation: false
+    influence_conversation: true
     mappings:
       - type: from_entity
         entity: position
-
-  # ===== PUBLICATION SLOTS =====
-  publication_type:
+      - type: from_text
+# ===== PROPOSED SLOTS - FROM INTENT MAPPINGS =====
+  proposed_current_workplace:
     type: text
     influence_conversation: false
-    mappings:
-      - type: from_entity
-        entity: publication_type
-
-  year:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_entity
-        entity: year
-
-  # ===== PROJECT SLOTS =====
-  project_status:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_entity
-        entity: project_status
-
-  project_role:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_entity
-        entity: project_role
-
-  # ===== LANGUAGE SLOTS =====
-  language:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_entity
-        entity: language
-
-  # ===== PAGINATION SLOTS =====
-  publication_offset:
-    type: float
-    initial_value: 0
-    influence_conversation: true
     mappings:
       - type: custom
-
-  project_offset:
-    type: float
-    initial_value: 0
-    influence_conversation: true
+  proposed_degree:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  proposed_academic_title:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  proposed_graduated_school:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  proposed_major:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  proposed_previous_workplace:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  proposed_position:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  original_current_workplace:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  original_degree:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  original_academic_title:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  original_graduated_school:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  original_major:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  original_previous_workplace:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  original_position:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+# ===== CHATGPT SLOTS =====
+  pending_chatgpt_question:
+    type: text
+    influence_conversation: false
     mappings:
       - type: custom
 
 actions:
-  # ===== EXPERT TABLE ACTIONS =====
-  - action_tra_cuu_chuyen_gia
-  - action_tra_cuu_chuyen_gia_theo_don_vi
-  - action_tra_cuu_chuyen_gia_theo_hoc_vi
-  - action_tra_cuu_chuyen_gia_theo_hoc_ham
-  
-  # ===== EDUCATION TABLE ACTIONS =====
-  - action_tra_cuu_qua_trinh_dao_tao
-  - action_tra_cuu_chuyen_gia_theo_truong_tot_nghiep
-  - action_tra_cuu_chuyen_gia_theo_chuyen_nganh
-  
-  # ===== WORKHISTORY TABLE ACTIONS =====
-  - action_tra_cuu_lich_su_lam_viec
-  - action_tra_cuu_chuyen_gia_theo_noi_tung_lam_viec
-  - action_tra_cuu_chuyen_gia_theo_vi_tri
-  
-  # ===== PUBLICATION ACTIONS =====
-  - action_thong_ke_cong_trinh_khoa_hoc
-  - action_liet_ke_cong_trinh_khoa_hoc
-  - action_liet_ke_cong_trinh_khoa_hoc_con_lai
-  
-  # ===== PROJECT ACTIONS =====
-  - action_thong_ke_du_an
-  - action_liet_ke_du_an
-  - action_liet_ke_du_an_con_lai
-  
-  # ===== LANGUAGE ACTIONS =====
-  - action_tra_cuu_ngoai_ngu
-  - action_tra_cuu_chuyen_gia_theo_ngoai_ngu
+  - action_ask_expert_current_workplace
+  - action_ask_expert_degree
+  - action_ask_expert_contact
+  - action_ask_expert_graduated_school
+  - action_ask_expert_major
+  - action_ask_expert_previous_workplace
+  - action_ask_expert_position
+  - action_expert_yes_no_question
+# ===== CORE ACTIONS =====
+  - action_potfolio_expert
+  - action_list_experts_by_current_workplace
+  - action_list_experts_by_degree
+  - action_list_experts_by_academic_title
+  - action_potfolio_education
+  - action_list_experts_by_graduated_school
+  - action_list_experts_by_major
+  - action_potfolio_workhistory
+  - action_list_experts_by_position_and_or_previous_workplace
+  - action_potfolio_publication
+  - action_potfolio_project
+  - action_fallback_chatgpt
+  - action_store_pending_chatgpt_question
+  - action_reset_chuyen_gia
+  - action_fallback_chatgpt
+  - validate_list_experts_by_position_and_or_previous_workplace_form
 
 responses:
-  # ===== CORE RESPONSES =====
+# ===== CORE RESPONSES =====
   utter_greet:
     - text: "Chào bạn! Tôi là trợ lý ảo hỗ trợ tra cứu thông tin chuyên gia. Bạn cần hỗ trợ gì?"
-  
   utter_goodbye:
     - text: "Tạm biệt! Cảm ơn bạn đã sử dụng dịch vụ."
-  
-  utter_happy:
-    - text: "Rất vui được hỗ trợ bạn!"
-  
+  utter_thank_you:
+    - text: "Cảm ơn bạn! Tôi rất vui khi có thể giúp đỡ."
+  utter_sorry:
+    - text: "Tôi xin lỗi nếu chưa làm bạn hài lòng. Tôi sẽ cải thiện thêm."
   utter_iamabot:
     - text: "Tôi là trợ lý ảo được phát triển để hỗ trợ tra cứu thông tin chuyên gia."
-  
-  # ===== ASK RESPONSES =====
-  utter_hoi_ten_chuyen_gia:
-    - text: "Bạn muốn tra cứu thông tin của chuyên gia nào?"
-  
-  utter_hoi_don_vi:
-    - text: "Bạn muốn tìm chuyên gia ở đơn vị nào?"
-  
-  utter_hoi_hoc_vi:
-    - text: "Bạn muốn tìm chuyên gia có học vị gì?"
-  
-  utter_hoi_hoc_ham:
-    - text: "Bạn muốn tìm chuyên gia có học hàm gì?"
-  
-  utter_hoi_truong_tot_nghiep:
-    - text: "Bạn muốn tìm chuyên gia tốt nghiệp từ trường nào?"
-  
-  utter_hoi_chuyen_nganh:
-    - text: "Bạn muốn tìm chuyên gia có chuyên ngành gì?"
-  
-  utter_hoi_noi_lam_viec:
-    - text: "Bạn muốn tìm chuyên gia đã làm việc tại đâu?"
-  
-  utter_hoi_vi_tri:
-    - text: "Bạn muốn tìm chuyên gia có vị trí gì?"
-  
-  # ===== PAGINATION RESPONSES =====
-  utter_co_them_cong_trinh:
-    - text: "Bạn có muốn xem thêm công trình khác không?"
-  
-  utter_co_them_du_an:
-    - text: "Bạn có muốn xem thêm dự án khác không?"
-  
-  # ===== FALLBACK & ERROR RESPONSES =====
+  utter_reset_expert:
+    - text: "Đã reset thông tin chuyên gia. Bạn có thể hỏi về người khác hoặc yêu cầu thông tin mới."
+# ===== ASK RESPONSES =====
+  utter_ask_name:
+    - text: "Không tìm thấy tên chuyên gia này. Bạn có thể cung cấp tên chuyên gia để tôi tra cứu thông tin."
+  utter_ask_current_workplace:
+    - text: "Không tìm thấy nơi làm việc hiện tại này. Bạn có thể cung cấp nơi làm việc hiện tại để tôi tra cứu thông tin."
+  utter_ask_degree:
+    - text: "Không tìm thấy trình độ học vấn này. Bạn có thể cung cấp trình độ học vấn để tôi tra cứu thông tin."
+  utter_ask_academic_title:
+    - text: "Không tìm thấy học hàm này. Bạn có thể cung cấp học hàm để tôi tra cứu thông tin."
+  utter_ask_graduated_school:
+    - text: "Không tìm thấy trường tốt nghiệp này. Bạn có thể cung cấp trường tốt nghiệp để tôi tra cứu thông tin."
+  utter_ask_major:
+    - text: "Không tìm thấy chuyên ngành này. Bạn có thể cung cấp chuyên ngành để tôi tra cứu thông tin."
+  utter_ask_position_or_workplace:
+    - text: "Không tìm thấy vị trí hoặc nơi làm việc trước đây này. Bạn có thể cung cấp vị trí hoặc nơi làm việc trước đây để tôi tra cứu thông tin."
+# ===== FALLBACK & ERROR RESPONSES =====
   utter_default:
     - text: "Xin lỗi, tôi chưa hiểu yêu cầu này. Tôi có thể hỗ trợ tra cứu thông tin chuyên gia, quá trình đào tạo, lịch sử làm việc, công trình khoa học và dự án nghiên cứu."
-  
-  utter_khong_tim_thay_chuyen_gia:
-    - text: "Không tìm thấy chuyên gia này. Bạn có thể thử tên khác không?"
-  
-  utter_khong_tim_thay_ket_qua:
-    - text: "Không tìm thấy kết quả phù hợp. Bạn có thể thử với từ khóa khác không?"
+# ===== CHATGPT RESPONSES =====
+  utter_ask_use_chatgpt:
+    - text: "Bạn có muốn tôi hỏi ChatGPT để trả lời câu này không?"
+  utter_cancel_chatgpt:
+    - text: "Đã hủy, bạn có thể hỏi điều khác."
 
 session_config:
   session_expiration_time: 60

@@ -5,6 +5,44 @@ from typing import Optional, Dict, List
 
 BASE_URL = "http://localhost:3000/api"
 
+
+def search_experts(
+    expert_name=None,
+    current_work=None,
+    degree=None,
+    academic_title=None,
+    phone=None,
+    email=None,
+    school=None,
+    major=None,
+    position=None,
+    limit=10,
+    offset=0,
+    **kwargs
+):
+    url = "http://localhost:3000/api/experts/search-advance"
+    payload = {
+        "expert_name": expert_name,
+        "current_workplace": current_work,
+        "degree": degree,
+        "academic_title": academic_title,
+        "phone": phone,
+        "email": email,
+        "graduated_school": school,
+        "major": major,
+        "position": position,
+        "limit": limit,
+        "offset": offset,
+    }
+    # Bỏ các key có giá trị None để tránh gửi thừa
+    payload = {k: v for k, v in payload.items() if v is not None}
+    payload.update(kwargs)
+    response = requests.post(url, json=payload)
+    if response.status_code == 200:
+        data = response.json()
+        return data.get("data", []), data.get("total", 0)
+    return [], 0
+
 def safe_api_call_get(url: str) -> dict:
     """Simple GET API call"""
     try:

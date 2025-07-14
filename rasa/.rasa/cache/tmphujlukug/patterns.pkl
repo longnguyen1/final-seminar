@@ -1,0 +1,138 @@
+[
+  {
+    "name": "academicTitle",
+    "pattern": "(Giáo sư|Phó giáo sư|GS|PGS|Professor|Associate Professor)"
+  },
+  {
+    "name": "current_workplace",
+    "pattern": "(Đại học|University|Viện|Institute|Trường|School|Phân viện|Branch)[\\s\\w\\-,()&]*"
+  },
+  {
+    "name": "degree",
+    "pattern": "(Tiến sĩ|Thạc sĩ|Kĩ sư|Cử nhân|TS|ThS|KS|CN|PhD|MSc|BSc|Doctor|Master|Engineer|Bachelor)"
+  },
+  {
+    "name": "language",
+    "pattern": "(English|Russian|French|Japanese|Korean|Chinese|German|Czech|Slovak)"
+  },
+  {
+    "name": "language",
+    "pattern": "(Tiếng|tiếng)\\s+[A-ZÀ-Ỹ][a-zà-ỹ]*"
+  },
+  {
+    "name": "language",
+    "pattern": "[A-Z][a-z]*(\\s+(ngữ|language))?"
+  },
+  {
+    "name": "language_level",
+    "pattern": "(Tốt|Khá|Trung bình|Good|Fair|Average|Excellent|Fluent|Basic|Advanced|Intermediate|Elementary|Beginner)"
+  },
+  {
+    "name": "name",
+    "pattern": "[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+(\\s+[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+)+"
+  },
+  {
+    "name": "name",
+    "pattern": "[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+(\\s+[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+)+"
+  },
+  {
+    "name": "name",
+    "pattern": "[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+(\\s+[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+)+"
+  },
+  {
+    "name": "name",
+    "pattern": "[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+(\\s+[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴỶỸ][a-zàáâãèéêìíòóôõùúăđĩũơưạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ]+)+"
+  },
+  {
+    "name": "organization",
+    "pattern": "(Đại học|University|Viện|Institute|Trường|School|Phân viện|Branch)[\\s\\w\\-,()]*"
+  },
+  {
+    "name": "project_role",
+    "pattern": "(Chủ nhiệm|Thành viên|Tác giả|Đồng tác giả|leader|member|author|co-author|PI|coordinator|manager|researcher|collaborator)"
+  },
+  {
+    "name": "project_status",
+    "pattern": "(Đã nghiệm thu|Hoàn thành|completed|finished|done|đã bảo vệ|kết thúc|terminated|ongoing|active|in progress)"
+  },
+  {
+    "name": "publication_type",
+    "pattern": "(Tạp chí quốc tế|Hội nghị quốc tế|Sách chuyên khảo|Tạp chí quốc gia|journal|conference|book|paper|proceeding)"
+  },
+  {
+    "name": "year",
+    "pattern": "(19|20)\\d{2}"
+  },
+  {
+    "name": "year",
+    "pattern": "(19|20)\\d{2}"
+  },
+  {
+    "name": "year",
+    "pattern": "năm\\s+(19|20)\\d{2}"
+  },
+  {
+    "name": "year",
+    "pattern": "năm\\s+(19|20)\\d{2}"
+  },
+  {
+    "name": "year",
+    "pattern": "year\\s+(19|20)\\d{2}"
+  },
+  {
+    "name": "year",
+    "pattern": "year\\s+(19|20)\\d{2}"
+  },
+  {
+    "name": "expert_name",
+    "pattern": "(\\bNguyễn\\ Thái\\ Anh\\b|\\bTrương\\ Quang\\ Phúc\\b|\\bVũ\\ Đình\\ Thành\\b|\\bNguyễn\\ Lê\\ Duy\\ Khải\\b|\\bĐặng\\ Mậu\\ Chiến\\b|\\bNguyễn\\ Mạnh\\ Hùng\\b|\\bBùi\\ Trọng\\ Hiếu\\b|\\bLê\\ Chí\\ Hiệp\\b|\\bHuỳnh\\ Ngọc\\ Văn\\b|\\bNguyễn\\ Trần\\ Thi\\ Văn\\b)"
+  },
+  {
+    "name": "graduated_school",
+    "pattern": "(\\bHCMUT\\b|\\bĐại\\ học\\ Bách\\ khoa\\ TPHCM\\b|\\bĐại\\ học\\ Bách\\ khoa\\ \\-\\ ĐHQG\\ TPHCM\\b|\\bĐHBK\\ TPHCM\\b|\\bĐHSPKT\\b|\\bĐại\\ học\\ Sư\\ phạm\\ kỹ\\ thuật\\ TPHCM\\b|\\bĐH\\ SPKT\\ TPHCM\\b|\\bHCMUTE\\b|\\bUIT\\b|\\bĐại\\ học\\ Công\\ nghệ\\ thông\\ tin\\b|\\bĐH\\ Công\\ nghệ\\ thông\\ tin\\ \\-\\ ĐHQG\\ TPHCM\\b|\\bHCMUS\\b|\\bĐại\\ học\\ Khoa\\ học\\ Tự\\ nhiên\\b|\\bĐại\\ học\\ Khoa\\ học\\ tự\\ nhiên\\ \\-\\ ĐHQG\\ TPHCM\\b|\\bĐHQG\\ TPHCM\\b|\\bĐại\\ học\\ Giao\\ thông\\ vận\\ tải\\ TPHCM\\b|\\bĐại\\ học\\ Nông\\ nghiệp\\ Hà\\ Nội\\b)"
+  },
+  {
+    "name": "major",
+    "pattern": "(\\bCông\\ nghệ\\ thông\\ tin\\b|\\bCNTT\\b|\\bIT\\b|\\bInformation\\ Technology\\b|\\bKhoa\\ học\\ máy\\ tính\\b|\\bComputer\\ Science\\b|\\bCơ\\ khí\\b|\\bMechanical\\ Engineering\\b|\\bĐiện\\ tử\\ viễn\\ thông\\b|\\bElectronics\\ and\\ Telecommunications\\b|\\bHóa\\ học\\b|\\bChemistry\\b|\\bKỹ\\ thuật\\ môi\\ trường\\b|\\bEnvironmental\\ Engineering\\b|\\bSoftware\\ Engineering\\b|\\bKỹ\\ thuật\\ phần\\ mềm\\b|\\bKỹ\\ thuật\\ xây\\ dựng\\b|\\bCivil\\ Engineering\\b)"
+  },
+  {
+    "name": "current_workplace",
+    "pattern": "(\\bHCMUT\\b|\\bĐại\\ học\\ Bách\\ khoa\\ TPHCM\\b|\\bĐại\\ học\\ Bách\\ khoa\\ \\-\\ ĐHQG\\ TPHCM\\b|\\bĐHBK\\ TPHCM\\b|\\bĐHSPKT\\b|\\bĐại\\ học\\ Sư\\ phạm\\ kỹ\\ thuật\\ TPHCM\\b|\\bHCMUTE\\b|\\bUIT\\b|\\bĐại\\ học\\ Công\\ nghệ\\ thông\\ tin\\b|\\bĐại\\ học\\ Công\\ nghệ\\ thông\\ tin\\ \\-\\ ĐHQG\\ TPHCM\\b|\\bHCMUS\\b|\\bĐại\\ học\\ Khoa\\ học\\ Tự\\ nhiên\\b|\\bĐHQG\\ TPHCM\\b|\\bĐại\\ học\\ Nông\\ lâm\\ TPHCM\\b)"
+  },
+  {
+    "name": "degree",
+    "pattern": "(\\bTiến\\ sĩ\\b|\\bTS\\b|\\bPhD\\b|\\bThạc\\ sĩ\\b|\\bThS\\b|\\bMaster\\b|\\bKỹ\\ sư\\b|\\bKS\\b|\\bEngineer\\b|\\bCử\\ nhân\\b|\\bCN\\b|\\bBachelor\\b|\\bBác\\ sĩ\\b|\\bBS\\b)"
+  },
+  {
+    "name": "academic_title",
+    "pattern": "(\\bGiáo\\ sư\\b|\\bGS\\b|\\bProfessor\\b|\\bPhó\\ Giáo\\ sư\\b|\\bPGS\\b|\\bAssociate\\ Professor\\b|\\bGiáo\\ sư\\ Tiến\\ sĩ\\b|\\bGS\\.TS\\b|\\bPhó\\ Giáo\\ sư\\ Tiến\\ sĩ\\b|\\bPGS\\.TS\\b)"
+  },
+  {
+    "name": "language",
+    "pattern": "(\\bTiếng\\ Anh\\b|\\bEnglish\\b|\\bTiếng\\ Nhật\\b|\\bJapanese\\b|\\bTiếng\\ Hàn\\b|\\bKorean\\b|\\bTiếng\\ Trung\\b|\\bChinese\\b|\\bMandarin\\b|\\bTiếng\\ Pháp\\b|\\bFrench\\b|\\bTiếng\\ Đức\\b|\\bGerman\\b|\\bTiếng\\ Tây\\ Ban\\ Nha\\b|\\bSpanish\\b|\\bTiếng\\ Nga\\b|\\bRussian\\b|\\bTiếng\\ Ý\\b|\\bItalian\\b)"
+  },
+  {
+    "name": "project_status",
+    "pattern": "(\\bĐang\\ thực\\ hiện\\b|\\bHoàn\\ thành\\b|\\bCompleted\\b|\\bIn\\ Progress\\b|\\bPending\\b|\\bCancelled\\b|\\bTạm\\ dừng\\b|\\bActive\\b|\\bFinished\\b|\\bOngoing\\b|\\bClosed\\b|\\bSuspended\\b)"
+  },
+  {
+    "name": "project_role",
+    "pattern": "(\\bChủ\\ nhiệm\\b|\\bThành\\ viên\\b|\\bPrincipal\\ Investigator\\b|\\bCo\\-Investigator\\b|\\bTeam\\ Member\\b|\\bLeader\\b|\\bResearcher\\b|\\bCollaborator\\b|\\bCoordinator\\b|\\bAdvisor\\b|\\bProject\\ Manager\\b|\\bContributor\\b)"
+  },
+  {
+    "name": "publication_type",
+    "pattern": "(\\bJournal\\b|\\bConference\\b|\\bBook\\b|\\bChapter\\b|\\bPatent\\b|\\bArticle\\b|\\bProceeding\\b|\\bThesis\\b|\\bPaper\\b|\\bResearch\\b|\\bReport\\b|\\bManual\\b|\\bReview\\b)"
+  },
+  {
+    "name": "year",
+    "pattern": "(\\b2023\\b|\\b2022\\b|\\b2021\\b|\\b2020\\b|\\b2019\\b|\\b2018\\b|\\b2017\\b|\\b2016\\b|\\b2015\\b|\\b2014\\b|\\b2013\\b|\\b2012\\b)"
+  },
+  {
+    "name": "previous_workplace",
+    "pattern": "(\\bMicrosoft\\b|\\bFPT\\b|\\bGoogle\\b|\\bSamsung\\b|\\bIntel\\b|\\bIBM\\b|\\bViettel\\b|\\bGrab\\b|\\bShopee\\b|\\bZalo\\b|\\bVNG\\b|\\bTiki\\b|\\bHCMUT\\b|\\bĐại\\ học\\ Bách\\ khoa\\ TPHCM\\b|\\bĐại\\ học\\ Bách\\ khoa\\ \\-\\ ĐHQG\\ TPHCM\\b|\\bĐHSPKT\\b|\\bĐại\\ học\\ Sư\\ phạm\\ kỹ\\ thuật\\ TPHCM\\b|\\bUIT\\b|\\bHCMUS\\b|\\bViện\\ Hàn\\ lâm\\ Khoa\\ học\\ và\\ Công\\ nghệ\\ Việt\\ Nam\\b|\\bCông\\ ty\\ CP\\ Đầu\\ tư\\ xây\\ dựng\\ Bình\\ Chánh\\b|\\bCông\\ ty\\ TNHH\\ Cơ\\ điện\\ lạnh\\ Văn\\ Minh\\b|\\bHọc\\ viện\\ Công\\ nghệ\\ Châu\\ Á\\b)"
+  },
+  {
+    "name": "position",
+    "pattern": "(\\bGiảng\\ viên\\b|\\bGV\\b|\\bLecturer\\b|\\bProfessor\\b|\\bTrưởng\\ phòng\\b|\\bDepartment\\ Head\\b|\\bPhó\\ Giám\\ đốc\\b|\\bDeputy\\ Director\\b|\\bManager\\b|\\bTeam\\ Lead\\b|\\bTechnical\\ Lead\\b|\\bDeveloper\\b|\\bSoftware\\ Engineer\\b|\\bResearcher\\b|\\bProject\\ Manager\\b|\\bCTO\\b|\\bDirector\\b|\\bGiám\\ đốc\\b)"
+  }
+]

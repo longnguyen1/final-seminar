@@ -1,0 +1,46 @@
+version: "3.1"
+
+nlu:
+- intent: out_of_scope
+  examples: |
+    - ChatGPT là gì?
+    - Trái đất có bao nhiêu nước?
+    - Tại sao trời mưa?
+    - Ai là tổng thống Mỹ?
+    - Kể chuyện cười đi
+    - Giới thiệu cơ bản về ChatGPT
+    - Giới thiệu cơ bản về Rasa
+    - Giới thiệu cơ bản về AI
+    - Giới thiệu cơ bản về Machine Learning
+    - Biến đổi khí hậu có tác động như thế nào?  # Ví dụ từ vấn đề bạn gặp phải
+    - Cách nấu món phở
+    - Lịch sử chiến tranh thế giới thứ 2
+    - Ý nghĩa của giấc mơ
+    - Công nghệ Blockchain hoạt động ra sao?
+    - Thời tiết hôm nay thế nào?
+    - Bạn có biết gì về vũ trụ không?
+    - Những tin tức nổi bật gần đây
+    - Giải thích khái niệm vật lý lượng tử
+    - Nên học ngôn ngữ lập trình nào bây giờ?
+    - Ai là người đã phát minh ra bóng đèn?
+    - Tại sao bầu trời lại màu xanh?
+    - Kể cho tôi một câu chuyện.
+    - Bạn có thể giúp tôi viết một đoạn văn ngắn không?
+    - Những ứng dụng của trí tuệ nhân tạo.
+    
+- intent: confirm_chatgpt
+  examples: |
+    - tôi muốn hỏi ChatGPT
+    - ok hỏi chatgpt
+    - hỏi giúp tôi ChatGPT
+    - hỏi chatgpt đi
+    - ok chuyển sang ChatGPT
+    - cảm ơn, tôi muốn hỏi ChatGPT
+
+- intent: deny_chatgpt
+  examples: |
+    - không, không cần ChatGPT
+    - thôi, không cần ChatGPT
+    - không cần, không hỏi ChatGPT
+    - đừng hỏi ChatGPT
+    - hủy, không hỏi ChatGPT

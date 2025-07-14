@@ -15,7 +15,7 @@ BASE_URL = "http://localhost:3000/api"
 def get_expert_publications_simple(expert_id: int) -> List[Dict]:
     if not expert_id:
         return []
-    url = f"{BASE_URL}/rasa/publication/expert_publication?expertId={expert_id}&limit=5"
+    url = f"{BASE_URL}/rasa/publication/expert-publication?expertId={expert_id}&limit=5"
     response = safe_api_call_get(url)
     if response and response.get("success"):
         return response.get("data", [])
@@ -36,9 +36,9 @@ def format_publication_timeline(publications: List[Dict], expert_name: str) -> s
         messages.append(f"- {type} ({year}): {title} - Tác giả: {author}, Nơi xuất bản: {place}\n")
     return "\n".join(messages)
         
-class ActionLietKeCongTrinhKhoaHoc(Action):
+class ActionAskPublications(Action):
     def name(self) -> Text:
-        return "action_liet_ke_cong_trinh_khoa_hoc"
+        return "action_potfolio_publication"
 
     def run(self, dispatcher: CollectingDispatcher, 
             tracker: Tracker, 
@@ -52,7 +52,7 @@ class ActionLietKeCongTrinhKhoaHoc(Action):
 
         expert = get_expert_by_name(name_canonical) or get_expert_by_name(name_norm)
         if not expert:
-            dispatcher.utter_message(text=f"Không tìm thấy chuyên gia {expert_name}.")
+            dispatcher.utter_message(response="utter_ask_name")
             return []
 
         expert_id = expert.get("id")

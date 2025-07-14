@@ -1,91 +1,50 @@
 version: "3.1"
 
 nlu:
-# ===== PROJECT TABLE INTENTS =====
-- intent: thong_ke_du_an
+- intent: potfolio_project
   examples: |
-    - thống kê dự án của [Nguyễn Thái Anh](expert_name)
-    - [Trương Quang Phúc](expert_name) tham gia bao nhiêu dự án
-    - số lượng project [Vũ Đình Thành](expert_name)
-    - [Nguyễn Lê Duy Khải](expert_name) có mấy dự án
-    - project statistics [Đặng Mậu Chiến](expert_name)
-    - research projects [Nguyễn Mạnh Hùng](expert_name)
-    - dự án nghiên cứu [Bùi Trọng Hiếu](expert_name)
-    - project count [Lê Chí Hiệp](expert_name)
-    - số dự án [Huỳnh Ngọc Văn](expert_name)
-    - project overview [Nguyễn Trần Thi Văn](expert_name)
-
-- intent: liet_ke_du_an
-  examples: |
-    - liệt kê dự án [Nguyễn Thái Anh](expert_name)
+    - danh sách dự án của [Nguyễn Thái Anh](expert_name)
     - danh sách project [Trương Quang Phúc](expert_name)
+    - danh sách dự án của [Võ Thị Ngà](expert_name)
+    - danh sách đồ án [Vũ Đình Thành](expert_name)
     - các dự án của [Vũ Đình Thành](expert_name)
     - show projects [Nguyễn Lê Duy Khải](expert_name)
+
     - list projects [Đặng Mậu Chiến](expert_name)
     - projects list [Nguyễn Mạnh Hùng](expert_name)
-    - dự án nghiên cứu [Bùi Trọng Hiếu](expert_name)
-    - research projects [Lê Chí Hiệp](expert_name)
+    - thống kê dự án đồ án của [Bùi Trọng Hiếu](expert_name)
+    - project works [Ngô Mạnh Thắng](expert_name)
+    - thống kê projects [Lê Chí Hiệp](expert_name)
+    - thống kê đồ án của [Huỳnh Ngọc Văn](expert_name)
     - project portfolio [Huỳnh Ngọc Văn](expert_name)
+
+    - list of projects [Nguyễn Thị Kim Oanh](expert_name)
+    - project details [Nguyễn Thị Kim Oanh](expert_name)
     - all projects [Nguyễn Trần Thi Văn](expert_name)
+    - project list [Phạm Văn Tấn](expert_name)
 
-# ===== PAGINATION INTENT - PROJECT =====
-- intent: liet_ke_du_an_con_lai
-  examples: |
-    # EXPLICIT CONTINUATION WITH CONTEXT
-    - tiếp tục liệt kê dự án của [Nguyễn Thái Anh](expert_name)
-    - xem thêm project [Trương Quang Phúc](expert_name)
-    - còn dự án nào khác của [Vũ Đình Thành](expert_name) không
-    - show more projects [Nguyễn Lê Duy Khải](expert_name)
-    - continue listing [Đặng Mậu Chiến](expert_name) projects
-    - next projects [Nguyễn Mạnh Hùng](expert_name)
-    - tiếp theo của [Bùi Trọng Hiếu](expert_name)
-    - more projects from [Lê Chí Hiệp](expert_name)
-    - các dự án còn lại [Huỳnh Ngọc Văn](expert_name)
-    - other projects [Nguyễn Trần Thi Văn](expert_name)
-    
-    # IMPLICIT CONTINUATION (context-aware)
-    - tiếp tục dự án
-    - xem thêm dự án
-    - liệt kê tiếp dự án
-    - hiển thị thêm dự án
-    - các dự án còn lại
-    - more projects
-    - show more projects
-    - continue projects
-    - next projects
-    - additional projects
-    - other projects
-    - remaining projects
-    - more research projects
+    - tôi muốn biết projects của [Võ Thế Sơn](expert_name)
+    - tôi tò mò về danh sách dự án của [Đặng Ngọc Minh Đức](expert_name)
+    - Tôi ham mê về list đồ án của [Lê Tiến Thường](expert_name)
+    - bạn có thể cho tôi biết danh sách dự án của [Nguyễn Thị Phi Loan](expert_name)
+    - liệu bạn có thể cung cấp cho tôi danh sách dự án của [Nguyễn Kim Lợi](expert_name) được không?
+    - bạn có thể cung cấp cho tôi danh sách đồ án của [Nguyễn Thị Kim Oanh](expert_name) không?
 
-# ===== LOOKUPS =====
-- lookup: project_status
-  examples: |
-    - Đang thực hiện
-    - Hoàn thành
-    - Completed
-    - In Progress
-    - Pending
-    - Cancelled
-    - Tạm dừng
-    - Active
-    - Finished
-    - Ongoing
-    - Closed
-    - Suspended
+    - thống kê dự án của người này
+    - liệt kê đồ án của ông ấy
+    - tổng hợp project của bà ấy
+    - list đồ án của anh ấy
+    - projects của chị ấy
 
-- lookup: project_role
-  examples: |
-    - Chủ nhiệm
-    - Thành viên
-    - Principal Investigator
-    - Co-Investigator
-    - Team Member
-    - Leader
-    - Researcher
-    - Collaborator
-    - Coordinator
-    - Advisor
-    - Project Manager
-    - Contributor
+    - tôi muốn biết danh sách dự án của người này
+    - tôi tò mò về đồ án của người này
+    - tôi ham mê về danh sách dự án của người này
+    - bạn có thể cho tôi biết đồ án của người này
+    - liệu bạn có thể cung cấp cho tôi danh sách dự án của người này
+    - bạn có thể cung cấp cho tôi danh sách đồ án của người này không?
+    - bạn có thể cho tôi biết danh sách dự án của người này không?
+    - tôi nóng lòng muốn biết danh sách dự án của người này
+
+
+
 

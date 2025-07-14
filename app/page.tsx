@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
-import ChatWidget from "@/components/ChatWidget";
+import ChatBox from "@/components/ChatBox";
 import dynamic from "next/dynamic";
 
 const Chart = dynamic(() =>
@@ -65,9 +65,6 @@ export default function Home() {
         </div>
         */}
       </main>
-
-      {/* Chatbot cố định */}
-      <ChatWidget />
     </div>
   );
 }
